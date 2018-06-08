@@ -6,8 +6,8 @@ create table categories(
 
 insert into categories(category_id, category_name, active_flg)values
 (1, '食料品', 1),
-(2, 'お酒', 0),
-(3, '飲料', 1);
+(2, '飲料水', 1),
+(3, 'お酒', 1);
 
 
 
