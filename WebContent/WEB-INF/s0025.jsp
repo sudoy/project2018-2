@@ -1,10 +1,13 @@
+<%@ page contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>売上詳細編集確認｜物品売上管理システム</title>
+		<title>売上詳細削除確認｜物品売上管理システム</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 
 		<!--[if lt IE 9]>
@@ -45,7 +48,7 @@
 
 	<div class="container">
 
-		<h1>売上を編集してよろしいですか？</h1>
+		<h1>売上を削除してよろしいですか？</h1>
 
 	<form class="form-horizontal" action="#" method="post">
  		<div class="form-group">
@@ -102,7 +105,7 @@
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">小計</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="number" value="1,350"s>
+				<input type="text" class="form-control" name="number" value="1,350" align="right">
 			</div>
 		</div>
 
@@ -117,8 +120,8 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-4">
-				<a href="S0021.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> O K</span></a>
-				<a href="#" class="btn btn-default">キャンセル</a>
+				<a href="S0021.html" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> O K</span></a>
+				<a href="S0022.html" class="btn btn-default">キャンセル</a>
 			</div>
 		</div>
 	</form>
