@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -117,8 +119,8 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-4">
-				<a href="S0021.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> O K</span></a>
-				<a href="#" class="btn btn-default">キャンセル</a>
+				<a href="S0022.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> O K</span></a>
+				<a href="S0023.html" class="btn btn-default">キャンセル</a>
 			</div>
 		</div>
 	</form>

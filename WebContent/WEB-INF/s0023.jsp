@@ -1,10 +1,11 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>売上詳細編集確認｜物品売上管理システム</title>
+		<title>売上詳細編集｜物品売上管理システム</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 
 		<!--[if lt IE 9]>
@@ -30,8 +31,8 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li ><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
-				<li><a href="S0010.html">売上登録</a></li>
-				<li class="active"><a href="S0020.html">売上検索</a></li>
+				<li class="active"><a href="S0010.html">売上登録</a></li>
+				<li><a href="S0020.html">売上検索</a></li>
 				<li><a href="S0030.html">アカウント登録</a></li>
 				<li><a href="S0040.html">アカウント検索</a></li>
 
@@ -45,80 +46,71 @@
 
 	<div class="container">
 
-		<h1>売上を編集してよろしいですか？</h1>
+		<h1>売上詳細編集</h1>
 
 	<form class="form-horizontal" action="#" method="post">
  		<div class="form-group">
-	 		<label for="salesDate" class="col-sm-2 control-label">販売日</label>
+	 		<label for="salesDate" class="col-sm-2 control-label">販売日 <span class="badge">必須</span></label>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" name="salesDate" value="2018/5/11">
+					<input type="text" class="form-control" id="salesDate" value="2018/5/11">
 			</div>
 		</div>
 
 		 <div class="form-group">
-	 			<label for="person" class="col-sm-2 control-label">担当</label>
+	 			<label for="person" class="col-sm-2 control-label">担当 <span class="badge">必須</span></label>
 	 			<div class="col-sm-5">
 					<select class="form-control">
-						<option value="">選択してください</option>
+						<option value="" >選択してください</option>
 						<option value="イチロー" selected>イチロー</option>
 					</select>
 			</div>
 		</div>
 
 		<div class="form-group">
- 			<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
+ 			<label for="category" class="col-sm-2 control-label">商品カテゴリー <span class="badge">必須</span></label>
  			<div class="col-sm-5">
  					<select class="form-control">
 						<option value="" >選択してください</option>
-						<option value="" selected>食品</option>
+						<option value="" selected>食料品</option>
 					</select>
 			</div>
 		</div>
 
 		<div class="form-group">
- 			<label for="name" class="col-sm-2 control-label">商品名</label>
+ 			<label for="name" class="col-sm-2 control-label">商品名 <span class="badge">必須</span></label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="name" value="からあげ弁当">
+				<input type="text" class="form-control" id="name" value="からあげ弁当">
 			</div>
 		</div>
 
 		<div class="form-group">
 
- 			<label for="price" class="col-sm-2 control-label">単価</label>
+ 			<label for="price" class="col-sm-2 control-label">単価 <span class="badge">必須</span></label>
 
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="price" value="450">
+				<input type="text" class="form-control" id="price" value="450">
 			</div>
 		</div>
 
 		<div class="form-group">
- 			<label for="number" class="col-sm-2 control-label">個数</label>
+ 			<label for="number" class="col-sm-2 control-label">個数 <span class="badge">必須</span></label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="number" value="3">
+				<input type="text" class="form-control" id="number" value="3">
 			</div>
 		</div>
 
 		<div class="form-group">
- 			<label for="number" class="col-sm-2 control-label">小計</label>
- 			<div class="col-sm-2">
-				<input type="text" class="form-control" name="number" value="1,350"s>
-			</div>
-		</div>
-
-
-		<div class="form-group">
- 			<label for="note" class="col-sm-2 control-label">備考</label>
+ 			<label for="note" class="col-sm-2 control-label">備考 <span class="badge">必須</span></label>
  			<div class="col-sm-5">
-				<textarea class="form-control" name="note" rows="5">今日からの新商品</textarea>
+				<textarea class="form-control" id="note" rows="5">今日からの新商品</textarea>
 			</div>
 		</div>
-
 
 		<div class="form-group">
 			<div class="col-sm-offset-4">
-				<a href="S0021.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> O K</span></a>
-				<a href="#" class="btn btn-default">キャンセル</a>
+				<a href="S0024.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 更　新</span></a>
+				<a href="S0022.html" class="btn btn-default">キャンセル</a>
 			</div>
 		</div>
 	</form>
