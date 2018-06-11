@@ -51,16 +51,15 @@
 
 		<table class="table">
 			<tr>
-				<td>操作<td>
-				<td>No</td>
-				<td>販売日</td>
-				<td>担当</td>
-				<td>商品カテゴリー</td>
-				<td>商品名</td>
-				<td>単価</td>
-				<td>個数</td>
-				<td>小計</td>
-
+				<th>操作</th>
+				<th>No</th>
+				<th>販売日</th>
+				<th>担当</th>
+				<th>商品カテゴリー</th>
+				<th>商品名</th>
+				<th>単価</th>
+				<th>個数</th>
+				<th>小計</th>
 			</tr>
 			<c:forEach var="project2" items="${list}">
 			<tr>
