@@ -1,3 +1,5 @@
+<%@page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -49,53 +51,31 @@
 
 		<table class="table">
 			<tr>
-				<td>操作</td>
-				<td>No</td>
-				<td>販売日</td>
-				<td>担当</td>
-				<td>商品カテゴリー</td>
-				<td>商品名</td>
-				<td>単価</td>
-				<td>個数</td>
-				<td>小計</td>
-
+				<th>操作</th>
+				<th>No</th>
+				<th>販売日</th>
+				<th>担当</th>
+				<th>商品カテゴリー</th>
+				<th>商品名</th>
+				<th>単価</th>
+				<th>個数</th>
+				<th>小計</th>
 			</tr>
-
+			<c:forEach var="project2" items="${list}">
 			<tr>
-			<td><a href="S0022.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 詳細</a></td>
-			<td>1</td>
-			<td>2015/1/15</td>
-			<td>イチロー</td>
-			<td>食料品</td>
-			<td>からあげ弁当</td>
-			<td>450</td>
-			<td>3</td>
-			<td>1,350</td>
+			<td><a href="S0022.html?id=${project2.saleId}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 詳細</a></td>
+			<td>${project2.saleId}</td>
+			<td>${project2.saleDate}</td>
+			<td>${project2.accountId}</td>
+			<td>${project2.categoryId}</td>
+			<td>${project2.tradeName}</td>
+			<td>${project2.unitPrice}</td>
+			<td>${project2.saleNumber}</td>
+			<td>${project2.unitPrice * project2.saleNumber}</td>
 			</tr>
+			</c:forEach>
 
-			<tr>
-			<td><a href="S0022.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 詳細</a></td>
-			<td>1</td>
-			<td>2015/1/15</td>
-			<td>イチロー</td>
-			<td>食料品</td>
-			<td>あんぱん</td>
-			<td>120</td>
-			<td>10</td>
-			<td>1,200</td>
-			</tr>
 
-			<tr>
-			<td><a href="S0022.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 詳細</a></td>
-			<td>1</td>
-			<td>2015/1/15</td>
-			<td>イチロー</td>
-			<td>飲料</td>
-			<td>コカコーラ 500ml</td>
-			<td>130</td>
-			<td>5</td>
-			<td>650</td>
-			</tr>
 
 		</table>
 	</div><!-- /container -->
