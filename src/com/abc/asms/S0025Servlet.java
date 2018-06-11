@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import project2.beans.Detail_beans;
-import project2.utils.DBUtils;
-import project2.utils.Utils;
+import com.abc.asms.beans.Detail_beans;
+import com.abc.asms.utils.DBUtils;
+import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0025.html")
 public class S0025Servlet extends HttpServlet {
@@ -98,6 +98,7 @@ public class S0025Servlet extends HttpServlet {
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, id);
+			System.out.println(ps);
 
 			rs = ps.executeQuery();
 

@@ -1,4 +1,4 @@
-package project2.utils;
+package com.abc.asms.utils;
 
 public class AuthorityUtils {
 	public static String checkAutority(String param, String value) {

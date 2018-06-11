@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import project2.beans.S0021;
-import project2.utils.DBUtils;
+import com.abc.asms.beans.S0021;
+import com.abc.asms.utils.DBUtils;
 
 
 @WebServlet("/S0021.html")

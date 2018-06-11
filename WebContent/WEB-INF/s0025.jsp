@@ -56,7 +56,7 @@
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日</label>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" name="sale_date" value="${param.sale_date != null? param.sale_date : HtmlUtils.formatDate(s25)}" disabled>
+					<input type="text" class="form-control" name="sale_date" value="${s25.sale_date}" disabled>
 			</div>
 		</div>
 

@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import project2.beans.Sales;
-import project2.utils.DBUtils;
+import com.abc.asms.beans.Sales;
+import com.abc.asms.utils.DBUtils;
 
 @WebServlet("/C0020.html")
 public class C0020Servlet extends HttpServlet {

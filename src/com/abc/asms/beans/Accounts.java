@@ -1,4 +1,4 @@
-package project2.beans;
+package com.abc.asms.beans;
 
 public class Accounts {
 	private int accountId;
