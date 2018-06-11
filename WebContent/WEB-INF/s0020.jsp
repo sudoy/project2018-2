@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -48,12 +49,12 @@
 
 		<h1>売上検索条件入力</h1>
 
-	<form class="form-horizontal" action="result.html" method="post">
+	<form class="form-horizontal" action="S0021.html" method="post">
  		<div class="form-group">
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日 <span class="badge">必須</span></label>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" id="salesspanStart" placeholder="販売日(検索開始日)">
+					<input type="text" class="form-control" name="sale_date1" id="salesspanStart" placeholder="販売日(検索開始日)">
 			</div>
 
 			<div class="col-xs-1" align="center">
@@ -61,7 +62,7 @@
 			</div>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" id="salesspanEnd" placeholder="販売日(検索終了日)">
+					<input type="text" class="form-control" name="sale_date2" id="salesspanEnd" placeholder="販売日(検索終了日)">
 			</div>
 
 		</div>
@@ -89,7 +90,7 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">商品名 <span class="badge">部分一致</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" id="name" placeholder="商品名">
+				<input type="text" class="form-control" name="trade_name" id="name" placeholder="商品名">
 			</div>
 		</div>
 
@@ -102,14 +103,10 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-4">
+				<button type="submit" class="btn btn-primary "><span class="glyphicon glyphicon-search"></span> 検 索</button>
 				<a href="S0021.html" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> 検　索</a>
 				<a href="S0020.html" class="btn btn-default">クリア</a>
-
-			<!--
-			<button type="button" class="btn btn-primary">O K</button>
-			<button type="button" class="btn btn-default">キャンセル</button>
-			-->
-		</div>
+			</div>
 		</div>
 
 	</form>
