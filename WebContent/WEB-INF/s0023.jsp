@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="project2.utils.HtmlUtils" %>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -44,16 +45,17 @@
 	</div><!-- /.container-fluid -->
 </nav>
 
+	<form action="s0024.html?id=${s23.sale_id}" method="POST">
+
 	<div class="container">
 
 		<h1>売上詳細編集</h1>
 
-	<form class="form-horizontal" action="#" method="post">
  		<div class="form-group">
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日 <span class="badge">必須</span></label>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" id="salesDate" value="2018/5/11">
+					<input type="text" class="form-control" id="salesDate" value="${HtmlUtils.formatDate(s23)}">
 			</div>
 		</div>
 
@@ -62,7 +64,7 @@
 	 			<div class="col-sm-5">
 					<select class="form-control">
 						<option value="" >選択してください</option>
-						<option value="イチロー" selected>イチロー</option>
+						<option value="イチロー" selected>${s23.name}</option>
 					</select>
 			</div>
 		</div>
@@ -72,7 +74,8 @@
  			<div class="col-sm-5">
  					<select class="form-control">
 						<option value="" >選択してください</option>
-						<option value="" selected>食料品</option>
+						<option value="">食料品</option>
+						<option value="" selected> ${s23.category_name}</option>
 					</select>
 			</div>
 		</div>
@@ -80,7 +83,7 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">商品名 <span class="badge">必須</span></label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" id="name" value="からあげ弁当">
+				<input type="text" class="form-control" id="name" value="${s23.trade_name}">
 			</div>
 		</div>
 
@@ -89,21 +92,21 @@
  			<label for="price" class="col-sm-2 control-label">単価 <span class="badge">必須</span></label>
 
  			<div class="col-sm-2">
-				<input type="text" class="form-control" id="price" value="450">
+				<input type="text" class="form-control" id="price" value="${s23.unit_price}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">個数 <span class="badge">必須</span></label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" id="number" value="3">
+				<input type="text" class="form-control" id="number" value="${s23.sale_number}">
 			</div>
 		</div>
 
 		<div class="form-group">
- 			<label for="note" class="col-sm-2 control-label">備考 <span class="badge">必須</span></label>
+ 			<label for="note" class="col-sm-2 control-label">備考 </label>
  			<div class="col-sm-5">
-				<textarea class="form-control" id="note" rows="5">今日からの新商品</textarea>
+				<textarea class="form-control" id="note" rows="5">${s23.note}</textarea>
 			</div>
 		</div>
 
@@ -113,9 +116,10 @@
 				<a href="S0022.html" class="btn btn-default">キャンセル</a>
 			</div>
 		</div>
-	</form>
+
 	</div><!-- /container -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		</form>
 	</body>
 </html>
