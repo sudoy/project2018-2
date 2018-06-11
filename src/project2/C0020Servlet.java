@@ -32,9 +32,9 @@ public class C0020Servlet extends HttpServlet {
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "select sale_id, sale_date, (select category_name from categories c where s.category_id = c.category_id) as category_name," +
-					"	trade_name, unit_price,  sale_number, note from sales s " +
-					"	JOIN accounts a ON s.account_id = a.account_id ORDER BY s.sale_id;";
+			sql = "select * from accounts a \r\n" +
+					"left join sales s on s.account_id = a.account_id\r\n" +
+					"left join categories c on c.category_id = s.category_id;";
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
@@ -48,7 +48,7 @@ public class C0020Servlet extends HttpServlet {
 			while(rs.next()) {
 				Sales sales = new Sales(rs.getInt("sale_id"),
 							rs.getDate("sale_date"),
-							rs.getString("category_name"),
+							rs.getInt("category_id"),
 							rs.getString("trade_name"),
 							rs.getInt("unit_price"),
 							rs.getInt("sale_number")

@@ -25,7 +25,13 @@ public class Sales {
 		this.note = note;
 	}
 
-	public Sales(int saleId, Date saleDate, String category_name, String tradeName, int unitPrice, int saleNumber) {
+	public Sales(int saleId, Date saleDate, int categoryId, String tradeName, int unitPrice, int saleNumber) {
+		this.saleId = saleId;
+		this.saleDate = saleDate;
+		this.categoryId = categoryId;
+		this.tradeName = tradeName;
+		this.unitPrice = unitPrice;
+		this.saleNumber = saleNumber;
 	}
 
 	public int getSaleId() {
