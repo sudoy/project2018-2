@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <c:set var="date" value="${today}" />
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -54,7 +55,7 @@
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日 <span class="badge">必須</span></label>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" name="sale_date1" id="salesspanStart" placeholder="販売日(検索開始日)">
+					<input type="text" class="form-control" name="sale_date1" id="salesspanStart" placeholder="販売日(検索開始日)" >
 			</div>
 
 			<div class="col-xs-1" align="center">
@@ -62,7 +63,7 @@
 			</div>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" name="sale_date2" id="salesspanEnd" placeholder="販売日(検索終了日)">
+					<input type="text" class="form-control" name="sale_date2" id="salesspanEnd" placeholder="販売日(検索終了日)" >
 			</div>
 
 		</div>
@@ -70,9 +71,11 @@
 		 <div class="form-group">
 	 			<label for="person" class="col-sm-2 control-label">担当 <span class="badge">必須</span></label>
 	 			<div class="col-sm-5">
-					<select class="form-control">
+					<select class="form-control" name="${project2.name}" >
 						<option value="" selected>選択してください</option>
-						<option value="イチロー" >イチロー</option>
+						<c:forEach var="project2" items="${list2}">
+						<option value="${project2.name}" >${project2.name}</option>
+						</c:forEach>
 					</select>
 			</div>
 		</div>
@@ -80,9 +83,11 @@
 		<div class="form-group">
  			<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
  			<div class="col-sm-5">
- 					<select class="form-control">
+ 					<select class="form-control" >
 						<option value="" selected>選択してください</option>
-						<option value="" >食料品</option>
+						<c:forEach var="project2" items="${list}">
+						<option value="${project2.categoryId}" >${project2.categoryName}</option>
+						</c:forEach>
 					</select>
 			</div>
 		</div>
