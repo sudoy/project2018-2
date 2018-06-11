@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="project2.utils.HtmlUtils" %>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -56,52 +57,52 @@
 		<table>
 			<tr>
 				<th>販売日</th>
-				<td>2015/1/15</td>
+				<td>${HtmlUtils.formatDate(s22)}</td>
 			</tr>
 
 			<th>　</th>
 
 			<tr>
 				<th>担当</th>
-				<td>イチロー</td>
+				<td>${s22.name}</td>
 			</tr>
 
 			<th>　</th>
 
 			<tr>
 				<th>商品カテゴリー</th>
-				<td>食料品</td>
+				<td>${s22.category_name}</td>
 			</tr>
 
 			<th>　</th>
 
 			<tr>
 				<th>商品名</th>
-				<td>からあげ弁当</td>
+				<td>${s22.trade_name}</td>
 			</tr>
 
 			<th>　</th>
 
 			<tr>
 				<th>単価</th>
-				<td>450</td>
+				<td>${s22.unit_price}</td>
 			</tr>
 
 			<th>　</th>
 
 			<tr>
 				<th>個数</th>
-				<td>3</td>
+				<td>${s22.sale_number}</td>
 			</tr>
 
 			<tr>
 				<th>小計</th>
-				<td>1,250</td>
+				<td>${s22.sum}</td>
 			</tr>
 
 			<tr>
 				<th>備考</th>
-				<td>今日からの新商品</td>
+				<td>${s22.note.equals("")? null : s22.note}</td>
 			</tr>
 
 			<th>　</th>
@@ -110,7 +111,7 @@
 		</div>
 
 		<div class="col-sm-offset-3">
-			<a href="S0023.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 編　集</span></a>
+			<a href="S0023.html?id=${s22.sale_id}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 編　集</span></a>
 			<a href="S0025.html" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> 削　除</span></a>
 			<button type="submit" href="S0021.html" class="btn btn-default">キャンセル</button><!-- キャンセル先は暫定。 -->
 
