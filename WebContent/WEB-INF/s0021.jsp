@@ -64,15 +64,15 @@
 			</tr>
 			<c:forEach var="project2" items="${list}">
 			<tr>
-			<td><a href="S0022.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 詳細</a></td>
-			<td>${project2.sale_id}</td>
-			<td>${project2.sale_date}</td>
-			<td>${project2.name}</td>
-			<td>${project2.category_name}</td>
-			<td>${project2.trade_name}</td>
-			<td>${project2.unit_price}</td>
-			<td>${project2.sale_number}</td>
-			<td>${project2.date}</td>
+			<td><a href="S0022.html?id=${project2.saleId}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 詳細</a></td>
+			<td>${project2.saleId}</td>
+			<td>${project2.saleDate}</td>
+			<td>${project2.accountId}</td>
+			<td>${project2.categoryId}</td>
+			<td>${project2.tradeName}</td>
+			<td>${project2.unitPrice}</td>
+			<td>${project2.saleNumber}</td>
+			<td>${project2.unitPrice * project2.saleNumber}</td>
 			</tr>
 			</c:forEach>
 
