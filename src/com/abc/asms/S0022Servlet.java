@@ -1,4 +1,4 @@
-package project2;
+package com.abc.asms;
 
 import java.io.IOException;
 import java.sql.Connection;
