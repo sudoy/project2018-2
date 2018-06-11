@@ -34,6 +34,12 @@ public class Sales {
 		this.saleNumber = saleNumber;
 	}
 
+
+
+	public Sales(int saleId) {
+		this.saleId = saleId;
+	}
+
 	public int getSaleId() {
 		return saleId;
 	}
