@@ -1,14 +1,13 @@
-<%@page contentType="text/html; charset=UTF-8"%>
-<%@page pageEncoding="UTF-8"%>
-<%@ page import="project2.utils.AuthorityUtils"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>アカウント編集確認｜物品売上管理システム</title>
+		<title>アカウント削除確認｜物品売上管理システム</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 
 		<!--[if lt IE 9]>
@@ -49,12 +48,14 @@
 
 	<div class="container">
 	
-		<h1>アカウントを編集してよろしいですか？</h1>
-			<form class="form-horizontal" action="S0043.html?account_id=${param.account_id != null ? param.account_id : accounts.account_id}" method="post">
+		<h1>アカウントを削除してよろしいですか？</h1>
+		
+	<form class="form-horizontal" action="S0042.html?account_id=${param.account_id != null ? param.account_id : accounts.account_id}" method="post">
+	
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">氏名 <span class="badge">必須</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" id="name" name="name" value="${param.name != null ? param.name : accounts.name}">
+				<input type="text" class="form-control" id="name" name="name" value="${accounts.name}">
 			</div>
 		</div>	
 		
@@ -76,32 +77,36 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">パスワード（確認）</label>
  			<div class="col-sm-5">
-				<input type="password" class="form-control" name="password" id="pass2" value="${accounts.password}">
+				<input type="password" class="form-control" name="pass2" id="pass2" value="${accounts.password}">
 			</div>
 		</div>	
 
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">売上登録権限 <span class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority" value="0">権限なし</label>
-					<label><input type="radio" name="authority" value="1">権限あり</label>
+					<label><input type="radio" name="authority" value="0" ${HTMLUtils.checkAuthority(param.authority != null? param.authority : accounts.authority, '0')}>権限なし</label>
+					<label><input type="radio" name="authority" value="1" ${HTMLUtils.checkAuthority(param.authority != null? param.authority : accounts.authority, '1')}>権限あり</label>
 				</div>
 		</div>
 		
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">アカウント登録権限 <span class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority" value="0" ${HTMLUtils.checkAuthority(accounts.authority != null? param.authority : accounts.authority, '0')}>権限なし</label>
-					<label><input type="radio" name="authority" value="1" ${HTMLUtils.checkAuthority(accounts.authority != null? param.authority : accounts.authority, '1')}>権限あり</label>
+					<label><input type="radio" name="aauthority" value="0" ${HTMLUtils.checkAuthority(param.authority != null? param.authority : accounts.authority, '0')}>権限なし</label>
+					<label><input type="radio" name="aauthority" value="1" ${HTMLUtils.checkAuthority(param.authority != null? param.authority : accounts.authority, '1')}>権限あり</label>
 				</div>	
 		</div>
 
 		<div class="form-group">
-			<div class="col-sm-offset-3">
-				<input type="submit" class="btn btn-primary" value=" O K">
-				<a href="S0041.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</a>
-				<a href="#" class="btn btn-default">キャンセル</a>
+			<div class="col-sm-offset-4">
+				<input type="submit" class="btn btn-danger" value="削除">
+				<a href="S0041.html" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> O K</a>
+				<a href="S0041.html" class="btn btn-default">キャンセル</a>
 
+			<!--
+			<button type="button" class="btn btn-primary">O K</button>
+			<button type="button" class="btn btn-default">キャンセル</button>
+			-->
 			</div>
 		</div>
 
