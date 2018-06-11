@@ -120,7 +120,7 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-4">
-				<a href="S0021.html" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> O K</span></a>
+				<button type="submit" href="S0025.html" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> O K</span></button>
 				<a href="S0022.html" class="btn btn-default">キャンセル</a>
 			</div>
 		</div>
