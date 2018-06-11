@@ -17,7 +17,7 @@ public class DBUtils {
 		//データベースの接続を確立
 		Context initContext = new InitialContext();
 		Context envContext = (Context)initContext.lookup("java:/comp/env");
-		DataSource ds = (DataSource)envContext.lookup("asms");
+		DataSource ds = (DataSource)envContext.lookup("project2");
 
 		return ds.getConnection();
 
