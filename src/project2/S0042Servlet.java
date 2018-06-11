@@ -36,24 +36,24 @@ public class S0042Servlet extends HttpServlet {
 		ps = con.prepareStatement(sql);
 
 		//select文にパラメータの内容をセット
-		ps.setString(1, req.getParameter("id"));
-
+		ps.setString(1, req.getParameter("account_id"));
+System.out.println(ps);
 		//select命令を実行
 		rs = ps.executeQuery();
 		
 		rs.next();
 
-		int id = rs.getInt("id");
+		int accountId = rs.getInt("account_id");
 		String name = rs.getString("name");
 		String mail = rs.getString("mail");
 		String password = rs.getString("password");
 		int authority = rs.getInt("authority");
 
-		 Accounts accounts = new Accounts(id, name,  mail,  password, authority);
+		 Accounts accounts = new Accounts(accountId, name,  mail,  password, authority);
 		req.setAttribute("accounts", accounts);
 
 		//JSPへフォワード
-		getServletContext().getRequestDispatcher("/WEB-INF/detail.jsp")
+		getServletContext().getRequestDispatcher("/WEB-INF/s0042.jsp")
 				.forward(req, resp);
 
 	} catch (Exception e) {
