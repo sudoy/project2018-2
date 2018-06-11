@@ -3,6 +3,9 @@ package project2;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import project2.beans.Sales;
 import project2.utils.DBUtils;
 
 @WebServlet("/S0010.html")
@@ -18,54 +22,50 @@ public class S0010Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
-			.forward(req, resp);
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
-
-		String saleDate = req.getParameter("saleDate");
-		String accountId = req.getParameter("accountId");
-		String categoryId = req.getParameter("categoryId");
-		String tradeName = req.getParameter("tradeName");
-		String unitPrice = req.getParameter("unitPrice");
-		String saleNumber = req.getParameter("saleNumber");
-		String note = req.getParameter("note");
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
+		ResultSet rs = null;
 
-		try {
+		try{
+
 			con = DBUtils.getConnection();
 
-			sql = "INSERT INTO sales(sale_date, account_id, category_id, trade_name, unit_price, sale_number, note)values (?,?,?,?,?,?,?,?)";
-			//INSERT命令の準備
+			//SQL
+			sql = "SELECT sale_id from sales;";
+
+			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
-			//INSERT命令にポストデータの内容をセット
-			ps.setString(1, saleDate);
-			ps.setString(2, accountId);
-			ps.setString(3, categoryId);
-			ps.setString(4, tradeName);
-			ps.setString(5, unitPrice);
-			ps.setString(6, saleNumber);
-			ps.setString(7, note);
 
-			ps.executeUpdate();
+			//SELECT命令を実行
+			rs = ps.executeQuery();
 
-			resp.sendRedirect("C0020.html");
+			//ResultSetをJavaBeansに変換
+			List<Sales> list = new ArrayList<>();
+
+			while(rs.next()) {
+				Sales sales = new Sales(rs.getInt("sale_id"));
+				list.add(sales);
+			}
+
+			//JavaBeansをJSPへ渡す
+			req.setAttribute("list", list);
+
+			//foward→index.jsp
+			getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
+				.forward(req, resp);
 		}catch(Exception e){
 			throw new ServletException(e);
-
 		}finally{
+			//終了処理
 			try{
+				DBUtils.close(rs);
 				DBUtils.close(ps);
 				DBUtils.close(con);
-			}catch(Exception e){}
+			}catch(Exception e){
+			}
 		}
+
 
 	}
 
