@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import project2.beans.Accounts;
 import project2.utils.DBUtils;
@@ -22,6 +23,7 @@ public class S0042Servlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		req.setCharacterEncoding("utf-8");
+		HttpSession session = req.getSession();
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -37,7 +39,7 @@ public class S0042Servlet extends HttpServlet {
 
 		//select文にパラメータの内容をセット
 		ps.setString(1, req.getParameter("account_id"));
-System.out.println(ps);
+
 		//select命令を実行
 		rs = ps.executeQuery();
 		

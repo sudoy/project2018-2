@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import project2.beans.Accounts;
 import project2.utils.DBUtils;
 
 
@@ -18,6 +19,60 @@ import project2.utils.DBUtils;
 public class S0044Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+
+		try {
+			con = DBUtils.getConnection();
+			
+			
+		sql = "select * from accounts where account_id = ?";
+		//select命令の準備
+		ps = con.prepareStatement(sql);
+
+		//select文にパラメータの内容をセット
+		ps.setString(1, req.getParameter("account_id"));
+
+		//select命令を実行
+		rs = ps.executeQuery();
+		
+		rs.next();
+
+		int accountId = rs.getInt("account_id");
+		String name = rs.getString("name");
+		String mail = rs.getString("mail");
+		String password = rs.getString("password");
+		int authority = rs.getInt("authority");
+
+		 Accounts accounts = new Accounts(accountId, name,  mail,  password, authority);
+		req.setAttribute("accounts", accounts);
+
+		//JSPへフォワード
+		getServletContext().getRequestDispatcher("/WEB-INF/s0044.jsp")
+				.forward(req, resp);
+
+	} catch (Exception e) {
+		throw new ServletException(e);
+	} finally {
+		try {
+			if (rs != null) {
+				con.close();
+			}
+			if (ps != null) {
+				ps.close();
+			}
+			DBUtils.close(con);
+		} catch (Exception e) {
+		}
+	}
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
 //		HttpSession session = req.getSession();
 		
@@ -81,4 +136,4 @@ public class S0044Servlet extends HttpServlet {
 //		}
 //		return errors;
 //	}
-}
+	}

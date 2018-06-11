@@ -68,7 +68,7 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">パスワード</label>
  			<div class="col-sm-5">
-				<input type="password" class="form-control" name="password" id="pass1" value="${accounts.password}">
+				<input type="password" class="form-control" name="password" id="pass1" value="${param.password}">
 			</div>
 			
 		</div>	
@@ -76,31 +76,30 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">パスワード（確認）</label>
  			<div class="col-sm-5">
-				<input type="password" class="form-control" name="password" id="pass2" value="${accounts.password}">
+				<input type="password" class="form-control" name="password" id="pass2" value="${param.password}">
 			</div>
 		</div>	
 
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">売上登録権限 <span class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority" value="0">権限なし</label>
-					<label><input type="radio" name="authority" value="1">権限あり</label>
+					<label><input type="radio" name="authority1" value="0">権限なし</label>
+					<label><input type="radio" name="authority1" value="1">権限あり</label>
 				</div>
 		</div>
 		
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">アカウント登録権限 <span class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority" value="0" ${HTMLUtils.checkAuthority(accounts.authority != null? param.authority : accounts.authority, '0')}>権限なし</label>
-					<label><input type="radio" name="authority" value="1" ${HTMLUtils.checkAuthority(accounts.authority != null? param.authority : accounts.authority, '1')}>権限あり</label>
+					<label><input type="radio" name="authority2" value="">権限なし</label>
+					<label><input type="radio" name="authority2" value="1">権限あり</label>
 				</div>	
 		</div>
 
 		<div class="form-group">
 			<div class="col-sm-offset-3">
 				<input type="submit" class="btn btn-primary" value=" O K">
-				<a href="S0041.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</a>
-				<a href="#" class="btn btn-default">キャンセル</a>
+				<a href="S0041.html" class="btn btn-default">キャンセル</a>
 
 			</div>
 		</div>

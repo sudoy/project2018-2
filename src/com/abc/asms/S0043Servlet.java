@@ -75,21 +75,24 @@ public class S0043Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		req.setCharacterEncoding("utf-8");
-		//		HttpSession session = req.getSession();
+//		HttpSession session = req.getSession();
 
 		String accountId = req.getParameter("account_id");
 		String name = req.getParameter("name");
 		String mail = req.getParameter("mail");
 		String password = req.getParameter("password");
-		String authority = req.getParameter("authority");
-
+		String passwordc = req.getParameter("passwordc");
+		String authority1 = req.getParameter("authority1");
+		String authority2 = req.getParameter("authority2");
+		String authority = authority1 + authority2;
+		
 		//バリデーションチェック
-		//		List<String> errors = validate(id, dating, inOut, category, memo, money);
-		//		if (errors.size() > 0) {
-		//			session.setAttribute("errors", errors);
-		//			getServletContext().getRequestDispatcher("/WEB-INF/update.jsp").forward(req, resp);
-		//			return;
-		//		}
+//				List<String> errors = validate(accountId, name, mail, password, passwordc, authority1, authority2);
+//				if (errors.size() > 0) {
+//					session.setAttribute("errors", errors);
+//					getServletContext().getRequestDispatcher("/WEB-INF/update.jsp").forward(req, resp);
+//					return;
+//				}
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -108,24 +111,18 @@ public class S0043Servlet extends HttpServlet {
 			ps.setString(4, authority);
 			ps.setString(5, accountId);
 
+			
+			System.out.println(ps);
+			
 			ps.executeUpdate();
-
+			
 			//成功メッセージ
-			//			List<String> successes = new ArrayList<>();
-			//			
-			//			if(category.equals("1")) {
-			//				category="食費";
-			//			}else if (category.equals("2")) {
-			//				category = "日用品";
-			//			}else if(category.equals("3")) {
-			//				category = "交際費";
-			//			}else {
-			//				return;
-			//			}
-			//			successes.add("更新しました。");
-			//			session.setAttribute("successes", successes);
+//			List<String> successes = new ArrayList<>();
+//			successes.add("更新しました。");
+//			session.setAttribute("success", successes);
 
-			resp.sendRedirect("S0042.html");
+
+			resp.sendRedirect("S0041.html");
 		} catch (Exception e) {
 			throw new ServletException(e);
 		} finally {

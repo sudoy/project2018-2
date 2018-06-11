@@ -71,7 +71,7 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">パスワード</label>
  			<div class="col-sm-5">
-				<input type="password" class="form-control" name="password" id="pass1" value="${accounts.password}">
+				<input type="password" class="form-control" name="password" id="pass1" value="">
 			</div>
 			
 		</div>	
@@ -79,7 +79,7 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">パスワード（確認）</label>
  			<div class="col-sm-5">
-				<input type="password" class="form-control" name="pass2" id="pass2" value="${accounts.password}">
+				<input type="password" class="form-control" name="pass2" id="pass2" value="">
 			</div>
 		</div>	
 
