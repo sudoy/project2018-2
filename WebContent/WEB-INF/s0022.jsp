@@ -46,7 +46,7 @@
 	</div><!-- /.container-fluid -->
 </nav>
 
-	<form class="form-horizontal" action="S0021.html" method="post">
+	<form class="form-horizontal" action="S0025.html" method="post">
 
 	<div class="container">
 
@@ -111,9 +111,9 @@
 		</div>
 
 		<div class="col-sm-offset-3">
-			<a href="S0023.html?id=${s22.sale_id}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 編　集</span></a>
-			<a href="S0025.html?id=${s22.sale_id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> 削　除</span></a>
-			<button type="submit" href="S0021.html" class="btn btn-default">キャンセル</button><!-- キャンセル先は暫定。 -->
+			<a href="S0023.html?id=${s22.sale_id}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 編　集</span></a><!--これもOK  -->
+			<button type="submit" href="S0025.html?id=${s22.sale_id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> 削　除</span></button>
+			<a href="S0021.html" class="btn btn-default">キャンセル</a><!-- キャンセルはOK -->
 
 		<!--
 		<button type="button" class="btn btn-default">Default</button>
