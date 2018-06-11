@@ -49,19 +49,20 @@
 
 		<h1>売上を登録してよろしいですか？</h1>
 
-	<form class="form-horizontal" action="#" method="post">
+	<form class="form-horizontal" action="S0011.html" method="post">
+
  		<div class="form-group">
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日</label>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" id="salesDate" value="2018/5/11">
+					<input type="text" class="form-control" name="saleDate" id="saleDate" value="${sales.saleDate}">
 			</div>
 		</div>
 
 		 <div class="form-group">
 	 			<label for="person" class="col-sm-2 control-label">担当</label>
 	 			<div class="col-sm-5">
-					<select class="form-control">
+					<select class="form-control" name="accountId">
 						<option value="" >選択してください</option>
 						<option value="イチロー" selected>イチロー</option>
 					</select>
@@ -71,7 +72,7 @@
 		<div class="form-group">
  			<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
  			<div class="col-sm-5">
- 					<select class="form-control">
+ 					<select class="form-control" name="categoryId">
 						<option value="" >選択してください</option>
 						<option value="" selected>食料品</option>
 					</select>
@@ -81,7 +82,7 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">商品名</label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" id="name" value="からあげ弁当">
+				<input type="text" class="form-control" name="tradeName" id="tradeName" value="${sales.tradeName}">
 			</div>
 		</div>
 
@@ -90,41 +91,36 @@
  			<label for="price" class="col-sm-2 control-label">単価</label>
 
  			<div class="col-sm-2">
-				<input type="text" class="form-control" id="price" value="450">
+				<input type="text" class="form-control" name="unitPrice" id="unitPrice" value="${sales.unitPrice}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">個数</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" id="number" value="3">
+				<input type="text" class="form-control" name="saleNumber" id="saleNumber" value="${sales.saleNumber}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="subtotal" class="col-sm-2 control-label">小計</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" id="subtotal" value="1,350">
+				<input type="text" class="form-control" name="subtotal" id="subtotal" value="${sales.unitPrice * sales.saleNumber}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="note" class="col-sm-2 control-label">備考</label>
  			<div class="col-sm-5">
-				<textarea class="form-control" id="note" rows="5">備考</textarea>
+				<textarea class="form-control" name="note" id="note" rows="5">${sales.note}</textarea>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<div class="col-sm-offset-4">
-			<a href="S0010.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</a>
-						<a href="#" class="btn btn-default">キャンセル</a>
-
-			<!--
-			<button type="button" class="btn btn-primary">O K</button>
-			<button type="button" class="btn btn-default">キャンセル</button>
-			-->
-		</div>
+				<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
+				<a href="S0010.html" class="btn btn-default">キャンセル</a>
+			</div>
 		</div>
 
 	</form>

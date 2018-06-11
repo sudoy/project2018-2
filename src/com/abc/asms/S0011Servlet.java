@@ -3,7 +3,6 @@ package com.abc.asms;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,73 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import project2.beans.Sales;
 import project2.utils.DBUtils;
 
 @WebServlet("/S0011.html")
 public class S0011Servlet extends HttpServlet {
-
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		String sql = null;
-		ResultSet rs = null;
-
-		try{
-			//データベースの接続を確立
-			con = DBUtils.getConnection();
-
-			sql = "SELECT sale_date, account_id, category_id, trade_name, unit_price, sale_number, note"
-					+ " FROM sales"
-					+ " where sale_id = 9";
-
-			ps = con.prepareStatement(sql);
-
-			//SELECT文にパラメーターの内容をセット
-//			ps.setString(1, req.getParameter("saleId"));
-
-			System.out.println(ps);
-
-			//SELCT命令を実行
-			rs = ps.executeQuery();
-
-			//ResultSet→JavaBeansに変換する
-			rs.next();
-
-			Sales sales = new Sales(rs.getInt("sale_id"),
-					rs.getDate("sale_date"),
-					rs.getInt("account_id"),
-					rs.getInt("category_id"),
-					rs.getString("trade_name"),
-					rs.getInt("unit_price"),
-					rs.getInt("sale_number"),
-					rs.getString("note")
-				);
-
-			System.out.println(sales);
-
-			req.setAttribute("sales", sales);
-
-
-
-			//JSPへフォワード
-			getServletContext().getRequestDispatcher("/WEB-INF/s0011.jsp")
-				.forward(req, resp);
-
-		}catch(Exception e){
-			throw new ServletException(e);
-
-		}finally{
-			try{
-				DBUtils.close(rs);
-				DBUtils.close(ps);
-				DBUtils.close(con);
-			}catch(Exception e){}
-		}
-	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)

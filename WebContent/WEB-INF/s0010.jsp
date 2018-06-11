@@ -50,16 +50,17 @@
 		<h1>売上登録</h1>
 
 	<form class="form-horizontal" action="S0010.html" method="post">
+	<input type="hidden" name="saleId" value="${sales.saleId}">
  		<div class="form-group">
-	 		<label for="salesDate" class="col-sm-2 control-label">販売日 <span class="badge">必須</span></label>
+	 		<label for="saleDate" class="col-sm-2 control-label">販売日 <span class="badge">必須</span></label>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" id="saleDate" name="saleDate" placeholder="販売日" value="">
+					<input type="text" class="form-control" id="saleDate" name="saleDate" placeholder="販売日" value="${param.saleDate}">
 			</div>
 		</div>
 
 		 <div class="form-group">
-				<label for="person" class="col-sm-2 control-label">担当 <span class="badge">必須</span></label>
+				<label for="accountId" class="col-sm-2 control-label">担当 <span class="badge">必須</span></label>
 	 			<div class="col-sm-5">
 					<select class="form-control" name="accountId" id="accountId">
 						<option value="" selected>選択してください</option>
@@ -71,7 +72,7 @@
 		</div>
 
 		<div class="form-group">
- 			<label for="category" class="col-sm-2 control-label">商品カテゴリー <span class="badge">必須</span></label>
+ 			<label for="categoryId" class="col-sm-2 control-label">商品カテゴリー <span class="badge">必須</span></label>
  			<div class="col-sm-5">
  					<select class="form-control" name="categoryId" id="categoryId">
 						<option value="" selected>選択してください</option>
@@ -83,32 +84,32 @@
 		</div>
 
 		<div class="form-group">
- 			<label for="name" class="col-sm-2 control-label">商品名 <span class="badge">必須</span></label>
+ 			<label for="tradeName" class="col-sm-2 control-label">商品名 <span class="badge">必須</span></label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" id="tradeName" name="tradeName" placeholder="商品カテゴリー" value="">
+				<input type="text" class="form-control" id="tradeName" name="tradeName" placeholder="商品名" value="${param.tradeName}">
 			</div>
 		</div>
 
 		<div class="form-group">
 
- 			<label for="price" class="col-sm-2 control-label">単価 <span class="badge">必須</span></label>
+ 			<label for="unitPrice" class="col-sm-2 control-label">単価 <span class="badge">必須</span></label>
 
  			<div class="col-sm-2">
-				<input type="text" class="form-control" id="unitPrice" name="unitPrice" placeholder="商品カテゴリー" value="">
+				<input type="text" class="form-control" id="unitPrice" name="unitPrice" placeholder="単価" value="${param.unitPrice}">
 			</div>
 		</div>
 
 		<div class="form-group">
- 			<label for="number" class="col-sm-2 control-label">個数 <span class="badge">必須</span></label>
+ 			<label for="saleNumber" class="col-sm-2 control-label">個数 <span class="badge">必須</span></label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" id="saleNumber" name="saleNumber" placeholder="個数" value="">
+				<input type="text" class="form-control" id="saleNumber" name="saleNumber" placeholder="個数" value="${param.saleNumber}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="note" class="col-sm-2 control-label">備考 </label>
  			<div class="col-sm-5">
-				<textarea class="form-control" id="note" name="note" placeholder="備考" rows="5"></textarea>
+				<textarea class="form-control" id="note" name="note" placeholder="備考" rows="5">${param.note}</textarea>
 			</div>
 		</div>
 

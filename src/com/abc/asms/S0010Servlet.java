@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,50 +20,73 @@ public class S0010Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
+		//foward→index.jsp
+		getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
+			.forward(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+
+		req.setCharacterEncoding("UTF-8");
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
 		ResultSet rs = null;
 
 		try{
-
+			//データベースの接続を確立
 			con = DBUtils.getConnection();
 
-			//SQL
-			sql = "SELECT sale_id from sales;";
+			sql = "SELECT sale_id = ?, sale_date = ?, account_id = ?, category_id = ?, trade_name = ?, unit_price = ?, sale_number = ?, note = ?"
+					+ " FROM sales;";
 
-			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
+
+			//SELECT文にパラメーターの内容をセット
+			ps.setString(1, req.getParameter("saleId"));
+			ps.setString(2, req.getParameter("saleDate"));
+			ps.setString(3, req.getParameter("accountId"));
+			ps.setString(4, req.getParameter("categoryId"));
+			ps.setString(5, req.getParameter("tradeName"));
+			ps.setString(6, req.getParameter("unitPrice"));
+			ps.setString(7, req.getParameter("saleNumber"));
+			ps.setString(8, req.getParameter("note"));
 
 			//SELECT命令を実行
 			rs = ps.executeQuery();
 
-			//ResultSetをJavaBeansに変換
-			List<Sales> list = new ArrayList<>();
+			//ResultSet→JavaBeansに変換する
+			rs.next();
 
-			while(rs.next()) {
-				Sales sales = new Sales(rs.getInt("sale_id"));
-				list.add(sales);
-			}
+			Sales sales = new Sales(rs.getInt("sale_id"),
+							rs.getDate("sale_date"),
+							rs.getInt("account_id"),
+							rs.getInt("category_id"),
+							rs.getString("trade_name"),
+							rs.getInt("unit_price"),
+							rs.getInt("sale_number"),
+							rs.getString("note")
+							);
 
-			//JavaBeansをJSPへ渡す
-			req.setAttribute("list", list);
+			req.setAttribute("sales", sales);
 
-			//foward→index.jsp
-			getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
+			//JSPへフォワード
+			getServletContext().getRequestDispatcher("/WEB-INF/s0011.jsp")
 				.forward(req, resp);
+
 		}catch(Exception e){
 			throw new ServletException(e);
+
 		}finally{
-			//終了処理
 			try{
 				DBUtils.close(rs);
 				DBUtils.close(ps);
 				DBUtils.close(con);
-			}catch(Exception e){
-			}
+			}catch(Exception e){}
 		}
-
 
 	}
 
