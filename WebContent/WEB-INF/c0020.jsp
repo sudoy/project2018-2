@@ -97,36 +97,17 @@
 							<th>小計</th>
 						</tr>
 					</thead>
-
+					<c:forEach var="sales" items="${list}">
 						<tr>
-							<td>1</td>
-							<td>2018/5/14</td>
-							<td>食料品</td>
-							<td>からあげ弁当</td>
-							<td>450</td>
-							<td>3</td>
-							<td>1350</td>
+							<td>${sales.saleId}</td>
+							<td>${sales.saleDate}</td>
+							<td>${sales.categoryId}</td>
+							<td>${sales.tradeName}</td>
+							<td>${sales.unitPrice}</td>
+							<td>${sales.saleNumber}</td>
+							<td>${sales.unitPrice * sales.saleNumber}</td>
 						</tr>
-
-						<tr>
-							<td>2</td>
-							<td>2018/5/14</td>
-							<td>食料品</td>
-							<td>あんぱん</td>
-							<td>120</td>
-							<td>10</td>
-							<td>1200</td>
-						</tr>
-
-						<tr>
-							<td>3</td>
-							<td>2018/5/14</td>
-							<td>飲料</td>
-							<td>コカコーラ 500ml</td>
-							<td>130</td>
-							<td>5</td>
-							<td>650</td>
-						</tr>
+					</c:forEach>
 
 						<tr>
 							<td>　</td>
