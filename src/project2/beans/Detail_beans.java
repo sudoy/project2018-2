@@ -13,6 +13,10 @@ public class Detail_beans {
 	private String note;
 	private int sale_id;
 
+	public Detail_beans() {
+
+	}
+
 	public LocalDate getSale_date() {
 		return sale_date;
 	}

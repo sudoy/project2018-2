@@ -32,8 +32,8 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li ><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
-				<li class="active"><a href="S0010.html">売上登録</a></li>
-				<li><a href="S0020.html">売上検索</a></li>
+				<li><a href="S0010.html">売上登録</a></li>
+				<li class="active"><a href="S0020.html">売上検索</a></li>
 				<li><a href="S0030.html">アカウント登録</a></li>
 				<li><a href="S0040.html">アカウント検索</a></li>
 
@@ -45,7 +45,7 @@
 	</div><!-- /.container-fluid -->
 </nav>
 
-	<form action="s0024.html?id=${s23.sale_id}" method="POST">
+	<form class="form-horizontal" action="S0022.html?id=${s23.sale_id}" method="POST">
 
 	<div class="container">
 
@@ -82,7 +82,7 @@
 
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">商品名 <span class="badge">必須</span></label>
- 			<div class="col-sm-2">
+ 			<div class="col-sm-5">
 				<input type="text" class="form-control" id="name" value="${s23.trade_name}">
 			</div>
 		</div>
@@ -112,8 +112,8 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-4">
-				<a href="S0024.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 更　新</span></a>
-				<a href="S0022.html" class="btn btn-default">キャンセル</a>
+				<a href="S0024.html?id=${s23.sale_id}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 更　新</span></a>
+				<button type="submit" href="S0022.html" class="btn btn-default">キャンセル</button>
 			</div>
 		</div>
 

@@ -57,7 +57,7 @@
 		<table>
 			<tr>
 				<th>販売日</th>
-				<td>${HtmlUtils.formatDate(s22)}</td>
+				<td>${param.sale_date != null? param.sale_date : HtmlUtils.formatDate(s22)}</td>
 			</tr>
 
 			<th>　</th>
@@ -92,7 +92,7 @@
 
 			<tr>
 				<th>個数</th>
-				<td>${s22.sale_number}</td>
+				<td>${ds22.sale_number}</td>
 			</tr>
 
 			<tr>
@@ -102,7 +102,7 @@
 
 			<tr>
 				<th>備考</th>
-				<td>${s22.note.equals("")? null : s22.note}</td>
+				<td>${param.note.equals("")? null : s22.note}</td>
 			</tr>
 
 			<th>　</th>
@@ -112,7 +112,7 @@
 
 		<div class="col-sm-offset-3">
 			<a href="S0023.html?id=${s22.sale_id}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 編　集</span></a>
-			<a href="S0025.html" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> 削　除</span></a>
+			<a href="S0025.html?id=${s22.sale_id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> 削　除</span></a>
 			<button type="submit" href="S0021.html" class="btn btn-default">キャンセル</button><!-- キャンセル先は暫定。 -->
 
 		<!--
