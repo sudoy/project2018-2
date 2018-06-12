@@ -55,7 +55,7 @@
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日</label>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" name="saleDate" id="saleDate" value="${sales.saleDate}">
+					<input type="text" class="form-control" name="saleDate" id="saleDate" value="${saleDate}">
 			</div>
 		</div>
 
@@ -82,7 +82,7 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">商品名</label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" name="tradeName" id="tradeName" value="${sales.tradeName}">
+				<input type="text" class="form-control" name="tradeName" id="tradeName" value="${tradeName}">
 			</div>
 		</div>
 
@@ -91,28 +91,28 @@
  			<label for="price" class="col-sm-2 control-label">単価</label>
 
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="unitPrice" id="unitPrice" value="${sales.unitPrice}">
+				<input type="text" class="form-control" name="unitPrice" id="unitPrice" value="${unitPrice}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">個数</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="saleNumber" id="saleNumber" value="${sales.saleNumber}">
+				<input type="text" class="form-control" name="saleNumber" id="saleNumber" value="${saleNumber}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="subtotal" class="col-sm-2 control-label">小計</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="subtotal" id="subtotal" value="${sales.unitPrice * sales.saleNumber}">
+				<input type="text" class="form-control" name="subtotal" id="subtotal" value="${unitPrice * saleNumber}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="note" class="col-sm-2 control-label">備考</label>
  			<div class="col-sm-5">
-				<textarea class="form-control" name="note" id="note" rows="5">${sales.note}</textarea>
+				<textarea class="form-control" name="note" id="note" rows="5">${note}</textarea>
 			</div>
 		</div>
 

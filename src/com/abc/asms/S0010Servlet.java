@@ -1,6 +1,11 @@
 package com.abc.asms;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +19,6 @@ public class S0010Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		//foward→index.jsp
 		getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
 			.forward(req, resp);
 	}
@@ -33,18 +37,75 @@ public class S0010Servlet extends HttpServlet {
 		String saleNumber = req.getParameter("saleNumber");
 		String note = req.getParameter("note");
 
-		req.setAttribute("saleDate", saleDate);
-		req.setAttribute("accountId", accountId);
-		req.setAttribute("categoryId", categoryId);
-		req.setAttribute("tradeName", tradeName);
-		req.setAttribute("unitPrice", unitPrice);
-		req.setAttribute("saleNumber", saleNumber);
-		req.setAttribute("note", note);
+		List<String> errors =  validate(saleDate, accountId, categoryId, tradeName, unitPrice, saleNumber);
+		if(errors.size() > 0) {
+			req.setAttribute("errors", errors);
+			getServletContext().getRequestDispatcher("/WEB-INF/entry.jsp")
+				.forward(req, resp);
+			return;
+		}
 
-		//JSPへフォワード
-		getServletContext().getRequestDispatcher("/WEB-INF/s0011.jsp")
-			.forward(req, resp);
 
+
+
+	}
+
+	private List<String> validate(String saleDate, String accountId, String categoryId, String tradeName, String unitPrice, String saleNumber) {
+		List<String> errors = new ArrayList<>();
+
+		//必須入力
+		if(saleDate.equals("")){
+			errors.add("販売日は必須入力です。");
+		}
+
+		if(accountId.equals("")) {
+			errors.add("担当は必須入力です。");
+		}
+
+		if(categoryId.equals("")) {
+			errors.add("カテゴリーは必須入力です。");
+		}
+
+		if(tradeName.equals("")) {
+			errors.add("商品名は必須入力です。");
+		}
+
+		if(unitPrice.equals("")) {
+			errors.add("単価は必須入力です。");
+		}
+
+		if(saleNumber.equals("")) {
+			errors.add("個数は必須入力です。");
+		}
+
+		//販売日の形式（yyyy/MM//dd）
+		if(!saleDate.equals("")) {
+			try {
+				LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/MM/dd")
+					.withResolverStyle(ResolverStyle.STRICT));
+			}catch(Exception e) {
+				errors.add("期限は「YYYY/MM/DD」形式で入力して下さい。");
+			}
+		}
+
+		//単価数字のみにする
+		if(!unitPrice.equals("")) {
+		    try {
+		        Integer.parseInt(unitPrice);
+		    } catch (NumberFormatException e) {
+		        errors.add("単価は数字で入力してください。");
+		    }
+		}
+
+		//個数数字のみにする
+		if(!saleNumber.equals("")) {
+		    try {
+		        Integer.parseInt(saleNumber);
+		    } catch (NumberFormatException e) {
+		        errors.add("個数は数字で入力してください。");
+		    }
+		}
+		return errors;
 
 	}
 
