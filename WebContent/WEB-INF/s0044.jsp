@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.abc.asms.utils.AuthorityUtils"%>
+ 
     
 <!DOCTYPE html>
 <html lang="ja">
@@ -84,22 +86,22 @@
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">売上登録権限 <span class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority" value="0" ${AuthorityUtils.checkAuthority1(account.authority)} disabled>権限なし</label>
-					<label><input type="radio" name="authority" value="1" ${AuthorityUtils.checkAuthority2(account.authority)} disabled>権限あり</label>
+					<label><input type="radio" name="authority" value="0" ${AuthorityUtils.checkAuthority1(accounts.authority)} disabled>権限なし</label>
+					<label><input type="radio" name="authority" value="1" ${AuthorityUtils.checkAuthority2(accounts.authority)} disabled>権限あり</label>
 				</div>
 		</div>
 		
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">アカウント登録権限 <span class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority1" value="0" ${AuthorityUtils.checkAuthority3(account.authority)} disabled>権限なし</label>
-					<label><input type="radio" name="authority1" value="1" ${AuthorityUtils.checkAuthority4(account.authority)} disabled>権限あり</label>
+					<label><input type="radio" name="authority1" value="0" ${AuthorityUtils.checkAuthority3(accounts.authority)} disabled>権限なし</label>
+					<label><input type="radio" name="authority1" value="1" ${AuthorityUtils.checkAuthority4(accounts.authority)} disabled>権限あり</label>
 				</div>	
 		</div>
 
 		<div class="form-group">
 			<div class="col-sm-offset-4">
-				<input type="submit" class="btn btn-danger" value=" O K">
+				<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> O K</span></button>
 				<a href="S0041.html" class="btn btn-default">キャンセル</a>
 
 			<!--

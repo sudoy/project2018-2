@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="project2.utils.AuthorityUtils"%>
+<%@ page import="com.abc.asms.utils.AuthorityUtils"%>
     
 <!DOCTYPE html>
 <html lang="ja">

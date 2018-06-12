@@ -1,6 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page pageEncoding="UTF-8"%>
-<%@ page import="project2.utils.AuthorityUtils"%>
+<%@ page import="com.abc.asms.utils.AuthorityUtils"%>
 
 
 <!DOCTYPE html>
@@ -86,16 +86,16 @@
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">売上登録権限 <span class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority" value="0" ${HTMLUtils.checkAuthority(param.authority != null? param.authority : accounts.authority, '0')}>権限なし</label>
-					<label><input type="radio" name="authority" value="1" ${HTMLUtils.checkAuthority(param.authority != null? param.authority : accounts.authority, '1')}>権限あり</label>
+					<label><input type="radio" name="authority1" value="0" ${AuthorityUtils.checkAuthority1(accounts.authority)}>権限なし</label>
+					<label><input type="radio" name="authority1" value="1" ${AuthorityUtils.checkAuthority2(accounts.authority)}>権限あり</label>
 				</div>
 		</div>
 		
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">アカウント登録権限 <span class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="aauthority" value="0" ${HTMLUtils.checkAuthority(param.authority != null? param.authority : accounts.authority, '0')}>権限なし</label>
-					<label><input type="radio" name="aauthority" value="1" ${HTMLUtils.checkAuthority(param.authority != null? param.authority : accounts.authority, '1')}>権限あり</label>
+					<label><input type="radio" name="authority2" value="0" ${AuthorityUtils.checkAuthority3(accounts.authority)}>権限なし</label>
+					<label><input type="radio" name="authority2" value="1" ${AuthorityUtils.checkAuthority4(accounts.authority)}>権限あり</label>
 				</div>	
 		</div>
 
