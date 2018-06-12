@@ -22,7 +22,7 @@ public class S0025Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-//  削除実行のプログラム
+	//  削除実行のプログラム
 
 //			if(!Utils.checkLogin(req, resp)) {
 //			return;
@@ -76,10 +76,11 @@ public class S0025Servlet extends HttpServlet {
 			}
 		}
 
+
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-
 		String id = req.getParameter("id");
 
 		Connection con = null;
@@ -98,7 +99,6 @@ public class S0025Servlet extends HttpServlet {
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, id);
-			System.out.println(ps);
 
 			rs = ps.executeQuery();
 
@@ -137,9 +137,5 @@ public class S0025Servlet extends HttpServlet {
 			}
 
 		}
-//		resp.sendRedirect("S0022.html");
-		req.getServletContext().getRequestDispatcher("/WEB-INF/s0025.jsp").forward(req, resp);
 	}
-
-
 }

@@ -51,12 +51,12 @@
 
 		<h1>売上を削除してよろしいですか？</h1>
 
-	<form class="form-horizontal" action="#" method="post">
+	<form class="form-horizontal" action="S0025.html?id=${s25.sale_id}" method="post">
  		<div class="form-group">
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日</label>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" name="sale_date" value="${s25.sale_date}" disabled>
+					<input type="text" class="form-control" name="sale_date" value="${HtmlUtils.formatDate(s25)}" disabled>
 			</div>
 		</div>
 
@@ -90,21 +90,21 @@
  			<label for="price" class="col-sm-2 control-label">単価</label>
 
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="price" value="${s25.unit_price}" disabled>
+				<input type="text" class="form-control text-right" name="price" value="${HtmlUtils.formatCommaC(s25)}" disabled>
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">個数</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="number" value="${s25.sale_number}" disabled>
+				<input type="text" class="form-control text-right" name="number" value="${HtmlUtils.formatCommaN(s25)}" disabled>
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">小計</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="number" value="${s25.sum}" align="right" disabled>
+				<input type="text" class="form-control text-right" name="number" value="${HtmlUtils.formatCommaSum(s25)}" align="right" disabled>
 			</div>
 		</div>
 
@@ -119,8 +119,8 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-4">
-				<button type="submit" href="S0025.html" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> O K</span></button>
-				<a href="S0022.html" class="btn btn-default">キャンセル</a>
+				<a href="S0025.html?id=${s25.sale_id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> O K</span></a>
+				<a href="S0022.html?id=${s25.sale_id}" class="btn btn-default">キャンセル</a>
 			</div>
 		</div>
 	</form>

@@ -19,4 +19,14 @@ public class HtmlUtils {
 		return line.format(dtf);
 
 	}
+
+	public static String formatCommaC(Detail_beans dbean) {
+		return String.format("%,d", dbean.getUnit_price());
+	}
+	public static String formatCommaN(Detail_beans dbean) {
+		return String.format("%,d", dbean.getSale_number());
+	}
+	public static String formatCommaSum(Detail_beans dbean) {
+		return String.format("%,d", dbean.getSum());
+	}
 }

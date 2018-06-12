@@ -46,7 +46,7 @@
 	</div><!-- /.container-fluid -->
 </nav>
 
-	<form class="form-horizontal" action="S0025.html" method="post">
+	<form class="form-horizontal" action="S0025.html?id=${s22.sale_id}" method="post">
 
 	<div class="container">
 
@@ -85,19 +85,19 @@
 
 			<tr>
 				<th>単価</th>
-				<td>${s22.unit_price}</td>
+				<td class=text-right>${HtmlUtils.formatCommaC(s22)}</td>
 			</tr>
 
 			<th>　</th>
 
 			<tr>
 				<th>個数</th>
-				<td>${ds22.sale_number}</td>
+				<td class=text-right>${HtmlUtils.formatCommaN(s22)}</td>
 			</tr>
 
 			<tr>
 				<th>小計</th>
-				<td>${s22.sum}</td>
+				<td class=text-right>${HtmlUtils.formatCommaSum(s22)}</td>
 			</tr>
 
 			<tr>
@@ -112,7 +112,7 @@
 
 		<div class="col-sm-offset-3">
 			<a href="S0023.html?id=${s22.sale_id}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 編　集</span></a><!--これもOK  -->
-			<button type="submit" href="S0025.html?id=${s22.sale_id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> 削　除</span></button>
+			<button type="submit" href="S0025.html" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> 削　除</span></button>
 			<a href="S0021.html" class="btn btn-default">キャンセル</a><!-- キャンセルはOK -->
 
 		<!--

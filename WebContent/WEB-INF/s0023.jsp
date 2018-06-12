@@ -55,7 +55,7 @@
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日 <span class="badge">必須</span></label>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" id="salesDate" value="${s23.sale_date}">
+					<input type="text" class="form-control" id="salesDate" value="${HtmlUtils.formatDate(s23)}">
 			</div>
 		</div>
 
@@ -92,14 +92,14 @@
  			<label for="price" class="col-sm-2 control-label">単価 <span class="badge">必須</span></label>
 
  			<div class="col-sm-2">
-				<input type="text" class="form-control" id="price" value="${s23.unit_price}">
+				<input type="text" class="form-control" id="price" value="${HtmlUtils.formatCommaC(s23)}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">個数 <span class="badge">必須</span></label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" id="number" value="${s23.sale_number}">
+				<input type="text" class="form-control" id="number" value="${HtmlUtils.formatCommaN(s23)}">
 			</div>
 		</div>
 

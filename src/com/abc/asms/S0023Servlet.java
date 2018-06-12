@@ -51,8 +51,6 @@ public class S0023Servlet extends HttpServlet {
 				throw new Exception();
 			}
 
-			System.out.println(rs.getDate("sale_date"));
-
 			Detail_beans s23 = new Detail_beans(
 					Utils.date2LocalDate(rs.getDate("sale_date")),
 					rs.getString("name"),

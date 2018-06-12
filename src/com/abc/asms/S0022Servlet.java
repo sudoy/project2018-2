@@ -148,7 +148,7 @@ public class S0022Servlet extends HttpServlet {
 			}
 		}
 
-		req.getServletContext().getRequestDispatcher("/WEB-INF/s0022.jsp").forward(req, resp);
+//		req.getServletContext().getRequestDispatcher("/WEB-INF/s0022.jsp").forward(req, resp);
 
 	}
 }
