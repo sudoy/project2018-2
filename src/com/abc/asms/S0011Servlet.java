@@ -16,6 +16,14 @@ import com.abc.asms.utils.DBUtils;
 public class S0011Servlet extends HttpServlet {
 
 	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+
+		getServletContext().getRequestDispatcher("/WEB-INF/s0011.jsp")
+		.forward(req, resp);
+	}
+
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -36,7 +44,7 @@ public class S0011Servlet extends HttpServlet {
 			con = DBUtils.getConnection();
 
 			sql = "INSERT INTO sales(sale_date, account_id, category_id, trade_name, unit_price, sale_number, note)"
-					+ "values(?,?,?,?,?,?,?,?)";
+					+ "values(?,?,?,?,?,?,?)";
 
 			//INSERT命令の準備
 			ps = con.prepareStatement(sql);
