@@ -54,15 +54,15 @@
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日</label>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" name="sale_date" value="" disabled>
+					<input type="text" class="form-control" name="sale_date" value="${param.sale_date}" disabled>
 			</div>
 		</div>
 
 		 <div class="form-group">
 	 			<label for="person" class="col-sm-2 control-label">担当</label>
 	 			<div class="col-sm-5">
-					<select name="name" class="form-control"disabled>
-						<option value="イチロー"></option>
+					<select name="name" class="form-control" disabled>
+						<option value="">${param.name}</option>
 					</select>
 			</div>
 		</div>
@@ -71,7 +71,7 @@
  			<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
  			<div class="col-sm-5">
  					<select name="category_name" class="form-control"disabled>
-						<option value=""></option>
+						<option value="">${param.category_name}</option>
 					</select>
 			</div>
 		</div>
@@ -117,7 +117,7 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-4">
-				<a href="S0022.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> O K</span></a>
+				<a href="S0024.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> O K</span></a>
 				<a href="S0023.html?id=${s24.sale_id}" class="btn btn-default">キャンセル</a>
 			</div>
 		</div>
