@@ -88,6 +88,7 @@ public class S0042Servlet extends HttpServlet {
 		String authority2 = req.getParameter("authority2");
 		String authority = authority1 + authority2;
 		
+		req.setAttribute("account_id", accountId);
 		req.setAttribute("name", name);
 		req.setAttribute("mail", mail);
 		req.setAttribute("password", password);

@@ -52,7 +52,7 @@
 	
 		<h1>アカウント編集</h1>
 		
-	<form class="form-horizontal" action="S0043.html?account_id=${param.account_id != null ? param.account_id : accounts.account_id}" method="post">
+	<form class="form-horizontal" action="S0042.html?account_id=${param.account_id != null ? param.account_id : accounts.account_id}" method="post">
 	
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">氏名 <span class="badge">必須</span></label>
