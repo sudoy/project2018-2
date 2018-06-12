@@ -21,21 +21,23 @@ public class AuthorityUtils {
 			return "売上登録/アカウント登録";
 		}
 	}
-	public static String checkAutority1(String authority) {
+	
+	
+	public  static String checkAuthority1(String authority) {
 		if (authority.equals("1") || authority.equals("11")) {
 			return "";
 		} else {
-			return "cheked";
+			return "checked";
 		}
 }
-	public static String checkAutority2(String authority) {
+	public static String checkAuthority2(String authority) {
 		if (authority.equals("1") || authority.equals("11")) {
-			return "checed";
+			return "checked";
 		} else {
 			return "";
 		}
 }
-	public static String checkAutority3(String authority) {
+	public static String checkAuthority3(String authority) {
 		if (authority.equals("0") || authority.equals("1")) {
 			return "checked";
 		} else {
@@ -43,11 +45,11 @@ public class AuthorityUtils {
 		}
 	
 }
-	public static String checkAutority4(String authority) {
-		if (authority.equals("01") || authority.equals("11")) {
-			return "checked";
-		} else {
+	public static String checkAuthority4(String authority) {
+		if (authority.equals("0") || authority.equals("1")) {
 			return "";
+		} else {
+			return "checked";
 		}
 	
 }

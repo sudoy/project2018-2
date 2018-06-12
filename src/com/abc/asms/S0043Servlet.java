@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.abc.asms.beans.Accounts;
 import com.abc.asms.utils.DBUtils;
 
 @WebServlet("/S0043.html")
@@ -21,6 +20,16 @@ public class S0043Servlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		req.setCharacterEncoding("utf-8");
+		
+		String accountId = req.getParameter("account_id");
+		String name = req.getParameter("name");
+		String mail = req.getParameter("mail");
+		String password = req.getParameter("password");
+		String passwordc = req.getParameter("passwordc");
+		String authority1 = req.getParameter("authority1");
+		String authority2 = req.getParameter("authority2");
+		String authority = authority1 + authority2;
+		
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -39,16 +48,16 @@ public class S0043Servlet extends HttpServlet {
 			//select命令を実行
 			rs = ps.executeQuery();
 
-			rs.next();
-
-			int accountId = rs.getInt("account_id");
-			String name = rs.getString("name");
-			String mail = rs.getString("mail");
-			String password = rs.getString("password");
-			int authority = rs.getInt("authority");
-
-			Accounts accounts = new Accounts(accountId, name, mail, password, authority);
-			req.setAttribute("accounts", accounts);
+//			rs.next();
+//
+//			int accountId = rs.getInt("account_id");
+//			String name = rs.getString("name");
+//			String mail = rs.getString("mail");
+//			String password = rs.getString("password");
+//			int authority = rs.getInt("authority");
+//
+//			Accounts accounts = new Accounts(accountId, name, mail, password, authority);
+//			req.setAttribute("accounts", accounts);
 
 			//JSPへフォワード
 			getServletContext().getRequestDispatcher("/WEB-INF/s0043.jsp")

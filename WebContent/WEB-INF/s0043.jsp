@@ -1,6 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page pageEncoding="UTF-8"%>
-<%@ page import="project2.utils.AuthorityUtils"%>
+<%@ page import="com.abc.asms.utils.AuthorityUtils"%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -54,14 +54,14 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">氏名 <span class="badge">必須</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" id="name" name="name" value="${param.name != null ? param.name : accounts.name}">
+				<input type="text" class="form-control" id="name" name="name" value="${param.name}">
 			</div>
 		</div>	
 		
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">メールアドレス <span class="badge">必須</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" id="mailadress" name="mail" value="${accounts.mail}">
+				<input type="text" class="form-control" id="mailadress" name="mail" value="${param.mail}">
 			</div>
 		</div>
 		
@@ -83,16 +83,16 @@
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">売上登録権限 <span class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority1" value="0">権限なし</label>
-					<label><input type="radio" name="authority1" value="1">権限あり</label>
+					<label><input type="radio" name="authority1" value="0" ${AuthorityUtils.checkAuthority1(accounts.authority)}>権限なし</label>
+					<label><input type="radio" name="authority1" value="1" ${AuthorityUtils.checkAuthority2(accounts.authority)}>権限あり</label>
 				</div>
 		</div>
 		
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">アカウント登録権限 <span class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority2" value="">権限なし</label>
-					<label><input type="radio" name="authority2" value="1">権限あり</label>
+					<label><input type="radio" name="authority2" value="0" ${AuthorityUtils.checkAuthority3(accounts.authority)}>権限なし</label>
+					<label><input type="radio" name="authority2" value="1" ${AuthorityUtils.checkAuthority4(accounts.authority)}>権限あり</label>
 				</div>	
 		</div>
 
