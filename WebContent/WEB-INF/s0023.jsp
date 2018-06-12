@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="project2.utils.HtmlUtils" %>
+<%@ page import="com.abc.asms.utils.HtmlUtils" %>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -55,7 +55,7 @@
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日 <span class="badge">必須</span></label>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" id="salesDate" value="${HtmlUtils.formatDate(s23)}">
+					<input type="text" class="form-control" id="salesDate" value="${s23.sale_date}">
 			</div>
 		</div>
 

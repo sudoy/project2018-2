@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="project2.utils.HtmlUtils" %>
+<%@ page import="com.abc.asms.utils.HtmlUtils" %>
 
 <!DOCTYPE html>
 <html lang="ja">
