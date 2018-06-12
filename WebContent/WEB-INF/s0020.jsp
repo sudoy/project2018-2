@@ -77,20 +77,25 @@
 						<option value="${project2.name}" >${project2.name}</option>
 						</c:forEach>
 					</select>
-			</div>
-		</div>
+				</div>
+		 </div>
 
-		<div class="form-group">
- 			<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
- 			<div class="col-sm-5">
- 					<select class="form-control" >
-						<option value="" selected>選択してください</option>
-						<c:forEach var="project2" items="${list}">
-						<option value="${project2.categoryId}" >${project2.categoryName}</option>
-						</c:forEach>
-					</select>
-			</div>
-		</div>
+		<fieldset class="form-group">
+				<div class="row">
+					<label for="person" class="col-sm-2 control-label">商品カテゴリー</label>
+
+					<div class="col-sm-8">
+					<c:forEach var="project2" items="${list}">
+						<div class="custom-control custom-checkbox custom-control-inline">
+ 							<input type="checkbox" id="${project2.categoryId}" value="${project2.categoryId}" name="${project2.categoryName}" class="custom-control-input category" checked>
+							<label class="custom-control-label"  for="${project2.categoryId}">${project2.categoryName}</label>
+						</div>
+					</c:forEach>
+
+					</div>
+
+				</div>
+			</fieldset>
 
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">商品名 <span class="badge">部分一致</span></label>
