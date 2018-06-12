@@ -45,7 +45,7 @@
 	</div><!-- /.container-fluid -->
 </nav>
 
-	<form class="form-horizontal" action="s0024.html?id=${s23.sale_id}" method="POST">
+	<form class="form-horizontal" action="S0024.html?id=${s23.sale_id}" method="POST">
 
 	<div class="container">
 
@@ -55,7 +55,7 @@
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日 <span class="badge">必須</span></label>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" id="salesDate" value="${HtmlUtils.formatDate(s23)}">
+					<input type="text" class="form-control" name="sale_date" id="salesDate" value="${HtmlUtils.formatDate(s23)}">
 			</div>
 		</div>
 
@@ -92,14 +92,14 @@
  			<label for="price" class="col-sm-2 control-label">単価 <span class="badge">必須</span></label>
 
  			<div class="col-sm-2">
-				<input type="text" class="form-control" id="price" value="${HtmlUtils.formatCommaC(s23)}">
+				<input type="text" class="form-control text-right" id="price" value="${HtmlUtils.formatCommaC(s23)}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">個数 <span class="badge">必須</span></label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" id="number" value="${HtmlUtils.formatCommaN(s23)}">
+				<input type="text" class="form-control text-right" id="number" value="${HtmlUtils.formatCommaN(s23)}">
 			</div>
 		</div>
 
@@ -112,7 +112,7 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-4">
-				<a href="S0024.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 更　新</span></a>
+				<button type="submit" href="S0024.html?id=${s23.sale_id}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 更　新</span></button>
 				<a href="S0022.html" class="btn btn-default">キャンセル</a>
 			</div>
 		</div>

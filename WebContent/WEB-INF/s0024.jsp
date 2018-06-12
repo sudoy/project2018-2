@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page import="com.abc.asms.utils.HtmlUtils" %>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -54,16 +54,15 @@
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日</label>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" name="salesDate" value="2018/5/11">
+					<input type="text" class="form-control" name="sale_date" value="" disabled>
 			</div>
 		</div>
 
 		 <div class="form-group">
 	 			<label for="person" class="col-sm-2 control-label">担当</label>
 	 			<div class="col-sm-5">
-					<select class="form-control">
-						<option value="">選択してください</option>
-						<option value="イチロー" selected>イチロー</option>
+					<select name="name" class="form-control"disabled>
+						<option value="イチロー"></option>
 					</select>
 			</div>
 		</div>
@@ -71,9 +70,8 @@
 		<div class="form-group">
  			<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
  			<div class="col-sm-5">
- 					<select class="form-control">
-						<option value="" >選択してください</option>
-						<option value="" selected>食品</option>
+ 					<select name="category_name" class="form-control"disabled>
+						<option value=""></option>
 					</select>
 			</div>
 		</div>
@@ -81,30 +79,30 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">商品名</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="name" value="からあげ弁当">
+				<input type="text" class="form-control" name="trade_name" value="" disabled>
 			</div>
 		</div>
 
 		<div class="form-group">
 
- 			<label for="price" class="col-sm-2 control-label">単価</label>
+ 			<label for="price" name="unit_price" class="col-sm-2 control-label">単価</label>
 
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="price" value="450">
+				<input type="text" class="form-control text-right" name="unit_price" value="" disabled>
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">個数</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="number" value="3">
+				<input type="text" class="form-control text-right" name="sale_number" value="" disabled>
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">小計</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="number" value="1,350"s>
+				<input type="text" class="form-control text-right" name="sum" value="" disabled>
 			</div>
 		</div>
 
@@ -112,7 +110,7 @@
 		<div class="form-group">
  			<label for="note" class="col-sm-2 control-label">備考</label>
  			<div class="col-sm-5">
-				<textarea class="form-control" name="note" rows="5">今日からの新商品</textarea>
+				<textarea class="form-control" name="note" rows="5" disabled></textarea>
 			</div>
 		</div>
 
@@ -120,7 +118,7 @@
 		<div class="form-group">
 			<div class="col-sm-offset-4">
 				<a href="S0022.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> O K</span></a>
-				<a href="S0023.html" class="btn btn-default">キャンセル</a>
+				<a href="S0023.html?id=${s24.sale_id}" class="btn btn-default">キャンセル</a>
 			</div>
 		</div>
 	</form>
