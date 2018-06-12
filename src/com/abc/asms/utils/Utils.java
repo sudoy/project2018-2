@@ -1,4 +1,4 @@
-package project2.utils;
+package com.abc.asms.utils;
 
 import java.sql.Date;
 import java.time.LocalDate;

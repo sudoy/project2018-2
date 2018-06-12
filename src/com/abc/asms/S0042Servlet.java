@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import project2.beans.Accounts;
-import project2.utils.DBUtils;
+import com.abc.asms.beans.Accounts;
+import com.abc.asms.utils.DBUtils;
 
 
 @WebServlet("/S0042.html")

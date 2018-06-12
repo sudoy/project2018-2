@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import project2.beans.Accounts;
-import project2.utils.DBUtils;
+import com.abc.asms.beans.Accounts;
+import com.abc.asms.utils.DBUtils;
 
 @WebServlet("/S0043.html")
 public class S0043Servlet extends HttpServlet {
@@ -99,7 +99,7 @@ public class S0043Servlet extends HttpServlet {
 		String sql = null;
 
 		try {
-			con = project2.utils.DBUtils.getConnection();
+			con = com.abc.asms.utils.DBUtils.getConnection();
 
 			sql = "update accounts set name = ?, mail = ?, password = ?, authority = ? where account_id = ?;";
 			ps = con.prepareStatement(sql);

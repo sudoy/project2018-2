@@ -16,9 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import project2.beans.Accounts;
-import project2.beans.Categories;
-import project2.utils.DBUtils;
+import com.abc.asms.beans.Accounts;
+import com.abc.asms.beans.Categories;
+import com.abc.asms.utils.DBUtils;
 @WebServlet("/S0020.html")
 public class S0020Servlet extends HttpServlet {
 	@Override

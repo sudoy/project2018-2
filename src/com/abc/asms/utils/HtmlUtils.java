@@ -1,9 +1,9 @@
-package project2.utils;
+package com.abc.asms.utils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import project2.beans.Detail_beans;
+import com.abc.asms.beans.Detail_beans;
 
 public class HtmlUtils {
 	public static String formatDate(Detail_beans dbean) {
