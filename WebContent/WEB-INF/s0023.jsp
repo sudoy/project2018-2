@@ -82,7 +82,7 @@
 
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">商品名 <span class="badge">必須</span></label>
- 			<div class="col-sm-5">
+ 			<div class="col-sm-2">
 				<input type="text" class="form-control" id="name" value="${s23.trade_name}">
 			</div>
 		</div>
@@ -113,7 +113,7 @@
 		<div class="form-group">
 			<div class="col-sm-offset-4">
 				<button type="submit" href="S0024.html?id=${s23.sale_id}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 更　新</span></button>
-				<a href="S0022.html" class="btn btn-default">キャンセル</a>
+				<a href="S0022.html?id=${s23.sale_id}" class="btn btn-default">キャンセル</a>
 			</div>
 		</div>
 

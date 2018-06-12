@@ -43,8 +43,6 @@ public class S0023Servlet extends HttpServlet {
 
 			ps.setString(1, id);
 
-			System.out.println(ps);
-
 			rs = ps.executeQuery();
 
 			if(!rs.next()) {

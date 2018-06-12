@@ -49,19 +49,19 @@
 
 		<h1>売上を編集してよろしいですか？</h1>
 
-	<form class="form-horizontal" action="#" method="post">
+	<form class="form-horizontal" action="S0022.html?id=6" method="post">
  		<div class="form-group">
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日</label>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" name="sale_date" value="${param.sale_date}" disabled>
+					<input type="text" class="form-control" name="sale_date" value="${param.sale_date}" <%//disabled-->%> >
 			</div>
 		</div>
 
 		 <div class="form-group">
 	 			<label for="person" class="col-sm-2 control-label">担当</label>
 	 			<div class="col-sm-5">
-					<select name="name" class="form-control" disabled>
+					<select name="name" class="form-control" <%//disabled-->%>>
 						<option value="">${param.name}</option>
 					</select>
 			</div>
@@ -70,7 +70,7 @@
 		<div class="form-group">
  			<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
  			<div class="col-sm-5">
- 					<select name="category_name" class="form-control"disabled>
+ 					<select name="category_name" class="form-control"<%//disabled-->%>>
 						<option value="">${param.category_name}</option>
 					</select>
 			</div>
@@ -79,7 +79,7 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">商品名</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="trade_name" value="" disabled>
+				<input type="text" class="form-control" name="trade_name" value="${param.trade_name}" <%//disabled-->%>>
 			</div>
 		</div>
 
@@ -88,21 +88,21 @@
  			<label for="price" name="unit_price" class="col-sm-2 control-label">単価</label>
 
  			<div class="col-sm-2">
-				<input type="text" class="form-control text-right" name="unit_price" value="" disabled>
+				<input type="text" class="form-control text-right" name="unit_price" value="${param.unit_price}" <%//disabled-->%>>
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">個数</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control text-right" name="sale_number" value="" disabled>
+				<input type="text" class="form-control text-right" name="sale_number" value="${sale_number}" <%//disabled-->%>>
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">小計</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control text-right" name="sum" value="" disabled>
+				<input type="text" class="form-control text-right" name="sum" value="${param.sum}" <%//disabled-->%>>
 			</div>
 		</div>
 
@@ -110,15 +110,15 @@
 		<div class="form-group">
  			<label for="note" class="col-sm-2 control-label">備考</label>
  			<div class="col-sm-5">
-				<textarea class="form-control" name="note" rows="5" disabled></textarea>
+				<textarea class="form-control" name="note" rows="5" <%//disabled-->%>>${param.note != null? param.note : null}</textarea>
 			</div>
 		</div>
 
 
 		<div class="form-group">
 			<div class="col-sm-offset-4">
-				<a href="S0024.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> O K</span></a>
-				<a href="S0023.html?id=${s24.sale_id}" class="btn btn-default">キャンセル</a>
+				<a href="S0024.html?id= 6" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> O K</span></a>
+				<a href="S0023.html?id= 6 " class="btn btn-default">キャンセル</a>
 			</div>
 		</div>
 	</form>
