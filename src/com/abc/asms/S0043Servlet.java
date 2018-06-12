@@ -16,25 +16,6 @@ public class S0043Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
 		
-		req.setCharacterEncoding("utf-8");
-		
-		String accountId = req.getParameter("account_id");
-		String name = req.getParameter("name");
-		String mail = req.getParameter("mail");
-		String password = req.getParameter("password");
-		String passwordc = req.getParameter("passwordc");
-		String authority1 = req.getParameter("authority1");
-		String authority2 = req.getParameter("authority2");
-		String authority = authority1 + authority2;
-		
-		req.setAttribute("name", name);
-		req.setAttribute("mail", mail);
-		req.setAttribute("password", password);
-		req.setAttribute("passwordc", passwordc);
-		req.setAttribute("authority1", authority1);
-		req.setAttribute("authority2", authority2);
-		req.setAttribute("authority", authority);
-		
 		getServletContext().getRequestDispatcher("/WEB-INF/s0043.jsp")
 		.forward(req, resp);
 	}

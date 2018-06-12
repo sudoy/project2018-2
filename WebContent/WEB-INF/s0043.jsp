@@ -83,16 +83,16 @@
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">売上登録権限 <span class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority1" value="0" ${AuthorityUtils.checkAuthority1(accounts.authority)}>権限なし</label>
-					<label><input type="radio" name="authority1" value="1" ${AuthorityUtils.checkAuthority2(accounts.authority)}>権限あり</label>
+					<label><input type="radio" name="authority1" value="0" ${AuthorityUtils.checkAuthoritya(param.authority1)}>権限なし</label>
+					<label><input type="radio" name="authority1" value="1" ${AuthorityUtils.checkAuthorityb(param.authority1)}>権限あり</label>
 				</div>
 		</div>
 		
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">アカウント登録権限 <span class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority2" value="0" ${AuthorityUtils.checkAuthority3(accounts.authority)}>権限なし</label>
-					<label><input type="radio" name="authority2" value="1" ${AuthorityUtils.checkAuthority4(accounts.authority)}>権限あり</label>
+					<label><input type="radio" name="authority2" value="0" ${AuthorityUtils.checkAuthoritya(param.authority2)}>権限なし</label>
+					<label><input type="radio" name="authority2" value="1" ${AuthorityUtils.checkAuthorityb(param.authority2)}>権限あり</label>
 				</div>	
 		</div>
 

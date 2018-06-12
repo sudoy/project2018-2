@@ -53,4 +53,18 @@ public class AuthorityUtils {
 		}
 	
 }
+	public static String checkAuthoritya(String authority) {
+		if (authority.equals("0")) {
+			return "checked";
+		} else {
+			return "";
+		}
+}
+	public static String checkAuthorityb(String authority) {
+		if (authority.equals("1")) {
+			return "checked";
+		} else {
+			return "";
+		}
+}
 }

@@ -52,19 +52,21 @@
 	
 		<h1>アカウント編集</h1>
 		
+<jsp:include page="_errors.jsp" />
+		
 	<form class="form-horizontal" action="S0042.html?account_id=${param.account_id != null ? param.account_id : accounts.account_id}" method="post">
 	
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">氏名 <span class="badge">必須</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" id="name" name="name" value="${accounts.name}">
+				<input type="text" class="form-control" id="name" name="name" value="${param.name != null ? param.name : accounts.name}">
 			</div>
 		</div>	
 		
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">メールアドレス <span class="badge">必須</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" id="mailadress" name="mail" value="${accounts.mail}">
+				<input type="text" class="form-control" id="mailadress" name="mail" value="${param.mail != null ? param.mail : accounts.mail}">
 			</div>
 		</div>
 		
@@ -86,23 +88,22 @@
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">売上登録権限 <span class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority1" value="0" ${AuthorityUtils.checkAuthority1(accounts.authority)}>権限なし</label>
-					<label><input type="radio" name="authority1" value="1" ${AuthorityUtils.checkAuthority2(accounts.authority)}>権限あり</label>
+					<label><input type="radio" name="authority1" value="0" ${AuthorityUtils.checkAuthority1(param.authority1 != null ? param.authority1 : accounts.authority)}>権限なし</label>
+					<label><input type="radio" name="authority1" value="1" ${AuthorityUtils.checkAuthority2(param.authority1 != null ? param.authority1 : accounts.authority)}>権限あり</label>
 				</div>
 		</div>
 		
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">アカウント登録権限 <span class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority2" value="0" ${AuthorityUtils.checkAuthority3(accounts.authority)}>権限なし</label>
-					<label><input type="radio" name="authority2" value="1" ${AuthorityUtils.checkAuthority4(accounts.authority)}>権限あり</label>
+					<label><input type="radio" name="authority2" value="0" ${AuthorityUtils.checkAuthority3(param.authority2 != null ? param.authority2 : accounts.authority)}>権限なし</label>
+					<label><input type="radio" name="authority2" value="1" ${AuthorityUtils.checkAuthority4(param.authority2 != null ? param.authority2 : accounts.authority)}>権限あり</label>
 				</div>	
 		</div>
 
 		<div class="form-group">
 			<div class="col-sm-offset-3">
 				<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 更新</span></button>
-				<a href="S0043.html?account_id=${accounts.accountId}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 更新</a>
 				<a href="S0041.html" class="btn btn-default">キャンセル</a>
 			</div>
 		</div>
