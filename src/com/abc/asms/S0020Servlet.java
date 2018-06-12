@@ -121,31 +121,47 @@ public class S0020Servlet extends HttpServlet {
 			//SQL
 			sql = "select * from accounts a left join sales s on a.account_id = s.account_id "
 					+"left join categories c on c.category_id = s.category_id "
-					+ "where note like ? or trade_name like ? or sale_date between ? and ? or c.category_name = ?";
+					+ "where 0 = 0 ";
 
-			//SELECT命令の準備
-			ps = con.prepareStatement(sql);
-			//備考検索
-			ps.setString(1, req.getParameter("note").equals("") ? null : "%" + note + "%");
-			//商品名検索
-			ps.setString(2, req.getParameter("trade_name").equals("") ? null : "%" + tradeName + "%");
-			//日付検索
-			if(!saleDate1.equals("") && !saleDate2.equals("")) {
-				ps.setString(3, saleDate1);
-				ps.setString(4, saleDate2);
-			}else if(saleDate1.equals("") && !saleDate2.equals("")){
-				ps.setString(3, "1900-01-01");
-				ps.setString(4, saleDate2);
-			}else if(!saleDate1.equals("") && saleDate2.equals("")) {
-				ps.setString(3, saleDate1);
-				ps.setString(4, "2099-01-01");
+//			//備考検索
+			if(note != "") {
+				sql += " and note like '%" + note + "%'";
 			}else {
-				ps.setString(3, "");
-				ps.setString(4, "");
+				sql += "";
+			}
+//			ps.setString(1,  "%" + note + "%");
+//			//商品名検索
+			if(tradeName != "") {
+				sql += " and trade_name like '%" + tradeName + "%'";
+			}else {
+				sql += "";
+			}
+//			ps.setString(2, req.getParameter("trade_name").equals("") ? null : "%" + tradeName + "%");
+//			//日付検索
+			if(!saleDate1.equals("") && !saleDate2.equals("")) {
+				sql += " and sale_date between '" + saleDate1 + "' and '" + saleDate2+ "'";
+//				ps.setString(3, saleDate1);
+//				ps.setString(4, saleDate2);
+			}else if(saleDate1.equals("") && !saleDate2.equals("")){
+				sql += " and sale_date <= '" + saleDate2 + "'";
+//				ps.setString(3, "1900-01-01");
+//				ps.setString(4, saleDate2);
+			}else if(!saleDate1.equals("") && saleDate2.equals("")) {
+				sql += " and sale_date >= '" + saleDate1 + "'";
+//				ps.setString(3, saleDate1);
+//				ps.setString(4, "2099-01-01");
+			}else {
+				sql += "";
+//				ps.setString(3, "");
+//				ps.setString(4, "");
 			}
 
 			//担当検索
-			ps.setString(5, categoryName );
+//			ps.setString(5, categoryName );
+
+
+			//SELECT命令の準備
+			ps = con.prepareStatement(sql);
 			System.out.println(ps);
 			//SELECT命令を実行
 			rs = ps.executeQuery();
