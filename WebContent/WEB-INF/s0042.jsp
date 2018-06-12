@@ -52,7 +52,7 @@
 	
 		<h1>アカウント編集</h1>
 		
-	<form class="form-horizontal" action="S0043.html?account_id=${param.account_id != null ? param.account_id : accounts.account_id}" method="post">
+	<form class="form-horizontal" action="S0042.html?account_id=${param.account_id != null ? param.account_id : accounts.account_id}" method="post">
 	
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">氏名 <span class="badge">必須</span></label>
@@ -79,7 +79,7 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">パスワード（確認）</label>
  			<div class="col-sm-5">
-				<input type="password" class="form-control" name="pass2" id="pass2" value="">
+				<input type="password" class="form-control" name="passwordc" id="pass2" value="">
 			</div>
 		</div>	
 
@@ -101,6 +101,7 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-3">
+				<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 更新</span></button>
 				<a href="S0043.html?account_id=${accounts.accountId}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 更新</a>
 				<a href="S0041.html" class="btn btn-default">キャンセル</a>
 			</div>
