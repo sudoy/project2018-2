@@ -45,9 +45,6 @@ public class S0010Servlet extends HttpServlet {
 			return;
 		}
 
-
-
-
 	}
 
 	private List<String> validate(String saleDate, String accountId, String categoryId, String tradeName, String unitPrice, String saleNumber) {
