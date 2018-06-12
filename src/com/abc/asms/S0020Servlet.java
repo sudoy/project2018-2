@@ -58,6 +58,10 @@ public class S0020Servlet extends HttpServlet {
 			}
 			//JavaBeansをJSPへ渡す
 			req.setAttribute("list", list);
+			try{
+				DBUtils.close(ps);
+				DBUtils.close(rs);
+			}catch(Exception e){}
 
 			sql = "select account_id,name,mail,password,authority  from accounts";
 			//SELECT命令の準備
@@ -108,9 +112,11 @@ public class S0020Servlet extends HttpServlet {
 		String tradeName = req.getParameter("trade_name");
 		String saleDate1 = req.getParameter("sale_date1");
 		String saleDate2 = req.getParameter("sale_date2");
-		String categoryName = req.getParameter("1");
+		String accountName = req.getParameter("name");
+		String categoryName = req.getParameter("categoryName");
 
-		List<String> errors =  validate(saleDate1,saleDate2,req);
+
+		List<String> errors =  validate(saleDate1,saleDate2,req,accountName);
 		if(errors.size() > 0) {
 			resp.sendRedirect("S0020.html");
 			return;
@@ -155,9 +161,16 @@ public class S0020Servlet extends HttpServlet {
 //				ps.setString(3, "");
 //				ps.setString(4, "");
 			}
-
+			//カテゴリー検索
+			sql += " and category_name =" + "'"+categoryName+"'";
+//			sql += " and category_name =" + "'"+categoryName+"'";
 			//担当検索
-//			ps.setString(5, categoryName );
+			if(accountName !=  "") {
+				sql += " and name =" + "'"+accountName+"'";
+			}else {
+				sql += "";
+			}
+
 
 
 			//SELECT命令の準備
@@ -205,7 +218,7 @@ public class S0020Servlet extends HttpServlet {
 			}
 		}
 	}
-	private List<String> validate(String saleDate1,String saleDate2,HttpServletRequest req) {
+	private List<String> validate(String saleDate1,String saleDate2,HttpServletRequest req,String accountName) {
 		List<String> errors = new ArrayList<>();
 
 		//日付の必須入力
@@ -242,6 +255,10 @@ public class S0020Servlet extends HttpServlet {
 			}catch(Exception e1) {
 
 			}
+		}
+
+		if(accountName.equals("")) {
+			errors.add("担当の入力は必須です");
 		}
 		return errors;
 
