@@ -4,10 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.S0021;
 import com.abc.asms.utils.DBUtils;
@@ -84,145 +79,4 @@ public class S0021Servlet extends HttpServlet {
 
 
 	}
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
-		HttpSession session = req.getSession();
-		Connection con = null;
-		PreparedStatement ps = null;
-		String sql = null;
-		ResultSet rs = null;
-
-		String note = req.getParameter("note");
-		String tradeName = req.getParameter("trade_name");
-		String saleDate1 = req.getParameter("sale_date1");
-		String saleDate2 = req.getParameter("sale_date2");
-		String categoryName = req.getParameter("1");
-
-		List<String> errors =  validate(saleDate1,saleDate2,req);
-		if(errors.size() > 0) {
-			getServletContext().getRequestDispatcher("/WEB-INF/s0020.jsp")
-				.forward(req, resp);
-			return;
-		}
-		try{
-			con = DBUtils.getConnection();
-
-			//SQL
-			sql = "select * from accounts a left join sales s on a.account_id = s.account_id "
-					+"left join categories c on c.category_id = s.category_id "
-					+ "where note like ? or trade_name like ? or sale_date between ? and ? or c.category_name = ?";
-
-			//SELECT命令の準備
-			ps = con.prepareStatement(sql);
-			//備考検索
-			ps.setString(1, req.getParameter("note").equals("") ? null : "%" + note + "%");
-			//商品名検索
-			ps.setString(2, req.getParameter("trade_name").equals("") ? null : "%" + tradeName + "%");
-			//日付検索
-			if(!saleDate1.equals("") && !saleDate2.equals("")) {
-				ps.setString(3, saleDate1);
-				ps.setString(4, saleDate2);
-			}else if(saleDate1.equals("") && !saleDate2.equals("")){
-				ps.setString(3, "1900-01-01");
-				ps.setString(4, saleDate2);
-			}else if(!saleDate1.equals("") && saleDate2.equals("")) {
-				ps.setString(3, saleDate1);
-				ps.setString(4, "2099-01-01");
-			}else {
-				ps.setString(3, "");
-				ps.setString(4, "");
-			}
-
-			//担当検索
-			ps.setString(5, categoryName );
-			System.out.println(ps);
-			//SELECT命令を実行
-			rs = ps.executeQuery();
-
-
-			List<S0021> list = new ArrayList<>();
-			while(rs.next()) {
-				S0021 sale = new S0021(rs.getInt("sale_id"),
-						rs.getDate("sale_date"),
-						rs.getString("name"),
-						rs.getString("category_name"),
-						rs.getString("trade_name"),
-						rs.getInt("unit_price"),
-						rs.getInt("sale_number"),
-						rs.getString("note"));
-
-				list.add(sale);
-			}
-			if(list.isEmpty()) {
-				errors = new ArrayList<>();
-				errors.add("検索結果はありません。");
-				session.setAttribute("errors", errors);
-				getServletContext().getRequestDispatcher("/WEB-INF/s0020.jsp")
-						.forward(req, resp);
-				return;
-			}
-			//JavaBeansをJSPへ渡す
-			req.setAttribute("list", list);
-			//foward
-			getServletContext().getRequestDispatcher("/WEB-INF/s0021.jsp")
-				.forward(req, resp);
-		}catch(Exception e){
-			throw new ServletException(e);
-		}finally{
-			//終了処理
-			try{
-				DBUtils.close(rs);
-				DBUtils.close(ps);
-				DBUtils.close(con);
-			}catch(Exception e){
-			}
-		}
-	}
-	private List<String> validate(String saleDate1,String saleDate2,HttpServletRequest req) {
-		List<String> errors = new ArrayList<>();
-
-		//日付の必須入力
-		if(saleDate1.equals("") && saleDate2.equals("")){
-			errors.add("日付は必須入力です。");
-		}
-		if(!saleDate1.equals("")) {
-			try {
-				LocalDate.parse(saleDate1, DateTimeFormatter.ofPattern("uuuu/MM/dd")
-					.withResolverStyle(ResolverStyle.STRICT));
-			}catch(Exception e) {
-				errors.add("販売日（検索開始日）を正しく入力して下さい。");
-			}
-		}
-
-		if(!saleDate2.equals("")) {
-			try {
-				LocalDate.parse(saleDate2, DateTimeFormatter.ofPattern("uuuu/MM/dd")
-					.withResolverStyle(ResolverStyle.STRICT));
-			}catch(Exception e) {
-				errors.add("販売日（検索終了日）を正しく入力して下さい。");
-			}
-		}
-
-		if(!req.getParameter("sale_date2").equals("") && !req.getParameter("sale_date1").equals("")) {
-			SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd");
-			fmt.setLenient(false);
-			try {
-				java.util.Date f1 = fmt.parse(req.getParameter("sale_date1"));
-				java.util.Date f2 = fmt.parse(req.getParameter("sale_date2"));
-				if(!f1.before(f2)) {
-					errors.add("販売日（検索開始日が販売日（検索終了日より後の日付になっています。");
-				}
-			}catch(Exception e1) {
-
-			}
-		}
-		return errors;
-
-
-
-	}
-
-
 }

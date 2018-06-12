@@ -50,7 +50,7 @@
 
 		<h1>売上検索条件入力</h1>
 
-	<form class="form-horizontal" action="S0021.html" method="post">
+	<form class="form-horizontal" action="S0020.html" method="post">
  		<div class="form-group">
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日 <span class="badge">必須</span></label>
 
@@ -87,7 +87,7 @@
 					<div class="col-sm-8">
 					<c:forEach var="project2" items="${list}">
 						<div class="custom-control custom-checkbox custom-control-inline">
- 							<input type="checkbox" id="${project2.categoryId}" value="${project2.categoryId}" name="${project2.categoryName}" class="custom-control-input category" checked>
+ 							<input type="checkbox" id="${project2.categoryId}" value="${project2.categoryName}" name="${project2.categoryName}" class="custom-control-input category" checked>
 							<label class="custom-control-label"  for="${project2.categoryId}">${project2.categoryName}</label>
 						</div>
 					</c:forEach>
@@ -114,7 +114,6 @@
 		<div class="form-group">
 			<div class="col-sm-offset-4">
 				<button type="submit" class="btn btn-primary "><span class="glyphicon glyphicon-search"></span> 検 索</button>
-				<a href="S0021.html" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> 検　索</a>
 				<a href="S0020.html" class="btn btn-default">クリア</a>
 			</div>
 		</div>
