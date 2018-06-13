@@ -3,3 +3,29 @@
 table{
 	padding-bottom: 0;
 }
+.h2, h2 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.checkbox {
+  display: none;
+  !important
+}
+.checkbox + .checkbox-icon {
+  position: relative;
+  vertical-align: middle;
+  !important
+}
+.checkbox + .checkbox-icon:before {
+  content: "\f372";
+  font-family: "Ionicons";
+  color: #ccc;
+  font-size: 22px;
+  !important
+}
+.checkbox:checked + .checkbox-icon:before {
+  content: "\f374";
+  color: #17bcdf;
+  !important
+}
