@@ -67,13 +67,13 @@
 			<tr>
 			<td><a href="S0022.html?id=${project2.saleId}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 詳細</a></td>
 			<td>${project2.saleId}</td>
-			<td>${project2.saleDate}</td>
+			<td>${HtmlUtils.formDate(project2.saleDate)}</td>
 			<td>${project2.accountName}</td>
 			<td>${project2.categoryName}</td>
 			<td>${project2.tradeName}</td>
-			<td>${project2.unitPrice}</td>
-			<td>${project2.saleNumber}</td>
-			<td>${project2.unitPrice * project2.saleNumber}</td>
+			<td>${HtmlUtils.formatUnitPrice(project2.unitPrice)}</td>
+			<td>${HtmlUtils.formatSaleNumber(project2.saleNumber)}</td>
+			<td>${HtmlUtils.formatTotal(project2.unitPrice * project2.saleNumber)}</td>
 			</tr>
 			</c:forEach>
 

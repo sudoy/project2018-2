@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import com.abc.asms.beans.Detail_beans;
+import com.abc.asms.beans.S0021;
 
 public class HtmlUtils {
 	public static String formatDate(Detail_beans dbean) {
@@ -99,5 +100,21 @@ public class HtmlUtils {
 		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		 return sdf.format(d);
 
+	}
+
+	public static String formatUnitPrice(int price) {
+		S0021 s = new S0021(price, null, null, null, null, price,price, null);
+		String str = String.format("%,3d", s.getUnitPrice());
+		return str;
+	}
+	public static String formatSaleNumber(int price) {
+		S0021 s = new S0021(price, null, null, null, null, price,price, null);
+		String str = String.format("%,3d", s.getSaleNumber());
+		return str;
+	}
+	public static String formatTotal(int price) {
+		S0021 s = new S0021(price, null, null, null, null, price,price, null);
+		String str = String.format("%,3d", s.getSaleNumber());
+		return str;
 	}
 }

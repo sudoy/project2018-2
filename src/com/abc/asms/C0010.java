@@ -90,10 +90,17 @@ public class C0010 extends HttpServlet {
 		List<String> errors = new ArrayList<>();
 
 		if(email.equals("")) {
-			errors.add("メールアドレスは必須入力です");
+			errors.add("メールアドレスを入力してください。");
 		}
+		if(email.length() > 100) {
+			errors.add("メールアドレスが長すぎます");
+		}
+
 		if(password.equals("")) {
-			errors.add("パスワードは必須入力です。");
+			errors.add("パスワードが未入力です。");
+		}
+		if(password.length() > 30) {
+			errors.add("パスワードが長すぎます");
 		}
 		return errors;
 
