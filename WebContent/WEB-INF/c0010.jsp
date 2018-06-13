@@ -12,18 +12,13 @@
 		<title>ログイン｜物品売上管理システム</title>
 
 		<link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
 		<link href="css/signin.css" rel="stylesheet">
 
 		<script type="text/javascript" src="http://gc.kis.v2.scr.kaspersky-labs.com/15FFB0EB-D585-DC46-87A9-4A5DB79FD622/main.js" charset="UTF-8"></script><script src="../../assets/js/ie-emulation-modes-warning.js"></script>
 
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
 	</head>
 
 	<body>

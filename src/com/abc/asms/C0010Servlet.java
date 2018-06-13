@@ -19,7 +19,7 @@ import com.abc.asms.utils.DBUtils;
 
 
 @WebServlet("/C0010.html")
-public class C0010 extends HttpServlet {
+public class C0010Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -88,20 +88,35 @@ public class C0010 extends HttpServlet {
 	}
 	private List<String> validate(String email,String password) {
 		List<String> errors = new ArrayList<>();
-
+		//1-1
 		if(email.equals("")) {
 			errors.add("メールアドレスを入力してください。");
 		}
+		//1-2
 		if(email.length() > 100) {
 			errors.add("メールアドレスが長すぎます");
 		}
-
+		//1-3
+//		if (!email.contains("@")) {
+//			errors.add("メールアドレスの形式が間違っています。");
+//		}
+//		String regex = "[^0-9a-zA-Z]";
+//		Matcher matcher = regex.matcher("aaaaab");
+		if (!email.contains("@")) {
+			errors.add("メールアドレスの形式が間違っています。");
+		}
+		//1-4
 		if(password.equals("")) {
 			errors.add("パスワードが未入力です。");
 		}
+		//1-5
 		if(password.length() > 30) {
 			errors.add("パスワードが長すぎます");
 		}
+		//1-6
+
+		//1-7
+
 		return errors;
 
 	}

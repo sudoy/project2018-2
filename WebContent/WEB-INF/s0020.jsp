@@ -89,7 +89,7 @@
 						<div class="custom-control custom-checkbox custom-control-inline" >
 						<c:forEach var="project2" items="${list}">
  							<input type="checkbox" id="${project2.categoryId}" value="${project2.categoryName}" name="categoryName" class="custom-control-input category" checked>
-							<label class="custom-control-label"  for="${project2.categoryId}">${project2.categoryName}</label>
+							<label class="custom-control-label"  for="${project2.categoryId}">${param.project2.categoryName != null ? param.project2.categoryName :project2.categoryName}</label>
 							</c:forEach>
 						</div>
 
