@@ -1,9 +1,11 @@
 package com.abc.asms.utils;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -23,6 +25,7 @@ public class HtmlUtils {
 		return line.format(dtf);
 
 	}
+
 
 	public static String formatCommaC(Detail_beans dbean) {
 		return String.format("%,d", dbean.getUnit_price());
@@ -88,5 +91,13 @@ public class HtmlUtils {
 		}else {
 			return "";
 		}
+	}
+	public static String formDate(Date d) {
+		if(d == null) {
+			return "";
+		}
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		 return sdf.format(d);
+
 	}
 }
