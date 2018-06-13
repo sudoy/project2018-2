@@ -1,4 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="com.abc.asms.utils.HtmlUtils" %>
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -55,26 +58,30 @@
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日</label>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" name="saleDate" id="saleDate" value="${saleDate}">
+					<input type="text" class="form-control" name="saleDate" id="saleDate" value="${param.saleDate}">
 			</div>
 		</div>
 
 		 <div class="form-group">
-	 			<label for="person" class="col-sm-2 control-label">担当</label>
+	 			<label for="name" class="col-sm-2 control-label">担当</label>
 	 			<div class="col-sm-5">
-					<select class="form-control" name="accountId">
-						<option value="" >選択してください</option>
-						<option value="イチロー" selected>イチロー</option>
+					<select class="form-control" name="name" id="name">
+						<option value="" selected>選択してください</option>
+						<c:forEach var="project2" items="${list2}">
+							<option value="${project2.name}" ${HtmlUtils.selectName(name, name)}>${name}</option>
+						</c:forEach>
 					</select>
 			</div>
 		</div>
 
 		<div class="form-group">
- 			<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
+ 			<label for="categoryName" class="col-sm-2 control-label">商品カテゴリー</label>
  			<div class="col-sm-5">
- 					<select class="form-control" name="categoryId">
-						<option value="" >選択してください</option>
-						<option value="" selected>食料品</option>
+ 					<select class="form-control" name="categoryName">
+ 						<option value="" selected>選択してください</option>
+						<c:forEach var="project2" items="${list}">
+							<option value="${project2.categoryName}" ${HtmlUtils.selectCategory(categoryName, categoryName)}>${categoryName}</option>
+						</c:forEach>
 					</select>
 			</div>
 		</div>
@@ -82,7 +89,7 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">商品名</label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" name="tradeName" id="tradeName" value="${tradeName}">
+				<input type="text" class="form-control" name="tradeName" id="tradeName" value="${param.tradeName}">
 			</div>
 		</div>
 
@@ -91,28 +98,28 @@
  			<label for="price" class="col-sm-2 control-label">単価</label>
 
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="unitPrice" id="unitPrice" value="${unitPrice}">
+				<input type="text" class="form-control" name="unitPrice" id="unitPrice" value="${param.unitPrice}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">個数</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="saleNumber" id="saleNumber" value="${saleNumber}">
+				<input type="text" class="form-control" name="saleNumber" id="saleNumber" value="${param.saleNumber}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="subtotal" class="col-sm-2 control-label">小計</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="subtotal" id="subtotal" value="${unitPrice * saleNumber}">
+				<input type="text" class="form-control" name="subtotal" id="subtotal" value="${param.unitPrice * param.saleNumber}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="note" class="col-sm-2 control-label">備考</label>
  			<div class="col-sm-5">
-				<textarea class="form-control" name="note" id="note" rows="5">${note}</textarea>
+				<textarea class="form-control" name="note" id="note" rows="5">${param.note}</textarea>
 			</div>
 		</div>
 

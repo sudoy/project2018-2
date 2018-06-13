@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="com.abc.asms.utils.HtmlUtils" %>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -50,7 +52,6 @@
 		<h1>売上登録</h1>
 
 	<form class="form-horizontal" action="S0010.html" method="post">
-	<input type="hidden" name="saleId" value="${sales.saleId}">
  		<div class="form-group">
 	 		<label for="saleDate" class="col-sm-2 control-label">販売日 <span class="badge">必須</span></label>
 
@@ -60,25 +61,25 @@
 		</div>
 
 		 <div class="form-group">
-				<label for="accountId" class="col-sm-2 control-label">担当 <span class="badge">必須</span></label>
+				<label for="name" class="col-sm-2 control-label">担当 <span class="badge">必須</span></label>
 	 			<div class="col-sm-5">
-					<select class="form-control" name="accountId" id="accountId">
+					<select class="form-control" name="name" id="name">
 						<option value="" selected>選択してください</option>
-						<option value="1" >イチロー</option>
-						<option value="2" >ダルビッシュ有</option>
-						<option value="3" >田中将大</option>
+						<c:forEach var="project2" items="${list2}">
+						<option value="${project2.name}">${project2.name}</option>
+						</c:forEach>
 					</select>
 			</div>
 		</div>
 
 		<div class="form-group">
- 			<label for="categoryId" class="col-sm-2 control-label">商品カテゴリー <span class="badge">必須</span></label>
+ 			<label for="categoryName" class="col-sm-2 control-label">商品カテゴリー <span class="badge">必須</span></label>
  			<div class="col-sm-5">
- 					<select class="form-control" name="categoryId" id="categoryId">
-						<option value="" selected>選択してください</option>
-						<option value="1" >食品</option>
-						<option value="2" >お酒</option>
-						<option value="3" >飲料</option>
+ 					<select class="form-control" name="categoryName" id="categoryName">
+ 						<option value="" selected>選択してください</option>
+						<c:forEach var="project2" items="${list}">
+							<option value="${project2.categoryName}">${project2.categoryName}</option>
+						</c:forEach>
 					</select>
 			</div>
 		</div>

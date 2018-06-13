@@ -73,4 +73,20 @@ public class HtmlUtils {
 
 		return sb.toString();
 	}
+
+	public static String selectCategory(String param, String value) {
+		if(param.equals(value)) {
+			return "selected";
+		}else {
+			return "";
+		}
+	}
+
+	public static String selectName(String param, String value) {
+		if(param.equals(value)) {
+			return "selected";
+		}else {
+			return "";
+		}
+	}
 }

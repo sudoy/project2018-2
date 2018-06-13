@@ -1,9 +1,9 @@
 package com.abc.asms;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.ResolverStyle;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +13,82 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.abc.asms.beans.Accounts;
+import com.abc.asms.beans.Categories;
+import com.abc.asms.utils.DBUtils;
+
 @WebServlet("/S0010.html")
 public class S0010Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+
+		try{
+			con = DBUtils.getConnection();
+
+			//SQL
+			sql = "select category_id,category_name, active_flg from categories";
+
+			//SELECT命令の準備
+			ps = con.prepareStatement(sql);
+
+			//SELECT命令を実行
+			rs = ps.executeQuery();
+
+			List<Categories> list = new ArrayList<>();
+			while(rs.next()) {
+				Categories category = new Categories(rs.getInt("category_id"),
+						rs.getString("category_name"),
+						rs.getInt("active_flg"));
+				list.add(category);
+			}
+
+			//JavaBeansをJSPへ渡す
+			req.setAttribute("list", list);
+
+			try{
+				DBUtils.close(ps);
+				DBUtils.close(rs);
+			}catch(Exception e){}
+
+			sql = "select account_id,name,mail,password,authority  from accounts";
+
+			//SELECT命令の準備
+			ps = con.prepareStatement(sql);
+
+			//SELECT命令を実行
+			rs = ps.executeQuery();
+
+			List<Accounts> list2 = new ArrayList<>();
+			while(rs.next()) {
+				Accounts account = new Accounts(rs.getInt("account_id"),
+						rs.getString("name"),
+						rs.getString("mail"),
+						rs.getString("password"),
+						rs.getInt("authority"));
+
+				list2.add(account);
+			}
+
+			//JavaBeansをJSPへ渡す
+			req.setAttribute("list2", list2);
+
+		}catch(Exception e){
+			throw new ServletException(e);
+		}finally{
+			//終了処理
+			try{
+				DBUtils.close(rs);
+				DBUtils.close(ps);
+				DBUtils.close(con);
+			}catch(Exception e){
+			}
+		}
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
 			.forward(req, resp);
@@ -29,81 +100,158 @@ public class S0010Servlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+
+		try{
+			con = DBUtils.getConnection();
+
+			//SQL
+			sql = "select category_id,category_name, active_flg from categories";
+
+			//SELECT命令の準備
+			ps = con.prepareStatement(sql);
+
+			//SELECT命令を実行
+			rs = ps.executeQuery();
+
+			List<Categories> list = new ArrayList<>();
+			while(rs.next()) {
+				Categories category = new Categories(rs.getInt("category_id"),
+						rs.getString("category_name"),
+						rs.getInt("active_flg"));
+				list.add(category);
+			}
+
+			//JavaBeansをJSPへ渡す
+			req.setAttribute("list", list);
+
+			try{
+				DBUtils.close(ps);
+				DBUtils.close(rs);
+			}catch(Exception e){}
+
+			sql = "select account_id,name,mail,password,authority  from accounts";
+
+			//SELECT命令の準備
+			ps = con.prepareStatement(sql);
+
+			//SELECT命令を実行
+			rs = ps.executeQuery();
+
+			List<Accounts> list2 = new ArrayList<>();
+			while(rs.next()) {
+				Accounts account = new Accounts(rs.getInt("account_id"),
+						rs.getString("name"),
+						rs.getString("mail"),
+						rs.getString("password"),
+						rs.getInt("authority"));
+
+				list2.add(account);
+			}
+
+			//JavaBeansをJSPへ渡す
+			req.setAttribute("list2", list2);
+
+		}catch(Exception e){
+			throw new ServletException(e);
+		}finally{
+			//終了処理
+			try{
+				DBUtils.close(rs);
+				DBUtils.close(ps);
+				DBUtils.close(con);
+			}catch(Exception e){
+			}
+		}
+
 		String saleDate = req.getParameter("saleDate");
-		String accountId = req.getParameter("accountId");
-		String categoryId = req.getParameter("categoryId");
 		String tradeName = req.getParameter("tradeName");
 		String unitPrice = req.getParameter("unitPrice");
 		String saleNumber = req.getParameter("saleNumber");
 		String note = req.getParameter("note");
+		String name = req.getParameter("name");
+		String categoryName = req.getParameter("categoryName");
 
-		List<String> errors =  validate(saleDate, accountId, categoryId, tradeName, unitPrice, saleNumber);
-		if(errors.size() > 0) {
-			req.setAttribute("errors", errors);
-			getServletContext().getRequestDispatcher("/WEB-INF/entry.jsp")
-				.forward(req, resp);
-			return;
-		}
+		req.setAttribute("saleDate", saleDate);
+		req.setAttribute("tradeName", tradeName);
+		req.setAttribute("unitPrice", unitPrice);
+		req.setAttribute("saleNumber", saleNumber);
+		req.setAttribute("note", note);
+		req.setAttribute("name", name);
+		req.setAttribute("categoryName", categoryName);
 
+//		List<String> errors =  validate(saleDate, name, categoryName, tradeName, unitPrice, saleNumber);
+//		if(errors.size() > 0) {
+//			req.setAttribute("errors", errors);
+//			getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
+//				.forward(req, resp);
+//			return;
+//		}
+
+		getServletContext().getRequestDispatcher("/WEB-INF/s0011.jsp")
+			.forward(req, resp);
 	}
 
-	private List<String> validate(String saleDate, String accountId, String categoryId, String tradeName, String unitPrice, String saleNumber) {
-		List<String> errors = new ArrayList<>();
-
-		//必須入力
-		if(saleDate.equals("")){
-			errors.add("販売日は必須入力です。");
-		}
-
-		if(accountId.equals("")) {
-			errors.add("担当は必須入力です。");
-		}
-
-		if(categoryId.equals("")) {
-			errors.add("カテゴリーは必須入力です。");
-		}
-
-		if(tradeName.equals("")) {
-			errors.add("商品名は必須入力です。");
-		}
-
-		if(unitPrice.equals("")) {
-			errors.add("単価は必須入力です。");
-		}
-
-		if(saleNumber.equals("")) {
-			errors.add("個数は必須入力です。");
-		}
-
-		//販売日の形式（yyyy/MM//dd）
-		if(!saleDate.equals("")) {
-			try {
-				LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/MM/dd")
-					.withResolverStyle(ResolverStyle.STRICT));
-			}catch(Exception e) {
-				errors.add("期限は「YYYY/MM/DD」形式で入力して下さい。");
-			}
-		}
-
-		//単価数字のみにする
-		if(!unitPrice.equals("")) {
-		    try {
-		        Integer.parseInt(unitPrice);
-		    } catch (NumberFormatException e) {
-		        errors.add("単価は数字で入力してください。");
-		    }
-		}
-
-		//個数数字のみにする
-		if(!saleNumber.equals("")) {
-		    try {
-		        Integer.parseInt(saleNumber);
-		    } catch (NumberFormatException e) {
-		        errors.add("個数は数字で入力してください。");
-		    }
-		}
-		return errors;
-
-	}
+//	private List<String> validate(String saleDate, String name, String categoryName, String tradeName, String unitPrice, String saleNumber) {
+//		List<String> errors = new ArrayList<>();
+//
+//		//必須入力
+//		if(saleDate.equals("")){
+//			errors.add("販売日は必須入力です。");
+//		}
+//
+//		if(name.equals("")) {
+//			errors.add("担当は必須入力です。");
+//		}
+//
+//		if(categoryName.equals("")) {
+//			errors.add("カテゴリーは必須入力です。");
+//		}
+//
+//		if(tradeName.equals("")) {
+//			errors.add("商品名は必須入力です。");
+//		}
+//
+//		if(unitPrice.equals("")) {
+//			errors.add("単価は必須入力です。");
+//		}
+//
+//		if(saleNumber.equals("")) {
+//			errors.add("個数は必須入力です。");
+//		}
+//
+//		//販売日の形式（yyyy/MM//dd）
+//		if(!saleDate.equals("")) {
+//			try {
+//				LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/MM/dd")
+//					.withResolverStyle(ResolverStyle.STRICT));
+//			}catch(Exception e) {
+//				errors.add("販売日を正しく入力して下さい。");
+//			}
+//		}
+//
+//		//単価数字のみにする
+//		if(!unitPrice.equals("")) {
+//		    try {
+//		        Integer.parseInt(unitPrice);
+//		    } catch (NumberFormatException e) {
+//		        errors.add("単価を正しく入力してください。");
+//		    }
+//		}
+//
+//		//個数数字のみにする
+//		if(!saleNumber.equals("")) {
+//		    try {
+//		        Integer.parseInt(saleNumber);
+//		    } catch (NumberFormatException e) {
+//		        errors.add("個数を正しく入力してください。");
+//		    }
+//		}
+//		return errors;
+//
+//	}
 
 }
