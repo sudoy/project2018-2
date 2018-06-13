@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.Accounts;
 import com.abc.asms.utils.DBUtils;
@@ -78,7 +79,7 @@ public class S0042Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		req.setCharacterEncoding("utf-8");
-		//HttpSession session = req.getSession();
+		HttpSession session = req.getSession();
 
 		String accountId = req.getParameter("account_id");
 		String name = req.getParameter("name");
@@ -100,8 +101,8 @@ public class S0042Servlet extends HttpServlet {
 
 		List<String> errors = validate(accountId, name, mail, password, passwordc, authority1, authority2);
 		if (errors.size() > 0) {
-			//session.setAttribute("errors", errors);
-			req.setAttribute("errors", errors);
+			session.setAttribute("errors", errors);
+			//req.setAttribute("errors", errors);
 			getServletContext().getRequestDispatcher("/WEB-INF/s0042.jsp")
 				.forward(req, resp);
 			return;

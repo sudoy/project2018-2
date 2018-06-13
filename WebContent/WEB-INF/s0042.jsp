@@ -100,6 +100,7 @@
 					<label><input type="radio" name="authority2" value="1" ${AuthorityUtils.checkAuthority4(param.authority2 != null ? param.authority2 : accounts.authority)}>権限あり</label>
 				</div>	
 		</div>
+		${param.authority2}
 
 		<div class="form-group">
 			<div class="col-sm-offset-3">

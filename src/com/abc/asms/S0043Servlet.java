@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/S0043.html")
 public class S0043Servlet extends HttpServlet {
@@ -25,7 +26,7 @@ public class S0043Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		req.setCharacterEncoding("utf-8");
-//		HttpSession session = req.getSession();
+		HttpSession session = req.getSession();
 
 		String accountId = req.getParameter("account_id");
 		String name = req.getParameter("name");
@@ -51,7 +52,7 @@ public class S0043Servlet extends HttpServlet {
 		try {
 			con = com.abc.asms.utils.DBUtils.getConnection();
 
-			sql = "update accounts set name = ?, mail = ?, password = ?, authority = ? where account_id = ?;";
+			sql = "update accounts set name = ?, mail = ?, password = MD5(?), authority = ? where account_id = ?;";
 			ps = con.prepareStatement(sql);
 
 			//insert命令にポストデータの内容をセット
