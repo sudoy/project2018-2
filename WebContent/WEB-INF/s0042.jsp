@@ -51,10 +51,10 @@
 </nav>
 
 	<div class="container">
-	
-		<h1>アカウント編集</h1>
-		
+
 <jsp:include page="_errors.jsp" />
+
+		<h1>アカウント編集</h1>
 		
 	<form class="form-horizontal" action="S0042.html?account_id=${param.account_id != null ? param.account_id : accounts.account_id}" method="post">
 	
