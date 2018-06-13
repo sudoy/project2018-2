@@ -34,7 +34,7 @@
 				<li><a href="S0020.html">売上検索</a></li>
 				<li><a href="S0030.html">アカウント登録</a></li>
 				<li><a href="S0040.html">アカウント検索</a></li>
-				
+
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="C0010.html">ログアウト</a></li>
@@ -44,18 +44,18 @@
 </nav>
 
 	<div class="container">
-	
+
 		<h1>売上登録</h1>
-		
+
 	<form class="form-horizontal" action="#" method="post">
  		<div class="form-group">
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日 <span class="badge">必須</span></label>
-	 			
+
 			<div class="col-sm-2">
 					<input type="text" class="form-control" id="salesDate" placeholder="販売日" value="2018/5/11">
 			</div>
-		</div>	
-		
+		</div>
+
 		 <div class="form-group">
 				<label for="person" class="col-sm-2 control-label">担当 <span class="badge">必須</span></label>
 	 			<div class="col-sm-5">
@@ -64,48 +64,49 @@
 						<option value="イチロー" >イチロー</option>
 					</select>
 			</div>
-		</div>	
-		
+		</div>
+
 		<div class="form-group">
  			<label for="category" class="col-sm-2 control-label">商品カテゴリー <span class="badge">必須</span></label>
  			<div class="col-sm-5">
- 					<select class="form-control">
-						<option value="" selected>選択してください</option>
-						<option value="" >食品</option>
-					</select>
+				<input type="radio" value="">食料品
+				<input type="radio" value="">飲料
+				<input type="radio" value="">本・雑誌
+				<input type="radio" value="">ギフトカード
+				<input type="radio" value="">その他
 			</div>
-		</div>	
-		
+		</div>
+
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">商品名 <span class="badge">必須</span></label>
  			<div class="col-sm-2">
 				<input type="text" class="form-control" id="name" placeholder="商品カテゴリー" value="商品名">
 			</div>
-		</div>	
-		
+		</div>
+
 		<div class="form-group">
-			
+
  			<label for="price" class="col-sm-2 control-label">単価 <span class="badge">必須</span></label>
- 			
+
  			<div class="col-sm-2">
 				<input type="text" class="form-control" id="price" placeholder="商品カテゴリー" value="単価">
 			</div>
-		</div>	
+		</div>
 
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">個数 <span class="badge">必須</span></label>
  			<div class="col-sm-2">
 				<input type="text" class="form-control" id="number" placeholder="個数" value="個数">
 			</div>
-		</div>	
+		</div>
 
 		<div class="form-group">
  			<label for="note" class="col-sm-2 control-label">備考 <span class="badge">必須</span></label>
  			<div class="col-sm-5">
 				<textarea class="form-control" id="note" placeholder="備考" rows="5"></textarea>
 			</div>
-		</div>	
-		
+		</div>
+
 		<div class="form-group">
 			<div class="col-sm-offset-4">
 				<a href="S0011.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 登　録</a>
