@@ -37,6 +37,21 @@ public class S0043Servlet extends HttpServlet {
 		String authority1 = req.getParameter("authority1");
 		String authority2 = req.getParameter("authority2");
 		String authority = authority1 + authority2;
+		
+		if(authority.equals("00"))
+		{
+			authority = "0";
+		}
+		
+		if(authority.equals("01"))
+		{
+			authority = "10";
+		}
+		
+		if(authority.equals("10"))
+		{
+			authority = "1";
+		}
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -61,8 +76,8 @@ public class S0043Servlet extends HttpServlet {
 
 				//成功メッセージ
 				List<String> successes = new ArrayList<>();
-				successes.add("更新しました。");
-				session.setAttribute("success", successes);
+				successes.add("No" + accountId + "のアカウントを更新しました。");
+				session.setAttribute("successes", successes);
 
 				resp.sendRedirect("S0041.html");
 
@@ -84,8 +99,8 @@ public class S0043Servlet extends HttpServlet {
 
 			//成功メッセージ
 			List<String> successes = new ArrayList<>();
-			successes.add("更新しました。");
-			session.setAttribute("success", successes);
+			successes.add("No" + accountId + "のアカウントを更新しました。");
+			session.setAttribute("successes", successes);
 
 			resp.sendRedirect("S0041.html");
 		}

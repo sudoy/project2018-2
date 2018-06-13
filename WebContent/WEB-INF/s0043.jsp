@@ -54,21 +54,21 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">氏名 <span class="badge">必須</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" id="name" name="name" value="${param.name}">
+				<input type="text" class="form-control" id="name" name="name" value="${param.name}" readonly>
 			</div>
 		</div>	
 		
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">メールアドレス <span class="badge">必須</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" id="mailadress" name="mail" value="${param.mail}">
+				<input type="text" class="form-control" id="mailadress" name="mail" value="${param.mail}" readonly>
 			</div>
 		</div>
 		
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">パスワード</label>
  			<div class="col-sm-5">
-				<input type="password" class="form-control" name="password" id="pass1" value="${param.password}">
+				<input type="password" class="form-control" name="password" id="pass1" value="${param.password}" readonly>
 			</div>
 			
 		</div>	
@@ -76,7 +76,7 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">パスワード（確認）</label>
  			<div class="col-sm-5">
-				<input type="password" class="form-control" name="password" id="pass2" value="${param.password}">
+				<input type="password" class="form-control" name="password" id="pass2" value="${param.password}" readonly>
 			</div>
 		</div>	
 
@@ -98,7 +98,7 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-3">
-				<input type="submit" class="btn btn-primary" value=" O K">
+				<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> O K</span></button>
 				<a href="S0041.html" class="btn btn-default">キャンセル</a>
 
 			</div>

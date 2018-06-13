@@ -49,6 +49,8 @@
 
 	<div class="container">
 	
+<jsp:include page="_successes.jsp" />
+
 		<h1>アカウント検索結果一覧</h1>
 	
 		<table class="table">

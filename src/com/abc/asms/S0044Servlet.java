@@ -107,9 +107,9 @@ public class S0044Servlet extends HttpServlet {
 			ps.executeUpdate();
 			
 			//成功メッセージ
-			List<String> successes = new ArrayList<>();
 			
-			successes.add("削除しました。");
+			List<String> successes = new ArrayList<>();
+			successes.add("No" + accountId + "のアカウントを削除しました。");
 			session.setAttribute("successes", successes);
 
 			resp.sendRedirect("S0041.html");
