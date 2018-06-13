@@ -103,6 +103,24 @@ public class S0010Servlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 
+		String saleDate = req.getParameter("saleDate");
+		String accountId = req.getParameter("accountId");
+		String categoryId = req.getParameter("categoryId");
+		String tradeName = req.getParameter("tradeName");
+		String unitPrice = req.getParameter("unitPrice");
+		String saleNumber = req.getParameter("saleNumber");
+		String note = req.getParameter("note");
+		String name = req.getParameter("name");
+		String categoryName = req.getParameter("categoryName");
+
+		List<String> errors =  validate(saleDate, name, categoryName, tradeName, unitPrice, saleNumber, note);
+			if(errors.size() > 0) {
+			req.setAttribute("errors", errors);
+			getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
+				.forward(req, resp);
+			return;
+			}
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -163,6 +181,17 @@ public class S0010Servlet extends HttpServlet {
 				DBUtils.close(rs);
 			}catch(Exception e){}
 
+			try {
+				sql = "SELECT * FROM accounts WHERE account_id = ? AND name = ?;";
+				ps = con.prepareStatement(sql);
+
+				ps.setString(1, "accountId");
+				ps.setString(2, "name");
+
+				ps.executeQuery();
+			}catch(Exception e) {
+				errors.add("アカウントテーブルに存在しません。");
+			}
 
 		}catch(Exception e){
 			throw new ServletException(e);
@@ -176,15 +205,7 @@ public class S0010Servlet extends HttpServlet {
 			}
 		}
 
-		String saleDate = req.getParameter("saleDate");
-		String accountId = req.getParameter("accountId");
-		String categoryId = req.getParameter("categoryId");
-		String tradeName = req.getParameter("tradeName");
-		String unitPrice = req.getParameter("unitPrice");
-		String saleNumber = req.getParameter("saleNumber");
-		String note = req.getParameter("note");
-		String name = req.getParameter("name");
-		String categoryName = req.getParameter("categoryName");
+
 
 		req.setAttribute("saleDate", saleDate);
 		req.setAttribute("accountId", accountId);
@@ -195,14 +216,6 @@ public class S0010Servlet extends HttpServlet {
 		req.setAttribute("note", note);
 		req.setAttribute("name", name);
 		req.setAttribute("categoryName", categoryName);
-
-		List<String> errors =  validate(saleDate, name, categoryName, tradeName, unitPrice, saleNumber, note);
-		if(errors.size() > 0) {
-			req.setAttribute("errors", errors);
-			getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
-				.forward(req, resp);
-			return;
-		}
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0011.jsp")
 			.forward(req, resp);
