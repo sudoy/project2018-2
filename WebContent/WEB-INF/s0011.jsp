@@ -65,7 +65,7 @@
 		 <div class="form-group">
 	 			<label for="name" class="col-sm-2 control-label">担当</label>
 	 			<div class="col-sm-5">
-					<select class="form-control" name="name" id="name">
+					<select class="form-control" name="accountId" id="name">
 						<option value="">選択してください</option>
 						<c:forEach var="account" items="${list2}">
 							<option value="${account.accountId}" ${HtmlUtils.selectName(name, name)}>${name}</option>
@@ -77,10 +77,10 @@
 		<div class="form-group">
  			<label for="categoryName" class="col-sm-2 control-label">商品カテゴリー</label>
  			<div class="col-sm-5">
- 					<select class="form-control" name="categoryName">
+ 					<select class="form-control" name="categoryId">
  						<option value="" selected>選択してください</option>
-						<c:forEach var="project2" items="${list}">
-							<option value="${project2.categoryName}" ${HtmlUtils.selectCategory(categoryName, categoryName)}>${categoryName}</option>
+						<c:forEach var="category" items="${list}">
+							<option value="${category.categoryId}" ${HtmlUtils.selectCategory(categoryName, categoryName)}>${categoryName}</option>
 						</c:forEach>
 					</select>
 			</div>
