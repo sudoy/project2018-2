@@ -55,7 +55,7 @@
 	<form class="form-horizontal" action="S0011.html" method="post">
 
  		<div class="form-group">
-	 		<label for="salesDate" class="col-sm-2 control-label">販売日</label>
+	 		<label for="saleDate" class="col-sm-2 control-label">販売日</label>
 
 			<div class="col-sm-2">
 					<input type="text" class="form-control" name="saleDate" id="saleDate" value="${param.saleDate}">
@@ -66,10 +66,7 @@
 	 			<label for="name" class="col-sm-2 control-label">担当</label>
 	 			<div class="col-sm-5">
 					<select class="form-control" name="accountId" id="name">
-						<option value="">選択してください</option>
-						<c:forEach var="account" items="${list2}">
-							<option value="${account.accountId}" ${HtmlUtils.selectName(name, name)}>${name}</option>
-						</c:forEach>
+							<option value="${account.accountId}" ${HtmlUtils.selectName(accountId, accountId)}>${name}</option>
 					</select>
 			</div>
 		</div>
@@ -80,7 +77,7 @@
  					<select class="form-control" name="categoryId">
  						<option value="" selected>選択してください</option>
 						<c:forEach var="category" items="${list}">
-							<option value="${category.categoryId}" ${HtmlUtils.selectCategory(categoryName, categoryName)}>${categoryName}</option>
+							<option value="${category.categoryId}" ${HtmlUtils.selectCategory(categoryId, categoryId)}>${categoryName}</option>
 						</c:forEach>
 					</select>
 			</div>

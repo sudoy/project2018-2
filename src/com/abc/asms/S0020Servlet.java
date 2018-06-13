@@ -28,7 +28,10 @@ public class S0020Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-
+		// ログインチェック
+//		if(!HtmlUtils.checkLogin(req, resp)) {
+//			return;
+//		}
 		req.setCharacterEncoding("UTF-8");
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -100,6 +103,10 @@ public class S0020Servlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		// ログインチェック
+//		if(!HtmlUtils.checkLogin(req, resp)) {
+//			return;
+//		}
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		Connection con = null;
@@ -131,21 +138,21 @@ public class S0020Servlet extends HttpServlet {
 					+"left join categories c on c.category_id = s.category_id "
 					+ "where 0 = 0 ";
 
-//			//備考検索
+			//備考検索
 			if(note != "") {
 				sql += " and note like '%" + note + "%'";
 			}else {
 				sql += "";
 			}
 
-//			//商品名検索
+			//商品名検索
 			if(tradeName != "") {
 				sql += " and trade_name like '%" + tradeName + "%'";
 			}else {
 				sql += "";
 			}
 
-//			//日付検索
+			//日付検索
 			if(!saleDate1.equals("") && !saleDate2.equals("")) {
 				sql += " and sale_date between '" + saleDate1 + "' and '" + saleDate2+ "'";
 
@@ -169,7 +176,13 @@ public class S0020Servlet extends HttpServlet {
 
 			if (categoryName != null) {
 				for (int i = 0; i < categoryName.length; i++) {
-			        sql += " and category_name =" + "'"+ categoryName[i] +"'";
+					if(i == 0) {
+						sql += " and category_name =" + "'"+ categoryName[i] +"'";
+					}
+					if(i != 0) {
+						sql += " or category_name =" + "'"+ categoryName[i] +"'";
+					}
+
 			      }
 			}else {
 				sql += "";
@@ -253,7 +266,7 @@ public class S0020Servlet extends HttpServlet {
 			try {
 				java.util.Date f1 = fmt.parse(req.getParameter("sale_date1"));
 				java.util.Date f2 = fmt.parse(req.getParameter("sale_date2"));
-				if(!f1.before(f2)) {
+				if(f1.after(f2)) {
 					errors.add("販売日（検索開始日)が販売日（検索終了日)より後の日付になっています。");
 				}
 			}catch(Exception e1) {
