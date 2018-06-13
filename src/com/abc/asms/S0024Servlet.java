@@ -24,8 +24,6 @@ public class S0024Servlet extends HttpServlet {
 //			return;
 //		}
 
-		String id = req.getParameter("id");
-
 		req.setCharacterEncoding("utf-8");
 //		HttpSession session = req.getSession();
 
@@ -37,6 +35,7 @@ public class S0024Servlet extends HttpServlet {
 		String sale_number = req.getParameter("sale_number");
 		String sum = req.getParameter("sum");
 		String note = req.getParameter("note");
+		String id = req.getParameter("id");
 
 
 //		List<String> errors = validate(id, title, deadline, level);
@@ -58,28 +57,28 @@ public class S0024Servlet extends HttpServlet {
 		try {
 			con = DBUtils.getConnection();
 
-//			String sql = ""
-//						+ "update sales set "
-//						+ "sale_date = ?, account_id = ?, category_id = ?, trade_name = ? "
-//						+ "unit_price = ?, sale_number = ?, note = ? "
-//						+ "where sale_id = ?";
-//
-//			ps.setString(1, sale_date);
-//			ps.setString(2, account_id);
-//			ps.setString(3, category_id);
-//			ps.setString(4, trade_name);
-//			ps.setString(5, unit_price);
-//			ps.setString(6, sale_number);
-//			ps.setString(7, note);
-//			ps.setString(8, id);
-
 			String sql = ""
-					+ "update sales set "
-					+ "sale_date = '2018/06/02', account_id = 2, category_id = 1, trade_name = '天丼', "
-					+ "unit_price = 450, sale_number = 5, note = '特になし' "
-					+ "where sale_id = ?";
+						+ "update sales set "
+						+ "sale_date = ?, account_id = ?, category_id = ?, trade_name = ? "
+						+ "unit_price = ?, sale_number = ?, note = ? "
+						+ "where sale_id = ?";
 
 			ps = con.prepareStatement(sql);
+
+			ps.setString(1, sale_date);
+			ps.setString(2, account_id);
+			ps.setString(3, category_id);
+			ps.setString(4, trade_name);
+			ps.setString(5, unit_price);
+			ps.setString(6, sale_number);
+			ps.setString(7, note);
+			ps.setString(8, id);
+
+//			String sql = ""
+//					+ "update sales set "
+//					+ "sale_date = '2018/06/02', account_id = 3, category_id = 1, trade_name = '天丼', "
+//					+ "unit_price = 450, sale_number = 5, note = '特になし' "
+//					+ "where sale_id = ?";
 
 //			ps.setString(1, sale_date);
 //			ps.setString(2, account_id);
@@ -96,7 +95,7 @@ public class S0024Servlet extends HttpServlet {
 
 			ps.executeUpdate();
 
-			resp.sendRedirect("S0022.html?id=6");
+			resp.sendRedirect("S0022.html?id=6"); //仮実装
 
 //			List<String> successes = new ArrayList<>();
 //			successes.add("更新しました。");
@@ -123,30 +122,32 @@ public class S0024Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
+		req.setCharacterEncoding("utf-8");
+
+
 //仮実装
-//		String sale_date = req.getParameter("sale_date");
-//		String name = req.getParameter("name");
-//		String category_name = req.getParameter("category_name");
-//		String trade_name = req.getParameter("trade_name");
-//		String unit_price = req.getParameter("unit_price");
-//		String sale_number = req.getParameter("sale_number");
-//		String sum = req.getParameter("sum");
-//		String note = req.getParameter("note");
-//		String sale_id = req.getParameter("sale_id");
-//
-//		req.setAttribute("sale_date", sale_date);
-//		req.setAttribute("name", name);
-//		req.setAttribute("category_name", category_name);
-//		req.setAttribute("trade_name ", trade_name );
-//		req.setAttribute("unit_price", unit_price);
-//		req.setAttribute("sale_number", sale_number);
-//		req.setAttribute("sum", sum);
-//		req.setAttribute("note", note);
-//		req.setAttribute("sale_id", sale_id);
+		String sale_id = req.getParameter("sale_id");
+		String sale_date = req.getParameter("sale_date");
+		String name = req.getParameter("name");
+		String category_id =  req.getParameter("category_id");
+		String category_name = req.getParameter("category_name");
+		String trade_name = req.getParameter("trade_name");
+		String unit_price = req.getParameter("unit_price");
+		String sale_number = req.getParameter("sale_number");
+		String sum = req.getParameter("sum");
+		String note = req.getParameter("note");
 
 
-
-
+		req.setAttribute("sale_id", sale_id);
+		req.setAttribute("sale_date", sale_date);
+		req.setAttribute("name", name);
+		req.setAttribute("category_id", category_id);
+		req.setAttribute("category_name", category_name);
+		req.setAttribute("trade_name ", trade_name );
+		req.setAttribute("unit_price", unit_price);
+		req.setAttribute("sale_number", sale_number);
+		req.setAttribute("sum", sum);
+		req.setAttribute("note", note);
 
 //		Connection con = null;
 //		PreparedStatement ps = null;

@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.abc.asms.utils.HtmlUtils" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -62,9 +65,11 @@
 		 <div class="form-group">
 	 			<label for="person" class="col-sm-2 control-label">担当 <span class="badge">必須</span></label>
 	 			<div class="col-sm-5">
-					<select class="form-control">
-						<option value="" >選択してください</option>
-						<option value="イチロー" selected>${s23.name}</option>
+					<select class="form-control" name="name">
+						<option value="0">選択してください</option>
+					<c:forEach var="aName" items="${accounts}">
+						<option value="${aName.accountId}" ${HtmlUtils.selectName(param.name, name)}>${aName.name}</option>
+					</c:forEach>
 					</select>
 			</div>
 		</div>
@@ -72,10 +77,11 @@
 		<div class="form-group">
  			<label for="category" class="col-sm-2 control-label">商品カテゴリー <span class="badge">必須</span></label>
  			<div class="col-sm-5">
- 					<select class="form-control">
-						<option value="" >選択してください</option>
-						<option value="">食料品</option>
-						<option value="" selected> ${s23.category_name}</option>
+ 					<select class="form-control" name="category_name">
+ 						<option value="0" >選択してください</option>
+ 					<c:forEach var="type" items="${categories}">
+						<option value="${type.categoryId}">${type.categoryName}</option>
+					</c:forEach>
 					</select>
 			</div>
 		</div>
@@ -83,7 +89,7 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">商品名 <span class="badge">必須</span></label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" id="name" value="${s23.trade_name}">
+				<input type="text" class="form-control" name="trade_name" id="name" value="${s23.trade_name}">
 			</div>
 		</div>
 
@@ -92,21 +98,21 @@
  			<label for="price" class="col-sm-2 control-label">単価 <span class="badge">必須</span></label>
 
  			<div class="col-sm-2">
-				<input type="text" class="form-control text-right" id="price" value="${HtmlUtils.formatCommaC(s23)}">
+				<input type="text" class="form-control text-right" name="unit_price" id="price" value="${HtmlUtils.formatCommaC(s23)}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">個数 <span class="badge">必須</span></label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control text-right" id="number" value="${HtmlUtils.formatCommaN(s23)}">
+				<input type="text" class="form-control text-right" name="sale_number" id="number" value="${HtmlUtils.formatCommaN(s23)}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="note" class="col-sm-2 control-label">備考 </label>
  			<div class="col-sm-5">
-				<textarea class="form-control" id="note" rows="5">${s23.note}</textarea>
+				<textarea class="form-control" name="note" id="note" rows="5">${s23.note}</textarea>
 			</div>
 		</div>
 
