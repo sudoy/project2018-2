@@ -46,7 +46,7 @@ public class AuthorityUtils {
 	
 }
 	public static String checkAuthority4(String authority) {
-		if (authority.equals("1") || authority.equals("11")) {
+		if (authority.equals("1") || authority.equals("11") || authority.equals("10")) {
 			return "checked";
 		} else {
 			return "";
