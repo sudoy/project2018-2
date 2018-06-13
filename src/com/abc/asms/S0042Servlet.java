@@ -115,48 +115,48 @@ public class S0042Servlet extends HttpServlet {
 	private List<String> validate(String accountId, String name, String mail, String password, String passwordc,
 			String authority1, String authority2) {
 		List<String> errors = new ArrayList<>();
-		//氏名の必須入力
+		//1-1氏名の必須入力
 		if (name.equals("")) {
 			errors.add("氏名を入力してください。");
 		}
-
+		//1-2氏名の長さチェック
 		if (name.length() > 21) {
 			errors.add("氏名が長すぎます。");
 		}
-
+		//1-3メールアドレス必須チェック
 		if (mail.equals("")) {
 			errors.add("メールアドレスを入力してください。");
 		}
-
+		//1-4メールアドレス長さチェック
 		if (mail.length() > 101) {
 			errors.add("メールアドレスが長すぎます。");
 		}
-
-		if (mail.contains("@")) {
+		//1-5メールアドレス形式チェック
+		if (!mail.contains("@")) {
 			errors.add("メールアドレスの形式が間違っています。");
 		}
-
+		//1-6パスワードの長さtチェック
 		if (password.length() > 31) {
 			errors.add("パスワードが長すぎます。");
 		}
-
-		if (password.equals(passwordc)) {
+		//1-7パスワード一致チェック
+		if (!password.equals(passwordc)) {
 			errors.add("パスワードとパスワード（確認）が一致していません。");
 		}
-
+		//1-8売上登録権限必須チェック
 		if (authority1.equals("")) {
 			errors.add("売上登録権限を入力してください。");
 		}
-
-		if (!authority1.equals("0") || !authority1.equals("1")) {
+		//1-9売上登録権限値チェック
+		if (!authority1.equals("0") && !authority1.equals("1")) {
 			errors.add("売上登録権限に正しい値を入力してください。");
 		}
-
+		//1-10アカウント登録権限必須チェック
 		if (authority2.equals("")) {
 			errors.add("アカウント登録権限を入力してください。");
 		}
-
-		if (!authority2.equals("0") || !authority2.equals("1")) {
+		//1-11アカウント登録権限必須チェック
+		if (!authority2.equals("0") && !authority2.equals("1")) {
 			errors.add("アカウント登録権限に正しい値を入力してください。");
 		}
 		return errors;

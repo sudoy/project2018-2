@@ -3,6 +3,8 @@ package com.abc.asms;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,11 +16,11 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/S0043.html")
 public class S0043Servlet extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+
 		getServletContext().getRequestDispatcher("/WEB-INF/s0043.jsp")
-		.forward(req, resp);
+				.forward(req, resp);
 	}
 
 	@Override
@@ -32,18 +34,9 @@ public class S0043Servlet extends HttpServlet {
 		String name = req.getParameter("name");
 		String mail = req.getParameter("mail");
 		String password = req.getParameter("password");
-		String passwordc = req.getParameter("passwordc");
 		String authority1 = req.getParameter("authority1");
 		String authority2 = req.getParameter("authority2");
 		String authority = authority1 + authority2;
-		
-		//バリデーションチェック
-//				List<String> errors = validate(accountId, name, mail, password, passwordc, authority1, authority2);
-//				if (errors.size() > 0) {
-//					session.setAttribute("errors", errors);
-//					getServletContext().getRequestDispatcher("/WEB-INF/update.jsp").forward(req, resp);
-//					return;
-//				}
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -51,6 +44,29 @@ public class S0043Servlet extends HttpServlet {
 
 		try {
 			con = com.abc.asms.utils.DBUtils.getConnection();
+
+			if (password.equals("")) {
+				sql = "update accounts set name = ?, mail = ?, authority = ? where account_id = ?;";
+				ps = con.prepareStatement(sql);
+
+				//insert命令にポストデータの内容をセット
+				ps.setString(1, name);
+				ps.setString(2, mail);
+				ps.setString(3, authority);
+				ps.setString(4, accountId);
+
+				System.out.println(ps);
+
+				ps.executeUpdate();
+
+				//成功メッセージ
+				List<String> successes = new ArrayList<>();
+				successes.add("更新しました。");
+				session.setAttribute("success", successes);
+
+				resp.sendRedirect("S0041.html");
+
+			}else {
 
 			sql = "update accounts set name = ?, mail = ?, password = MD5(?), authority = ? where account_id = ?;";
 			ps = con.prepareStatement(sql);
@@ -62,18 +78,18 @@ public class S0043Servlet extends HttpServlet {
 			ps.setString(4, authority);
 			ps.setString(5, accountId);
 
-			
 			System.out.println(ps);
-			
-			ps.executeUpdate();
-			
-			//成功メッセージ
-//			List<String> successes = new ArrayList<>();
-//			successes.add("更新しました。");
-//			session.setAttribute("success", successes);
 
+			ps.executeUpdate();
+
+			//成功メッセージ
+			List<String> successes = new ArrayList<>();
+			successes.add("更新しました。");
+			session.setAttribute("success", successes);
 
 			resp.sendRedirect("S0041.html");
+		}
+		
 		} catch (Exception e) {
 			throw new ServletException(e);
 		} finally {
