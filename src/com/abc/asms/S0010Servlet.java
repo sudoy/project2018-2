@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +35,7 @@ public class S0010Servlet extends HttpServlet {
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "select category_id,category_name, active_flg from categories";
+			sql = "select category_id,category_name, active_flg from categories where active_flg = 1";
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
@@ -109,7 +112,7 @@ public class S0010Servlet extends HttpServlet {
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "select category_id,category_name, active_flg from categories";
+			sql = "select category_id,category_name, active_flg from categories where active_flg = 1";
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
@@ -155,6 +158,12 @@ public class S0010Servlet extends HttpServlet {
 			//JavaBeansをJSPへ渡す
 			req.setAttribute("list2", list2);
 
+			try{
+				DBUtils.close(ps);
+				DBUtils.close(rs);
+			}catch(Exception e){}
+
+
 		}catch(Exception e){
 			throw new ServletException(e);
 		}finally{
@@ -168,6 +177,8 @@ public class S0010Servlet extends HttpServlet {
 		}
 
 		String saleDate = req.getParameter("saleDate");
+		String accountId = req.getParameter("accountId");
+		String categoryId = req.getParameter("categoryId");
 		String tradeName = req.getParameter("tradeName");
 		String unitPrice = req.getParameter("unitPrice");
 		String saleNumber = req.getParameter("saleNumber");
@@ -176,6 +187,8 @@ public class S0010Servlet extends HttpServlet {
 		String categoryName = req.getParameter("categoryName");
 
 		req.setAttribute("saleDate", saleDate);
+		req.setAttribute("accountId", accountId);
+		req.setAttribute("categoryId", categoryId);
 		req.setAttribute("tradeName", tradeName);
 		req.setAttribute("unitPrice", unitPrice);
 		req.setAttribute("saleNumber", saleNumber);
@@ -183,75 +196,107 @@ public class S0010Servlet extends HttpServlet {
 		req.setAttribute("name", name);
 		req.setAttribute("categoryName", categoryName);
 
-//		List<String> errors =  validate(saleDate, name, categoryName, tradeName, unitPrice, saleNumber);
-//		if(errors.size() > 0) {
-//			req.setAttribute("errors", errors);
-//			getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
-//				.forward(req, resp);
-//			return;
-//		}
+		List<String> errors =  validate(saleDate, name, categoryName, tradeName, unitPrice, saleNumber, note);
+		if(errors.size() > 0) {
+			req.setAttribute("errors", errors);
+			getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
+				.forward(req, resp);
+			return;
+		}
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0011.jsp")
 			.forward(req, resp);
 	}
 
-//	private List<String> validate(String saleDate, String name, String categoryName, String tradeName, String unitPrice, String saleNumber) {
-//		List<String> errors = new ArrayList<>();
-//
-//		//必須入力
-//		if(saleDate.equals("")){
-//			errors.add("販売日は必須入力です。");
-//		}
-//
-//		if(name.equals("")) {
-//			errors.add("担当は必須入力です。");
-//		}
-//
-//		if(categoryName.equals("")) {
-//			errors.add("カテゴリーは必須入力です。");
-//		}
-//
-//		if(tradeName.equals("")) {
-//			errors.add("商品名は必須入力です。");
-//		}
-//
-//		if(unitPrice.equals("")) {
-//			errors.add("単価は必須入力です。");
-//		}
-//
-//		if(saleNumber.equals("")) {
-//			errors.add("個数は必須入力です。");
-//		}
-//
-//		//販売日の形式（yyyy/MM//dd）
-//		if(!saleDate.equals("")) {
-//			try {
-//				LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/MM/dd")
-//					.withResolverStyle(ResolverStyle.STRICT));
-//			}catch(Exception e) {
-//				errors.add("販売日を正しく入力して下さい。");
-//			}
-//		}
-//
-//		//単価数字のみにする
-//		if(!unitPrice.equals("")) {
-//		    try {
-//		        Integer.parseInt(unitPrice);
-//		    } catch (NumberFormatException e) {
-//		        errors.add("単価を正しく入力してください。");
-//		    }
-//		}
-//
-//		//個数数字のみにする
-//		if(!saleNumber.equals("")) {
-//		    try {
-//		        Integer.parseInt(saleNumber);
-//		    } catch (NumberFormatException e) {
-//		        errors.add("個数を正しく入力してください。");
-//		    }
-//		}
-//		return errors;
-//
-//	}
+	private List<String> validate(String saleDate, String name, String categoryName, String tradeName, String unitPrice, String saleNumber, String note) {
+		List<String> errors = new ArrayList<>();
+
+		//販売日の必須入力
+		if(saleDate.equals("")){
+			errors.add("販売日を入力して下さい。");
+		}
+
+		//販売日の形式（yyyy/MM//dd）
+		if(!saleDate.equals("")) {
+			try {
+				LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/MM/dd")
+					.withResolverStyle(ResolverStyle.STRICT));
+			}catch(Exception e) {
+				errors.add("販売日を正しく入力して下さい。");
+			}
+		}
+
+		//担当の必須入力
+		if(name.equals("")) {
+			errors.add("担当が未選択です。");
+		}
+
+		//商品カテゴリーの必須入力
+		if(categoryName.equals("")) {
+			errors.add("商品カテゴリーが未選択です。");
+		}
+
+		//商品名の必須入力
+		if(tradeName.equals("")) {
+			errors.add("商品名を入力して下さい。");
+		}
+
+		//商品名の長さチェック
+		if(categoryName.length() >= 101) {
+			errors.add("商品名が長すぎます。");
+		}
+
+		//販売日の必須入力
+		if(unitPrice.equals("")) {
+			errors.add("単価を入力して下さい。");
+		}
+
+		//単価の長さチェック
+		if(unitPrice.length() >= 10) {
+			errors.add("単価が長すぎます。");
+		}
+
+		//単価整数かつ1以上にする
+		if(!unitPrice.equals("")) {
+		    try {
+		        int i = Integer.parseInt(unitPrice);
+				if(i < 0) {
+					throw new NumberFormatException();
+				}
+		    } catch (NumberFormatException e) {
+		        errors.add("単価を正しく入力してください。");
+		    }
+		}
+
+		//個数の必須入力
+		if(saleNumber.equals("")) {
+			errors.add("個数を入力して下さい。");
+		}
+
+		//個数の長さチェック
+		if(saleNumber.length() >= 10) {
+			errors.add("個数が長すぎます。");
+		}
+
+		//個数整数かつ1以上にする
+		if(!saleNumber.equals("")) {
+		    try {
+		        int i = Integer.parseInt(unitPrice);
+				if(i < 0) {
+					throw new NumberFormatException();
+				}
+		    } catch (NumberFormatException e) {
+		        errors.add("個数を正しく入力してください。");
+		    }
+		}
+
+		//備考の長さチェック
+		if(note.length() >= 400) {
+			errors.add("備考が長すぎます。");
+		}
+
+		return errors;
+
+	}
 
 }

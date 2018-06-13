@@ -51,6 +51,8 @@
 
 		<h1>売上登録</h1>
 
+		<jsp:include page="_errors.jsp" />
+
 	<form class="form-horizontal" action="S0010.html" method="post">
  		<div class="form-group">
 	 		<label for="saleDate" class="col-sm-2 control-label">販売日 <span class="badge">必須</span></label>

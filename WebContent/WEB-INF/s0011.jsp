@@ -66,9 +66,9 @@
 	 			<label for="name" class="col-sm-2 control-label">担当</label>
 	 			<div class="col-sm-5">
 					<select class="form-control" name="name" id="name">
-						<option value="" selected>選択してください</option>
-						<c:forEach var="project2" items="${list2}">
-							<option value="${project2.name}" ${HtmlUtils.selectName(name, name)}>${name}</option>
+						<option value="">選択してください</option>
+						<c:forEach var="account" items="${list2}">
+							<option value="${account.accountId}" ${HtmlUtils.selectName(name, name)}>${name}</option>
 						</c:forEach>
 					</select>
 			</div>

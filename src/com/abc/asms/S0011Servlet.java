@@ -33,7 +33,7 @@ public class S0011Servlet extends HttpServlet {
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "select category_id,category_name, active_flg from categories";
+			sql = "select category_id,category_name, active_flg from categories where active_flg = 1";
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
@@ -111,11 +111,12 @@ public class S0011Servlet extends HttpServlet {
 		PreparedStatement ps = null;
 		String sql = null;
 
+
 		try {
 			con = DBUtils.getConnection();
 
 			sql = "INSERT INTO sales(sale_date, account_id, category_id, trade_name, unit_price, sale_number, note)"
-					+ "values(?,?,?,?,?,?,?)";
+					+ "values(?,?,?,?,?,?,?);";
 
 			//INSERT命令の準備
 			ps = con.prepareStatement(sql);
@@ -129,38 +130,9 @@ public class S0011Servlet extends HttpServlet {
 			ps.setString(6, saleNumber);
 			ps.setString(7, note);
 
-			ps.executeUpdate();
-
-			try{
-				DBUtils.close(ps);
-				DBUtils.close(con);
-			}catch(Exception e){}
-
-			String name = req.getParameter("name");
-
-			sql = "INSERT INTO accounts(name) VALUES(?);";
-
-			ps = con.prepareStatement(sql);
-
-			ps.setString(1, name);
+			System.out.println(ps);
 
 			ps.executeUpdate();
-
-			try{
-				DBUtils.close(ps);
-				DBUtils.close(con);
-			}catch(Exception e){}
-
-			String categoryName = req.getParameter("categoryName");
-
-			sql = "INSERT INTO categories(category_name) VALUES(?);";
-
-			ps = con.prepareStatement(sql);
-
-			ps.setString(1, categoryName);
-
-			ps.executeUpdate();
-
 
 		}catch(Exception e){
 			throw new ServletException(e);
