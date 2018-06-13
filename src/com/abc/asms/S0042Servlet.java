@@ -132,6 +132,10 @@ public class S0042Servlet extends HttpServlet {
 			errors.add("メールアドレスが長すぎます。");
 		}
 		//1-5メールアドレス形式チェック
+//		if (mail.matches("[a-z0-9A-Z]+")) {
+//			errors.add("メールアドレスの形式が間違っています。");
+//		}
+		//1-5メールアドレス形式チェック
 		if (!mail.contains("@")) {
 			errors.add("メールアドレスの形式が間違っています。");
 		}
