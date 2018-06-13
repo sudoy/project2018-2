@@ -29,7 +29,6 @@ public class S0020Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		HttpSession session = req.getSession();
 		req.setCharacterEncoding("UTF-8");
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -37,7 +36,7 @@ public class S0020Servlet extends HttpServlet {
 		ResultSet rs = null;
 		LocalDateTime d = LocalDateTime.now();
 		String today = DateTimeFormatter.ofPattern("yyyy/MM/dd").format(d);
-		session.setAttribute("today", today);
+		req.setAttribute("today", today);
 
 
 		try{
@@ -113,12 +112,15 @@ public class S0020Servlet extends HttpServlet {
 		String saleDate1 = req.getParameter("sale_date1");
 		String saleDate2 = req.getParameter("sale_date2");
 		String accountName = req.getParameter("name");
-		String categoryName = req.getParameter("categoryName");
+		String categoryName[] = req.getParameterValues("categoryName");
+
 
 
 		List<String> errors =  validate(saleDate1,saleDate2,req,accountName);
 		if(errors.size() > 0) {
-			resp.sendRedirect("S0020.html");
+			session.setAttribute("errors", errors);
+			getServletContext().getRequestDispatcher("/WEB-INF/s0020.jsp")
+			.forward(req, resp);
 			return;
 		}
 		try{
@@ -135,42 +137,44 @@ public class S0020Servlet extends HttpServlet {
 			}else {
 				sql += "";
 			}
-//			ps.setString(1,  "%" + note + "%");
+
 //			//商品名検索
 			if(tradeName != "") {
 				sql += " and trade_name like '%" + tradeName + "%'";
 			}else {
 				sql += "";
 			}
-//			ps.setString(2, req.getParameter("trade_name").equals("") ? null : "%" + tradeName + "%");
+
 //			//日付検索
 			if(!saleDate1.equals("") && !saleDate2.equals("")) {
 				sql += " and sale_date between '" + saleDate1 + "' and '" + saleDate2+ "'";
-//				ps.setString(3, saleDate1);
-//				ps.setString(4, saleDate2);
+
 			}else if(saleDate1.equals("") && !saleDate2.equals("")){
 				sql += " and sale_date <= '" + saleDate2 + "'";
-//				ps.setString(3, "1900-01-01");
-//				ps.setString(4, saleDate2);
+
 			}else if(!saleDate1.equals("") && saleDate2.equals("")) {
 				sql += " and sale_date >= '" + saleDate1 + "'";
-//				ps.setString(3, saleDate1);
-//				ps.setString(4, "2099-01-01");
+
 			}else {
 				sql += "";
-//				ps.setString(3, "");
-//				ps.setString(4, "");
 			}
-			//カテゴリー検索
-			sql += " and category_name =" + "'"+categoryName+"'";
-//			sql += " and category_name =" + "'"+categoryName+"'";
+
 			//担当検索
 			if(accountName !=  "") {
 				sql += " and name =" + "'"+accountName+"'";
 			}else {
 				sql += "";
 			}
+			//カテゴリー検索
 
+			if (categoryName != null) {
+				for (int i = 0; i < categoryName.length; i++) {
+			        sql += " and category_name =" + "'"+ categoryName[i] +"'";
+			      }
+			}else {
+				sql += "";
+
+			}
 
 
 			//SELECT命令の準備
@@ -250,7 +254,7 @@ public class S0020Servlet extends HttpServlet {
 				java.util.Date f1 = fmt.parse(req.getParameter("sale_date1"));
 				java.util.Date f2 = fmt.parse(req.getParameter("sale_date2"));
 				if(!f1.before(f2)) {
-					errors.add("販売日（検索開始日が販売日（検索終了日より後の日付になっています。");
+					errors.add("販売日（検索開始日)が販売日（検索終了日)より後の日付になっています。");
 				}
 			}catch(Exception e1) {
 
