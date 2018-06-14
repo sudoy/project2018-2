@@ -1,4 +1,5 @@
-<%@page contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -12,40 +13,38 @@
 		<title>ログイン｜物品売上管理システム</title>
 
 		<link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
 		<link href="css/signin.css" rel="stylesheet">
 
 		<script type="text/javascript" src="http://gc.kis.v2.scr.kaspersky-labs.com/15FFB0EB-D585-DC46-87A9-4A5DB79FD622/main.js" charset="UTF-8"></script><script src="../../assets/js/ie-emulation-modes-warning.js"></script>
 
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
 	</head>
 
 	<body>
 
 		<div class="container">
 
-			<form class="form-signin"  action="#" method="post">
+			<form class="form-signin">
 				<h2 class="form-signin-heading">物品売上管理システム</h2>
-				<jsp:include page="_successes.jsp" />
-				<jsp:include page="_errors.jsp" />
-				
+				<h3 class="form-signin-heading">パスワード再設定</h3>
 				<label for="inputEmail" class="sr-only"></label>
-				<input type="text" id="inputEmail" name="mail" class="form-control" placeholder="メールアドレス" value="${param.mail != null ? param.mail : mail}"/>
-				<label for="inputPassword" class="sr-only"></label>
-				<input type="password" id="inputPassword" name="password" class="form-control" placeholder="パスワード" />
+				<input type="text" id="inputEmail" class="form-control" placeholder="メールアドレス">
 				<div class="checkbox">
 				</div>
-
-
-				<input type="submit" class="btn btn-primary" style="width:300px;" value="ログイン"><br>
-				<a href="S0045.html" class="btn btn-link">パスワードを忘れた方はこちら</a>
-
+				
+				<button type="submit" class="btn btn-primary" style="width:300px;"><span class="glyphicon glyphicon" aria-hidden="true">メール送信</span></button>
 				<!--
 				<button class="btn btn-lg btn-primary" type="submit">ログイン</button>
 				 <button class="btn btn-link" type="submit">パスワードを忘れた方はこちら</button>
 				 -->
-
+				
 			</form>
 
 		</div> <!-- /container -->
