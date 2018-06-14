@@ -16,12 +16,23 @@ import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.Accounts;
 import com.abc.asms.utils.DBUtils;
+import com.abc.asms.utils.HtmlUtils;
 
 @WebServlet("/S0042.html")
 public class S0042Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		String userauthority = req.getParameter("authority");
+		//ログインチェック
+		if (!HtmlUtils.checkLogin(req, resp)) {
+			return;
+		}
+		
+		//権限チェック
+//		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
+//			return;
+//		}
 
 		req.setCharacterEncoding("utf-8");
 		//HttpSession session = req.getSession();
@@ -77,6 +88,15 @@ public class S0042Servlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		//ログインチェック
+		if (!HtmlUtils.checkLogin(req, resp)) {
+			return;
+		}
+		
+		//権限チェック
+//		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
+//			return;
+//		}
 
 		req.setCharacterEncoding("utf-8");
 		HttpSession session = req.getSession();
