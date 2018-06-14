@@ -129,7 +129,7 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-4">
-				<button type="submit" name="hogehoge" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> O K</span></button>
+				<button type="submit" name="update" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> O K</span></button>
 				<a href="S0023.html?id=${param.id} " class="btn btn-default">キャンセル</a>
 			</div>
 		</div>

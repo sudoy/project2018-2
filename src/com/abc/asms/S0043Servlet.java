@@ -19,23 +19,6 @@ import com.abc.asms.utils.HtmlUtils;
 @WebServlet("/S0043.html")
 public class S0043Servlet extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-
-		//ログインチェック
-		if (!HtmlUtils.checkLogin(req, resp)) {
-			return;
-		}
-		//権限チェック
-		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
-			return;
-		}
-
-		getServletContext().getRequestDispatcher("/WEB-INF/s0043.jsp")
-				.forward(req, resp);
-	}
-
-	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
@@ -89,10 +72,6 @@ public class S0043Servlet extends HttpServlet {
 					ps.setString(2, mail);
 					ps.setString(3, authority);
 					ps.setString(4, accountId);
-
-					System.out.println(authority1);
-					System.out.println(authority2);
-					System.out.println(authority);
 					
 					ps.executeUpdate();
 

@@ -120,6 +120,7 @@ public class S0042Servlet extends HttpServlet {
 		req.setAttribute("authority2", authority2);
 		req.setAttribute("authority", authority);
 
+		//バリデーションチェック
 		List<String> errors = validate(accountId, name, mail, password, passwordc, authority1, authority2);
 		if (errors.size() > 0) {
 			session.setAttribute("errors", errors);

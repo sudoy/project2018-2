@@ -13,10 +13,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.Accounts;
 import com.abc.asms.beans.Categories;
 import com.abc.asms.utils.DBUtils;
+import com.abc.asms.utils.HtmlUtils;
 
 
 @WebServlet("/S0024.html")
@@ -80,13 +82,16 @@ public class S0024Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
+
+		//ログインチェック
+		if (!HtmlUtils.checkLogin(req, resp)) {
+			return;
+		}
+
 		req.setCharacterEncoding("utf-8");
+		HttpSession session = req.getSession();
 
-	//		if(!Utils.checkLogin(req, resp)) {
-	//		return;
-	//	}
-
-		if(req.getParameter("hogehoge") != null ) {
+		if(req.getParameter("update") != null ) {
 
 		//	HttpSession session = req.getSession();
 
@@ -102,25 +107,25 @@ public class S0024Servlet extends HttpServlet {
 			String note = req.getParameter("note");
 
 
-		//	List<String> errors = validate(id, title, deadline, level);
-		//	System.out.println(errors);
-		//
-		//	if(errors.size() > 0) {
-		//
-		//		session.setAttribute("errors", errors);
-		//
-		//		getServletContext().getRequestDispatcher("/WEB-INF/update.jsp")
-		//			.forward(req, resp);
-		//
-		//		return;
-		//	}
+//			List<String> errors = validate(sale_date);
+//			System.out.println(errors);
+//
+//			if(errors.size() > 0) {
+//
+//				session.setAttribute("errors", errors);
+//
+//				getServletContext().getRequestDispatcher("/WEB-INF/update.jsp")
+//					.forward(req, resp);
+//
+//				return;
+//			}
 
 			Connection con = null;
 			PreparedStatement ps = null;
 
 			try {
 				con = DBUtils.getConnection();
-
+				//仮実装 ラジオボタンに対応していない。
 				String sql = ""
 							+ "update sales set "
 							+ "sale_date = ?, account_id = ?, category_id = 1, trade_name = ?, "
@@ -138,17 +143,16 @@ public class S0024Servlet extends HttpServlet {
 				ps.setString(6, note);
 				ps.setString(7, id);
 
-				System.out.println(ps);
-
 				ps.executeUpdate();
 
-				resp.sendRedirect("S0022.html?id="+ id); //仮実装
+				List<String> successes = new ArrayList<>();
+				successes.add("No." + id + "の売上を更新しました。");
+				session.setAttribute("successes", successes);
 
-		//		List<String> successes = new ArrayList<>();
-		//		successes.add("更新しました。");
-		//		session.setAttribute("successes", successes);
-		//
-		//		resp.sendRedirect("index.html");
+				System.out.println(successes);//確認用
+
+				resp.sendRedirect("S0022.html?id="+ id);
+
 
 			} catch (Exception e) {
 				throw new ServletException(e);
@@ -162,16 +166,18 @@ public class S0024Servlet extends HttpServlet {
 					}
 			}
 
-		}else if(req.getParameter("piyopiyo") != null) {
+
+
+
+
+			//わかりやすく間開けてるだけ（後日削除）
+
+		}else if(req.getParameter("check") != null) {
 
 			Connection con = null;
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 			String sql;
-
-//			if(!Utils.checkLogin(req, resp)) {
-//				return;
-//			}
 
 			String id = req.getParameter("id");
 
@@ -182,6 +188,19 @@ public class S0024Servlet extends HttpServlet {
 			String unit_price = req.getParameter("unit_price");
 			String sale_number = req.getParameter("sale_number");
 			String note = req.getParameter("note");
+
+			List<String> errors = validate(sale_date);
+			System.out.println(errors);
+
+			if(errors.size() > 0) {
+
+				session.setAttribute("errors", errors);
+
+				req.getServletContext().getRequestDispatcher("/WEB-INF/s0023.html").forward(req, resp);
+
+				return;
+			}
+
 
 			try{
 				con = DBUtils.getConnection();
@@ -254,5 +273,26 @@ public class S0024Servlet extends HttpServlet {
 			}
 			req.getServletContext().getRequestDispatcher("/WEB-INF/s0024.jsp").forward(req, resp);
 		}
+
+
+//			private List<String> validate(String sale_date) {
+//				if(!sale_date.equals("")) {
+//					try {
+//						if(LocalDate.parse(sale_date, DateTimeFormatter.ofPattern("uuuu/M/d")
+//								.withResolverStyle(ResolverStyle.STRICT)) != null ) {
+//							LocalDate.parse(sale_date, DateTimeFormatter.ofPattern("uuuu/M/d")
+//									.withResolverStyle(ResolverStyle.STRICT)) ;
+//						}
+//					}catch(Exception e) {
+//						errors.add("販売日（検索開始日）を正しく入力して下さい。");
+//					}
+//				}
+//				return null;
+//			}
+		}
+
+	private List<String> validate(String sale_date) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 }
