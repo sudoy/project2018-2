@@ -59,7 +59,7 @@ public class C0010Servlet extends HttpServlet {
 
 			if(rs.next()) {
 				//email passwordが正しいとき
-				//ログイン処理
+				//session にログイン情報を保存する。
 				Accounts accounts = new Accounts(rs.getInt("account_id"),
 						rs.getString("name"),
 						rs.getString("mail"),
@@ -70,7 +70,7 @@ public class C0010Servlet extends HttpServlet {
 
 
 			}else {
-				errors.add("メールアドレスかパスワードが間違っています。");
+				errors.add("メールアドレス、パスワードを正しく入力してください。");
 				session.setAttribute("errors", errors);
 				getServletContext().getRequestDispatcher("/WEB-INF/c0010.jsp").forward(req, resp);
 			}
@@ -103,7 +103,7 @@ public class C0010Servlet extends HttpServlet {
 //		String regex = "[^0-9a-zA-Z]";
 //		Matcher matcher = regex.matcher("aaaaab");
 		if (!email.contains("@")) {
-			errors.add("メールアドレスの形式が間違っています。");
+			errors.add("メールアドレスを正しく入力してください。");
 		}
 		//1-4
 		if(password.equals("")) {
@@ -113,9 +113,7 @@ public class C0010Servlet extends HttpServlet {
 		if(password.length() > 30) {
 			errors.add("パスワードが長すぎます");
 		}
-		//1-6
 
-		//1-7
 
 		return errors;
 

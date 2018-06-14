@@ -39,8 +39,11 @@
 				<li><a href="S0040.html">アカウント検索</a></li>
 
 			</ul>
+
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="C0010.html">ログアウト</a></li>
+				<c:if test="${accounts ne null}">
+				<li><a href="C0030.html">ログアウト</a></li>
+				</c:if>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
@@ -50,9 +53,9 @@
 
 		<h1>売上検索条件入力</h1>
 <jsp:include page="_errors.jsp" />
-	<form class="form-horizontal" action="S0020.html" method="post">
+	<form class="form-horizontal" action="S0021.html" method="post">
  		<div class="form-group">
-	 		<label for="salesDate" class="col-sm-2 control-label">販売日 <span class="badge">必須</span></label>
+	 		<label for="salesDate" class="col-sm-2 control-label">販売日 </label>
 
 			<div class="col-sm-2">
 					<input type="text" class="form-control" name="sale_date1" id="salesspanStart" placeholder="販売日(検索開始日)"  value="${param.sale_date1 != null ? param.sale_date1 : date}" >
@@ -69,18 +72,18 @@
 		</div>
 
 		 <div class="form-group">
-	 			<label for="person" class="col-sm-2 control-label">担当 <span class="badge">必須</span></label>
+	 			<label for="person" class="col-sm-2 control-label">担当 </label>
 	 			<div class="col-sm-5">
 					<select class="form-control" name="name" >
 						<option value=""  selected>選択してください</option>
 						<c:forEach var="project2" items="${list2}">
-						<option value="${param.project2.name != null ? param.project2.name : project2.name}" ${param.project2.name == project2.name ?'selected': ''}>${param.project2.name != null ? param.project2.name : project2.name}</option>
+						<option value="${project2.name}" ${param.name eq project2.name  ? 'selected' : ''}>${project2.name}</option>
 						</c:forEach>
 					</select>
 				</div>
 		 </div>
 
-			<div class="form-group">
+		<div class="form-group">
  			<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
  			<div class="col-sm-5">
  			<c:forEach var="project2" items="${list1}">
