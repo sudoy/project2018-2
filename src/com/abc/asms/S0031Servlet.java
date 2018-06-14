@@ -35,6 +35,18 @@ public class S0031Servlet extends HttpServlet {
 		String authority2 = req.getParameter("authority2");
 		String authority = authority1 + authority2;
 
+		if (authority.equals("00")) {
+			authority = "0";
+		}
+
+		if (authority.equals("10")) {
+			authority = "1";
+		}
+
+		if(authority.equals("01")) {
+			authority = "10";
+		}
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;

@@ -48,6 +48,8 @@
 
 	<div class="container">
 
+<jsp:include page="_errors.jsp" />
+
 		<h1>アカウント登録</h1>
 
 	<form class="form-horizontal" action="S0030.html" method="post">
