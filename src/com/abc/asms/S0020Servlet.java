@@ -18,16 +18,15 @@ import javax.servlet.http.HttpServletResponse;
 import com.abc.asms.beans.Accounts;
 import com.abc.asms.beans.Categories;
 import com.abc.asms.utils.DBUtils;
-import com.abc.asms.utils.HtmlUtils;
 @WebServlet("/S0020.html")
 public class S0020Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// ログインチェック
-		if(!HtmlUtils.checkLogin(req, resp)) {
-			return;
-		}
+//		if(!HtmlUtils.checkLogin(req, resp)) {
+//			return;
+//		}
 		req.setCharacterEncoding("UTF-8");
 		Connection con = null;
 		PreparedStatement ps = null;

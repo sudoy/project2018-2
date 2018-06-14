@@ -87,7 +87,8 @@
  			<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
  			<div class="col-sm-5">
  			<c:forEach var="project2" items="${list1}">
-	 			<label class="checkbox-inline" ><input type="checkbox" name="categoryName"  class="custom-control-input category"  value="${project2.categoryName}"checked>${param.project2.categoryName != null ? param.project2.categoryName :project2.categoryName}</label>
+	 			<label class="checkbox-inline" ><input type="checkbox" name="categoryName"  class="custom-control-input category"
+	 			 value="${project2.categoryName}"${param.categoryName eq project2.categoryName  ? 'checked' : ''}>${project2.categoryName}</label>
 			</c:forEach>
 			</div>
 		</div>

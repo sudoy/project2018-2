@@ -22,7 +22,6 @@ import com.abc.asms.beans.Accounts;
 import com.abc.asms.beans.Categories;
 import com.abc.asms.beans.S0021;
 import com.abc.asms.utils.DBUtils;
-import com.abc.asms.utils.HtmlUtils;
 
 
 @WebServlet("/S0021.html")
@@ -31,9 +30,9 @@ public class S0021Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// ログインチェック
-		if(!HtmlUtils.checkLogin(req, resp)) {
-			return;
-		}
+//		if(!HtmlUtils.checkLogin(req, resp)) {
+//			return;
+//		}
 
 		//foward
 		getServletContext().getRequestDispatcher("/WEB-INF/s0021.jsp")
@@ -45,9 +44,9 @@ public class S0021Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// ログインチェック
-		if(!HtmlUtils.checkLogin(req, resp)) {
-			return;
-		}
+//		if(!HtmlUtils.checkLogin(req, resp)) {
+//			return;
+//		}
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		Connection con = null;
