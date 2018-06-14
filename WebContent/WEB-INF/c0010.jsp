@@ -29,7 +29,7 @@
 				<h2 class="form-signin-heading">物品売上管理システム</h2>
 				<jsp:include page="_errors.jsp" />
 				<label for="inputEmail" class="sr-only"></label>
-				<input type="email" id="inputEmail" name="mail" class="form-control" placeholder="メールアドレス" />
+				<input type="text" id="inputEmail" name="mail" class="form-control" placeholder="メールアドレス" />
 				<label for="inputPassword" class="sr-only"></label>
 				<input type="password" id="inputPassword" name="password" class="form-control" placeholder="パスワード" />
 				<div class="checkbox">
