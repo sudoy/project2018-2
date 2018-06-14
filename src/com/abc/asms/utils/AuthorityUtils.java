@@ -10,10 +10,10 @@ import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.Accounts;
 
-public class AuthorityUtils { 
-	public static boolean checkAccountEditAuthority(HttpServletRequest req, HttpServletResponse resp) 
+public class AuthorityUtils {
+	public static boolean checkAccountEditAuthority(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		
+
 		HttpSession session = req.getSession();
 		Accounts accounts = (Accounts)session.getAttribute("accounts");
 		int authorityaccountEditAuthority = accounts.getAuthority();
@@ -29,24 +29,44 @@ public class AuthorityUtils {
 		}
 
 	}
-	
-	public static boolean tabDeleteAccountAuthority(HttpServletRequest req, HttpServletResponse resp) 
+
+	//売上登録の権限チェック
+	public static boolean checkSalesAuthority(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		
+
 		HttpSession session = req.getSession();
 		Accounts accounts = (Accounts)session.getAttribute("accounts");
-		int authorityaccountEditAuthority = accounts.getAuthority();
-		String authority = String.valueOf(authorityaccountEditAuthority);
-		if (!authority.equals("10") && !authority.equals("11")) {
-			
+		int authority = accounts.getAuthority();
+		String salesAuthority = String.valueOf(authority);
+		if (!salesAuthority.equals("1") && !salesAuthority.equals("11")) {
+			List<String> errors = new ArrayList<>();
+			errors.add("不正なアクセスです。");
+			session.setAttribute("errors", errors);
+			resp.sendRedirect("C0020.html");
 			return false;
 		}else {
 			return true;
 		}
 
 	}
-	
-	
+
+	public static boolean tabDeleteAccountAuthority(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException {
+
+		HttpSession session = req.getSession();
+		Accounts accounts = (Accounts)session.getAttribute("accounts");
+		int authorityaccountEditAuthority = accounts.getAuthority();
+		String authority = String.valueOf(authorityaccountEditAuthority);
+		if (!authority.equals("10") && !authority.equals("11")) {
+
+			return false;
+		}else {
+			return true;
+		}
+
+	}
+
+
 
 	public static String conversionAuthority(String authority) {
 		if (authority.equals("0")) {

@@ -56,33 +56,29 @@
 	<form class="form-horizontal" action="S0010.html" method="post">
  		<div class="form-group">
 	 		<label for="saleDate" class="col-sm-2 control-label">販売日 <span class="badge">必須</span></label>
-
 			<div class="col-sm-2">
-					<input type="text" class="form-control" id="saleDate" name="saleDate" placeholder="販売日" value="${param.saleDate}">
+				<input type="text" class="form-control" id="saleDate" name="saleDate" placeholder="販売日" value="${param.saleDate}">
 			</div>
 		</div>
 
 		 <div class="form-group">
-				<label for="name" class="col-sm-2 control-label">担当 <span class="badge">必須</span></label>
-	 			<div class="col-sm-5">
-					<select class="form-control" name="name" id="name">
-						<option value="" selected>選択してください</option>
-						<c:forEach var="project2" items="${list2}">
-						<option value="${project2.name}">${project2.name}</option>
-						</c:forEach>
-					</select>
+			<label for="name" class="col-sm-2 control-label">担当 <span class="badge">必須</span></label>
+	 		<div class="col-sm-5">
+				<select class="form-control" name="accountId" id="accountId">
+					<option value="">選択してください</option>
+					<c:forEach var="account" items="${list2}">
+						<option value="${account.accountId}" ${param.accountId eq account.accountId ? 'selected' : '' }>${account.name}</option>
+					</c:forEach>
+				</select>
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="categoryName" class="col-sm-2 control-label">商品カテゴリー <span class="badge">必須</span></label>
  			<div class="col-sm-5">
- 					<select class="form-control" name="categoryName" id="categoryName">
- 						<option value="" selected>選択してください</option>
-						<c:forEach var="project2" items="${list}">
-							<option value="${project2.categoryName}">${project2.categoryName}</option>
-						</c:forEach>
-					</select>
+				<c:forEach var="category" items="${list}">
+					<label class="radio-inline"><input type="radio"  name="categoryId" value="${category.categoryId}" ${param.categoryId eq category.categoryId ? 'checked' : ''}>${category.categoryName}</label>
+				</c:forEach>
 			</div>
 		</div>
 
