@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.Accounts;
 import com.abc.asms.utils.DBUtils;
+import com.abc.asms.utils.HtmlUtils;
 
 
 @WebServlet("/S0044.html")
@@ -23,6 +24,11 @@ public class S0044Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
+		
+		//ログインチェック
+		if (!HtmlUtils.checkLogin(req, resp)) {
+			return;
+		}
 		req.setCharacterEncoding("utf-8");
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -76,6 +82,12 @@ public class S0044Servlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
+		
+		//ログインチェック
+		if (!HtmlUtils.checkLogin(req, resp)) {
+			return;
+		}
+		
 		HttpSession session = req.getSession();
 		
 		String accountId = req.getParameter("account_id");

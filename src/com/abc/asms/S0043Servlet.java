@@ -13,11 +13,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.abc.asms.utils.HtmlUtils;
+
 @WebServlet("/S0043.html")
 public class S0043Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+
+		//ログインチェック
+		if (!HtmlUtils.checkLogin(req, resp)) {
+			return;
+		}
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0043.jsp")
 				.forward(req, resp);
@@ -26,97 +33,101 @@ public class S0043Servlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-
-		req.setCharacterEncoding("utf-8");
-		HttpSession session = req.getSession();
-
-		String accountId = req.getParameter("account_id");
-		String name = req.getParameter("name");
-		String mail = req.getParameter("mail");
-		String password = req.getParameter("password");
-		String authority1 = req.getParameter("authority1");
-		String authority2 = req.getParameter("authority2");
-		String authority = authority1 + authority2;
 		
-		if(authority.equals("00"))
-		{
-			authority = "0";
+		//ログインチェック
+		if (!HtmlUtils.checkLogin(req, resp)) {
+			return;
 		}
 		
-		if(authority.equals("01"))
-		{
-			authority = "10";
-		}
-		
-		if(authority.equals("10"))
-		{
-			authority = "1";
-		}
+			req.setCharacterEncoding("utf-8");
+			
+			HttpSession session = req.getSession();
 
-		Connection con = null;
-		PreparedStatement ps = null;
-		String sql = null;
+			String accountId = req.getParameter("account_id");
+			String name = req.getParameter("name");
+			String mail = req.getParameter("mail");
+			String password = req.getParameter("password");
+			String authority1 = req.getParameter("authority1");
+			String authority2 = req.getParameter("authority2");
+			String authority = authority1 + authority2;
 
-		try {
-			con = com.abc.asms.utils.DBUtils.getConnection();
+			if (authority.equals("00")) {
+				authority = "0";
+			}
 
-			if (password.equals("")) {
-				sql = "update accounts set name = ?, mail = ?, authority = ? where account_id = ?;";
-				ps = con.prepareStatement(sql);
+			if (authority.equals("01")) {
+				authority = "10";
+			}
 
-				//insert命令にポストデータの内容をセット
-				ps.setString(1, name);
-				ps.setString(2, mail);
-				ps.setString(3, authority);
-				ps.setString(4, accountId);
+			if (authority.equals("10")) {
+				authority = "1";
+			}
 
-				System.out.println(ps);
+			Connection con = null;
+			PreparedStatement ps = null;
+			String sql = null;
 
-				ps.executeUpdate();
-
-				//成功メッセージ
-				List<String> successes = new ArrayList<>();
-				successes.add("No" + accountId + "のアカウントを更新しました。");
-				session.setAttribute("successes", successes);
-
-				resp.sendRedirect("S0041.html");
-
-			}else {
-
-			sql = "update accounts set name = ?, mail = ?, password = MD5(?), authority = ? where account_id = ?;";
-			ps = con.prepareStatement(sql);
-
-			//insert命令にポストデータの内容をセット
-			ps.setString(1, name);
-			ps.setString(2, mail);
-			ps.setString(3, password);
-			ps.setString(4, authority);
-			ps.setString(5, accountId);
-
-			System.out.println(ps);
-
-			ps.executeUpdate();
-
-			//成功メッセージ
-			List<String> successes = new ArrayList<>();
-			successes.add("No" + accountId + "のアカウントを更新しました。");
-			session.setAttribute("successes", successes);
-
-			resp.sendRedirect("S0041.html");
-		}
-		
-		} catch (Exception e) {
-			throw new ServletException(e);
-		} finally {
 			try {
-				if (con != null) {
-					con.close();
+				con = com.abc.asms.utils.DBUtils.getConnection();
+
+				if (password.equals("")) {
+					sql = "update accounts set name = ?, mail = ?, authority = ? where account_id = ?;";
+					ps = con.prepareStatement(sql);
+
+					//insert命令にポストデータの内容をセット
+					ps.setString(1, name);
+					ps.setString(2, mail);
+					ps.setString(3, authority);
+					ps.setString(4, accountId);
+
+					System.out.println(ps);
+
+					ps.executeUpdate();
+
+					//成功メッセージ
+					List<String> successes = new ArrayList<>();
+					successes.add("No" + accountId + "のアカウントを更新しました。");
+					session.setAttribute("successes", successes);
+
+					getServletContext().getRequestDispatcher("/WEB-INF/s0041.jsp")
+					.forward(req, resp);
+
+				} else {
+
+					sql = "update accounts set name = ?, mail = ?, password = MD5(?), authority = ? where account_id = ?;";
+					ps = con.prepareStatement(sql);
+
+					//insert命令にポストデータの内容をセット
+					ps.setString(1, name);
+					ps.setString(2, mail);
+					ps.setString(3, password);
+					ps.setString(4, authority);
+					ps.setString(5, accountId);
+
+					System.out.println(ps);
+
+					ps.executeUpdate();
+
+					//成功メッセージ
+					List<String> successes = new ArrayList<>();
+					successes.add("No" + accountId + "のアカウントを更新しました。");
+					session.setAttribute("successes", successes);
+
+					resp.sendRedirect("S0041.html");
 				}
-				if (ps != null) {
-					ps.close();
-				}
+
 			} catch (Exception e) {
+				throw new ServletException(e);
+			} finally {
+				try {
+					if (con != null) {
+						con.close();
+					}
+					if (ps != null) {
+						ps.close();
+					}
+				} catch (Exception e) {
+				}
 			}
 		}
 	}
-}

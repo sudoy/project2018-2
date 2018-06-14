@@ -130,7 +130,7 @@ public class HtmlUtils {
 		HttpSession session = req.getSession();
 
 		//ログインチェック
-		if(session.getAttribute("user") == null) {
+		if(session.getAttribute("accounts") == null) {
 			//ログインしていない
 			List<String> errors = new ArrayList<>();
 			errors.add("ログインして下さい。");

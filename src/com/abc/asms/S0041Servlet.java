@@ -16,12 +16,18 @@ import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.Accounts;
 import com.abc.asms.utils.DBUtils;
+import com.abc.asms.utils.HtmlUtils;
 
 @WebServlet("/S0041.html")
 public class S0041Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		
+		//ログインチェック
+		if (!HtmlUtils.checkLogin(req, resp)) {
+			return;
+		}
 		
 		req.setCharacterEncoding("utf-8");
 		HttpSession session = req.getSession();
