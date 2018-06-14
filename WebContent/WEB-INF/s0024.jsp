@@ -51,12 +51,12 @@
 
 		<h1>売上を編集してよろしいですか？</h1>
 
-	<form class="form-horizontal" action="S0022.html?id=6" method="post">
+	<form class="form-horizontal" action="S0024.html?id=${param.id}" method="post">
  		<div class="form-group">
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日</label>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" name="sale_date" value="${param.sale_date}"  disabled>
+					<input type="text" class="form-control" name="sale_date" value="${HtmlUtils.formatDate(s24)}"  disabled>
 			</div>
 		</div>
 
@@ -64,7 +64,7 @@
 	 			<label for="person" class="col-sm-2 control-label">担当</label>
 	 			<div class="col-sm-5">
 					<select name="name" class="form-control" disabled>
-						<option value="">${param.name}</option>
+						<option value="">${s24.name}</option>
 					</select>
 			</div>
 		</div>
@@ -72,16 +72,16 @@
 		<div class="form-group">
  			<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
  			<div class="col-sm-5">
- 					<select name="category_name" class="form-control"disabled>
-						<option value="">${param.category_name}</option>
-					</select>
+			<c:forEach var="type" items="${categories}">
+					<label class="radio-inline"><input type="radio" name="category" value="${type.categoryId}">${type.categoryName}</label>
+			</c:forEach>
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">商品名</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="trade_name" value="${param.trade_name}" disabled>
+				<input type="text" class="form-control" name="trade_name" value="${s24.trade_name}" disabled>
 			</div>
 		</div>
 
@@ -90,21 +90,21 @@
  			<label for="price" name="unit_price" class="col-sm-2 control-label">単価</label>
 
  			<div class="col-sm-2">
-				<input type="text" class="form-control text-right" name="unit_price" value="${param.unit_price}" disabled>
+				<input type="text" class="form-control text-right" name="unit_price" value="${HtmlUtils.formatCommaC(s24)}" disabled>
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">個数</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control text-right" name="sale_number" value="${param.sale_number}" disabled>
+				<input type="text" class="form-control text-right" name="sale_number" value="${HtmlUtils.formatCommaN(s24)}" disabled>
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">小計</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control text-right" name="sum" value="${param.unit_price * param.sale_number}" disabled>
+				<input type="text" class="form-control text-right" name="sum" value="${HtmlUtils.formatCommaSum(s24)}" disabled>
 			</div>
 		</div>
 
@@ -112,14 +112,14 @@
 		<div class="form-group">
  			<label for="note" class="col-sm-2 control-label">備考</label>
  			<div class="col-sm-5">
-				<textarea class="form-control" name="note" rows="5" disabled>${param.note != null? param.note : null}</textarea>
+				<textarea class="form-control" name="note" rows="5" disabled>${s24.note != null? s24.note : null}</textarea>
 			</div>
 		</div>
 
 
 		<div class="form-group">
 			<div class="col-sm-offset-4">
-				<a href="S0024.html?id=${param.id}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> O K</span></a>
+				<button type="submit" href="S0024.html?id=${param.id}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> O K</span></button>
 				<a href="S0023.html?id=${param.id} " class="btn btn-default">キャンセル</a>
 			</div>
 		</div>

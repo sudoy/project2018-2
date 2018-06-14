@@ -118,7 +118,6 @@ public class S0023Servlet extends HttpServlet {
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, id);
-			System.out.println(ps);
 
 			rs = ps.executeQuery();
 
@@ -181,7 +180,6 @@ public class S0023Servlet extends HttpServlet {
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, id);
-			System.out.println(ps);
 
 			rs = ps.executeQuery();
 
