@@ -48,6 +48,9 @@
 </nav>
 
 	<div class="container">
+	
+	<jsp:include page="_errors.jsp" />
+	
 
 		<h1>ダッシュボード</h1>
 	<div class="row">

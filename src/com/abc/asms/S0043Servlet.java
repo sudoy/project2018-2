@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.HtmlUtils;
 
 @WebServlet("/S0043.html")
@@ -23,6 +24,10 @@ public class S0043Servlet extends HttpServlet {
 
 		//ログインチェック
 		if (!HtmlUtils.checkLogin(req, resp)) {
+			return;
+		}
+		//権限チェック
+		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
 			return;
 		}
 
@@ -36,6 +41,11 @@ public class S0043Servlet extends HttpServlet {
 		
 		//ログインチェック
 		if (!HtmlUtils.checkLogin(req, resp)) {
+			return;
+		}
+		
+		//権限チェック
+		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
 			return;
 		}
 		
@@ -55,12 +65,12 @@ public class S0043Servlet extends HttpServlet {
 				authority = "0";
 			}
 
-			if (authority.equals("01")) {
-				authority = "10";
-			}
-
 			if (authority.equals("10")) {
 				authority = "1";
+			}
+			
+			if(authority.equals("01")) {
+				authority = "10";
 			}
 
 			Connection con = null;
@@ -80,8 +90,10 @@ public class S0043Servlet extends HttpServlet {
 					ps.setString(3, authority);
 					ps.setString(4, accountId);
 
-					System.out.println(ps);
-
+					System.out.println(authority1);
+					System.out.println(authority2);
+					System.out.println(authority);
+					
 					ps.executeUpdate();
 
 					//成功メッセージ
@@ -89,8 +101,7 @@ public class S0043Servlet extends HttpServlet {
 					successes.add("No" + accountId + "のアカウントを更新しました。");
 					session.setAttribute("successes", successes);
 
-					getServletContext().getRequestDispatcher("/WEB-INF/s0041.jsp")
-					.forward(req, resp);
+					resp.sendRedirect("S0041.html");
 
 				} else {
 

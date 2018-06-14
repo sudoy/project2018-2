@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.Accounts;
+import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.HtmlUtils;
 
@@ -29,6 +30,12 @@ public class S0044Servlet extends HttpServlet {
 		if (!HtmlUtils.checkLogin(req, resp)) {
 			return;
 		}
+		
+		//権限チェック
+		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
+			return;
+		}
+		
 		req.setCharacterEncoding("utf-8");
 		Connection con = null;
 		PreparedStatement ps = null;
