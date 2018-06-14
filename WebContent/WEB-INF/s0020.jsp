@@ -72,32 +72,22 @@
 	 			<label for="person" class="col-sm-2 control-label">担当 <span class="badge">必須</span></label>
 	 			<div class="col-sm-5">
 					<select class="form-control" name="name" >
-						<option value="" selected>選択してください</option>
+						<option value=""  selected>選択してください</option>
 						<c:forEach var="project2" items="${list2}">
-						<option value="${project2.name}" >${project2.name}</option>
+						<option value="${param.project2.name != null ? param.project2.name : project2.name}" ${param.project2.name == project2.name ?'selected': ''}>${param.project2.name != null ? param.project2.name : project2.name}</option>
 						</c:forEach>
 					</select>
 				</div>
 		 </div>
 
-		<fieldset class="form-group" name="categoryName">
-				<div class="row">
-					<label for="person" class="col-sm-2 control-label"  >商品カテゴリー</label>
-
-					<div class="col-sm-8">
-
-						<div class="custom-control custom-checkbox custom-control-inline" >
-						<c:forEach var="project2" items="${list}">
- 							<input type="checkbox" id="${project2.categoryId}" value="${project2.categoryName}" name="categoryName" class="custom-control-input category" checked>
-							<label class="custom-control-label"  for="${project2.categoryId}">${param.project2.categoryName != null ? param.project2.categoryName :project2.categoryName}</label>
-							</c:forEach>
-						</div>
-
-
-					</div>
-
-				</div>
-			</fieldset>
+			<div class="form-group">
+ 			<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
+ 			<div class="col-sm-5">
+ 			<c:forEach var="project2" items="${list1}">
+	 			<label class="checkbox-inline" ><input type="checkbox" name="categoryName"  class="custom-control-input category"  value="${project2.categoryName}"checked>${param.project2.categoryName != null ? param.project2.categoryName :project2.categoryName}</label>
+			</c:forEach>
+			</div>
+		</div>
 
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">商品名 <span class="badge">部分一致</span></label>
