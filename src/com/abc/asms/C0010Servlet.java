@@ -113,9 +113,7 @@ public class C0010Servlet extends HttpServlet {
 		if(password.length() > 30) {
 			errors.add("パスワードが長すぎます");
 		}
-		//1-6
 
-		//1-7
 
 		return errors;
 
