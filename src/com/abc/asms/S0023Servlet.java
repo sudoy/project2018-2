@@ -18,6 +18,7 @@ import com.abc.asms.beans.Accounts;
 import com.abc.asms.beans.Categories;
 import com.abc.asms.beans.Detail_beans;
 import com.abc.asms.utils.DBUtils;
+import com.abc.asms.utils.HtmlUtils;
 import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0023.html")
@@ -26,8 +27,13 @@ public class S0023Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
+		//ログインチェック
+		if (!HtmlUtils.checkLogin(req, resp)) {
+			return;
+		}
 
-//		//仮実装
+		req.setCharacterEncoding("utf-8");
+
 		String id = req.getParameter("id");
 
 		Connection con = null;
@@ -106,6 +112,8 @@ public class S0023Servlet extends HttpServlet {
 				}
 		}
 
+		String sale_date = req.getParameter("sale_date");
+
 		try {
 			con = DBUtils.getConnection();
 
@@ -156,7 +164,7 @@ public class S0023Servlet extends HttpServlet {
 
 		}
 	}
-
+}
 //	@Override
 //	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 //			throws ServletException, IOException {
@@ -226,4 +234,4 @@ public class S0023Servlet extends HttpServlet {
 //		req.getServletContext().getRequestDispatcher("/WEB-INF/s0023.jsp").forward(req, resp);
 //
 //	}
-}
+

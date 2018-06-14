@@ -115,7 +115,7 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-4">
-				<button type="submit" name="piyopiyo" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 更　新</span></button>
+				<button type="submit" name="check" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 更　新</span></button>
 				<a href="S0022.html?id=${s23.sale_id}" class="btn btn-default">キャンセル</a>
 			</div>
 		</div>
