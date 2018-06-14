@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8" %>
+<%@ page import="com.abc.asms.utils.AuthorityUtils"%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -49,56 +50,56 @@
 
 		<h1>アカウント登録</h1>
 
-	<form class="form-horizontal" action="#" method="post">
+	<form class="form-horizontal" action="S0030.html" method="post">
 
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">氏名 <span class="badge">必須</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" name="name" placeholder="氏名" value="">
+				<input type="text" class="form-control" name="name" placeholder="氏名" value="${param.name}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">メールアドレス <span class="badge">必須</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" name="mailadress" placeholder="メールアドレス" value="">
+				<input type="text" class="form-control" name="mail" placeholder="メールアドレス" value="${param.mail}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">パスワード<span class="badge">必須</span></label>
  			<div class="col-sm-5">
-				<input type="password" class="form-control" placeholder="パスワード" value="">
+				<input type="text" class="form-control" name="password" placeholder="パスワード" value="" >
 			</div>
 
 		</div>
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">パスワード（確認）<span class="badge">必須</span></label>
  			<div class="col-sm-5">
-				<input type="password" class="form-control" placeholder="パスワード（確認）" value="">
+				<input type="text" class="form-control" name="password2" placeholder="パスワード（確認）" value="">
 			</div>
 		</div>
 
 
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">売上登録権限 <span class="badge">必須</span></label>
-				<div class="radio">
-					<label><input type="radio" name="sauthority" value="no" checked>権限なし</label>
-					<label><input type="radio" name="sauthority" value="ok">権限あり</label>
+				<div class="col-sm-5">
+					<label><input type="radio" name="authority1" value="0" ${AuthorityUtils.checkAuthority1(param.authority1 != null ? param.authority1 : accounts.authority)}>権限なし</label>
+					<label><input type="radio" name="authority1" value="1" ${AuthorityUtils.checkAuthority2(param.authority1 != null ? param.authority1 : accounts.authority)}>権限あり</label>
 				</div>
 		</div>
 
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">アカウント登録権限 <span class="badge">必須</span></label>
-				<div class="radio">
-					<label><input type="radio" name="aauthority" value="no" checked>権限なし</label>
-					<label><input type="radio" name="aauthority" value="ok">権限あり</label>
+				<div class="col-sm-5">
+					<label><input type="radio" name="authority2" value="0" ${AuthorityUtils.checkAuthority3(param.authority2 != null ? AuthorityUtils.checkAuthority3a(param.authority2) : accounts.authority)}>権限なし</label>
+					<label><input type="radio" name="authority2" value="1" ${AuthorityUtils.checkAuthority4(param.authority2 != null ? AuthorityUtils.checkAuthority4a(param.authority2) : accounts.authority)}>権限あり</label>
 				</div>
 		</div>
 
 		<div class="form-group">
 			<div class="col-sm-offset-4">
-				<a href="S0031.html" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 登　録</a>
+				<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 登　録</button>
 
 			<!--
 			<button type="button" class="btn btn-primary">O K</button>
