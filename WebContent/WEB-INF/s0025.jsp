@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.abc.asms.utils.HtmlUtils" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -63,8 +64,10 @@
 		 <div class="form-group">
 	 			<label for="person" class="col-sm-2 control-label">担当</label>
 	 			<div class="col-sm-5">
-					<select class="form-control" disabled>
-						<option value="イチロー">${s25.name}</option>
+					<select class="form-control" name="account_id" disabled>
+					<c:forEach var="aName" items="${accounts}">
+						<option value="${aName.accountId}"${aName.accountId eq s25.account_id ? 'selected' : '' }>${aName.name}</option>
+					</c:forEach>
 					</select>
 			</div>
 		</div>
@@ -72,9 +75,9 @@
 		<div class="form-group">
  			<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
  			<div class="col-sm-5">
- 					<select class="form-control" disabled>
-						<option value="" selected>${s25.category_name}</option>
-					</select>
+ 				<c:forEach var="type" items="${categories}">
+					<label class="radio-inline"><input type="radio" name="categoryType" value="${type.categoryId}">${type.categoryName}</label>
+				</c:forEach>
 			</div>
 		</div>
 

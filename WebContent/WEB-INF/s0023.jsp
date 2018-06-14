@@ -65,10 +65,10 @@
 		 <div class="form-group">
 	 			<label for="person" class="col-sm-2 control-label">担当 <span class="badge">必須</span></label>
 	 			<div class="col-sm-5">
-					<select class="form-control" name="name">
+					<select class="form-control" name="account_id">
 						<option value="0">選択してください</option>
 					<c:forEach var="aName" items="${accounts}">
-						<option value="${aName.accountId}" ${HtmlUtils.selectName(param.name, name)}>${aName.name}</option>
+						<option value="${aName.accountId}" ${aName.accountId.equals(s23.account_id) ? 'selected' : '' }>${aName.name}</option>
 					</c:forEach>
 					</select>
 			</div>
@@ -78,14 +78,14 @@
  			<label for="category" class="col-sm-2 control-label">商品カテゴリー <span class="badge">必須</span></label>
  			<div class="col-sm-5">
  				<c:forEach var="type" items="${categories}">
-					<label class="radio-inline"><input type="radio" name="category" value="${type.categoryId}">${type.categoryName}</label>
+					<label class="radio-inline"><input type="radio" name="categoryType" value="${type.categoryId}">${type.categoryName}</label>
 				</c:forEach>
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">商品名 <span class="badge">必須</span></label>
- 			<div class="col-sm-2">
+ 			<div class="col-sm-5">
 				<input type="text" class="form-control" name="trade_name" id="name" value="${s23.trade_name}">
 			</div>
 		</div>
@@ -115,7 +115,7 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-4">
-				<a href="S0024.html?id=${s23.sale_id}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 更　新</span></button>
+				<button type="submit" name="piyopiyo" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 更　新</span></button>
 				<a href="S0022.html?id=${s23.sale_id}" class="btn btn-default">キャンセル</a>
 			</div>
 		</div>

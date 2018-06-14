@@ -12,8 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.abc.asms.beans.Detail_beans;
+import com.abc.asms.beans.S0022;
 import com.abc.asms.utils.DBUtils;
+import com.abc.asms.utils.HtmlUtils;
 import com.abc.asms.utils.Utils;
 
 
@@ -23,7 +24,10 @@ public class S0022Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-// 		idからデータを出力（詳細表示）
+		//ログインチェック
+		if (!HtmlUtils.checkLogin(req, resp)) {
+			return;
+		}
 
 		req.setCharacterEncoding("utf-8");
 
@@ -54,7 +58,7 @@ public class S0022Servlet extends HttpServlet {
 				throw new ServletException();
 			}
 
-			Detail_beans s22 = new Detail_beans(
+			S0022 s22 = new S0022(
 						Utils.date2LocalDate(rs.getDate("sale_date")),
 						rs.getString("name"),
 						rs.getString("category_name"),
@@ -92,6 +96,10 @@ public class S0022Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
+		//ログインチェック
+		if (!HtmlUtils.checkLogin(req, resp)) {
+			return;
+		}
 
 		req.setCharacterEncoding("utf-8");
 
@@ -117,7 +125,7 @@ public class S0022Servlet extends HttpServlet {
 
 			rs = ps.executeQuery();
 
-			Detail_beans s22 = new Detail_beans(
+			S0022 s22 = new S0022(
 						Utils.date2LocalDate(rs.getDate("sale_date")),
 						rs.getString("name"),
 						rs.getString("category_name"),

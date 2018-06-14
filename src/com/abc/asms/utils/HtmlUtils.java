@@ -18,11 +18,26 @@ import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.Detail_beans;
 import com.abc.asms.beans.S0021;
+import com.abc.asms.beans.S0022;
 
 public class HtmlUtils {
 	public static String formatDate(Detail_beans dbean) {
 
 		LocalDate line = dbean.getSale_date();
+
+
+//		if(line == null) {
+//			return "";
+//		}
+
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		return line.format(dtf);
+
+	}
+
+	public static String formatDate(S0022 s22) {
+
+		LocalDate line = s22.getSale_date();
 
 
 //		if(line == null) {
@@ -43,6 +58,21 @@ public class HtmlUtils {
 	}
 	public static String formatCommaSum(Detail_beans dbean) {
 		return String.format("%,d", dbean.getSum());
+	}
+
+	public static String formatCommaC(S0022 s22) {
+		return String.format("%,d", s22.getUnit_price());
+	}
+	public static String formatCommaN(S0022 s22) {
+		return String.format("%,d", s22.getSale_number());
+	}
+	public static String formatCommaSum(S0022 s22) {
+		return String.format("%,d", s22.getSum());
+	}
+
+
+	public static String formatComma(int value) {
+		return String.format("%,d", value);
 	}
 
 	public static String makeOptionCategories(String value) {
@@ -88,6 +118,14 @@ public class HtmlUtils {
 	public static String selectCategory(String param, String value) {
 		if(param.equals(value)) {
 			return "selected";
+		}else {
+			return "";
+		}
+	}
+
+	public static String checkCategory(String param, String value) {
+		if(param.equals(value)) {
+			return "checked";
 		}else {
 			return "";
 		}

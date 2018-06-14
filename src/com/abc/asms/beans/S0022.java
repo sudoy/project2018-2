@@ -2,11 +2,10 @@ package com.abc.asms.beans;
 
 import java.time.LocalDate;
 
-public class Detail_beans {
+public class S0022 {
 	private LocalDate sale_date;
 	private String name;
-	private int category_id;
-	private int account_id;
+	private String category_name;
 	private String trade_name;
 	private int unit_price;
 	private int sale_number;
@@ -14,9 +13,9 @@ public class Detail_beans {
 	private String note;
 	private int sale_id;
 
-	public Detail_beans() {
-
-	}
+//	public Detail_beans2() {
+//
+//	}
 
 	public LocalDate getSale_date() {
 		return sale_date;
@@ -38,20 +37,12 @@ public class Detail_beans {
 		return trade_name;
 	}
 
-	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
 	}
 
-	public int getCategory_id() {
-		return category_id;
-	}
-
-	public void setAccount_id(int account_id) {
-		this.account_id = account_id;
-	}
-
-	public int getAccount_id() {
-		return account_id;
+	public String getCategory_name() {
+		return category_name;
 	}
 
 	public void setTrade_name(String trade_name) {
@@ -98,13 +89,12 @@ public class Detail_beans {
 		this.sale_id = sale_id;
 	}
 
-	public Detail_beans(LocalDate sale_date, String name, int category_id, int account_id, String trade_name, int price, int count,
+	public S0022(LocalDate sale_date, String name, String category_name, String trade_name, int price, int count,
 			int sum, String note, int sale_id) {
 		super();
 		this.sale_date = sale_date;
 		this.name = name;
-		this.category_id = category_id;
-		this.account_id = account_id;
+		this.category_name = category_name;
 		this.trade_name = trade_name;
 		this.unit_price = price;
 		this.sale_number = count;

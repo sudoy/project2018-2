@@ -111,10 +111,11 @@
 		</div>
 
 		<div class="col-sm-offset-3">
+<%--<c:if test="${ }">--%>
 			<a href="S0023.html?id=${s22.sale_id}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 編　集</span></a><!--これもOK  -->
-			<button type="submit" href="S0025.html" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> 削　除</span></button>
+			<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> 削　除</span></button>
 			<a href="S0021.html" class="btn btn-default">キャンセル</a><!-- キャンセルはOK -->
-
+<%--</c:if>--%>
 		<!--
 		<button type="button" class="btn btn-default">Default</button>
 
