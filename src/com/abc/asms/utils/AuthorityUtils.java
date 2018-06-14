@@ -70,7 +70,7 @@ public class AuthorityUtils {
 
 	public static String conversionAuthority(String authority) {
 		if (authority.equals("0")) {
-			return "";
+			return "権限なし";
 		} else if (authority.equals("1")) {
 			return "売上登録";
 		} else if (authority.equals("10")) {

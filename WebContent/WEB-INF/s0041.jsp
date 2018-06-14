@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.abc.asms.utils.AuthorityUtils"%>
-    
+
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -37,8 +37,8 @@
 				<li><a href="S0010.html">売上登録</a></li>
 				<li><a href="S0020.html">売上検索</a></li>
 				<li><a href="S0030.html">アカウント登録</a></li>
-				<li class="active"><a href="S0041.html">アカウント検索</a></li>
-				
+				<li class="active"><a href="S0040.html">アカウント検索</a></li>
+
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="C0010.html">ログアウト</a></li>
@@ -48,11 +48,11 @@
 </nav>
 
 	<div class="container">
-	
+
 <jsp:include page="_successes.jsp" />
 
 		<h1>アカウント検索結果一覧</h1>
-	
+
 		<table class="table">
 			<tr>
 				<th>操作</th>
@@ -60,9 +60,9 @@
 				<th>氏名</th>
 				<th>メールアドレス</th>
 				<th>権限</th>
-				
+
 			</tr>
-			
+
 			<c:forEach var="accounts" items="${list}">
 			<tr>
 				<td>

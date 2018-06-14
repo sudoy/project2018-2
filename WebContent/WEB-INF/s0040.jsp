@@ -49,19 +49,19 @@
 
 		<h1>アカウント検索</h1>
 
-	<form class="form-horizontal" action="#" method="post">
+	<form class="form-horizontal" action="S0041.html" method="post">
 
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">氏名 <span class="badge">部分一致</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" id="name" placeholder="氏名" value="氏名">
+				<input type="text" class="form-control" id="name" placeholder="氏名" value="${param.name != null ? param.name :name}"  name="name">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">メールアドレス</label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" id="mailadress" placeholder="メールアドレス" value="メールアドレス">
+				<input type="text" class="form-control" id="mailadress" placeholder="メールアドレス" value="${param.mail != null ? param.mail :mail}" name="mail">
 			</div>
 		</div>
 
@@ -85,7 +85,7 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-3">
-				<a href="S0041.html" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> 検　索</a>
+				<button type="submit" class="btn btn-primary "><span class="glyphicon glyphicon-search"></span> 検 索</button>
 				<a href="S0040.html" class="btn btn-default">クリア</a>
 
 			<!--

@@ -14,21 +14,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.abc.asms.beans.Accounts;
-import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
-import com.abc.asms.utils.HtmlUtils;
 
 @WebServlet("/S0041.html")
 public class S0041Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+
 		//ログインチェック
-		if (!HtmlUtils.checkLogin(req, resp)) {
-			return;
-		}
-		
+//		if (!HtmlUtils.checkLogin(req, resp)) {
+//			return;
+//		}
+
 		req.setCharacterEncoding("utf-8");
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -43,7 +41,7 @@ public class S0041Servlet extends HttpServlet {
 			ps = con.prepareStatement(sql);
 			//select命令を実行
 			rs = ps.executeQuery();
-			
+
 			List<Accounts> list = new ArrayList<>();
 
 			while(rs.next()) {
@@ -56,14 +54,14 @@ public class S0041Servlet extends HttpServlet {
 
 				list.add(accounts);
 			}
-			
+
 			req.setAttribute("list", list);
-			
+
 			//権限チェック
-			if(!AuthorityUtils.tabDeleteAccountAuthority(req, resp)) {
-				getServletContext().getRequestDispatcher("/WEB-INF/s0041a.jsp")
-				.forward(req, resp);
-		}
+//			if(!AuthorityUtils.tabDeleteAccountAuthority(req, resp)) {
+//				getServletContext().getRequestDispatcher("/WEB-INF/s0041a.jsp")
+//				.forward(req, resp);
+//			}
 
 			//JSPへフォワード
 			getServletContext().getRequestDispatcher("/WEB-INF/s0041.jsp")
@@ -83,5 +81,71 @@ public class S0041Servlet extends HttpServlet {
 			} catch (Exception e) {
 			}
 		}
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+		String name = req.getParameter("name");
+		String mail = req.getParameter("mail");
+		try{
+			con = DBUtils.getConnection();
+
+			//SQL
+			sql = "select * from accounts where 0 = 0 ";
+			//氏名検索
+			if(name != "") {
+				sql += " and name like '%" + name + "%'";
+			}else {
+				sql += "";
+			}
+
+			//メール検索
+			if(mail != "") {
+				sql += " and mail like '%" + mail + "%'";
+			}else {
+				sql += "";
+			}
+
+			//SELECT命令の準備
+			ps = con.prepareStatement(sql);
+			System.out.println(ps);
+			//SELECT命令を実行
+			rs = ps.executeQuery();
+
+
+			List<Accounts> list = new ArrayList<>();
+			while(rs.next()) {
+				Accounts account = new Accounts(rs.getInt("account_id"),
+						rs.getString("name"),
+						rs.getString("mail"),
+						rs.getString("password"),
+						rs.getInt("authority"));
+
+				list.add(account);
+			}
+
+			//JavaBeansをJSPへ渡す
+			req.setAttribute("list", list);
+
+			//foward
+			getServletContext().getRequestDispatcher("/WEB-INF/s0041.jsp")
+				.forward(req, resp);
+		}catch(Exception e){
+			throw new ServletException(e);
+		}finally{
+			//終了処理
+			try{
+				DBUtils.close(rs);
+				DBUtils.close(ps);
+				DBUtils.close(con);
+			}catch(Exception e){
+			}
+		}
+
 	}
 }
