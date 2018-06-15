@@ -62,7 +62,7 @@
 			</div>
 		</div>
 
-		 <div class="form-group">
+		<div class="form-group">
 			<label for="accountId" class="col-sm-2 control-label">担当 <span class="badge">必須</span></label>
 	 		<div class="col-sm-5">
 				<select class="form-control" name="accountId" id="accountId">
