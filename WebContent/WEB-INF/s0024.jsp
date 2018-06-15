@@ -66,6 +66,7 @@
 	 			<label for="person" class="col-sm-2 control-label">担当</label>
 	 			<div class="col-sm-5">
 					<select class="form-control" name="account_id" disabled>
+						<option value="0">選択してください</option>
 					<c:forEach var="aName" items="${accounts}">
 						<option value="${aName.accountId}"${aName.accountId eq param.account_id ? 'selected' : '' }>${aName.name}</option>
 					</c:forEach>
@@ -73,12 +74,12 @@
 			</div>
 		</div>
 
-		<input type="hidden" name="account_id" value="${param.category_id}">
+		<input type="hidden" name="category_id" value="${param.category_id}">
 		<div class="form-group">
  			<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
  			<div class="col-sm-5">
 			<c:forEach var="type" items="${categories}">
-					<label class="radio-inline"><input type="radio" name="category" value="${type.categoryId}" ${type.categoryId eq param.category_id ? 'checked' : ' '  }>${type.categoryName}</label>
+					<label class="radio-inline"><input type="radio" name="category_id" value="${type.categoryId}" ${param.category_id eq type.categoryId ? 'checked' : ' '  }>${type.categoryName}</label>
 			</c:forEach>
 			</div>
 		</div>
