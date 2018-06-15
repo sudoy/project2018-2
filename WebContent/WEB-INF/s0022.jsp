@@ -118,7 +118,7 @@
 				<a href="S0023.html?id=${s22.sale_id}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 編　集</span></a>
 				<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> 削　除</span></button>
 			</c:if>
-			<a href="S0021.html" class="btn btn-default">キャンセル</a><!-- キャンセルはOK -->
+			<a href="S0021.html" class="btn btn-default">キャンセル</a>
 
 		<!--
 		<button type="button" class="btn btn-default">Default</button>

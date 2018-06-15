@@ -52,7 +52,7 @@ public class S0023Servlet extends HttpServlet {
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "select category_id,category_name, active_flg from categories";
+			sql = "select category_id,category_name, active_flg from categories where active_flg = 1";
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
 

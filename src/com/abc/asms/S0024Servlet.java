@@ -93,7 +93,7 @@ public class S0024Servlet extends HttpServlet {
 				con = DBUtils.getConnection();
 
 				//SQL
-				sql = "select category_id,category_name, active_flg from categories";
+				sql = "select category_id,category_name, active_flg from categories where active_flg = 1";
 				//SELECT命令の準備
 				ps = con.prepareStatement(sql);
 
@@ -124,59 +124,15 @@ public class S0024Servlet extends HttpServlet {
 				}
 			}
 
-//			try {
-//				con = DBUtils.getConnection();
-//
-//				//アカウントカウントテーブル存在確認チェック
-//				sql = "SELECT * FROM accounts WHERE account_id = ?;";
-//				ps = con.prepareStatement(sql);
-//
-//				ps.setString(1, account_id);
-//
-//				ps.executeQuery();
-//
-//			} catch (Exception e) {
-//				errors.add("アカウントテーブルに存在しません。");
-//
-//			} finally {
-//				try {
-//					DBUtils.close(ps);
-//					DBUtils.close(ps);
-//				} catch (SQLException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//
-//			//商品テーブル存在確認チェック
-//			try {
-//				con = DBUtils.getConnection();
-//
-//				sql = "SELECT * FROM categories WHERE category_id = ? and active_flg = 1;";
-//				ps = con.prepareStatement(sql);
-//
-//				ps.setString(1, category_id);
-//
-//				ps.executeQuery();
-//
-//			} catch (Exception e) {
-//				errors.add("商品テーブルに存在しません。");
-//
-//			} finally {
-//				try {
-//					DBUtils.close(con);
-//					DBUtils.close(ps);
-//				} catch (SQLException e) {
-//					e.printStackTrace();
-//				}
-//			}
-
 			try {
 
 				con = DBUtils.getConnection();
 
-				sql = "select account_id,name,mail,password,authority  from accounts";
+				sql = "select account_id,name,mail,password,authority  from accounts where account_id = ?";
 				//SELECT命令の準備
 				ps = con.prepareStatement(sql);
+
+				ps.setString(1, account_id);
 				//SELECT命令を実行
 				rs = ps.executeQuery();
 
@@ -207,6 +163,8 @@ public class S0024Servlet extends HttpServlet {
 			}
 			req.getServletContext().getRequestDispatcher("/WEB-INF/s0024.jsp").forward(req, resp);
 
+
+
 		} else if (req.getParameter("update") != null) {
 			//ログインチェック
 			if (!HtmlUtils.checkLogin(req, resp)) {
@@ -234,7 +192,6 @@ public class S0024Servlet extends HttpServlet {
 
 			try {
 				con = DBUtils.getConnection();
-				//仮実装 ラジオボタンに対応していない。
 				String sql = ""
 						+ "update sales set "
 						+ "sale_date = ?, account_id = ?, category_id = ?, trade_name = ?, "
