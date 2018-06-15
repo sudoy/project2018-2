@@ -53,70 +53,75 @@
 		<h1>売上を登録してよろしいですか？</h1>
 
 	<form class="form-horizontal" action="S0011.html" method="post">
-	<input type="hidden" name="saleId" value="${saleId}">
+		<input type="hidden" name="saleId" value="${saleId}">
 
+		<input type="hidden" name="saleDate" value="${param.saleDate}">
  		<div class="form-group">
 	 		<label for="saleDate" class="col-sm-2 control-label">販売日</label>
-
 			<div class="col-sm-2">
-					<input type="text" class="form-control" name="saleDate" id="saleDate" value="${param.saleDate}">
+				<input type="text" class="form-control" name="saleDate" id="saleDate" value="${param.saleDate}" disabled>
 			</div>
 		</div>
 
-		 <div class="form-group">
-	 			<label for="name" class="col-sm-2 control-label">担当</label>
-	 			<div class="col-sm-5">
-					<select class="form-control" name="accountId" id="accountId">
-						<c:forEach var="account" items="${list2}">
-							<option value="${accountId}" ${account.accountId eq accountId ? 'selected' : ''}>${account.name}</option>
-						</c:forEach>
-					</select>
-			</div>
-		</div>
-
+		<input type="hidden" name="accountId" value="${accountId}">
 		<div class="form-group">
- 			<label for="categoryName" class="col-sm-2 control-label">商品カテゴリー</label>
+	 		<label for="accountId" class="col-sm-2 control-label">担当</label>
+	 		<div class="col-sm-5">
+				<select class="form-control" name="accountId" id="accountId" disabled>
+					<c:forEach var="account" items="${list2}">
+						<option value="${accountId}" ${account.accountId eq accountId ? 'selected' : ''}>${account.name}</option>
+					</c:forEach>
+				</select>
+			</div>
+		</div>
+
+		<input type="hidden" name="categoryId" value="${categoryId}">
+		<div class="form-group">
+ 			<label for="categoryId" class="col-sm-2 control-label">商品カテゴリー</label>
  			<div class="col-sm-5">
  				<c:forEach var="category" items="${list}">
-					<label class="radio-inline"><input type="radio"  name="categoryId" value="${categoryId}" ${category.categoryId eq categoryId ? 'checked' : ''}>${category.categoryName}</label>
+					<label class="radio-inline"><input type="radio"  name="categoryId" value="${categoryId}" ${category.categoryId eq categoryId ? 'checked' : ''} disabled>${category.categoryName}</label>
 				</c:forEach>
 			</div>
 		</div>
 
+		<input type="hidden" name="tradeName" value="${param.tradeName}">
 		<div class="form-group">
- 			<label for="name" class="col-sm-2 control-label">商品名</label>
+ 			<label for="tradeName" class="col-sm-2 control-label">商品名</label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" name="tradeName" id="tradeName" value="${param.tradeName}">
+				<input type="text" class="form-control" name="tradeName" id="tradeName" value="${param.tradeName}" disabled>
 			</div>
 		</div>
 
+		<input type="hidden" name="unitPrice" value="${param.unitPrice}">
 		<div class="form-group">
-
- 			<label for="price" class="col-sm-2 control-label">単価</label>
-
+ 			<label for="unitPrice" class="col-sm-2 control-label">単価</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="unitPrice" id="unitPrice" value="${param.unitPrice}">
+				<input type="text" style="text-align: right" class="form-control" name="unitPrice" id="unitPrice" value="${HtmlUtils.formatComma(param.unitPrice)}" disabled >
 			</div>
 		</div>
 
+		<input type="hidden" name="saleNumber" value="${param.saleNumber}">
 		<div class="form-group">
  			<label for="number" class="col-sm-2 control-label">個数</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="saleNumber" id="saleNumber" value="${param.saleNumber}">
+				<input type="text" style="text-align: right" class="form-control" name="saleNumber" id="saleNumber" value="${HtmlUtils.formatComma(param.saleNumber)}" disabled>
 			</div>
 		</div>
 
+		<input type="hidden" name="subtotal" value="${param.unitPrice * param.saleNumber}">
 		<div class="form-group">
  			<label for="subtotal" class="col-sm-2 control-label">小計</label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" name="subtotal" id="subtotal" value="${param.unitPrice * param.saleNumber}">
+				<input type="text" style="text-align: right" class="form-control" name="subtotal" id="subtotal" value="${HtmlUtils.formatComma(param.unitPrice * param.saleNumber)}" disabled>
 			</div>
 		</div>
 
+		<input type="hidden" name="note" value="${param.note}">
 		<div class="form-group">
  			<label for="note" class="col-sm-2 control-label">備考</label>
  			<div class="col-sm-5">
-				<textarea class="form-control" name="note" id="note" rows="5">${param.note}</textarea>
+				<textarea class="form-control" name="note" id="note" rows="5" disabled>${param.note}</textarea>
 			</div>
 		</div>
 

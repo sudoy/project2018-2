@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@ page import="com.abc.asms.utils.AuthorityUtils"%>
+<%@page import="com.abc.asms.utils.HtmlUtils" %>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -48,9 +49,11 @@
 
 	<div class="container">
 
-<jsp:include page="_errors.jsp" />
-
 		<h1>アカウント登録</h1>
+
+		<jsp:include page="_errors.jsp" />
+		<jsp:include page="_successes.jsp" />
+
 
 	<form class="form-horizontal" action="S0030.html" method="post">
 
@@ -62,7 +65,7 @@
 		</div>
 
 		<div class="form-group">
- 			<label for="name" class="col-sm-3 control-label">メールアドレス <span class="badge">必須</span></label>
+ 			<label for="mail" class="col-sm-3 control-label">メールアドレス <span class="badge">必須</span></label>
  			<div class="col-sm-5">
 				<input type="text" class="form-control" name="mail" placeholder="メールアドレス" value="${param.mail}">
 			</div>
@@ -71,7 +74,7 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">パスワード<span class="badge">必須</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" name="password" placeholder="パスワード" value="" >
+				<input type="text" class="form-control" name="password" placeholder="パスワード" value="">
 			</div>
 
 		</div>

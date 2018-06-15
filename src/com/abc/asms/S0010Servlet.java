@@ -196,6 +196,7 @@ public class S0010Servlet extends HttpServlet {
 			return;
 		}
 
+		//アカウントカウントテーブル存在確認チェック
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -204,42 +205,62 @@ public class S0010Servlet extends HttpServlet {
 		try{
 			con = DBUtils.getConnection();
 
-			//アカウントカウントテーブル存在確認チェック
 			try {
 				sql = "SELECT * FROM accounts WHERE account_id = ?;";
 				ps = con.prepareStatement(sql);
 
 				ps.setString(1, "accountId");
 
-				ps.executeQuery();
-			}catch(Exception e) {
-				errors.add("アカウントテーブルに存在しません。");
-			}
-			try{
-				DBUtils.close(ps);
-			}catch(Exception e){}
+				rs = ps.executeQuery();
 
+				//sqlが実行出来なかったらエラー　→　s0010に返す
+				if(!rs.next()) {
+					errors.add("アカウントテーブルに存在しません。");
+					req.setAttribute("errors", errors);
+					getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
+						.forward(req, resp);
+					return;
+				}
+			}catch(Exception e){
+				throw new ServletException(e);
+			}finally{
+				try{
+					DBUtils.close(rs);
+					DBUtils.close(ps);
+					DBUtils.close(con);
+				}catch(Exception e){
+				}
+			}
 
 			//商品テーブル存在確認チェック
 			try {
-				sql = "SELECT * FROM categories WHERE category_id = ?;";
+				con = DBUtils.getConnection();
+
+				sql = "SELECT * FROM categories WHERE category_id = ? AND active_flg = 1;";
+
 				ps = con.prepareStatement(sql);
 
 				ps.setString(1, "categoryId");
 
-				ps.executeQuery();
-			}catch(Exception e) {
-				errors.add("商品テーブルに存在しません。");
-			}
-			try{
-				DBUtils.close(ps);
-			}catch(Exception e){}
+				rs = ps.executeQuery();
 
-			if(errors.size() > 0) {
-				req.setAttribute("errors", errors);
-				getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
-					.forward(req, resp);
-				return;
+				//sqlが実行出来なかったらエラー　→　s0010に返す
+				if(!rs.next()) {
+					errors.add("商品テーブルに存在しません。");
+					req.setAttribute("errors", errors);
+					getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
+						.forward(req, resp);
+					return;
+				}
+			}catch(Exception e){
+				throw new ServletException(e);
+			}finally{
+				try{
+					DBUtils.close(rs);
+					DBUtils.close(ps);
+					DBUtils.close(con);
+				}catch(Exception e){
+				}
 			}
 
 			//SQL
@@ -372,7 +393,7 @@ public class S0010Servlet extends HttpServlet {
 		if(!unitPrice.equals("")) {
 		    try {
 		        int i = Integer.parseInt(unitPrice);
-				if(i < 0) {
+				if(i <= 0) {
 					throw new NumberFormatException();
 				}
 		    } catch (NumberFormatException e) {
@@ -394,7 +415,7 @@ public class S0010Servlet extends HttpServlet {
 		if(!saleNumber.equals("")) {
 		    try {
 		        int i = Integer.parseInt(unitPrice);
-				if(i < 0) {
+				if(i <= 0) {
 					throw new NumberFormatException();
 				}
 		    } catch (NumberFormatException e) {

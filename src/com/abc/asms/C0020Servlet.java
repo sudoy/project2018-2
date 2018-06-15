@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.abc.asms.beans.Sales;
+import com.abc.asms.beans.C0020;
 import com.abc.asms.utils.DBUtils;
 
 @WebServlet("/C0020.html")
@@ -26,16 +26,10 @@ public class C0020Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = req.getSession();
-		Connection con = null;
-		PreparedStatement ps = null;
-		String sql = null;
-		ResultSet rs = null;
-		
+
 //		Accounts accounts = (Accounts)session.getAttribute("accounts");
 //		String name = accounts.getName();
-		
-		
-		
+
 		// localDateから現在時刻を抽出するか否かの判定
 		LocalDate ld = null;
 
@@ -57,7 +51,7 @@ public class C0020Servlet extends HttpServlet {
 			ld = LocalDate.parse(check + "01日", DateTimeFormatter.ofPattern("yyyy年MM月dd日"));
 		} else {
 			ld = LocalDate.now();
-		};
+		}
 
 		// 表示月とその月初末の変数宣言
 		String today = null;
@@ -93,52 +87,48 @@ public class C0020Servlet extends HttpServlet {
 			last = ld.withDayOfMonth(1).plusMonths(1).minusDays(1);
 		};
 
-		try{
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
 
+		try{
 			con = DBUtils.getConnection();
 
-			//SQL
 			sql = "select * from accounts a \r\n" +
 					"left join sales s on s.account_id = a.account_id\r\n" +
 					"left join categories c on c.category_id = s.category_id where s.sale_date between ? and ? order by s.sale_date;";
 
-			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
-			
+
 			ps.setString(1, first.toString());
 			ps.setString(2, last.toString());
 
-
-			//SELECT命令を実行
 			rs = ps.executeQuery();
 
 			//ResultSetをJavaBeansに変換
-			List<Sales> list = new ArrayList<>();
+			List<C0020> list = new ArrayList<>();
 
 			while(rs.next()) {
-				Sales sales = new Sales(rs.getInt("sale_id"),
+				C0020 c0020 = new C0020(rs.getInt("sale_id"),
 							rs.getDate("sale_date"),
-							rs.getInt("category_id"),
+							rs.getString("category_name"),
 							rs.getString("trade_name"),
 							rs.getInt("unit_price"),
 							rs.getInt("sale_number")
 						);
 
-				list.add(sales);
+				list.add(c0020);
+
 			}
 
 			//JavaBeansをJSPへ渡す
 			session.setAttribute("list", list);
 			session.setAttribute("today", today);
 
-
-			//foward→c0020.jsp
-			getServletContext().getRequestDispatcher("/WEB-INF/c0020.jsp")
-				.forward(req, resp);
 		}catch(Exception e){
 			throw new ServletException(e);
 		}finally{
-			//終了処理
 			try{
 				DBUtils.close(rs);
 				DBUtils.close(ps);
@@ -146,6 +136,10 @@ public class C0020Servlet extends HttpServlet {
 			}catch(Exception e){
 			}
 		}
+
+		//foward→c0020.jsp
+		getServletContext().getRequestDispatcher("/WEB-INF/c0020.jsp")
+			.forward(req, resp);
 
 	}
 }

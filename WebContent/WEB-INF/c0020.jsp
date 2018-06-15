@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page import="com.abc.asms.utils.HtmlUtils" %>
+
 <c:set var="data" value="${today}" />
 
 <!DOCTYPE html>
@@ -39,7 +41,7 @@
 				<li><a href="S0010.html">売上登録</a></li>
 				<li><a href="S0020.html">売上検索</a></li>
 				<li><a href="S0030.html">アカウント登録</a></li>
-				<li><a href="S0041.html">アカウント検索</a></li>
+				<li><a href="S0040.html">アカウント検索</a></li>
 
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -50,9 +52,9 @@
 </nav>
 
 	<div class="container">
-	
+
 	<jsp:include page="_errors.jsp" />
-	
+
 
 		<h1 class="text-center">ダッシュボード</h1>
 
@@ -135,15 +137,15 @@
 							<th>小計</th>
 						</tr>
 					</thead>
-					<c:forEach var="sales" items="${list}">
+					<c:forEach var="c0020" items="${list}">
 						<tr>
-							<td>${sales.saleId}</td>
-							<td>${sales.saleDate}</td>
-							<td>${sales.categoryId}</td>
-							<td>${sales.tradeName}</td>
-							<td>${sales.unitPrice}</td>
-							<td>${sales.saleNumber}</td>
-							<td>${sales.unitPrice * sales.saleNumber}</td>
+							<td>${c0020.saleId}</td>
+							<td>${c0020.saleDate}</td>
+							<td>${c0020.categoryName}</td>
+							<td>${c0020.tradeName}</td>
+							<td>${HtmlUtils.formatComma(c0020.unitPrice)}</td>
+							<td>${HtmlUtils.formatComma(c0020.saleNumber)}</td>
+							<td>${HtmlUtils.formatComma(c0020.unitPrice * c0020.saleNumber)}</td>
 						</tr>
 					</c:forEach>
 

@@ -3,14 +3,19 @@ package com.abc.asms;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
+import com.abc.asms.utils.HtmlUtils;
 
 @WebServlet("/S0031.html")
 public class S0031Servlet extends HttpServlet {
@@ -18,8 +23,19 @@ public class S0031Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
+		//ログインチェック
+		if (!HtmlUtils.checkLogin(req, resp)) {
+			return;
+		}
+
+		//権限チェック
+		if(!AuthorityUtils.checkSalesAuthority(req, resp)) {
+			return;
+		}
+
 		getServletContext().getRequestDispatcher("/WEB-INF/s0031.jsp")
 			.forward(req, resp);
+
 	}
 
 	@Override
@@ -28,6 +44,9 @@ public class S0031Servlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 
+		HttpSession session = req.getSession();
+
+		String accountId = req.getParameter("accountId");
 		String name = req.getParameter("name");
 		String mail = req.getParameter("mail");
 		String password = req.getParameter("password");
@@ -47,6 +66,10 @@ public class S0031Servlet extends HttpServlet {
 			authority = "10";
 		}
 
+		List<String> successes = new ArrayList<>();
+		successes.add("No" + accountId + "のアカウントを登録しました。");
+		session.setAttribute("successes", successes);
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -54,19 +77,16 @@ public class S0031Servlet extends HttpServlet {
 		try {
 			con = DBUtils.getConnection();
 
+			//INSERT文（パスワードはMD5でハッシュ化）
 			sql = "INSERT INTO accounts(name, mail, password, authority)"
 					+ "VALUES(?,?,MD5(?),?);";
 
-			//INSERT命令の準備
 			ps = con.prepareStatement(sql);
 
-			//INSERT命令にポストデータの内容をセット
 			ps.setString(1, name);
 			ps.setString(2, mail);
 			ps.setString(3, password);
 			ps.setString(4, authority);
-
-			System.out.println(ps);
 
 			ps.executeUpdate();
 
@@ -79,6 +99,8 @@ public class S0031Servlet extends HttpServlet {
 				DBUtils.close(con);
 			}catch(Exception e){}
 		}
+
 		resp.sendRedirect("S0030.html");
+
 	}
 }

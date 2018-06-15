@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@ page import="com.abc.asms.utils.AuthorityUtils"%>
+<%@page import="com.abc.asms.utils.HtmlUtils" %>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -55,45 +56,45 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">氏名 <span class="badge">必須</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" name="name"  value="${param.name}">
+				<input type="text" class="form-control" name="name"  value="${param.name}" readonly>
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">メールアドレス <span class="badge">必須</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" name="mail" value="${param.mail}">
+				<input type="text" class="form-control" name="mail" value="${param.mail}" readonly>
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">パスワード<span class="badge">必須</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" name="password" value="${param.password}">
+				<input type="text" class="form-control" name="password" value="${param.password}" readonly>
 			</div>
 
 		</div>
+
 		<div class="form-group">
  			<label for="name" class="col-sm-3 control-label">パスワード（確認）<span class="badge">必須</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" name="password2" value="${param.password2}">
+				<input type="text" class="form-control" name="password2" value="${param.password2}" readonly>
 			</div>
 		</div>
-
 
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">売上登録権限 <span class="badge">必須</span></label>
 				<div class="col-sm-5">
-					<label><input type="radio" name="authority1" value="0" ${AuthorityUtils.checkAuthoritya(param.authority1)}>権限なし</label>
-					<label><input type="radio" name="authority1" value="1" ${AuthorityUtils.checkAuthorityb(param.authority1)}>権限あり</label>
+					<label><input type="radio" name="authority1" value="0" ${AuthorityUtils.checkAuthoritya(param.authority1)} readonly onclick="return false;">権限なし</label>
+					<label><input type="radio" name="authority1" value="1" ${AuthorityUtils.checkAuthorityb(param.authority1)} readonly onclick="return false;">権限あり</label>
 				</div>
 		</div>
 
 		<div class="form-group">
 			<label for="name" class="col-sm-3 control-label">アカウント登録権限 <span class="badge">必須</span></label>
 				<div class="col-sm-5">
-					<label><input type="radio" name="authority2" value="0" ${AuthorityUtils.checkAuthoritya(param.authority2)}>権限なし</label>
-					<label><input type="radio" name="authority2" value="1" ${AuthorityUtils.checkAuthorityb(param.authority2)}>権限あり</label>
+					<label><input type="radio" name="authority2" value="0" ${AuthorityUtils.checkAuthoritya(param.authority2)} readonly onclick="return false;">権限なし</label>
+					<label><input type="radio" name="authority2" value="1" ${AuthorityUtils.checkAuthorityb(param.authority2)} readonly onclick="return false;">権限あり</label>
 				</div>
 		</div>
 

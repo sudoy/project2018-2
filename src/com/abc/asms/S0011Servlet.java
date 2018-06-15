@@ -3,12 +3,15 @@ package com.abc.asms;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
@@ -40,7 +43,9 @@ public class S0011Servlet extends HttpServlet {
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
-//		String saleId = req.getParameter("saleId");
+		HttpSession session = req.getSession();
+
+		String saleId = req.getParameter("saleId");
 		String saleDate = req.getParameter("saleDate");
 		String accountId = req.getParameter("accountId");
 		String categoryId = req.getParameter("categoryId");
@@ -49,9 +54,9 @@ public class S0011Servlet extends HttpServlet {
 		String saleNumber = req.getParameter("saleNumber");
 		String note = req.getParameter("note");
 
-//		List<String> successes = new ArrayList<>();
-//		successes.add("No" + saleId + "の売り上げを登録しました。");
-//		req.setAttribute("successes", successes);
+		List<String> successes = new ArrayList<>();
+		successes.add("No" + saleId + "の売り上げを登録しました。");
+		session.setAttribute("successes", successes);
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -74,8 +79,6 @@ public class S0011Servlet extends HttpServlet {
 			ps.setString(5, unitPrice);
 			ps.setString(6, saleNumber);
 			ps.setString(7, note);
-
-			System.out.println(ps);
 
 			ps.executeUpdate();
 

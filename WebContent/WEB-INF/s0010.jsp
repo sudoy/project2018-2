@@ -51,6 +51,7 @@
 
 		<h1>売上登録</h1>
 
+		<jsp:include page="_successes.jsp" />
 		<jsp:include page="_errors.jsp" />
 
 	<form class="form-horizontal" action="S0010.html" method="post">
@@ -62,7 +63,7 @@
 		</div>
 
 		 <div class="form-group">
-			<label for="name" class="col-sm-2 control-label">担当 <span class="badge">必須</span></label>
+			<label for="accountId" class="col-sm-2 control-label">担当 <span class="badge">必須</span></label>
 	 		<div class="col-sm-5">
 				<select class="form-control" name="accountId" id="accountId">
 					<option value="">選択してください</option>
@@ -94,14 +95,14 @@
  			<label for="unitPrice" class="col-sm-2 control-label">単価 <span class="badge">必須</span></label>
 
  			<div class="col-sm-2">
-				<input type="text" class="form-control" id="unitPrice" name="unitPrice" placeholder="単価" value="${param.unitPrice}">
+				<input type="text" style="text-align: right" class="form-control" id="unitPrice" name="unitPrice" placeholder="単価" value="${param.unitPrice}">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="saleNumber" class="col-sm-2 control-label">個数 <span class="badge">必須</span></label>
  			<div class="col-sm-2">
-				<input type="text" class="form-control" id="saleNumber" name="saleNumber" placeholder="個数" value="${param.saleNumber}">
+				<input type="text"  style="text-align: right" class="form-control" id="saleNumber" name="saleNumber" placeholder="個数" value="${param.saleNumber}">
 			</div>
 		</div>
 
