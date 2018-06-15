@@ -15,11 +15,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.abc.asms.beans.Accounts;
-import com.abc.asms.beans.Categories;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
+import com.abc.asms.utils.DBUtils2;
 import com.abc.asms.utils.HtmlUtils;
 
 @WebServlet("/S0010.html")
@@ -38,71 +38,7 @@ public class S0010Servlet extends HttpServlet {
 			return;
 		}
 
-		Connection con = null;
-		PreparedStatement ps = null;
-		String sql = null;
-		ResultSet rs = null;
-
-		try{
-			con = DBUtils.getConnection();
-
-			//SQL
-			sql = "select category_id,category_name, active_flg from categories where active_flg = 1";
-
-			//SELECT命令の準備
-			ps = con.prepareStatement(sql);
-
-			//SELECT命令を実行
-			rs = ps.executeQuery();
-
-			List<Categories> list = new ArrayList<>();
-			while(rs.next()) {
-				Categories category = new Categories(rs.getInt("category_id"),
-											rs.getString("category_name"),
-											rs.getInt("active_flg"));
-				list.add(category);
-			}
-
-			//JavaBeansをJSPへ渡す
-			req.setAttribute("list", list);
-
-			try{
-				DBUtils.close(ps);
-				DBUtils.close(rs);
-			}catch(Exception e){}
-
-			sql = "select account_id,name,mail,password,authority  from accounts";
-
-			//SELECT命令の準備
-			ps = con.prepareStatement(sql);
-
-			//SELECT命令を実行
-			rs = ps.executeQuery();
-
-			List<Accounts> list2 = new ArrayList<>();
-			while(rs.next()) {
-				Accounts account = new Accounts(rs.getInt("account_id"),
-										rs.getString("name"),
-										rs.getString("mail"),
-										rs.getString("password"),
-										rs.getInt("authority"));
-				list2.add(account);
-			}
-
-			//JavaBeansをJSPへ渡す
-			req.setAttribute("list2", list2);
-
-		}catch(Exception e){
-			throw new ServletException(e);
-		}finally{
-			//終了処理
-			try{
-				DBUtils.close(rs);
-				DBUtils.close(ps);
-				DBUtils.close(con);
-			}catch(Exception e){
-			}
-		}
+		DBUtils2.getConnection2(req, resp);
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
 			.forward(req, resp);
@@ -114,6 +50,8 @@ public class S0010Servlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 
+		HttpSession session = req.getSession();
+
 		String saleDate = req.getParameter("saleDate");
 		String accountId = req.getParameter("accountId");
 		String categoryId = req.getParameter("categoryId");
@@ -122,74 +60,12 @@ public class S0010Servlet extends HttpServlet {
 		String saleNumber = req.getParameter("saleNumber");
 		String note = req.getParameter("note");
 
-		List<String> errors =  validate(saleDate, accountId, categoryId, tradeName, unitPrice, saleNumber, note);
+		List<String> errors =  validate(saleDate, accountId, categoryId,
+				tradeName, unitPrice, saleNumber, note);
+
 		if(errors.size() > 0) {
-			Connection con = null;
-			PreparedStatement ps = null;
-			String sql = null;
-			ResultSet rs = null;
+			DBUtils2.getConnection2(req, resp);
 
-			try{
-				con = DBUtils.getConnection();
-
-				//SQL
-				sql = "select category_id,category_name, active_flg from categories where active_flg = 1";
-
-				//SELECT命令の準備
-				ps = con.prepareStatement(sql);
-
-				//SELECT命令を実行
-				rs = ps.executeQuery();
-
-				List<Categories> list = new ArrayList<>();
-				while(rs.next()) {
-					Categories category = new Categories(rs.getInt("category_id"),
-							rs.getString("category_name"),
-							rs.getInt("active_flg"));
-					list.add(category);
-				}
-
-				//JavaBeansをJSPへ渡す
-				req.setAttribute("list", list);
-
-				try{
-					DBUtils.close(ps);
-					DBUtils.close(rs);
-				}catch(Exception e){}
-
-				sql = "select account_id,name,mail,password,authority  from accounts";
-
-				//SELECT命令の準備
-				ps = con.prepareStatement(sql);
-
-				//SELECT命令を実行
-				rs = ps.executeQuery();
-
-				List<Accounts> list2 = new ArrayList<>();
-				while(rs.next()) {
-					Accounts account = new Accounts(rs.getInt("account_id"),
-							rs.getString("name"),
-							rs.getString("mail"),
-							rs.getString("password"),
-							rs.getInt("authority"));
-
-					list2.add(account);
-				}
-
-				//JavaBeansをJSPへ渡す
-				req.setAttribute("list2", list2);
-
-			}catch(Exception e){
-				throw new ServletException(e);
-			}finally{
-				//終了処理
-				try{
-					DBUtils.close(rs);
-					DBUtils.close(ps);
-					DBUtils.close(con);
-				}catch(Exception e){
-				}
-			}
 			req.setAttribute("errors", errors);
 			getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
 				.forward(req, resp);
@@ -205,18 +81,22 @@ public class S0010Servlet extends HttpServlet {
 		try{
 			con = DBUtils.getConnection();
 
+			DBUtils2.getConnection2(req, resp);
+
 			try {
 				sql = "SELECT * FROM accounts WHERE account_id = ?;";
 				ps = con.prepareStatement(sql);
 
-				ps.setString(1, "accountId");
+				ps.setString(1, accountId);
 
 				rs = ps.executeQuery();
 
 				//sqlが実行出来なかったらエラー　→　s0010に返す
 				if(!rs.next()) {
+					DBUtils2.getConnection2(req, resp);
+
 					errors.add("アカウントテーブルに存在しません。");
-					req.setAttribute("errors", errors);
+					session.setAttribute("errors", errors);
 					getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
 						.forward(req, resp);
 					return;
@@ -240,12 +120,14 @@ public class S0010Servlet extends HttpServlet {
 
 				ps = con.prepareStatement(sql);
 
-				ps.setString(1, "categoryId");
+				ps.setString(1, categoryId);
 
 				rs = ps.executeQuery();
 
 				//sqlが実行出来なかったらエラー　→　s0010に返す
 				if(!rs.next()) {
+					DBUtils2.getConnection2(req, resp);
+
 					errors.add("商品テーブルに存在しません。");
 					req.setAttribute("errors", errors);
 					getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
@@ -263,60 +145,7 @@ public class S0010Servlet extends HttpServlet {
 				}
 			}
 
-			//SQL
-			sql = "select category_id,category_name, active_flg from categories where active_flg = 1";
-
-			//SELECT命令の準備
-			ps = con.prepareStatement(sql);
-
-			//SELECT命令を実行
-			rs = ps.executeQuery();
-
-			List<Categories> list = new ArrayList<>();
-			while(rs.next()) {
-				Categories category = new Categories(rs.getInt("category_id"),
-						rs.getString("category_name"),
-						rs.getInt("active_flg"));
-				list.add(category);
-			}
-
-			//JavaBeansをJSPへ渡す
-			req.setAttribute("list", list);
-
-			try{
-				DBUtils.close(ps);
-				DBUtils.close(rs);
-			}catch(Exception e){}
-
-			sql = "select account_id,name,mail,password,authority  from accounts";
-
-			//SELECT命令の準備
-			ps = con.prepareStatement(sql);
-
-			//SELECT命令を実行
-			rs = ps.executeQuery();
-
-			List<Accounts> list2 = new ArrayList<>();
-			while(rs.next()) {
-				Accounts account = new Accounts(rs.getInt("account_id"),
-						rs.getString("name"),
-						rs.getString("mail"),
-						rs.getString("password"),
-						rs.getInt("authority"));
-				list2.add(account);
-			}
-
-
-			//JavaBeansをJSPへ渡す
-			req.setAttribute("list2", list2);
-
-			try{
-				DBUtils.close(ps);
-				DBUtils.close(rs);
-			}catch(Exception e){}
-
-
-
+			DBUtils2.getConnection2(req, resp);
 		}catch(Exception e){
 			throw new ServletException(e);
 		}finally{
@@ -365,7 +194,7 @@ public class S0010Servlet extends HttpServlet {
 		}
 
 		//商品カテゴリーの必須入力
-		if(categoryId.equals("")) {
+		if(categoryId == null) {
 			errors.add("商品カテゴリーが未選択です。");
 		}
 
