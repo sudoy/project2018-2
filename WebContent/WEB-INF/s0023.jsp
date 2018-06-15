@@ -80,7 +80,7 @@
  			<label for="category" class="col-sm-2 control-label">商品カテゴリー <span class="badge">必須</span></label>
  			<div class="col-sm-5">
  				<c:forEach var="type" items="${categories}">
-					<label class="radio-inline"><input type="radio" name="category_id" value="${type.categoryId}">${type.categoryName}</label>
+					<label class="radio-inline"><input type="radio" name="category_id" value="${type.categoryId}" ${type.categoryId.equals(s23.category_id) ? 'checked' : '' }>${type.categoryName}</label>
 				</c:forEach>
 			</div>
 		</div>
