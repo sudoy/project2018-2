@@ -89,8 +89,6 @@ public class S0010Servlet extends HttpServlet {
 
 				ps.setString(1, accountId);
 
-				System.out.println(ps);
-
 				rs = ps.executeQuery();
 
 				//sqlが実行出来なかったらエラー　→　s0010に返す
