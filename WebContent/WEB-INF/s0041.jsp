@@ -66,8 +66,8 @@
 			<c:forEach var="accounts" items="${list}">
 			<tr>
 				<td>
-					<a href="S0042.html?account_id=${accounts.accountId}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 詳細</a>
-					<a href="S0044.html?account_id=${accounts.accountId}" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 削除</a>
+					<a href="S0042.html?account_id=${accounts.accountId}" class="btn btn-primary"><span class="glyphicon glyphicon-ok " aria-hidden="true" ></span> 詳細</a>
+					<a href="S0044.html?account_id=${accounts.accountId}" class="btn btn-dange "><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 削除</a>
 				</td>
 				<td>${accounts.accountId}</td>
 				<td>${accounts.name}</td>

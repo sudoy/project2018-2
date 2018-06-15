@@ -108,6 +108,19 @@ public class HtmlUtils {
 		String str = String.format("%,3d", s.getSaleNumber());
 		return str;
 	}
+	public static boolean checkCategory1(String[] param, String value) {
+		if(param == null) {
+			return true;
+		}
+		for(String s : param) {
+			if(s.equals(value)) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+
 
 	public static boolean checkLogin(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {

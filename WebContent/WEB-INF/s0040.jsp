@@ -48,7 +48,7 @@
 	<div class="container">
 
 		<h1>アカウント検索</h1>
-
+<jsp:include page="_errors.jsp" />
 	<form class="form-horizontal" action="S0041.html" method="post">
 
 		<div class="form-group">
@@ -69,8 +69,8 @@
 			<label for="name" class="col-sm-2 control-label">売上登録権限</label>
 				<div class="col-sm-5">
 					<label><input type="radio" name="sauthority" value="all" checked>全て</label>
-					<label><input type="radio" name="sauthority" value="no">権限なし</label>
-					<label><input type="radio" name="sauthority" value="ok">権限あり</label>
+					<label><input type="radio" name="sauthority" value="no" ${param.sauthority eq 'no' ? 'checked' : ''}>権限なし</label>
+					<label><input type="radio" name="sauthority" value="ok" ${param.sauthority eq 'ok' ? 'checked' : ''}>権限あり</label>
 				</div>
 		</div>
 
@@ -78,8 +78,8 @@
 			<label for="name" class="col-sm-2 control-label">アカウント登録権限</label>
 				<div class="col-sm-5">
 					<label><input type="radio" name="aauthority" value="all" checked>全て</label>
-					<label><input type="radio" name="aauthority" value="no">権限なし</label>
-					<label><input type="radio" name="aauthority" value="ok">権限あり</label>
+					<label><input type="radio" name="aauthority" value="no"${param.aauthority eq 'no' ? 'checked' : ''}>権限なし</label>
+					<label><input type="radio" name="aauthority" value="ok"${param.aauthority eq 'ok' ? 'checked' : ''}>権限あり</label>
 				</div>
 		</div>
 
