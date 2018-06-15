@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.abc.asms.utils.HtmlUtils" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -49,6 +50,7 @@
 	<form class="form-horizontal" action="S0025.html?id=${s22.sale_id}" method="post">
 
 	<div class="container">
+	<jsp:include page="_successes.jsp"/>
 
 		<h1>売上詳細表示</h1>
 
@@ -111,11 +113,13 @@
 		</div>
 
 		<div class="col-sm-offset-3">
-<%--<c:if test="${ }">--%>
-			<a href="S0023.html?id=${s22.sale_id}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 編　集</span></a><!--これもOK  -->
-			<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> 削　除</span></button>
+
+			<c:if test="${accounts.authority == '1' || accounts.authority == '11'}">
+				<a href="S0023.html?id=${s22.sale_id}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 編　集</span></a>
+				<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> 削　除</span></button>
+			</c:if>
 			<a href="S0021.html" class="btn btn-default">キャンセル</a><!-- キャンセルはOK -->
-<%--</c:if>--%>
+
 		<!--
 		<button type="button" class="btn btn-default">Default</button>
 

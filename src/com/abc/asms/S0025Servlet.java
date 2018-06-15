@@ -13,11 +13,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.Accounts;
 import com.abc.asms.beans.Categories;
 import com.abc.asms.beans.Detail_beans;
+import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
+import com.abc.asms.utils.HtmlUtils;
 import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0025.html")
@@ -26,65 +29,71 @@ public class S0025Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-	//  削除実行のプログラム
-
-//			if(!Utils.checkLogin(req, resp)) {
-//			return;
-//		} ログインチェック(コピペ)
-
-			req.setCharacterEncoding("utf-8");
-
-//			HttpSession session = req.getSession();
-	//
-			String id = req.getParameter("id");
-	//
-//			List<String> errors = validate(id);
-//			if(errors.size() > 0) {
-//				session.setAttribute("errors", errors);
-//				resp.sendRedirect("index.html");
-//				return;
-//			} エラーチェック（コピペ）
-
-			Connection con = null;
-			PreparedStatement ps = null;
-
-			try {
-				con = DBUtils.getConnection();
-
-				String sql = ""
-							+"delete from sales"
-							+" where sale_id = ?";
-
-				ps = con.prepareStatement(sql);
-				ps.setString(1, id);
-
-				ps.executeUpdate();
-
-//				List<String> successes = new ArrayList<>();
-//				successes.add("削除しました。");
-//				session.setAttribute("successes", successes);
-
-				resp.sendRedirect("S0021.html");
-
-			}catch(Exception e) {
-				e.printStackTrace();
-				throw new ServletException();
-			}finally {
-				try {
-					DBUtils.close(con);
-					DBUtils.close(ps);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-
-			}
+		//ログインチェック
+		if (!HtmlUtils.checkLogin(req, resp)) {
+			return;
 		}
 
+		//権限チェック
+		if (!AuthorityUtils.checkSalesAuthority(req, resp)) {
+			return;
+		}
 
+		req.setCharacterEncoding("utf-8");
+
+		HttpSession session = req.getSession();
+
+		String id = req.getParameter("id");
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DBUtils.getConnection();
+
+			String sql = ""
+					+ "delete from sales"
+					+ " where sale_id = ?";
+
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+
+			ps.executeUpdate();
+
+			List<String> successes = new ArrayList<>();
+			successes.add("No." + id + "の売上を削除しました。");
+			session.setAttribute("successes", successes);
+
+			resp.sendRedirect("S0021.html");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServletException();
+		} finally {
+			try {
+				DBUtils.close(con);
+				DBUtils.close(ps);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+
+		//ログインチェック
+		if (!HtmlUtils.checkLogin(req, resp)) {
+			return;
+		}
+
+		//権限チェック
+		if (!AuthorityUtils.checkSalesAuthority(req, resp)) {
+			return;
+		}
+
 		String id = req.getParameter("id");
 
 		Connection con = null;
@@ -92,7 +101,7 @@ public class S0025Servlet extends HttpServlet {
 		ResultSet rs = null;
 		String sql = null;
 
-		try{
+		try {
 			con = DBUtils.getConnection();
 
 			//SQL
@@ -104,7 +113,7 @@ public class S0025Servlet extends HttpServlet {
 			rs = ps.executeQuery();
 
 			List<Categories> categories = new ArrayList<>();
-			while(rs.next()) {
+			while (rs.next()) {
 				Categories category = new Categories(
 						rs.getInt("category_id"),
 						rs.getString("category_name"),
@@ -117,58 +126,58 @@ public class S0025Servlet extends HttpServlet {
 		} catch (Exception e) {
 			throw new ServletException(e);
 
-		}finally {
-				try {
-					DBUtils.close(con);
-					DBUtils.close(ps);
-					DBUtils.close(rs);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+		} finally {
+			try {
+				DBUtils.close(con);
+				DBUtils.close(ps);
+				DBUtils.close(rs);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
-		try{
+		try {
 
-		con = DBUtils.getConnection();
+			con = DBUtils.getConnection();
 
-		sql = "select account_id,name,mail,password,authority  from accounts";
-		//SELECT命令の準備
-		ps = con.prepareStatement(sql);
-		//SELECT命令を実行
-		rs = ps.executeQuery();
-		List<Accounts> accounts = new ArrayList<>();
-		while(rs.next()) {
-			Accounts account = new Accounts(
-					rs.getInt("account_id"),
-					rs.getString("name"),
-					rs.getString("mail"),
-					rs.getString("password"),
-					rs.getInt("authority"));
+			sql = "select account_id,name,mail,password,authority  from accounts";
+			//SELECT命令の準備
+			ps = con.prepareStatement(sql);
+			//SELECT命令を実行
+			rs = ps.executeQuery();
+			List<Accounts> accounts = new ArrayList<>();
+			while (rs.next()) {
+				Accounts account = new Accounts(
+						rs.getInt("account_id"),
+						rs.getString("name"),
+						rs.getString("mail"),
+						rs.getString("password"),
+						rs.getInt("authority"));
 
-			accounts.add(account);
-		}
+				accounts.add(account);
+			}
 			req.setAttribute("accounts", accounts);
 
 		} catch (Exception e) {
 			throw new ServletException(e);
 
-		}finally {
-				try {
-					DBUtils.close(con);
-					DBUtils.close(ps);
-					DBUtils.close(rs);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+		} finally {
+			try {
+				DBUtils.close(con);
+				DBUtils.close(ps);
+				DBUtils.close(rs);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		try {
 			con = DBUtils.getConnection();
 
 			sql = "select sale_id, sale_date, name,"
-					+" category_id, a.account_id,"
-					+" trade_name, unit_price,sale_number, unit_price * sale_number as sum,"
-					+" note from sales s JOIN accounts a ON s.account_id = a.account_id"
-					+" where sale_id = ?";
+					+ " category_id, a.account_id,"
+					+ " trade_name, unit_price,sale_number, unit_price * sale_number as sum,"
+					+ " note from sales s JOIN accounts a ON s.account_id = a.account_id"
+					+ " where sale_id = ?";
 
 			ps = con.prepareStatement(sql);
 
@@ -176,11 +185,11 @@ public class S0025Servlet extends HttpServlet {
 
 			rs = ps.executeQuery();
 
-			if(!rs.next()) {
+			if (!rs.next()) {
 				throw new Exception();
 			}
 
-//			System.out.println(rs.getDate("sale_date"));
+			//			System.out.println(rs.getDate("sale_date"));
 
 			Detail_beans s25 = new Detail_beans(
 					Utils.date2LocalDate(rs.getDate("sale_date")),
@@ -192,9 +201,7 @@ public class S0025Servlet extends HttpServlet {
 					rs.getInt("sale_number"),
 					rs.getInt("sum"),
 					rs.getString("note"),
-					rs.getInt("sale_id")
-				);
-
+					rs.getInt("sale_id"));
 
 			req.setAttribute("s25", s25);
 
@@ -202,7 +209,7 @@ public class S0025Servlet extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				DBUtils.close(con);
 				DBUtils.close(ps);

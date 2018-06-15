@@ -63,16 +63,18 @@
 
 			</tr>
 
-			<c:forEach var="accounts" items="${list}">
+			<c:forEach var="account" items="${list}">
 			<tr>
 				<td>
-					<a href="S0042.html?account_id=${accounts.accountId}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 詳細</a>
-					<a href="S0044.html?account_id=${accounts.accountId}" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 削除</a>
+				<c:if test="${accounts.authority == '10' || accounts.authority == '11'}">
+					<a href="S0042.html?account_id=${account.accountId}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 詳細</a>
+					<a href="S0044.html?account_id=${account.accountId}" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 削除</a>
+				</c:if>
 				</td>
-				<td>${accounts.accountId}</td>
-				<td>${accounts.name}</td>
-				<td>${accounts.mail}</td>
-				<td>${AuthorityUtils.conversionAuthority(accounts.authority)}</td>
+				<td>${account.accountId}</td>
+				<td>${account.name}</td>
+				<td>${account.mail}</td>
+				<td>${AuthorityUtils.conversionAuthority(account.authority)}</td>
 			</tr>
 			</c:forEach>
 

@@ -1,5 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.abc.asms.utils.HtmlUtils" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
  <c:set var="date" value="${today}" />
 <!DOCTYPE html>
 <html lang="ja">
@@ -83,12 +85,14 @@
 				</div>
 		 </div>
 
+
+
 		<div class="form-group">
  			<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
  			<div class="col-sm-5">
- 			<c:forEach var="project2" items="${list1}">
+ 			<c:forEach  var="project2" items="${list1}">
 	 			<label class="checkbox-inline" ><input type="checkbox" name="categoryName"  class="custom-control-input category"
-	 			 value="${project2.categoryName}"${param.categoryName eq project2.categoryName  ? 'checked' : ''}>${project2.categoryName}</label>
+	 			 value="${project2.categoryName}"${HtmlUtils.checkCategory1(paramValues.categoryName, project2.categoryName) ? 'checked' : ''}>${project2.categoryName}</label>
 			</c:forEach>
 			</div>
 		</div>

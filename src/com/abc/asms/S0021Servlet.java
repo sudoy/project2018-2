@@ -161,6 +161,9 @@ public class S0021Servlet extends HttpServlet {
 				sql += "";
 			}
 			//カテゴリー検索
+			if(categoryName == null) {
+				sql += "";
+			}
 			sql += "and category_name in(";
 			for(int i = 0; i < categoryName.length; i++) {
 				if(i != categoryName.length-1) {
@@ -169,6 +172,8 @@ public class S0021Servlet extends HttpServlet {
 					sql += "'"+ categoryName[i] +"'"+")";
 				}
 			}
+			//id降順
+			sql += "order by sale_id";
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
