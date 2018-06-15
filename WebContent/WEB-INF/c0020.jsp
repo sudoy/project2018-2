@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="data" value="${today}" />
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -52,7 +54,41 @@
 	<jsp:include page="_errors.jsp" />
 	
 
-		<h1>ダッシュボード</h1>
+		<h1 class="text-center">ダッシュボード</h1>
+
+		<div class="row">
+			<div class="col-sm-2">
+				<nav class="float-left">
+					<ul class="pagination">
+						<li class="page-item">
+							<a class="page-link" href="C0020.html?before=${data}"><span class="oi oi-chevron-left"></span><span class="oi oi-chevron-left"></span> 前年</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="C0020.html?back=${data}"><span class="oi oi-chevron-left"></span> 前月</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+
+			<div class="col-sm-8 text-center">
+				<h2>${data}</h2>
+			</div>
+
+			<div class="col-sm-2" style="padding-left: 33px;">
+				<nav class="float-right">
+					<ul class="pagination">
+						<li class="page-item">
+							<a class="page-link" href="C0020.html?next=${data}">翌月 <span class="oi oi-chevron-right"></span></a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="C0020.html?after=${data}">翌年 <span class="oi oi-chevron-right"></span><span class="oi oi-chevron-right"></span></a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+
 	<div class="row">
 		<div class="col-sm-4">
 		<div class="panel panel-default">
@@ -84,9 +120,8 @@
 		</div>
 
 		</div>
-
 		<div class="panel panel-default">
-			<div class="panel-heading">今月のイチローさんの売上</div>
+			<div class="panel-heading">今月の${accounts.name}さんの売上</div>
 			<div class="panel-body">
 				<table class="table">
 					<thead>
