@@ -112,7 +112,6 @@ public class C0010Servlet extends HttpServlet {
 			errors.add("パスワードが長すぎます");
 		}
 
-
 		return errors;
 
 	}

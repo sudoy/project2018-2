@@ -25,11 +25,11 @@
 
 		<div class="container">
 
-			<form class="form-signin"  action="#" method="post">
+			<form class="form-signin"  action="C0010.html" method="post">
 				<h2 class="form-signin-heading">物品売上管理システム</h2>
 				<jsp:include page="_successes.jsp" />
 				<jsp:include page="_errors.jsp" />
-				
+
 				<label for="inputEmail" class="sr-only"></label>
 				<input type="text" id="inputEmail" name="mail" class="form-control" placeholder="メールアドレス" value="${param.mail != null ? param.mail : mail}"/>
 				<label for="inputPassword" class="sr-only"></label>
@@ -41,17 +41,11 @@
 				<input type="submit" class="btn btn-primary" style="width:300px;" value="ログイン"><br>
 				<a href="S0045.html" class="btn btn-link">パスワードを忘れた方はこちら</a>
 
-				<!--
-				<button class="btn btn-lg btn-primary" type="submit">ログイン</button>
-				 <button class="btn btn-link" type="submit">パスワードを忘れた方はこちら</button>
-				 -->
 
 			</form>
 
 		</div> <!-- /container -->
 
-
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 		<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 	</body>
 </html>

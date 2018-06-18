@@ -19,10 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.abc.asms.beans.Accounts;
-import com.abc.asms.beans.Categories;
 import com.abc.asms.beans.S0021;
 import com.abc.asms.utils.DBUtils;
+import com.abc.asms.utils.DBUtils2;
 @WebServlet("/S0020.html")
 public class S0020Servlet extends HttpServlet {
 	@Override
@@ -33,71 +32,14 @@ public class S0020Servlet extends HttpServlet {
 //			return;
 //		}
 		req.setCharacterEncoding("UTF-8");
-		Connection con = null;
-		PreparedStatement ps = null;
-		String sql = null;
-		ResultSet rs = null;
 		LocalDateTime d = LocalDateTime.now();
 		String today = DateTimeFormatter.ofPattern("yyyy/MM/dd").format(d);
 		req.setAttribute("today", today);
 
 
-		try{
-			con = DBUtils.getConnection();
-
-			//SQL
-			sql = "select category_id,category_name, active_flg from categories";
-			//SELECT命令の準備
-			ps = con.prepareStatement(sql);
-			//SELECT命令を実行
-			rs = ps.executeQuery();
-			List<Categories> list1 = new ArrayList<>();
-			while(rs.next()) {
-				Categories category = new Categories(rs.getInt("category_id"),
-						rs.getString("category_name"),
-						rs.getInt("active_flg"));
-				list1.add(category);
-			}
-			//JavaBeansをJSPへ渡す
-			req.setAttribute("list1", list1);
-			try{
-				DBUtils.close(ps);
-				DBUtils.close(rs);
-			}catch(Exception e){}
-
-			sql = "select account_id,name,mail,password,authority  from accounts";
-			//SELECT命令の準備
-			ps = con.prepareStatement(sql);
-			//SELECT命令を実行
-			rs = ps.executeQuery();
-			List<Accounts> list2 = new ArrayList<>();
-			while(rs.next()) {
-				Accounts account = new Accounts(rs.getInt("account_id"),
-						rs.getString("name"),
-						rs.getString("mail"),
-						rs.getString("password"),
-						rs.getInt("authority"));
-
-				list2.add(account);
-			}
-			//JavaBeansをJSPへ渡す
-			req.setAttribute("list2", list2);
-
-			//foward
-			getServletContext().getRequestDispatcher("/WEB-INF/s0020.jsp")
-				.forward(req, resp);
-			//resp.sendRedirect("result.html");
-		}catch(Exception e){
-			throw new ServletException(e);
-		}finally{
-			//終了処理
-			try{
-				DBUtils.close(rs);
-				DBUtils.close(ps);
-				DBUtils.close(con);
-			}catch(Exception e){
-			}
-		}
+		DBUtils2.getConnection2(req, resp);
+		getServletContext().getRequestDispatcher("/WEB-INF/s0020.jsp")
+		.forward(req, resp);
 
 	}
 	@Override
@@ -120,56 +62,8 @@ public class S0020Servlet extends HttpServlet {
 		String saleDate2 = req.getParameter("sale_date2");
 		String accountName = req.getParameter("name");
 		String categoryName[] = req.getParameterValues("categoryName");
-		try {
-		//SQL
-		con = DBUtils.getConnection();
-		sql = "select category_id,category_name, active_flg from categories";
-		//SELECT命令の準備
-		ps = con.prepareStatement(sql);
-		//SELECT命令を実行
-		rs = ps.executeQuery();
-		List<Categories> list1 = new ArrayList<>();
-		while(rs.next()) {
-			Categories category = new Categories(rs.getInt("category_id"),
-					rs.getString("category_name"),
-					rs.getInt("active_flg"));
-			list1.add(category);
-		}
-		//JavaBeansをJSPへ渡す
-		req.setAttribute("list1", list1);
-		try{
-			DBUtils.close(ps);
-			DBUtils.close(rs);
-		}catch(Exception e){}
 
-		sql = "select account_id,name,mail,password,authority  from accounts";
-		//SELECT命令の準備
-		ps = con.prepareStatement(sql);
-		//SELECT命令を実行
-		rs = ps.executeQuery();
-		List<Accounts> list2 = new ArrayList<>();
-		while(rs.next()) {
-			Accounts account = new Accounts(rs.getInt("account_id"),
-					rs.getString("name"),
-					rs.getString("mail"),
-					rs.getString("password"),
-					rs.getInt("authority"));
-
-			list2.add(account);
-		}
-		//JavaBeansをJSPへ渡す
-		req.setAttribute("list2", list2);
-		}catch(Exception e){
-			throw new ServletException(e);
-		}finally{
-			//終了処理
-			try{
-				DBUtils.close(rs);
-				DBUtils.close(ps);
-				DBUtils.close(con);
-			}catch(Exception e){
-			}
-		}
+		DBUtils2.getConnection2(req, resp);
 
 		List<String> errors =  validate(saleDate1,saleDate2,req,accountName);
 		if(errors.size() > 0) {
