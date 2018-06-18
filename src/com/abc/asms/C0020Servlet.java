@@ -103,12 +103,15 @@ public class C0020Servlet extends HttpServlet {
 		try{
 			con = DBUtils.getConnection();
 
-			sql = "SELECT SUM(unit_price * sale_number) AS sum1 FROM sales WHERE sale_date between ? and ?;";
+			sql = "SELECT SUM(unit_price * sale_number) AS sum1 "
+					+ "FROM sales "
+					+ "WHERE sale_date between ? and ? and account_id = ?;";
 
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, first.toString());
 			ps.setString(2, last.toString());
+			ps.setString(3, strAccountId);
 
 			rs = ps.executeQuery();
 
@@ -123,12 +126,15 @@ public class C0020Servlet extends HttpServlet {
 				DBUtils.close(rs);
 			}catch(Exception e){}
 
-			sql = "SELECT SUM(unit_price * sale_number) AS sum2 FROM sales WHERE sale_date between ? and ?;";
+			sql = "SELECT SUM(unit_price * sale_number) AS sum2 "
+					+ "FROM sales "
+					+ "WHERE sale_date between ? and ? and account_id = ?;";
 
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, lastMonthFirst.toString());
 			ps.setString(2, lastMonthLast.toString());
+			ps.setString(3, strAccountId);
 
 			rs = ps.executeQuery();
 
@@ -146,7 +152,7 @@ public class C0020Servlet extends HttpServlet {
 			sql = "select * from accounts a "
 					+"left join sales s on s.account_id = a.account_id "
 					+"left join categories c on c.category_id = s.category_id "
-					+ "where s.sale_date between ? and ? and a.account_id = ?"
+					+ "where s.sale_date between ? and ? and a.account_id = ? "
 					+ "order by s.sale_date;";
 
 			ps = con.prepareStatement(sql);

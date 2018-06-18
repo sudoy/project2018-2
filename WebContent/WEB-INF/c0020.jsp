@@ -114,7 +114,7 @@
 			<div class="panel-heading">
 			<h3 class="panel-title">前月比</h3>
 			</div>
-			<div class="panel-body" align="center"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true">120.00%</span></div>
+			<div class="panel-body" align="center"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true">${(thisMonthSum / lastMonthSum) * 100}%</span></div>
 		</div>
 		</div>
 
