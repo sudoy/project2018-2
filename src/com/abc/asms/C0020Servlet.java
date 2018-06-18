@@ -27,9 +27,6 @@ public class C0020Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 
-//		Accounts accounts = (Accounts)session.getAttribute("accounts");
-//		String name = accounts.getName();
-
 		// localDateから現在時刻を抽出するか否かの判定
 		LocalDate ld = null;
 
@@ -87,12 +84,16 @@ public class C0020Servlet extends HttpServlet {
 			last = ld.withDayOfMonth(1).plusMonths(1).minusDays(1);
 		};
 
+		LocalDate lastMonthFirst = ld.withDayOfMonth(1).minusMonths(1);
+		LocalDate lastMonthLast = ld.withDayOfMonth(1).minusDays(1);
+
+		int thisMonthSum = 0;
+		int lastMonthSum = 0;
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
 		ResultSet rs = null;
-
-		int thisMonthSum = 0;
 
 		try{
 			con = DBUtils.getConnection();
@@ -117,9 +118,30 @@ public class C0020Servlet extends HttpServlet {
 				DBUtils.close(rs);
 			}catch(Exception e){}
 
+			sql = "SELECT SUM(unit_price * sale_number) AS sum2 FROM sales WHERE sale_date between ? and ?;";
+
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, lastMonthFirst.toString());
+			ps.setString(2, lastMonthLast.toString());
+
+			rs = ps.executeQuery();
+
+			if(rs.next()) {
+				lastMonthSum = rs.getInt("sum2");
+
+				session.setAttribute("lastMonthSum", lastMonthSum);
+			}
+
+			try{
+				DBUtils.close(ps);
+				DBUtils.close(rs);
+			}catch(Exception e){}
+
 			sql = "select * from accounts a \r\n" +
 					"left join sales s on s.account_id = a.account_id\r\n" +
-					"left join categories c on c.category_id = s.category_id where s.sale_date between ? and ? order by s.sale_date;";
+					"left join categories c on c.category_id = s.category_id where s.sale_date between ? and ?"
+					+ "order by s.sale_date;";
 
 			ps = con.prepareStatement(sql);
 

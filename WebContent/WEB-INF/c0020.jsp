@@ -23,7 +23,6 @@
 	<body>
 <nav class="navbar navbar-default">
 	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#global-nav" aria-expanded="false">
 				<span class="sr-only">Toggle navigation</span>
@@ -34,7 +33,6 @@
 			<a class="navbar-brand" href="C0020.html">物品売上管理システム</a>
 		</div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
@@ -42,7 +40,6 @@
 				<li><a href="S0020.html">売上検索</a></li>
 				<li><a href="S0030.html">アカウント登録</a></li>
 				<li><a href="S0040.html">アカウント検索</a></li>
-
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="C0010.html">ログアウト</a></li>
@@ -97,7 +94,7 @@
 			<div class="panel-heading">
 			<h3 class="panel-title">前月（5月）の売上合計</h3>
 			</div>
-			<div class="panel-body" align="center">1,000,000円</div>
+			<div class="panel-body" align="center">${HtmlUtils.formatComma(lastMonthSum)}</div>
 		</div>
 		</div>
 
@@ -107,7 +104,7 @@
 			<div class="panel-heading">
 			<h3 class="panel-title">今月（6月）の売上合計</h3>
 			</div>
-			<div class="panel-body" align="center">${thisMonthSum}</div>
+			<div class="panel-body" align="center">${HtmlUtils.formatComma(thisMonthSum)}</div>
 		</div>
 		</div>
 
@@ -156,7 +153,7 @@
 							<td>　</td>
 							<td>　</td>
 							<th>合計</th>
-							<td>3,000</td>
+							<td>${HtmlUtils.formatComma(thisMonthSum)}</td>
 						</tr>
 
 				</table>
