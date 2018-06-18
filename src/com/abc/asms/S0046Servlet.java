@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -87,12 +89,32 @@ public class S0046Servlet extends HttpServlet {
 		String user = req.getParameter("user");
 		req.setAttribute("user", user);
 		
-System.out.println(user);
+		// クエリ文字列を追加する元のURL
+		String path = "http://localhost:8080/project2/S0046.html";
+
+		// クエリ文字列を連想配列に入れる
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("user", user);
+
+		// クエリ文字列組み立て・URL との連結
+		// 末尾に余計な文字 ("?" or "&") が残るので、
+		// String に変換時、substring で削る
+		StringBuilder builder = new StringBuilder(path);
+		builder.append("?");
+		for (Map.Entry<String, String> param: map.entrySet()) {
+			builder.append(param.getKey());
+			builder.append("=");
+			builder.append(param.getValue());
+			builder.append("&");
+		}
+		
+		String url = builder.substring(0, builder.length() - 1);
+		
 		//バリデーションチェック
 		List<String> errors = validate(password1, password2);
 		if (errors.size() > 0) {
 			session.setAttribute("errors", errors);
-			resp.sendRedirect("S0046.html");
+			resp.sendRedirect(url);
 			return;
 		}
 
