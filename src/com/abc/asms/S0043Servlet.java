@@ -14,26 +14,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.abc.asms.utils.AuthorityUtils;
-import com.abc.asms.utils.HtmlUtils;
+import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0043.html")
 public class S0043Servlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+
 		//ログインチェック
-		if (!HtmlUtils.checkLogin(req, resp)) {
+		if (!Utils.checkLogin(req, resp)) {
 			return;
 		}
-		
+
 		//権限チェック
 		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
 			return;
 		}
-		
+
 			req.setCharacterEncoding("utf-8");
-			
+
 			HttpSession session = req.getSession();
 
 			String accountId = req.getParameter("account_id");
@@ -51,7 +51,7 @@ public class S0043Servlet extends HttpServlet {
 			if (authority.equals("10")) {
 				authority = "1";
 			}
-			
+
 			if(authority.equals("01")) {
 				authority = "10";
 			}
@@ -72,7 +72,7 @@ public class S0043Servlet extends HttpServlet {
 					ps.setString(2, mail);
 					ps.setString(3, authority);
 					ps.setString(4, accountId);
-					
+
 					ps.executeUpdate();
 
 					//成功メッセージ

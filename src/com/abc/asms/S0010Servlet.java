@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.DBUtils2;
-import com.abc.asms.utils.HtmlUtils;
+import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0010.html")
 public class S0010Servlet extends HttpServlet {
@@ -28,7 +28,7 @@ public class S0010Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		//ログインチェック
-		if (!HtmlUtils.checkLogin(req, resp)) {
+		if (!Utils.checkLogin(req, resp)) {
 			return;
 		}
 

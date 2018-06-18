@@ -23,7 +23,7 @@ import com.abc.asms.beans.Categories;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.DBUtils2;
-import com.abc.asms.utils.HtmlUtils;
+import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0024.html")
 public class S0024Servlet extends HttpServlet {
@@ -31,7 +31,7 @@ public class S0024Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		//ログインチェック
-		if (!HtmlUtils.checkLogin(req, resp)) {
+		if (!Utils.checkLogin(req, resp)) {
 			return;
 		}
 
@@ -52,7 +52,7 @@ public class S0024Servlet extends HttpServlet {
 		if (req.getParameter("check") != null) {
 
 			//ログインチェック
-			if (!HtmlUtils.checkLogin(req, resp)) {
+			if (!Utils.checkLogin(req, resp)) {
 				return;
 			}
 
@@ -251,7 +251,7 @@ public class S0024Servlet extends HttpServlet {
 
 		} else if (req.getParameter("update") != null) {
 			//ログインチェック
-			if (!HtmlUtils.checkLogin(req, resp)) {
+			if (!Utils.checkLogin(req, resp)) {
 				return;
 			}
 

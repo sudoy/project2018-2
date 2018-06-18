@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import com.abc.asms.beans.Accounts;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
-import com.abc.asms.utils.HtmlUtils;
+import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0042.html")
 public class S0042Servlet extends HttpServlet {
@@ -26,10 +26,10 @@ public class S0042Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		//ログインチェック
-		if (!HtmlUtils.checkLogin(req, resp)) {
+		if (!Utils.checkLogin(req, resp)) {
 			return;
 		}
-		
+
 		//権限チェック
 		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
 			return;
@@ -90,10 +90,10 @@ public class S0042Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		//ログインチェック
-		if (!HtmlUtils.checkLogin(req, resp)) {
+		if (!Utils.checkLogin(req, resp)) {
 			return;
 		}
-		
+
 		//権限チェック
 //		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
 //			return;

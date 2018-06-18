@@ -19,7 +19,6 @@ import com.abc.asms.beans.Categories;
 import com.abc.asms.beans.Detail_beans;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
-import com.abc.asms.utils.HtmlUtils;
 import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0023.html")
@@ -29,7 +28,7 @@ public class S0023Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		//ログインチェック
-		if (!HtmlUtils.checkLogin(req, resp)) {
+		if (!Utils.checkLogin(req, resp)) {
 			return;
 		}
 

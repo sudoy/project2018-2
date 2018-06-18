@@ -17,25 +17,25 @@ import javax.servlet.http.HttpSession;
 import com.abc.asms.beans.Accounts;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
-import com.abc.asms.utils.HtmlUtils;
+import com.abc.asms.utils.Utils;
 
 
 @WebServlet("/S0044.html")
 public class S0044Servlet extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+
 		//ログインチェック
-		if (!HtmlUtils.checkLogin(req, resp)) {
+		if (!Utils.checkLogin(req, resp)) {
 			return;
 		}
-		
+
 		//権限チェック
 		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
 			return;
 		}
-		
+
 		req.setCharacterEncoding("utf-8");
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -44,7 +44,7 @@ public class S0044Servlet extends HttpServlet {
 
 		try {
 			con = DBUtils.getConnection();
-			
+
 		sql = "select * from accounts where account_id = ?";
 		//select命令の準備
 		ps = con.prepareStatement(sql);
@@ -54,7 +54,7 @@ public class S0044Servlet extends HttpServlet {
 
 		//select命令を実行
 		rs = ps.executeQuery();
-		
+
 		rs.next();
 
 		int accountId = rs.getInt("account_id");
@@ -85,20 +85,20 @@ public class S0044Servlet extends HttpServlet {
 		}
 	}
 	}
-	
+
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+
 		//ログインチェック
-		if (!HtmlUtils.checkLogin(req, resp)) {
+		if (!Utils.checkLogin(req, resp)) {
 			return;
 		}
-		
+
 		HttpSession session = req.getSession();
-		
+
 		String accountId = req.getParameter("account_id");
-		
+
 		//バリデーションチェック
 //		List<String> errors = validate(id);
 //		if (errors.size() > 0) {
@@ -106,7 +106,7 @@ public class S0044Servlet extends HttpServlet {
 //			resp.sendRedirect("index.html");
 //			return;
 //		}
-		
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -124,7 +124,7 @@ public class S0044Servlet extends HttpServlet {
 
 			//select命令を実行
 			ps.executeUpdate();
-			
+
 			//成功メッセージ
 			List<String> successes = new ArrayList<>();
 			successes.add("No" + accountId + "のアカウントを削除しました。");
@@ -149,7 +149,7 @@ public class S0044Servlet extends HttpServlet {
 	}
 //	private List<String> validate(String id) {
 //		List<String> errors = new ArrayList<>();
-//		
+//
 //		//日付の必須入力
 //		if (id == null || id.equals("")) {
 //			errors.add("不正なアクセスです。");

@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.abc.asms.beans.S0022;
 import com.abc.asms.utils.DBUtils;
-import com.abc.asms.utils.HtmlUtils;
 import com.abc.asms.utils.Utils;
 
 
@@ -25,7 +24,7 @@ public class S0022Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		//ログインチェック
-		if (!HtmlUtils.checkLogin(req, resp)) {
+		if (!Utils.checkLogin(req, resp)) {
 			return;
 		}
 

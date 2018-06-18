@@ -15,11 +15,12 @@
 			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
+
 	</head>
+
 	<body>
 <nav class="navbar navbar-default">
 	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#global-nav" aria-expanded="false">
 				<span class="sr-only">Toggle navigation</span>
@@ -30,7 +31,6 @@
 			<a class="navbar-brand" href="C0020.html">物品売上管理システム</a>
 		</div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li ><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
@@ -38,13 +38,12 @@
 				<li class="active"><a href="S0020.html">売上検索</a></li>
 				<li><a href="S0030.html">アカウント登録</a></li>
 				<li><a href="S0040.html">アカウント検索</a></li>
-
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="C0010.html">ログアウト</a></li>
 			</ul>
-		</div><!-- /.navbar-collapse -->
-	</div><!-- /.container-fluid -->
+		</div>
+	</div>
 </nav>
 
 	<form class="form-horizontal" action="S0025.html?id=${s22.sale_id}" method="post">
@@ -53,7 +52,6 @@
 	<jsp:include page="_successes.jsp"/>
 
 		<h1>売上詳細表示</h1>
-
 
 	<div class="col-sm-offset-2">
 		<table>
@@ -108,7 +106,7 @@
 
 			<tr>
 				<th>備考</th>
-				<td>${param.note.equals("")? null : s22.note}</td>
+				<td>${s22.note}</td>
 			</tr>
 
 			<th>　</th>
@@ -124,16 +122,8 @@
 			</c:if>
 			<a href="S0021.html" class="btn btn-default">キャンセル</a>
 
-		<!--
-		<button type="button" class="btn btn-default">Default</button>
-
-		<button type="button" class="btn btn-primary">Primary</button>
-
-		<button type="button" class="btn btn-success">Success</button>
-		-->
-
 		</div>
-	</div><!-- /container -->
+	</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		</form>

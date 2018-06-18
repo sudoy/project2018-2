@@ -48,6 +48,7 @@
 </nav>
 
 	<div class="container">
+	<jsp:include page="_successes.jsp"/>
 
 		<h1>売上検索結果表示</h1>
 

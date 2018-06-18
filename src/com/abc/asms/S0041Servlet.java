@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.abc.asms.beans.S0021;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
-import com.abc.asms.utils.HtmlUtils;
+import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0041.html")
 public class S0041Servlet extends HttpServlet {
@@ -24,7 +24,7 @@ public class S0041Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		//ログインチェック
-		if (!HtmlUtils.checkLogin(req, resp)) {
+		if (!Utils.checkLogin(req, resp)) {
 			return;
 		}
 		//権限チェック
