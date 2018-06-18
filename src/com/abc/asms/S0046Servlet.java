@@ -45,13 +45,14 @@ public class S0046Servlet extends HttpServlet {
 		try {
 			con = DBUtils.getConnection();
 
-			sql = "SELECT * FROM accounts WHERE mail = ?;";
+			sql = "SELECT * FROM accounts WHERE mail = ?";
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, user);
 
 			rs = ps.executeQuery();
 
+			//1-1メールアドレス存在チェック
 			if (!rs.next()) {
 				errors.add("メールアドレスが存在しません。");
 				req.setAttribute("errors", errors);
@@ -64,12 +65,9 @@ public class S0046Servlet extends HttpServlet {
 			throw new ServletException(e);
 		} finally {
 			try {
-				if (con != null) {
-					con.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
+				DBUtils.close(rs);
+				DBUtils.close(ps);
+				DBUtils.close(con);
 			} catch (Exception e) {
 			}
 		}
@@ -97,8 +95,6 @@ public class S0046Servlet extends HttpServlet {
 		map.put("user", user);
 
 		// クエリ文字列組み立て・URL との連結
-		// 末尾に余計な文字 ("?" or "&") が残るので、
-		// String に変換時、substring で削る
 		StringBuilder builder = new StringBuilder(path);
 		builder.append("?");
 		for (Map.Entry<String, String> param: map.entrySet()) {
@@ -108,6 +104,7 @@ public class S0046Servlet extends HttpServlet {
 			builder.append("&");
 		}
 		
+		// String に変換時、substring で削る
 		String url = builder.substring(0, builder.length() - 1);
 		
 		//バリデーションチェック
@@ -120,15 +117,15 @@ public class S0046Servlet extends HttpServlet {
 
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = null;
 		ResultSet rs = null;
+		String sql = null;
 
 		try {
 			con = DBUtils.getConnection();
 
-			//メールアドレス存在確認チェック
+			//1-1メールアドレス存在確認チェック
 			try {
-				sql = "SELECT * FROM accounts WHERE mail = ?;";
+				sql = "SELECT * FROM accounts WHERE mail = ?";
 				ps = con.prepareStatement(sql);
 
 				ps.setString(1, user);
@@ -171,19 +168,15 @@ public class S0046Servlet extends HttpServlet {
 			throw new ServletException(e);
 		} finally {
 			try {
-				if (con != null) {
-					con.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
+				DBUtils.close(rs);
+				DBUtils.close(ps);
+				DBUtils.close(con);
 			} catch (Exception e) {
 			}
 		}
 	}
 	private List<String> validate1(String user) {
 		List<String> errors = new ArrayList<>();
-
 		return errors;
 	}
 	private List<String> validate(String password1, String password2) {
