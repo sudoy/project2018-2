@@ -3,6 +3,7 @@ package com.abc.asms;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
@@ -42,7 +44,8 @@ public class S0011Servlet extends HttpServlet {
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
-		String saleId = req.getParameter("saleId");
+		HttpSession session = req.getSession();
+
 		String saleDate = req.getParameter("saleDate");
 		String accountId = req.getParameter("accountId");
 		String categoryId = req.getParameter("categoryId");
@@ -51,13 +54,12 @@ public class S0011Servlet extends HttpServlet {
 		String saleNumber = req.getParameter("saleNumber");
 		String note = req.getParameter("note");
 
-		List<String> successes = new ArrayList<>();
-		successes.add("No" + saleId + "の売り上げを登録しました。");
-		req.setAttribute("successes", successes);
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
+		ResultSet rs = null;
+
+		int id = 0;
 
 		try {
 			con = DBUtils.getConnection();
@@ -78,6 +80,26 @@ public class S0011Servlet extends HttpServlet {
 			ps.setString(7, note);
 
 			ps.executeUpdate();
+
+			try{
+				DBUtils.close(ps);
+			}catch(Exception e){}
+
+			//最後のinsertされたidをselect文で出す
+			sql = "SELECT LAST_INSERT_ID() as id FROM sales";
+
+			ps = con.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			if(rs.next()) {
+				id = rs.getInt("id");
+				req.setAttribute("id", id);
+
+				List<String> successes = new ArrayList<>();
+				successes.add("No" + id + "のアカウントを登録しました。");
+				session.setAttribute("successes", successes);
+			}
 
 		}catch(Exception e){
 			throw new ServletException(e);

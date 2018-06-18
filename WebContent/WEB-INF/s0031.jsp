@@ -19,7 +19,6 @@
 	<body>
 <nav class="navbar navbar-default">
 	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#global-nav" aria-expanded="false">
 				<span class="sr-only">Toggle navigation</span>
@@ -30,7 +29,6 @@
 			<a class="navbar-brand" href="C0020.html">物品売上管理システム</a>
 		</div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
@@ -102,10 +100,6 @@
 			<div class="col-sm-offset-4">
 				<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
 				<a href="S0030.html" class="btn btn-default">キャンセル</a>
-			<!--
-			<button type="button" class="btn btn-primary">O K</button>
-			<button type="button" class="btn btn-default">キャンセル</button>
-			-->
 			</div>
 		</div>
 

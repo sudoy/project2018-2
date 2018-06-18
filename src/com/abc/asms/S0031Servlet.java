@@ -3,6 +3,7 @@ package com.abc.asms;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,6 @@ public class S0031Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 
-		String accountId = req.getParameter("accountId");
 		String name = req.getParameter("name");
 		String mail = req.getParameter("mail");
 		String password = req.getParameter("password");
@@ -66,13 +66,12 @@ public class S0031Servlet extends HttpServlet {
 			authority = "10";
 		}
 
-		List<String> successes = new ArrayList<>();
-		successes.add("No" + accountId + "のアカウントを登録しました。");
-		session.setAttribute("successes", successes);
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
+		ResultSet rs = null;
+
+		int id = 0;
 
 		try {
 			con = DBUtils.getConnection();
@@ -89,6 +88,26 @@ public class S0031Servlet extends HttpServlet {
 			ps.setString(4, authority);
 
 			ps.executeUpdate();
+
+			try{
+				DBUtils.close(ps);
+			}catch(Exception e){}
+
+			//最後のinsertされたidをselect文で出す
+			sql = "SELECT LAST_INSERT_ID() as id FROM accounts";
+
+			ps = con.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			if(rs.next()) {
+				id = rs.getInt("id");
+				req.setAttribute("id", id);
+
+				List<String> successes = new ArrayList<>();
+				successes.add("No" + id + "のアカウントを登録しました。");
+				session.setAttribute("successes", successes);
+			}
 
 		}catch(Exception e){
 			throw new ServletException(e);
