@@ -35,10 +35,12 @@ public class C0010Servlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String email = req.getParameter("mail");
 		String password = req.getParameter("password");
+
 		List<String> errors = validate(email,password);
 		if(errors.size() > 0) {
 			session.setAttribute("errors", errors);
-			getServletContext().getRequestDispatcher("/WEB-INF/c0010.jsp").forward(req, resp);
+			getServletContext().getRequestDispatcher("/WEB-INF/c0010.jsp")
+			.forward(req, resp);
 			return;
 		}
 		//関連チェック
@@ -56,24 +58,23 @@ public class C0010Servlet extends HttpServlet {
 			ps.setString(2, password);
 			//SELCT命令を実行
 			rs=ps.executeQuery();
-
-			if(rs.next()) {
-				//email passwordが正しいとき
-				//session にログイン情報を保存する。
-				Accounts accounts = new Accounts(rs.getInt("account_id"),
-						rs.getString("name"),
-						rs.getString("mail"),
-						rs.getString("password"),
-						rs.getInt("authority"));
-				session.setAttribute("accounts", accounts);
-				resp.sendRedirect("C0020.html");
-
-
-			}else {
+			//
+			if(!rs.next()) {
 				errors.add("メールアドレス、パスワードを正しく入力してください。");
 				session.setAttribute("errors", errors);
-				getServletContext().getRequestDispatcher("/WEB-INF/c0010.jsp").forward(req, resp);
+				getServletContext().getRequestDispatcher("/WEB-INF/c0010.jsp")
+				.forward(req, resp);
+				return;
+
 			}
+			Accounts accounts = new Accounts(rs.getInt("account_id"),
+					rs.getString("name"),
+					rs.getString("mail"),
+					rs.getString("password"),
+					rs.getInt("authority"));
+			//session にログイン情報を保存する。
+			session.setAttribute("accounts", accounts);
+			resp.sendRedirect("C0020.html");
 
 		}catch(Exception e){
 			throw new ServletException(e);
@@ -97,9 +98,6 @@ public class C0010Servlet extends HttpServlet {
 			errors.add("メールアドレスが長すぎます");
 		}
 		//1-3
-//		if (!email.contains("@")) {
-//			errors.add("メールアドレスの形式が間違っています。");
-//		}
 //		String regex = "[^0-9a-zA-Z]";
 //		Matcher matcher = regex.matcher("aaaaab");
 		if (!email.contains("@")) {

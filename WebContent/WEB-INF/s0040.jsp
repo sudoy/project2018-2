@@ -49,7 +49,7 @@
 
 		<h1>アカウント検索</h1>
 <jsp:include page="_errors.jsp" />
-	<form class="form-horizontal" action="S0041.html" method="post">
+	<form class="form-horizontal" action="S0040.html" method="post">
 
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">氏名 <span class="badge">部分一致</span></label>

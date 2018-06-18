@@ -55,7 +55,7 @@
 
 		<h1>売上検索条件入力</h1>
 <jsp:include page="_errors.jsp" />
-	<form class="form-horizontal" action="S0021.html" method="post">
+	<form class="form-horizontal" action="S0020.html" method="post">
  		<div class="form-group">
 	 		<label for="salesDate" class="col-sm-2 control-label">販売日 </label>
 
