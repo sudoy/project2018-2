@@ -38,13 +38,13 @@ public class S0045Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		req.setCharacterEncoding("utf-8");
+		
 		String mail = req.getParameter("mail");
-		req.setAttribute("mail", mail);
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = null;
 		ResultSet rs = null;
-		
+		String sql = null;
+
 		//バリデーションチェック
 		List<String> errors = validate(mail);
 		if (errors.size() > 0) {
@@ -115,6 +115,8 @@ public class S0045Servlet extends HttpServlet {
 					+ "http://localhost:8080/project2/S0046.html?user=" + mail, "ISO-2022-JP");
 
 			Transport.send(mimeMessage);
+			
+			//1-5メール送信エラー
 			} catch (javax.mail.AuthenticationFailedException e) {
 				errors.add("予期しないエラーが発生しました。");
 				req.setAttribute("errors", errors);
@@ -155,10 +157,7 @@ public class S0045Servlet extends HttpServlet {
 		if (!mail.contains("@")) {
 			errors.add("メールアドレスを正しく入力してください。");
 		}		//1-3メールアドレス形式チェック
-		//1-5メール送信エラー
-//		if ()) {
-//			errors.add("予期しないエラーが発生しました。");
-//		}
+
 
 		return errors;
 	}
