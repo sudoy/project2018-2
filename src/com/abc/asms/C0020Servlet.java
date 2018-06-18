@@ -92,8 +92,30 @@ public class C0020Servlet extends HttpServlet {
 		String sql = null;
 		ResultSet rs = null;
 
+		int thisMonthSum = 0;
+
 		try{
 			con = DBUtils.getConnection();
+
+			sql = "SELECT SUM(unit_price * sale_number) AS sum1 FROM sales WHERE sale_date between ? and ?;";
+
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, first.toString());
+			ps.setString(2, last.toString());
+
+			rs = ps.executeQuery();
+
+			if(rs.next()) {
+				thisMonthSum = rs.getInt("sum1");
+
+				session.setAttribute("thisMonthSum", thisMonthSum);
+			}
+
+			try{
+				DBUtils.close(ps);
+				DBUtils.close(rs);
+			}catch(Exception e){}
 
 			sql = "select * from accounts a \r\n" +
 					"left join sales s on s.account_id = a.account_id\r\n" +

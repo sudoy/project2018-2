@@ -107,7 +107,7 @@
 			<div class="panel-heading">
 			<h3 class="panel-title">今月（6月）の売上合計</h3>
 			</div>
-			<div class="panel-body" align="center">1,200,000円</div>
+			<div class="panel-body" align="center">${thisMonthSum}</div>
 		</div>
 		</div>
 

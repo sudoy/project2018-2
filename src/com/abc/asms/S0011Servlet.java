@@ -11,7 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
@@ -43,8 +42,6 @@ public class S0011Servlet extends HttpServlet {
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
-		HttpSession session = req.getSession();
-
 		String saleId = req.getParameter("saleId");
 		String saleDate = req.getParameter("saleDate");
 		String accountId = req.getParameter("accountId");
@@ -56,7 +53,7 @@ public class S0011Servlet extends HttpServlet {
 
 		List<String> successes = new ArrayList<>();
 		successes.add("No" + saleId + "の売り上げを登録しました。");
-		session.setAttribute("successes", successes);
+		req.setAttribute("successes", successes);
 
 		Connection con = null;
 		PreparedStatement ps = null;

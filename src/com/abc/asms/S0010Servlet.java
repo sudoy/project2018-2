@@ -15,7 +15,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
@@ -38,6 +37,7 @@ public class S0010Servlet extends HttpServlet {
 			return;
 		}
 
+		//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
 		DBUtils2.getConnection2(req, resp);
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
@@ -49,8 +49,6 @@ public class S0010Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
-
-		HttpSession session = req.getSession();
 
 		String saleDate = req.getParameter("saleDate");
 		String accountId = req.getParameter("accountId");
@@ -81,10 +79,12 @@ public class S0010Servlet extends HttpServlet {
 		try{
 			con = DBUtils.getConnection();
 
+			//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
 			DBUtils2.getConnection2(req, resp);
 
 			try {
 				sql = "SELECT * FROM accounts WHERE account_id = ?;";
+
 				ps = con.prepareStatement(sql);
 
 				ps.setString(1, accountId);
@@ -93,10 +93,11 @@ public class S0010Servlet extends HttpServlet {
 
 				//sqlが実行出来なかったらエラー　→　s0010に返す
 				if(!rs.next()) {
+					//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
 					DBUtils2.getConnection2(req, resp);
 
 					errors.add("アカウントテーブルに存在しません。");
-					session.setAttribute("errors", errors);
+					req.setAttribute("errors", errors);
 					getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
 						.forward(req, resp);
 					return;
@@ -126,6 +127,7 @@ public class S0010Servlet extends HttpServlet {
 
 				//sqlが実行出来なかったらエラー　→　s0010に返す
 				if(!rs.next()) {
+					//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
 					DBUtils2.getConnection2(req, resp);
 
 					errors.add("商品テーブルに存在しません。");
@@ -145,6 +147,7 @@ public class S0010Servlet extends HttpServlet {
 				}
 			}
 
+			//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
 			DBUtils2.getConnection2(req, resp);
 		}catch(Exception e){
 			throw new ServletException(e);
