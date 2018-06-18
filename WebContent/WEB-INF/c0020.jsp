@@ -125,24 +125,24 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>No</th>
+							<th style="text-align: right">No</th>
 							<th>販売日</th>
 							<th>商品カテゴリー</th>
 							<th>商品名</th>
-							<th>単価</th>
-							<th>個数</th>
-							<th>小計</th>
+							<th style="text-align: right">単価</th>
+							<th style="text-align: right">個数</th>
+							<th style="text-align: right">小計</th>
 						</tr>
 					</thead>
 					<c:forEach var="c0020" items="${list}">
 						<tr>
-							<td>${c0020.saleId}</td>
+							<td style="text-align: right">${c0020.saleId}</td>
 							<td>${c0020.saleDate}</td>
 							<td>${c0020.categoryName}</td>
 							<td>${c0020.tradeName}</td>
-							<td>${HtmlUtils.formatComma(c0020.unitPrice)}</td>
-							<td>${HtmlUtils.formatComma(c0020.saleNumber)}</td>
-							<td>${HtmlUtils.formatComma(c0020.unitPrice * c0020.saleNumber)}</td>
+							<td style="text-align: right">${HtmlUtils.formatComma(c0020.unitPrice)}</td>
+							<td style="text-align: right">${HtmlUtils.formatComma(c0020.saleNumber)}</td>
+							<td style="text-align: right">${HtmlUtils.formatComma(c0020.unitPrice * c0020.saleNumber)}</td>
 						</tr>
 					</c:forEach>
 
@@ -152,8 +152,8 @@
 							<td>　</td>
 							<td>　</td>
 							<td>　</td>
-							<th>合計</th>
-							<td>${HtmlUtils.formatComma(thisMonthSum)}</td>
+							<th style="text-align: right">合計</th>
+							<td style="text-align: right">${HtmlUtils.formatComma(thisMonthSum)}</td>
 						</tr>
 
 				</table>
