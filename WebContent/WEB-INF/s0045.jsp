@@ -30,12 +30,14 @@
 	<body>
 
 		<div class="container">
+		<jsp:include page="_successes.jsp" />
+		<jsp:include page="_errors.jsp" />
 
-			<form class="form-signin">
+			<form class="form-signin" action="S0045.html" method="post">
 				<h2 class="form-signin-heading">物品売上管理システム</h2>
 				<h3 class="form-signin-heading">パスワード再設定</h3>
 				<label for="inputEmail" class="sr-only"></label>
-				<input type="text" id="inputEmail" class="form-control" placeholder="メールアドレス">
+				<input type="text" id="inputEmail" name="mail" class="form-control" placeholder="メールアドレス">
 				<div class="checkbox">
 				</div>
 				
