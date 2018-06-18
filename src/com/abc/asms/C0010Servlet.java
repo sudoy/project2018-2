@@ -23,7 +23,7 @@ public class C0010Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
+
 		getServletContext().getRequestDispatcher("/WEB-INF/c0010.jsp")
 		.forward(req, resp);
 
@@ -58,7 +58,7 @@ public class C0010Servlet extends HttpServlet {
 			ps.setString(2, password);
 			//SELCT命令を実行
 			rs=ps.executeQuery();
-			//
+
 			if(!rs.next()) {
 				errors.add("メールアドレス、パスワードを正しく入力してください。");
 				session.setAttribute("errors", errors);
@@ -81,9 +81,9 @@ public class C0010Servlet extends HttpServlet {
 
 		}finally{
 			try{
-				if(con != null){con.close();}
-				if(ps != null){ps.close();}
-				if(rs != null){rs.close();}
+				DBUtils.close(rs);
+				DBUtils.close(ps);
+				DBUtils.close(con);
 			}catch(Exception e){}
 		}
 	}
