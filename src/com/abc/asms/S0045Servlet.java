@@ -50,7 +50,7 @@ public class S0045Servlet extends HttpServlet {
 		if (errors.size() > 0) {
 			req.setAttribute("errors", errors);
 			getServletContext().getRequestDispatcher("/WEB-INF/s0045.jsp")
-			.forward(req, resp);
+				.forward(req, resp);
 			return;
 		}
 		
@@ -64,6 +64,7 @@ public class S0045Servlet extends HttpServlet {
 
 				rs = ps.executeQuery();
 
+				//1-4アカウントテーブル存在チェック
 				if (!rs.next()) {
 					errors.add("正しいメールアドレスを入力してください。");
 					req.setAttribute("errors", errors);
@@ -153,11 +154,6 @@ public class S0045Servlet extends HttpServlet {
 		if (!mail.contains("@")) {
 			errors.add("メールアドレスの形式が間違っています。");
 		}
-		//1-4アカウントテーブル存在チェック
-		if (!mail.contains("@")) {
-			errors.add("メールアドレスを正しく入力してください。");
-		}		//1-3メールアドレス形式チェック
-
 
 		return errors;
 	}
