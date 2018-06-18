@@ -118,8 +118,6 @@ public class S0023Servlet extends HttpServlet {
 				}
 		}
 
-		String sale_date = req.getParameter("sale_date");
-
 		try {
 			con = DBUtils.getConnection();
 

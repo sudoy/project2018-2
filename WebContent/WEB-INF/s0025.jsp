@@ -76,7 +76,7 @@
  			<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
  			<div class="col-sm-5">
  				<c:forEach var="type" items="${categories}">
-					<label class="radio-inline"><input type="radio" name="categoryType" value="${type.categoryId}">${type.categoryName}</label>
+					<label class="radio-inline"><input type="radio" name="categoryType" value="${type.categoryId}" ${s25.category_id eq type.categoryId ? 'checked' : ' '  } disabled>${type.categoryName}</label>
 				</c:forEach>
 			</div>
 		</div>

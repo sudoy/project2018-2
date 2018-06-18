@@ -22,6 +22,7 @@ import com.abc.asms.beans.Accounts;
 import com.abc.asms.beans.Categories;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
+import com.abc.asms.utils.DBUtils2;
 import com.abc.asms.utils.HtmlUtils;
 
 @WebServlet("/S0024.html")
@@ -87,6 +88,89 @@ public class S0024Servlet extends HttpServlet {
 				resp.sendRedirect("S0023.html?id=" + id);
 
 				return;
+			}
+
+
+			try{
+				con = DBUtils.getConnection();
+
+				DBUtils2.getConnection2(req, resp);
+
+
+				//アカウントテーブル存在確認チェック
+				try {
+					sql = "SELECT * FROM accounts WHERE account_id = ?;";
+					ps = con.prepareStatement(sql);
+
+					ps.setString(1, account_id);
+
+					rs = ps.executeQuery();
+
+					//sqlが実行出来なかったらエラー　→　s0010に返す
+					if(!rs.next()) {
+						DBUtils2.getConnection2(req, resp);
+
+						errors.add("アカウントテーブルに存在しません。");
+						session.setAttribute("errors", errors);
+						getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
+							.forward(req, resp);
+						return;
+					}
+				}catch(Exception e){
+					throw new ServletException(e);
+				}finally{
+					try{
+						DBUtils.close(rs);
+						DBUtils.close(ps);
+						DBUtils.close(con);
+					}catch(Exception e){
+					}
+				}
+
+				//商品テーブル存在確認チェック
+				try {
+					con = DBUtils.getConnection();
+
+					sql = "SELECT * FROM categories WHERE category_id = ? AND active_flg = 1;";
+
+					ps = con.prepareStatement(sql);
+
+					ps.setString(1, category_id);
+
+					rs = ps.executeQuery();
+
+					//sqlが実行出来なかったらエラー　→　s0010に返す
+					if(!rs.next()) {
+						DBUtils2.getConnection2(req, resp);
+
+						errors.add("商品テーブルに存在しません。");
+						req.setAttribute("errors", errors);
+						getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
+							.forward(req, resp);
+						return;
+					}
+				}catch(Exception e){
+					throw new ServletException(e);
+				}finally{
+					try{
+						DBUtils.close(rs);
+						DBUtils.close(ps);
+						DBUtils.close(con);
+					}catch(Exception e){
+					}
+				}
+
+				DBUtils2.getConnection2(req, resp);
+			}catch(Exception e){
+				throw new ServletException(e);
+			}finally{
+				//終了処理
+				try{
+					DBUtils.close(rs);
+					DBUtils.close(ps);
+					DBUtils.close(con);
+				}catch(Exception e){
+				}
 			}
 
 			try {

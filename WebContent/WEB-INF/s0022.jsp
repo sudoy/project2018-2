@@ -59,7 +59,7 @@
 		<table>
 			<tr>
 				<th>販売日</th>
-				<td>${param.sale_date != null? param.sale_date : HtmlUtils.formatDate(s22)}</td>
+				<td>${HtmlUtils.formatDate(s22)}</td>
 			</tr>
 
 			<th>　</th>
@@ -97,10 +97,14 @@
 				<td class=text-right>${HtmlUtils.formatCommaN(s22)}</td>
 			</tr>
 
+			<th>　</th>
+
 			<tr>
 				<th>小計</th>
 				<td class=text-right>${HtmlUtils.formatCommaSum(s22)}</td>
 			</tr>
+
+			<th>　</th>
 
 			<tr>
 				<th>備考</th>
