@@ -13,11 +13,12 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 <!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
 
 </head>
+
 <body>
 	<nav class="navbar navbar-default">
 		<div class="container">
@@ -49,11 +50,9 @@
 		</div>
 	</nav>
 
-	<form class="form-horizontal" action="S0024.html?id=${s23.sale_id}"
+	<form class="form-horizontal" action="S0024.html?id=${s23.saleId}"
 		method="POST">
-
 		<div class="container">
-
 			<jsp:include page="_errors.jsp" />
 
 			<h1>売上詳細編集</h1>
@@ -64,7 +63,7 @@
 
 				<div class="col-sm-2">
 					<input type="text" class="form-control" name="sale_date"
-						id="salesDate" value="${HtmlUtils.formatDate(s23.sale_date)}">
+						id="salesDate" value="${HtmlUtils.formatDate(s23.saleDate)}">
 				</div>
 			</div>
 
@@ -75,7 +74,8 @@
 					<select class="form-control" name="account_id">
 						<option value="0">選択してください</option>
 						<c:forEach var="aName" items="${list2}">
-							<option value="${aName.accountId}" ${aName.accountId.equals(s23.account_id) ? 'selected' : '' }>${aName.name}</option>
+							<option value="${aName.accountId}"
+								${aName.accountId.equals(s23.accountId) ? 'selected' : '' }>${aName.name}</option>
 						</c:forEach>
 					</select>
 				</div>
@@ -87,17 +87,20 @@
 				</label>
 				<div class="col-sm-5">
 					<c:forEach var="type" items="${list}">
-						<label class="radio-inline">
-							<input type="radio" name="category_id" value="${type.categoryId}" ${type.categoryId.equals(s23.category_id) ? 'checked' : '' }>${type.categoryName}
+						<label class="radio-inline"> <input type="radio"
+							name="category_id" value="${type.categoryId}"
+							${type.categoryId.equals(s23.categoryId) ? 'checked' : '' }>${type.categoryName}
 						</label>
 					</c:forEach>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="name" class="col-sm-2 control-label">商品名 <span class="badge">必須</span></label>
+				<label for="name" class="col-sm-2 control-label">商品名 <span
+					class="badge">必須</span></label>
 				<div class="col-sm-5">
-					<input type="text" class="form-control" name="trade_name" id="name" value="${s23.trade_name}">
+					<input type="text" class="form-control" name="trade_name" id="name"
+						value="${s23.tradeName}">
 				</div>
 			</div>
 
@@ -107,7 +110,8 @@
 					class="badge">必須</span></label>
 
 				<div class="col-sm-2">
-					<input type="text" class="form-control text-right" name="unit_price" id="price" value="${s23.unit_price}">
+					<input type="text" class="form-control text-right"
+						name="unit_price" id="price" value="${s23.unitPrice}">
 				</div>
 			</div>
 
@@ -116,7 +120,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-2">
 					<input type="text" class="form-control text-right"
-						name="sale_number" id="number" value="${s23.sale_number}">
+						name="sale_number" id="number" value="${s23.saleNumber}">
 				</div>
 			</div>
 
@@ -129,8 +133,11 @@
 
 			<div class="form-group">
 				<div class="col-sm-offset-4">
-					<button type="submit" name="check" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 更 新</span></button>
-					<a href="S0022.html?id=${s23.sale_id}" class="btn btn-default">キャンセル</a>
+					<button type="submit" name="check" class="btn btn-primary">
+						<span class="glyphicon glyphicon-ok" aria-hidden="true"> 更
+							新</span>
+					</button>
+					<a href="S0022.html?id=${s23.saleId}" class="btn btn-default">キャンセル</a>
 				</div>
 			</div>
 

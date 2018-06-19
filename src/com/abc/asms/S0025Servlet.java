@@ -26,62 +26,6 @@ public class S0025Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-
-		//ログインチェック
-		if (!Utils.checkLogin(req, resp)) {
-			return;
-		}
-
-		//権限チェック
-		if (!AuthorityUtils.checkSalesAuthority(req, resp)) {
-			return;
-		}
-
-		req.setCharacterEncoding("utf-8");
-
-		HttpSession session = req.getSession();
-
-		String id = req.getParameter("id");
-
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DBUtils.getConnection();
-
-			String sql = ""
-					+ "delete from sales"
-					+ " where sale_id = ?";
-
-			ps = con.prepareStatement(sql);
-			ps.setString(1, id);
-
-			ps.executeUpdate();
-
-			List<String> successes = new ArrayList<>();
-			successes.add("No." + id + "の売上を削除しました。");
-			session.setAttribute("successes", successes);
-
-			resp.sendRedirect("S0021.html");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new ServletException();
-		} finally {
-			try {
-				DBUtils.close(con);
-				DBUtils.close(ps);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-		}
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-
 		//ログインチェック
 		if (!Utils.checkLogin(req, resp)) {
 			return;
@@ -146,6 +90,60 @@ public class S0025Servlet extends HttpServlet {
 				DBUtils.close(con);
 				DBUtils.close(ps);
 				DBUtils.close(rs);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+
+		//ログインチェック
+		if (!Utils.checkLogin(req, resp)) {
+			return;
+		}
+
+		//権限チェック
+		if (!AuthorityUtils.checkSalesAuthority(req, resp)) {
+			return;
+		}
+
+		req.setCharacterEncoding("utf-8");
+
+		HttpSession session = req.getSession();
+
+		String id = req.getParameter("id");
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DBUtils.getConnection();
+
+			String sql = ""
+					+ "delete from sales"
+					+ " where sale_id = ?";
+
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+
+			ps.executeUpdate();
+
+			List<String> successes = new ArrayList<>();
+			successes.add("No." + id + "の売上を削除しました。");
+			session.setAttribute("successes", successes);
+
+			resp.sendRedirect("S0021.html");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServletException();
+		} finally {
+			try {
+				DBUtils.close(con);
+				DBUtils.close(ps);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

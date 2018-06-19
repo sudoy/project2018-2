@@ -12,9 +12,9 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 <!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
 
 </head>
 <body>
@@ -52,14 +52,14 @@
 
 		<h1>売上を削除してよろしいですか？</h1>
 
-		<form class="form-horizontal" action="S0025.html?id=${s25.sale_id}"
+		<form class="form-horizontal" action="S0025.html?id=${s25.saleId}"
 			method="post">
 			<div class="form-group">
 				<label for="salesDate" class="col-sm-2 control-label">販売日</label>
 
 				<div class="col-sm-2">
 					<input type="text" class="form-control" name="sale_date"
-						value="${HtmlUtils.formatDate(s25.sale_date)}" disabled>
+						value="${HtmlUtils.formatDate(s25.saleDate)}" disabled>
 				</div>
 			</div>
 
@@ -68,7 +68,7 @@
 				<div class="col-sm-5">
 					<select class="form-control" name="account_id" disabled>
 						<c:forEach var="aName" items="${list2}">
-							<option value="${aName.accountId}" ${aName.accountId eq s25.account_id ? 'selected' : '' }>${aName.name}</option>
+							<option value="${aName.accountId}" ${aName.accountId eq s25.accountId ? 'selected' : '' }>${aName.name}</option>
 						</c:forEach>
 					</select>
 				</div>
@@ -78,7 +78,7 @@
 				<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
 				<div class="col-sm-5">
 					<c:forEach var="type" items="${list}">
-						<label class="radio-inline"><input type="radio"	name="categoryType" value="${type.categoryId}" ${s25.category_id eq type.categoryId ? 'checked' : ' '} disabled>${type.categoryName}</label>
+						<label class="radio-inline"><input type="radio"	name="categoryType" value="${typeCategoryId}" ${s25.categoryId eq type.categoryId ? 'checked' : ' '} disabled>${type.categoryName}</label>
 					</c:forEach>
 				</div>
 			</div>
@@ -86,7 +86,7 @@
 			<div class="form-group">
 				<label for="name" class="col-sm-2 control-label">商品名</label>
 				<div class="col-sm-2">
-					<input type="text" class="form-control" name="name" value="${s25.trade_name}" disabled>
+					<input type="text" class="form-control" name="name" value="${s25.tradeName}" disabled>
 				</div>
 			</div>
 
@@ -95,14 +95,14 @@
 				<label for="price" class="col-sm-2 control-label">単価</label>
 
 				<div class="col-sm-2">
-					<input type="text" class="form-control text-right" name="price"	value="${HtmlUtils.formatComma(s25.unit_price)}" disabled>
+					<input type="text" class="form-control text-right" name="price"	value="${HtmlUtils.formatComma(s25.unitPrice)}" disabled>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label for="number" class="col-sm-2 control-label">個数</label>
 				<div class="col-sm-2">
-					<input type="text" class="form-control text-right" name="number" value="${HtmlUtils.formatComma(s25.sale_number)}" disabled>
+					<input type="text" class="form-control text-right" name="number" value="${HtmlUtils.formatComma(s25.saleNumber)}" disabled>
 				</div>
 			</div>
 
@@ -117,16 +117,16 @@
 			<div class="form-group">
 				<label for="note" class="col-sm-2 control-label">備考</label>
 				<div class="col-sm-5">
-					<textarea class="form-control" name="note" rows="5" disabled>${s25.note.equals("")? null : s25.note}</textarea>
+					<textarea class="form-control" name="note" rows="5" disabled>${s25.note}</textarea>
 				</div>
 			</div>
 
 
 			<div class="form-group">
 				<div class="col-sm-offset-4">
-					<a href="S0025.html?id=${s25.sale_id}" class="btn btn-danger"><span
-						class="glyphicon glyphicon-remove" aria-hidden="true"> O K</span></a>
-					<a href="S0022.html?id=${s25.sale_id}" class="btn btn-default">キャンセル</a>
+					<button type="submit" class="btn btn-danger"><span
+						class="glyphicon glyphicon-remove" aria-hidden="true"> O K</span></button>
+					<a href="S0022.html?id=${s25.saleId}" class="btn btn-default">キャンセル</a>
 				</div>
 			</div>
 		</form>

@@ -14,19 +14,19 @@ public class Detail_beans {
 	private int sum;
 	private String note;
 
-	public int getSale_id() {
+	public int getSaleId() {
 		return saleId;
 	}
 
-	public void setSale_id(int saleId) {
+	public void setSaleId(int saleId) {
 		this.saleId = saleId;
 	}
 
-	public LocalDate getSale_date() {
+	public LocalDate getSaleDate() {
 		return saleDate;
 	}
 
-	public void setSale_date(LocalDate saleDate) {
+	public void setSaleDate(LocalDate saleDate) {
 		this.saleDate = saleDate;
 	}
 
@@ -38,43 +38,43 @@ public class Detail_beans {
 		this.name = name;
 	}
 
-	public int getCategory_id() {
+	public int getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategory_id(int categoryId) {
+	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
 
-	public int getAccount_id() {
+	public int getAccountId() {
 		return accountId;
 	}
 
-	public void setAccount_id(int accountId) {
+	public void setAccountId(int accountId) {
 		this.accountId = accountId;
 	}
 
-	public String getTrade_name() {
+	public String getTradeName() {
 		return tradeName;
 	}
 
-	public void setTrade_name(String tradeName) {
+	public void setTradeName(String tradeName) {
 		this.tradeName = tradeName;
 	}
 
-	public int getUnit_price() {
+	public int getUnitPrice() {
 		return unitPrice;
 	}
 
-	public void setUnit_price(int unitPrice) {
+	public void setUnitPrice(int unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 
-	public int getSale_number() {
+	public int getSaleNumber() {
 		return saleNumber;
 	}
 
-	public void setSale_number(int saleNumber) {
+	public void setSaleNumber(int saleNumber) {
 		this.saleNumber = saleNumber;
 	}
 

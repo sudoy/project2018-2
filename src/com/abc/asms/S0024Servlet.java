@@ -47,6 +47,7 @@ public class S0024Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 
+//確認画面用のdoPost check
 		if (req.getParameter("check") != null) {
 
 			//ログインチェック
@@ -66,17 +67,17 @@ public class S0024Servlet extends HttpServlet {
 
 			String id = req.getParameter("id");
 
-			String sale_date = req.getParameter("sale_date");
+			String saleDate = req.getParameter("sale_date");
 			String name = req.getParameter("name");
-			String account_id = req.getParameter("account_id");
-			String category_id = req.getParameter("category_id");
-			String trade_name = req.getParameter("trade_name");
-			String unit_price = req.getParameter("unit_price");
-			String sale_number = req.getParameter("sale_number");
+			String accountId = req.getParameter("account_id");
+			String categoryId = req.getParameter("category_id");
+			String tradeName = req.getParameter("trade_name");
+			String unitPrice = req.getParameter("unit_price");
+			String saleNumber = req.getParameter("sale_number");
 			String note = req.getParameter("note");
 
 			//エラー処理セット
-			List<String> errors = validate(sale_date, account_id, category_id, trade_name, unit_price, sale_number,
+			List<String> errors = validate(saleDate, accountId, categoryId, tradeName, unitPrice, saleNumber,
 					note);
 
 			if (errors.size() > 0) {
@@ -100,7 +101,7 @@ public class S0024Servlet extends HttpServlet {
 					sql = "SELECT * FROM accounts WHERE account_id = ?;";
 					ps = con.prepareStatement(sql);
 
-					ps.setString(1, account_id);
+					ps.setString(1, accountId);
 
 					rs = ps.executeQuery();
 
@@ -134,7 +135,7 @@ public class S0024Servlet extends HttpServlet {
 
 					ps = con.prepareStatement(sql);
 
-					ps.setString(1, category_id);
+					ps.setString(1, categoryId);
 
 					rs = ps.executeQuery();
 
@@ -177,7 +178,7 @@ public class S0024Servlet extends HttpServlet {
 			req.getServletContext().getRequestDispatcher("/WEB-INF/s0024.jsp").forward(req, resp);
 
 
-
+//Update処理のメソッド
 		} else if (req.getParameter("update") != null) {
 			//ログインチェック
 			if (!Utils.checkLogin(req, resp)) {
@@ -191,13 +192,12 @@ public class S0024Servlet extends HttpServlet {
 
 			String id = req.getParameter("id");
 
-			String sale_date = req.getParameter("sale_date");
-			String account_id = req.getParameter("account_id");
-			String category_id = req.getParameter("category_id");
-			String trade_name = req.getParameter("trade_name");
-			String unit_price = req.getParameter("unit_price");
-			String sale_number = req.getParameter("sale_number");
-			String sum = req.getParameter("sum");
+			String saleDate = req.getParameter("sale_date");
+			String accountId = req.getParameter("account_id");
+			String categoryId = req.getParameter("category_id");
+			String tradeName = req.getParameter("trade_name");
+			String unitPrice = req.getParameter("unit_price");
+			String saleNumber = req.getParameter("sale_number");
 			String note = req.getParameter("note");
 
 			Connection con = null;
@@ -213,12 +213,12 @@ public class S0024Servlet extends HttpServlet {
 
 				ps = con.prepareStatement(sql);
 
-				ps.setString(1, sale_date);
-				ps.setString(2, account_id);
-				ps.setString(3, category_id);
-				ps.setString(4, trade_name);
-				ps.setString(5, unit_price);
-				ps.setString(6, sale_number);
+				ps.setString(1, saleDate);
+				ps.setString(2, accountId);
+				ps.setString(3, categoryId);
+				ps.setString(4, tradeName);
+				ps.setString(5, unitPrice);
+				ps.setString(6, saleNumber);
 				ps.setString(7, note);
 				ps.setString(8, id);
 
@@ -244,19 +244,19 @@ public class S0024Servlet extends HttpServlet {
 		}
 	}
 
-	private List<String> validate(String sale_date, String account_id, String category_id, String trade_name,
-			String unit_price, String sale_number, String note) {
+	private List<String> validate(String saleDate, String accountId, String categoryId, String tradeName,
+			String unitPrice, String saleNumber, String note) {
 		List<String> errors = new ArrayList<>();
 
 		//1-1 販売日必須入力チェック
-		if (sale_date.equals("")) {
+		if (saleDate.equals("")) {
 			errors.add("販売日を入力してください。");
 		}
 
 		//1-2 販売日形式チェック
-		if (!sale_date.equals("")) {
+		if (!saleDate.equals("")) {
 			try {
-				LocalDate.parse(sale_date, DateTimeFormatter.ofPattern("uuuu/MM/dd")
+				LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/MM/dd")
 						.withResolverStyle(ResolverStyle.STRICT));
 			} catch (Exception e) {
 				errors.add("販売日を正しく入力してください。");
@@ -264,32 +264,32 @@ public class S0024Servlet extends HttpServlet {
 		}
 
 		//1-3 担当者必須入力チェック
-		if (account_id.equals("") || account_id.equals("0")) {
+		if (accountId.equals("") || accountId.equals("0")) {
 			errors.add("担当が未選択です。");
 		}
 
 		//1-4 商品カテゴリー必須入力チェック
-		if (category_id == null) {
+		if (categoryId == null) {
 			errors.add("商品カテゴリーが未選択です。");
 		}
 
 		//1-5 商品名必須入力チェック
-		if (trade_name.equals("")) {
+		if (tradeName.equals("")) {
 			errors.add("商品名を入力して下さい。");
 		}
 
 		//1-6 商品名長さチェック
-		if (trade_name.length() >= 101) {
+		if (tradeName.length() >= 101) {
 			errors.add("商品名が長すぎます。");
 		}
 		//1-7 単価必須入力チェック
-		if (unit_price.equals("")) {
+		if (unitPrice.equals("")) {
 			errors.add("単価を入力して下さい。");
 		}
 		//1-8 単価形式チェック
-		if (!unit_price.equals("")) {
+		if (!unitPrice.equals("")) {
 			try {
-				int i = Integer.parseInt(unit_price);
+				int i = Integer.parseInt(unitPrice);
 				if (i <= 0) {
 					throw new NumberFormatException();
 				} else if (i == 0) {
@@ -301,17 +301,17 @@ public class S0024Servlet extends HttpServlet {
 		}
 
 		//1-9 単価長さチェック
-		if (unit_price.length() >= 10) {
+		if (unitPrice.length() >= 10) {
 			errors.add("単価が長すぎます。");
 		}
 		//1-10 個数必須入力チェック
-		if (sale_number.equals("")) {
+		if (saleNumber.equals("")) {
 			errors.add("個数を入力して下さい。");
 		}
 		//1-11 個数形式チェック
-		if (!sale_number.equals("")) {
+		if (!saleNumber.equals("")) {
 			try {
-				int i = Integer.parseInt(sale_number);
+				int i = Integer.parseInt(saleNumber);
 				if (i <= 0) {
 					throw new NumberFormatException();
 				}
@@ -321,7 +321,7 @@ public class S0024Servlet extends HttpServlet {
 		}
 
 		//1-12 個数長さチェック
-		if (sale_number.length() >= 10) {
+		if (saleNumber.length() >= 10) {
 			errors.add("個数が長すぎます。");
 		}
 

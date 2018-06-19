@@ -12,9 +12,9 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 <!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
 
 </head>
 
@@ -48,7 +48,7 @@
 		</div>
 	</nav>
 
-	<form class="form-horizontal" action="S0025.html?id=${s22.sale_id}"
+	<form class="form-horizontal" action="S0025.html?id=${s22.saleId}"
 		method="post">
 
 		<div class="container">
@@ -60,7 +60,7 @@
 				<table>
 					<tr>
 						<th>販売日</th>
-						<td>${HtmlUtils.formatDate(s22.sale_date)}</td>
+						<td>${HtmlUtils.formatDate(s22.saleDate)}</td>
 					</tr>
 
 					<th>　</th>
@@ -74,28 +74,28 @@
 
 					<tr>
 						<th>商品カテゴリー</th>
-						<td>${s22.category_name}</td>
+						<td>${s22.categoryName}</td>
 					</tr>
 
 					<th>　</th>
 
 					<tr>
 						<th>商品名</th>
-						<td>${s22.trade_name}</td>
+						<td>${s22.tradeName}</td>
 					</tr>
 
 					<th>　</th>
 
 					<tr>
 						<th>単価</th>
-						<td class=text-right>${HtmlUtils.formatComma(s22.unit_price)}</td>
+						<td class=text-right>${HtmlUtils.formatComma(s22.unitPrice)}</td>
 					</tr>
 
 					<th>　</th>
 
 					<tr>
 						<th>個数</th>
-						<td class=text-right>${HtmlUtils.formatComma(s22.sale_number)}</td>
+						<td class=text-right>${HtmlUtils.formatComma(s22.saleNumber)}</td>
 					</tr>
 
 					<th>　</th>
@@ -121,9 +121,10 @@
 
 				<c:if
 					test="${accounts.authority == '1' || accounts.authority == '11'}">
-					<a href="S0023.html?id=${s22.sale_id}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 編 集</span></a>
-					<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true">削 除</span></button>
+					<a href="S0023.html?id=${s22.saleId}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 編 集</span></a>
+					<a href="S0025.html?id=${s22.saleId}" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true">削 除</span></a>
 				</c:if>
+
 				<a href="S0021.html" class="btn btn-default">キャンセル</a>
 
 			</div>
