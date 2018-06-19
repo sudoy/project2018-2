@@ -85,8 +85,8 @@
 				<div class="form-group">
 					<label for="authority1" class="col-sm-3 control-label">売上登録権限 <span class="badge">必須</span></label>
 						<div class="col-sm-5">
-							<label><input type="radio" name="authority1" value="0" ${AuthorityUtils.checkAuthority1(param.authority1 != null ? param.authority1 : accounts.authority)}>権限なし</label>
-							<label><input type="radio" name="authority1" value="1" ${AuthorityUtils.checkAuthority2(param.authority1 != null ? param.authority1 : accounts.authority)}>権限あり</label>
+							<label><input type="radio" name="authority1" value="0" ${AuthorityUtils.checkAuthority1(param.authority1)}>権限なし</label>
+							<label><input type="radio" name="authority1" value="1" ${AuthorityUtils.checkAuthority2(param.authority1)}>権限あり</label>
 						</div>
 				</div>
 
