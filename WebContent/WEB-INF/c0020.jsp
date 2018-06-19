@@ -17,6 +17,7 @@
 
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="css/style.css" type="text/css">
+		<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css" type="text/css">
 
 		<!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -116,10 +117,10 @@
 						<div class="panel-body" align="center">
 							<c:choose>
 								<c:when test="${MoM >= 100}">
-									<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"><fmt:formatNumber value="${MoM}" pattern="0.00" />%</span>
+									<div style="color: green"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"><fmt:formatNumber value="${MoM}" pattern="0.00" />%</span></div>
 								</c:when>
 								<c:otherwise>
-									<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"><fmt:formatNumber value="${MoM}" pattern="0.00" />%</span>
+									<div style="color: red"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"><fmt:formatNumber value="${MoM}" pattern="0.00" />%</span></div>
 								</c:otherwise>
 							</c:choose>
 						</div>
