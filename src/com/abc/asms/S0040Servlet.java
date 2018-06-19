@@ -12,12 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.SearchKeepA;
+import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0040.html")
 public class S0040Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		//ログインチェック
+		if (!Utils.checkLogin(req, resp)) {
+			return;
+		}
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0040.jsp")
 			.forward(req, resp);

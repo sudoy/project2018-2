@@ -18,15 +18,16 @@ import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.SearchKeepS;
 import com.abc.asms.utils.DBUtils2;
+import com.abc.asms.utils.Utils;
 @WebServlet("/S0020.html")
 public class S0020Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// ログインチェック
-//		if(!Utils.checkLogin(req, resp)) {
-//			return;
-//		}
+		if(!Utils.checkLogin(req, resp)) {
+			return;
+		}
 		req.setCharacterEncoding("UTF-8");
 		LocalDateTime d = LocalDateTime.now();
 		String today = DateTimeFormatter.ofPattern("yyyy/MM/dd").format(d);
