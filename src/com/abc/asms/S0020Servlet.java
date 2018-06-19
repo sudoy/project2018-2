@@ -22,15 +22,16 @@ import javax.servlet.http.HttpSession;
 import com.abc.asms.beans.S0021;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.DBUtils2;
+import com.abc.asms.utils.Utils;
 @WebServlet("/S0020.html")
 public class S0020Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// ログインチェック
-//		if(!HtmlUtils.checkLogin(req, resp)) {
-//			return;
-//		}
+		if(!Utils.checkLogin(req, resp)) {
+			return;
+		}
 		req.setCharacterEncoding("UTF-8");
 		LocalDateTime d = LocalDateTime.now();
 		String today = DateTimeFormatter.ofPattern("yyyy/MM/dd").format(d);
@@ -45,10 +46,7 @@ public class S0020Servlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// ログインチェック
-//		if(!HtmlUtils.checkLogin(req, resp)) {
-//			return;
-//		}
+
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		Connection con = null;
@@ -76,7 +74,7 @@ public class S0020Servlet extends HttpServlet {
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "select * from accounts a left join sales s on a.account_id = s.account_id "
+			sql = "select sale_id,sale_date,a.name,c.category_name, s.trade_name, s.unit_price, s.sale_number,note from accounts a left join sales s on a.account_id = s.account_id "
 					+"left join categories c on c.category_id = s.category_id "
 					+ "where 0 = 0 ";
 

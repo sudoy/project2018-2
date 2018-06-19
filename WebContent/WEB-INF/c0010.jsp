@@ -4,20 +4,14 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<link rel="icon" href="../../favicon.ico">
 
 		<title>ログイン｜物品売上管理システム</title>
-
-		<link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
 		<link href="css/signin.css" rel="stylesheet">
 
-		<script type="text/javascript" src="http://gc.kis.v2.scr.kaspersky-labs.com/15FFB0EB-D585-DC46-87A9-4A5DB79FD622/main.js" charset="UTF-8"></script><script src="../../assets/js/ie-emulation-modes-warning.js"></script>
 
 	</head>
 
@@ -31,12 +25,9 @@
 				<jsp:include page="_errors.jsp" />
 
 				<label for="inputEmail" class="sr-only"></label>
-				<input type="text" id="inputEmail" name="mail" class="form-control" placeholder="メールアドレス" value="${param.mail != null ? param.mail : mail}"/>
+				<input type="text" id="inputEmail" name="mail" class="form-control" placeholder="メールアドレス" value="${param.mail != null ? param.mail : ''}"/>
 				<label for="inputPassword" class="sr-only"></label>
 				<input type="password" id="inputPassword" name="password" class="form-control" placeholder="パスワード" />
-				<div class="checkbox">
-				</div>
-
 
 				<input type="submit" class="btn btn-primary" style="width:300px;" value="ログイン"><br>
 				<a href="S0045.html" class="btn btn-link">パスワードを忘れた方はこちら</a>
@@ -46,6 +37,5 @@
 
 		</div> <!-- /container -->
 
-		<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 	</body>
 </html>

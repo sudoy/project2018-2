@@ -50,7 +50,7 @@ public class S0040Servlet extends HttpServlet {
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "select * from accounts where 0 = 0 ";
+			sql = "select account_id,name,mail,password,authority from accounts where 0 = 0 ";
 			//氏名検索
 			if(name != "") {
 				sql += " and name like '%" + name + "%'";
@@ -141,9 +141,9 @@ public class S0040Servlet extends HttpServlet {
 		if(mail.length() > 100) {
 			errors.add("メールアドレスの指定が長すぎます。");
 		}
-//		if (!mail.contains("@")) {
-//			errors.add("メールアドレスの形式が誤っています。");
-//		}
+		if (!mail.contains("@")) {
+			errors.add("メールアドレスの形式が誤っています。");
+		}
 		return errors;
 
 

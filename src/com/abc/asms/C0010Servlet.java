@@ -98,8 +98,6 @@ public class C0010Servlet extends HttpServlet {
 			errors.add("メールアドレスが長すぎます");
 		}
 		//1-3
-//		String regex = "[^0-9a-zA-Z]";
-//		Matcher matcher = regex.matcher("aaaaab");
 		if (!email.contains("@")) {
 			errors.add("メールアドレスを正しく入力してください。");
 		}
