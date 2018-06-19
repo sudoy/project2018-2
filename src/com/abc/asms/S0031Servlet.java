@@ -30,7 +30,7 @@ public class S0031Servlet extends HttpServlet {
 		}
 
 		//権限チェック
-		if(!AuthorityUtils.checkSalesAuthority(req, resp)) {
+		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
 			return;
 		}
 
@@ -49,7 +49,7 @@ public class S0031Servlet extends HttpServlet {
 
 		String name = req.getParameter("name");
 		String mail = req.getParameter("mail");
-		String password = req.getParameter("password");
+		String password1 = req.getParameter("password1");
 		String authority1 = req.getParameter("authority1");
 		String authority2 = req.getParameter("authority2");
 		String authority = authority1 + authority2;
@@ -84,7 +84,7 @@ public class S0031Servlet extends HttpServlet {
 
 			ps.setString(1, name);
 			ps.setString(2, mail);
-			ps.setString(3, password);
+			ps.setString(3, password1);
 			ps.setString(4, authority);
 
 			ps.executeUpdate();
@@ -93,7 +93,7 @@ public class S0031Servlet extends HttpServlet {
 				DBUtils.close(ps);
 			}catch(Exception e){}
 
-			//最後のinsertされたidをselect文で出す
+			//insertされた後のidをselect文で取り出す
 			sql = "SELECT LAST_INSERT_ID() as id FROM accounts";
 
 			ps = con.prepareStatement(sql);
@@ -101,9 +101,11 @@ public class S0031Servlet extends HttpServlet {
 			rs = ps.executeQuery();
 
 			if(rs.next()) {
+				//sqlからidを取り出してsetAttribute
 				id = rs.getInt("id");
 				req.setAttribute("id", id);
 
+				//成功メッセージ（遷移先で出る）
 				List<String> successes = new ArrayList<>();
 				successes.add("No" + id + "のアカウントを登録しました。");
 				session.setAttribute("successes", successes);
@@ -119,6 +121,7 @@ public class S0031Servlet extends HttpServlet {
 			}catch(Exception e){}
 		}
 
+		//登録処理後、登録画面に遷移
 		resp.sendRedirect("S0030.html");
 
 	}
