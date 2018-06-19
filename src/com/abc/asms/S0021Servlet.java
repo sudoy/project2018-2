@@ -15,9 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.S0021;
-import com.abc.asms.beans.SearchSale;
+import com.abc.asms.beans.SearchKeepS;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.DBUtils2;
+import com.abc.asms.utils.Utils;
 
 
 @WebServlet("/S0021.html")
@@ -26,9 +27,9 @@ public class S0021Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// ログインチェック
-//		if(!HtmlUtils.checkLogin(req, resp)) {
-//			return;
-//		}
+		if(!Utils.checkLogin(req, resp)) {
+			return;
+		}
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		Connection con = null;
@@ -45,7 +46,7 @@ public class S0021Servlet extends HttpServlet {
 		}
 		try{
 			con = DBUtils.getConnection();
-			SearchSale ss = (SearchSale)session.getAttribute("ss");
+			SearchKeepS ss = (SearchKeepS)session.getAttribute("ss");
 
 			//SQL
 			sql = "select sale_id,sale_date,a.name,c.category_name, s.trade_name, s.unit_price, s.sale_number,note from accounts a left join sales s on a.account_id = s.account_id "
@@ -107,7 +108,6 @@ public class S0021Servlet extends HttpServlet {
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
-			System.out.println(ps);
 			//SELECT命令を実行
 			rs = ps.executeQuery();
 

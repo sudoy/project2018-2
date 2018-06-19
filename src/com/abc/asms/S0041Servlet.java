@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.Accounts;
-import com.abc.asms.beans.SearchAccount;
+import com.abc.asms.beans.SearchKeepA;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.Utils;
@@ -40,12 +40,6 @@ public class S0041Servlet extends HttpServlet {
 		PreparedStatement ps = null;
 		String sql = null;
 		ResultSet rs = null;
-		String note = req.getParameter("note");
-		String tradeName = req.getParameter("trade_name");
-		String saleDate1 = req.getParameter("sale_date1");
-		String saleDate2 = req.getParameter("sale_date2");
-		String accountName = req.getParameter("name");
-		String categoryName[] = req.getParameterValues("categoryName");
 		List<String> errors =  new ArrayList<>();
 		if(errors.size() > 0) {
 			session.setAttribute("errors", errors);
@@ -55,10 +49,9 @@ public class S0041Servlet extends HttpServlet {
 		}
 		try{
 			con = DBUtils.getConnection();
-
 			//SQL
 			sql = "select account_id,name,mail,password,authority from accounts where 0 = 0 ";
-			SearchAccount sa = (SearchAccount)session.getAttribute("sa");
+			SearchKeepA sa = (SearchKeepA)session.getAttribute("sa");
 			//氏名検索
 			if(sa.getAccountName() != "") {
 				sql += " and name like '%" + sa.getAccountName() + "%'";
@@ -76,31 +69,28 @@ public class S0041Servlet extends HttpServlet {
 			//権限検索
 			if(sa.getSaleAuthority().equals("no") && sa.getAccountAuthority().equals("no")) {
 				sql += " and authority = 0";
-			}else if(sa.getSaleAuthority().equals("ok") && sa.getAccountName().equals("no")) {
+			}else if(sa.getSaleAuthority().equals("ok") && sa.getAccountAuthority().equals("no")) {
 				sql += " and authority = 1";
-			}else if(sa.getSaleAuthority().equals("no") && sa.getAccountName().equals("ok")) {
+			}else if(sa.getSaleAuthority().equals("no") && sa.getAccountAuthority().equals("ok")) {
 				sql += " and authority = 10";
-			}else if(sa.getSaleAuthority().equals("ok") && sa.getAccountName().equals("ok")) {
+			}else if(sa.getSaleAuthority().equals("ok") && sa.getAccountAuthority().equals("ok")) {
 				sql += " and authority = 11";
-			}else if(sa.getSaleAuthority().equals("all") && sa.getAccountName().equals("all")) {
+			}else if(sa.getSaleAuthority().equals("all") && sa.getAccountAuthority().equals("all")) {
 				sql += " and authority in(0,1,10,11)";
-			}else if(sa.getSaleAuthority().equals("all") && sa.getAccountName().equals("no")) {
+			}else if(sa.getSaleAuthority().equals("all") && sa.getAccountAuthority().equals("no")) {
 				sql += " and authority in(0,1,10)";
-			}else if(sa.getSaleAuthority().equals("all") && sa.getAccountName().equals("ok")) {
+			}else if(sa.getSaleAuthority().equals("all") && sa.getAccountAuthority().equals("ok")) {
 				sql += " and authority in(0,10,11)";
-			}else if(sa.getSaleAuthority().equals("no") && sa.getAccountName().equals("all")) {
+			}else if(sa.getSaleAuthority().equals("no") && sa.getAccountAuthority().equals("all")) {
 				sql += " and authority in(0,1,10)";
-			}else if(sa.getSaleAuthority().equals("ok") && sa.getAccountName().equals("all")) {
+			}else if(sa.getSaleAuthority().equals("ok") && sa.getAccountAuthority().equals("all")) {
 				sql += " and authority in(0,1,11)";
 			}
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
-			System.out.println(ps);
 			//SELECT命令を実行
 			rs = ps.executeQuery();
-
-
 			List<Accounts> list = new ArrayList<>();
 			while(rs.next()) {
 				Accounts account = new Accounts(rs.getInt("account_id"),

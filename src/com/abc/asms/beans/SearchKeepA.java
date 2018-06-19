@@ -1,11 +1,11 @@
 package com.abc.asms.beans;
 
-public class SearchAccount {
+public class SearchKeepA {
 	private String accountName;
 	private String mail;
 	private String saleAuthority;
 	private String accountAuthority;
-	public SearchAccount(String accountName, String mail,String saleAuthority,String accountAuthority) {
+	public SearchKeepA(String accountName, String mail,String saleAuthority,String accountAuthority) {
 		super();
 
 		this.accountName = accountName;

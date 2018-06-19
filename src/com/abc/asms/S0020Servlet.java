@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.abc.asms.beans.SearchSale;
+import com.abc.asms.beans.SearchKeepS;
 import com.abc.asms.utils.DBUtils2;
 @WebServlet("/S0020.html")
 public class S0020Servlet extends HttpServlet {
@@ -47,7 +47,9 @@ public class S0020Servlet extends HttpServlet {
 		String saleDate1 = req.getParameter("sale_date1");
 		String saleDate2 = req.getParameter("sale_date2");
 		String accountName = req.getParameter("name");
-
+		String[] categoryName = req.getParameterValues("categoryName");
+		String tradeName = req.getParameter("trade_name");
+		String note = req.getParameter("note");
 
 		DBUtils2.getConnection2(req, resp);
 
@@ -59,9 +61,7 @@ public class S0020Servlet extends HttpServlet {
 			return;
 		}
 
-		SearchSale ss = new SearchSale(req.getParameter("sale_date1"),req.getParameter("sale_date2"),
-				req.getParameter("name"),req.getParameterValues("categoryName"),req.getParameter("trade_name"),
-				req.getParameter("note"));
+		SearchKeepS ss = new SearchKeepS(saleDate1,saleDate2,accountName,categoryName,tradeName,note);
 		session.setAttribute("ss", ss);
 
 		resp.sendRedirect("S0021.html");
