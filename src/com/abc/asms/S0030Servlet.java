@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
@@ -29,7 +30,7 @@ public class S0030Servlet extends HttpServlet {
 		}
 
 		//権限チェック
-		if(!AuthorityUtils.checkSalesAuthority(req, resp)) {
+		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
 			return;
 		}
 
@@ -44,10 +45,12 @@ public class S0030Servlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 
+		HttpSession session = req.getSession();
+
 		String accountId = req.getParameter("accountId");
 		String name = req.getParameter("name");
 		String mail = req.getParameter("mail");
-		String password = req.getParameter("password");
+		String password1 = req.getParameter("password1");
 		String password2 = req.getParameter("password2");
 		String authority1 = req.getParameter("authority1");
 		String authority2 = req.getParameter("authority2");
@@ -56,7 +59,7 @@ public class S0030Servlet extends HttpServlet {
 		req.setAttribute("accountId", accountId);
 		req.setAttribute("name", name);
 		req.setAttribute("mail", mail);
-		req.setAttribute("password", password);
+		req.setAttribute("password1", password1);
 		req.setAttribute("password2", password2);
 		req.setAttribute("authority1", authority1);
 		req.setAttribute("authority2", authority2);
@@ -64,10 +67,10 @@ public class S0030Servlet extends HttpServlet {
 
 		//バリデーションチェック(メールアドレス重複チェック以外)
 		List<String> errors = validate(accountId, name, mail,
-				password, password2, authority1, authority2);
+				password1, password2, authority1, authority2);
 
 		if (errors.size() > 0) {
-			req.setAttribute("errors", errors);
+			session.setAttribute("errors", errors);
 			getServletContext().getRequestDispatcher("/WEB-INF/s0030.jsp")
 				.forward(req, resp);
 			return;
@@ -90,10 +93,10 @@ public class S0030Servlet extends HttpServlet {
 
 			rs = ps.executeQuery();
 
-			//sqlが実行出来たらエラー　→　s0030に返す
+			//sqlが実行出来たらエラー（そのメールアドレスが既に存在している）　→　s0030に返す
 			if(rs.next()) {
 				errors.add("メールアドレスが既に登録されています。");
-				req.setAttribute("errors", errors);
+				session.setAttribute("errors", errors);
 				getServletContext().getRequestDispatcher("/WEB-INF/s0030.jsp")
 					.forward(req, resp);
 				return;
@@ -116,7 +119,7 @@ public class S0030Servlet extends HttpServlet {
 	}
 
 	private List<String> validate(String accountId, String name,
-				String mail,String password, String password2,
+				String mail,String password1, String password2,
 				String authority1, String authority2) {
 
 		List<String> errors = new ArrayList<>();
@@ -127,7 +130,7 @@ public class S0030Servlet extends HttpServlet {
 		}
 
 		//氏名長さチェック
-		if (name.length() > 21) {
+		if (name.length() >= 21) {
 			errors.add("氏名が長すぎます。");
 		}
 
@@ -137,7 +140,7 @@ public class S0030Servlet extends HttpServlet {
 		}
 
 		//メールアドレス長さチェック
-		if (mail.length() > 101) {
+		if (mail.length() >= 101) {
 			errors.add("メールアドレスが長すぎます。");
 		}
 
@@ -147,22 +150,22 @@ public class S0030Servlet extends HttpServlet {
 		}
 
 		//パスワード必須入力チェック
-		if (password.equals("")) {
+		if (password1.equals("")) {
 			errors.add("パスワードを入力してください。");
 		}
 
 		//パスワード長さチェック
-		if (password.length() > 31) {
+		if (password1.length() >= 31) {
 			errors.add("パスワードが長すぎます。");
 		}
 
 		//パスワード(確認)必須入力チェック
-		if (password.equals("")) {
+		if (password1.equals("")) {
 			errors.add("パスワード(確認)を入力してください。");
 		}
 
 		//パスワード等値チェック
-		if (!password.equals(password2)) {
+		if (!password1.equals(password2)) {
 			errors.add("パスワードとパスワード（確認）が一致していません。");
 		}
 
