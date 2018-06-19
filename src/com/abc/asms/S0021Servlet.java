@@ -68,32 +68,34 @@ public class S0021Servlet extends HttpServlet {
 			}
 
 			//日付検索
+
 			if(!ss.getSaleDate1().equals("") && !ss.getSaleDate2().equals("")) {
 				sql += " and sale_date between '" + ss.getSaleDate1() + "' and '" + ss.getSaleDate2()+ "'";
-
+			//開始日が入力されず、終了日が入力されたときに終了日の日付までの検索を行う
 			}else if(ss.getSaleDate1().equals("") && !ss.getSaleDate2().equals("")){
 				sql += " and sale_date <= '" + ss.getSaleDate2() + "'";
-
+			//開始日が入力され、終了日が入力されなかったときに開始日の日付からすべて検索する。
 			}else if(!ss.getSaleDate1().equals("") && ss.getSaleDate2().equals("")) {
 				sql += " and sale_date >= '" + ss.getSaleDate1() + "'";
 
 			}else {
 				sql += "";
 			}
-//
-//			//担当検索
+
+			//担当検索
 			if(ss.getAccountName() !=  "") {
 				sql += " and name =" + "'"+ss.getAccountName()+"'";
 			}else {
 				sql += "";
 			}
-//			//カテゴリー検索
+			//カテゴリー検索
 			if(req.getParameterValues("categoryName") == null) {
 				sql += "";
 			}
 			if(ss.getCategoryName() != null) {
 				sql += "and category_name in(";
 				for(int i = 0; i < ss.getCategoryName().length; i++) {
+					//カテゴリーを選択した数の一つ前になったら「,」をなくし、「カテゴリー」と「)」を追加したものにする。
 					if(i != ss.getCategoryName().length-1) {
 						sql += "'"+ ss.getCategoryName()[i] +"'"+",";
 					}else {
