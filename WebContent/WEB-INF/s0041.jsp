@@ -11,10 +11,6 @@
 		<title>アカウント検索結果一覧｜物品売上管理システム</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 
-		<!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
 	</head>
 	<body>
 <nav class="navbar navbar-default">
@@ -30,7 +26,6 @@
 			<a class="navbar-brand" href="C0020.html">物品売上管理システム</a>
 		</div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>

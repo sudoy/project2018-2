@@ -5,51 +5,19 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import com.abc.asms.beans.Detail_beans;
 import com.abc.asms.beans.S0021;
-import com.abc.asms.beans.S0022;
 
 public class HtmlUtils {
-	public static String formatDate(Detail_beans dbean) {
+// / 区切りのメソッド
+	public static String formatDate(LocalDate sale_date) {
 
-		LocalDate line = dbean.getSale_date();
-
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-		return line.format(dtf);
-
-	}
-
-	public static String formatDate(S0022 s22) {
-
-		LocalDate line = s22.getSale_date();
+		LocalDate line = sale_date;
 
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 		return line.format(dtf);
-
 	}
 
-
-	public static String formatCommaC(Detail_beans dbean) {
-		return String.format("%,d", dbean.getUnit_price());
-	}
-	public static String formatCommaN(Detail_beans dbean) {
-		return String.format("%,d", dbean.getSale_number());
-	}
-	public static String formatCommaSum(Detail_beans dbean) {
-		return String.format("%,d", dbean.getSum());
-	}
-
-	public static String formatCommaC(S0022 s22) {
-		return String.format("%,d", s22.getUnit_price());
-	}
-	public static String formatCommaN(S0022 s22) {
-		return String.format("%,d", s22.getSale_number());
-	}
-	public static String formatCommaSum(S0022 s22) {
-		return String.format("%,d", s22.getSum());
-	}
-
-
+//カンマ区切りのメソッド
 	public static String formatComma(int value) {
 		return String.format("%,d", value);
 	}

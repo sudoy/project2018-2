@@ -1,7 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.abc.asms.utils.HtmlUtils" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
  <c:set var="date" value="${today}" />
 <!DOCTYPE html>
 <html lang="ja">

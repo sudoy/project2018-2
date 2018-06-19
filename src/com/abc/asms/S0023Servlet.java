@@ -5,8 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,11 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.abc.asms.beans.Accounts;
-import com.abc.asms.beans.Categories;
 import com.abc.asms.beans.Detail_beans;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
+import com.abc.asms.utils.DBUtils2;
 import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0023.html")
@@ -46,76 +43,7 @@ public class S0023Servlet extends HttpServlet {
 		ResultSet rs = null;
 		String sql;
 
-		//categoriesTableからデータ取得
-		try{
-			con = DBUtils.getConnection();
-
-			//SQL
-			sql = "select category_id,category_name, active_flg from categories where active_flg = 1";
-			//SELECT命令の準備
-			ps = con.prepareStatement(sql);
-
-			//SELECT命令を実行
-			rs = ps.executeQuery();
-
-			List<Categories> categories = new ArrayList<>();
-			while(rs.next()) {
-				Categories category = new Categories(
-						rs.getInt("category_id"),
-						rs.getString("category_name"),
-						rs.getInt("active_flg"));
-				categories.add(category);
-			}
-
-			req.setAttribute("categories", categories);
-
-		} catch (Exception e) {
-			throw new ServletException(e);
-
-		}finally {
-				try {
-					DBUtils.close(con);
-					DBUtils.close(ps);
-					DBUtils.close(rs);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-		}
-
-		try{
-
-		con = DBUtils.getConnection();
-
-		sql = "select account_id,name,mail,password,authority from accounts";
-		//SELECT命令の準備
-		ps = con.prepareStatement(sql);
-		//SELECT命令を実行
-		rs = ps.executeQuery();
-		List<Accounts> accounts = new ArrayList<>();
-		while(rs.next()) {
-			Accounts account = new Accounts(
-					rs.getInt("account_id"),
-					rs.getString("name"),
-					rs.getString("mail"),
-					rs.getString("password"),
-					rs.getInt("authority"));
-
-			accounts.add(account);
-		}
-			req.setAttribute("accounts", accounts);
-
-		} catch (Exception e) {
-			throw new ServletException(e);
-
-		}finally {
-				try {
-					DBUtils.close(con);
-					DBUtils.close(ps);
-					DBUtils.close(rs);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-		}
+		DBUtils2.getConnection2(req, resp);
 
 		try {
 			con = DBUtils.getConnection();
@@ -137,6 +65,7 @@ public class S0023Servlet extends HttpServlet {
 			}
 
 			Detail_beans s23 = new Detail_beans(
+					rs.getInt("sale_id"),
 					Utils.date2LocalDate(rs.getDate("sale_date")),
 					rs.getString("name"),
 					rs.getInt("category_id"),
@@ -145,9 +74,7 @@ public class S0023Servlet extends HttpServlet {
 					rs.getInt("unit_price"),
 					rs.getInt("sale_number"),
 					rs.getInt("sum"),
-					rs.getString("note"),
-					rs.getInt("sale_id")
-
+					rs.getString("note")
 				);
 
 			req.setAttribute("s23", s23);
