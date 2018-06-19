@@ -5,9 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +23,7 @@ public class S0046Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		req.setCharacterEncoding("utf-8");
-
+		HttpSession session = req.getSession();
 		String user = req.getParameter("user");
 
 		Connection con = null;
@@ -36,7 +34,7 @@ public class S0046Servlet extends HttpServlet {
 		//バリデーションチェック
 		List<String> errors = validate1(user);
 		if (errors.size() > 0) {
-			req.setAttribute("errors", errors);
+			session.setAttribute("errors", errors);
 			getServletContext().getRequestDispatcher("/WEB-INF/s0046.jsp")
 					.forward(req, resp);
 			return;
@@ -55,7 +53,7 @@ public class S0046Servlet extends HttpServlet {
 			//1-1メールアドレス存在チェック
 			if (!rs.next()) {
 				errors.add("メールアドレスが存在しません。");
-				req.setAttribute("errors", errors);
+				session.setAttribute("errors", errors);
 				getServletContext().getRequestDispatcher("/WEB-INF/s0046.jsp")
 						.forward(req, resp);
 				return;
@@ -86,32 +84,13 @@ public class S0046Servlet extends HttpServlet {
 		String password2 = req.getParameter("password2");
 		String user = req.getParameter("user");
 		req.setAttribute("user", user);
-		
-		// クエリ文字列を追加する元のURL
-		String path = "http://localhost:8080/project2/S0046.html";
 
-		// クエリ文字列を連想配列に入れる
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("user", user);
-
-		// クエリ文字列組み立て・URL との連結
-		StringBuilder builder = new StringBuilder(path);
-		builder.append("?");
-		for (Map.Entry<String, String> param: map.entrySet()) {
-			builder.append(param.getKey());
-			builder.append("=");
-			builder.append(param.getValue());
-			builder.append("&");
-		}
-		
-		// String に変換時、substring で削る
-		String url = builder.substring(0, builder.length() - 1);
-		
 		//バリデーションチェック
 		List<String> errors = validate(password1, password2);
 		if (errors.size() > 0) {
 			session.setAttribute("errors", errors);
-			resp.sendRedirect(url);
+			getServletContext().getRequestDispatcher("/WEB-INF/s0046.jsp")
+					.forward(req, resp);
 			return;
 		}
 
@@ -124,32 +103,33 @@ public class S0046Servlet extends HttpServlet {
 			con = DBUtils.getConnection();
 
 			//1-1メールアドレス存在確認チェック
-			try {
-				sql = "SELECT * FROM accounts WHERE mail = ?";
-				ps = con.prepareStatement(sql);
+			sql = "SELECT * FROM accounts WHERE mail = ?";
+			ps = con.prepareStatement(sql);
 
-				ps.setString(1, user);
+			ps.setString(1, user);
 
-				rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
-				if (!rs.next()) {
-					errors.add("メールアドレスが存在しません。");
-					session.setAttribute("errors", errors);
-					resp.sendRedirect("S0046.html");
-					return;
-				}
-			} catch (Exception e) {
-				throw new ServletException(e);
-			} finally {
-				try {
-					DBUtils.close(rs);
-					DBUtils.close(ps);
-					DBUtils.close(con);
-				} catch (Exception e) {
-				}
+			if (!rs.next()) {
+				errors.add("メールアドレスが存在しません。");
+				session.setAttribute("errors", errors);
+				resp.sendRedirect("S0046.html");
+				return;
 			}
+		} catch (Exception e) {
+			throw new ServletException(e);
+		} finally {
+			try {
+				DBUtils.close(rs);
+				DBUtils.close(ps);
+				DBUtils.close(con);
+			} catch (Exception e) {
+			}
+		}
 
+		try {
 			con = DBUtils.getConnection();
+
 			sql = "update accounts set password = MD5(?) where mail = ?";
 			ps = con.prepareStatement(sql);
 
@@ -157,7 +137,6 @@ public class S0046Servlet extends HttpServlet {
 			ps.setString(1, password1);
 			ps.setString(2, user);
 			ps.executeUpdate();
-			System.out.println(ps);
 			List<String> successes = new ArrayList<>();
 			successes.add("パスワードを再設定しました。");
 			session.setAttribute("successes", successes);
@@ -172,32 +151,35 @@ public class S0046Servlet extends HttpServlet {
 				DBUtils.close(ps);
 				DBUtils.close(con);
 			} catch (Exception e) {
+				e.printStackTrace();
+
 			}
 		}
 	}
+
 	private List<String> validate1(String user) {
 		List<String> errors = new ArrayList<>();
 		return errors;
 	}
+
 	private List<String> validate(String password1, String password2) {
 		List<String> errors = new ArrayList<>();
-		//1-1メールアドレス存在チェック
 
 		//1-2新パスワードの必須入力
 		if (password1.equals("")) {
-			errors.add("パスワードを入力してください。");
+			errors.add("パスワードを入力して下さい");
 		}
 		//1-3メールアドレス長さチェック
-		if (password1.length() > 31) {
-			errors.add("メールアドレスが長すぎます。");
+		if (password1.length() >= 31) {
+			errors.add("パスワードが長すぎます。");
 		}
 		//1-4新パスワード確認の必須入力
-		if (password1.equals("")) {
-			errors.add("確認用パスワードを入力してください。");
+		if (password2.equals("")) {
+			errors.add("確認用パスワードを入力して下さい");
 		}
 		//1-5新パスワード一致チェック
 		if (!password1.equals(password2)) {
-			errors.add("新パスワードとパスワード（確認）が一致しません。");
+			errors.add("新パスワードとパスワード（確認）が一致していません。");
 		}
 		return errors;
 	}

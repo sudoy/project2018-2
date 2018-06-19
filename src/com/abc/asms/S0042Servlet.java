@@ -31,7 +31,7 @@ public class S0042Servlet extends HttpServlet {
 		}
 
 		//権限チェック
-		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
+		if (!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
 			return;
 		}
 
@@ -95,9 +95,9 @@ public class S0042Servlet extends HttpServlet {
 		}
 
 		//権限チェック
-//		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
-//			return;
-//		}
+				if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
+					return;
+				}
 
 		req.setCharacterEncoding("utf-8");
 		HttpSession session = req.getSession();
@@ -126,7 +126,7 @@ public class S0042Servlet extends HttpServlet {
 			session.setAttribute("errors", errors);
 			//req.setAttribute("errors", errors);
 			getServletContext().getRequestDispatcher("/WEB-INF/s0042.jsp")
-				.forward(req, resp);
+					.forward(req, resp);
 			return;
 		}
 
@@ -154,9 +154,9 @@ public class S0042Servlet extends HttpServlet {
 			errors.add("メールアドレスが長すぎます。");
 		}
 		//1-5メールアドレス形式チェック
-//		if (mail.matches("[a-z0-9A-Z]+")) {
-//			errors.add("メールアドレスの形式が間違っています。");
-//		}
+		//		if (mail.matches("[a-z0-9A-Z]+")) {
+		//			errors.add("メールアドレスの形式が間違っています。");
+		//		}
 		//1-5メールアドレス形式チェック
 		if (!mail.contains("@")) {
 			errors.add("メールアドレスの形式が間違っています。");

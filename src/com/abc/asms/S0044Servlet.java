@@ -19,7 +19,6 @@ import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.Utils;
 
-
 @WebServlet("/S0044.html")
 public class S0044Servlet extends HttpServlet {
 	@Override
@@ -32,7 +31,7 @@ public class S0044Servlet extends HttpServlet {
 		}
 
 		//権限チェック
-		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
+		if (!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
 			return;
 		}
 
@@ -45,45 +44,45 @@ public class S0044Servlet extends HttpServlet {
 		try {
 			con = DBUtils.getConnection();
 
-		sql = "select * from accounts where account_id = ?";
-		//select命令の準備
-		ps = con.prepareStatement(sql);
+			sql = "select * from accounts where account_id = ?";
+			//select命令の準備
+			ps = con.prepareStatement(sql);
 
-		//select文にパラメータの内容をセット
-		ps.setString(1, req.getParameter("account_id"));
+			//select文にパラメータの内容をセット
+			ps.setString(1, req.getParameter("account_id"));
 
-		//select命令を実行
-		rs = ps.executeQuery();
+			//select命令を実行
+			rs = ps.executeQuery();
 
-		rs.next();
+			rs.next();
 
-		int accountId = rs.getInt("account_id");
-		String name = rs.getString("name");
-		String mail = rs.getString("mail");
-		String password = rs.getString("password");
-		int authority = rs.getInt("authority");
+			int accountId = rs.getInt("account_id");
+			String name = rs.getString("name");
+			String mail = rs.getString("mail");
+			String password = rs.getString("password");
+			int authority = rs.getInt("authority");
 
-		 Accounts accounts = new Accounts(accountId, name,  mail,  password, authority);
-		req.setAttribute("accounts", accounts);
+			Accounts accounts = new Accounts(accountId, name, mail, password, authority);
+			req.setAttribute("accounts", accounts);
 
-		//JSPへフォワード
-		getServletContext().getRequestDispatcher("/WEB-INF/s0044.jsp")
-				.forward(req, resp);
+			//JSPへフォワード
+			getServletContext().getRequestDispatcher("/WEB-INF/s0044.jsp")
+					.forward(req, resp);
 
-	} catch (Exception e) {
-		throw new ServletException(e);
-	} finally {
-		try {
-			if (rs != null) {
-				con.close();
-			}
-			if (ps != null) {
-				ps.close();
-			}
-			DBUtils.close(con);
 		} catch (Exception e) {
+			throw new ServletException(e);
+		} finally {
+			try {
+				if (rs != null) {
+					con.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				DBUtils.close(con);
+			} catch (Exception e) {
+			}
 		}
-	}
 	}
 
 	@Override
@@ -98,14 +97,6 @@ public class S0044Servlet extends HttpServlet {
 		HttpSession session = req.getSession();
 
 		String accountId = req.getParameter("account_id");
-
-		//バリデーションチェック
-//		List<String> errors = validate(id);
-//		if (errors.size() > 0) {
-//			session.setAttribute("errors", errors);
-//			resp.sendRedirect("index.html");
-//			return;
-//		}
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -147,13 +138,4 @@ public class S0044Servlet extends HttpServlet {
 			}
 		}
 	}
-//	private List<String> validate(String id) {
-//		List<String> errors = new ArrayList<>();
-//
-//		//日付の必須入力
-//		if (id == null || id.equals("")) {
-//			errors.add("不正なアクセスです。");
-//		}
-//		return errors;
-//	}
-	}
+}

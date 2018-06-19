@@ -98,7 +98,14 @@ public class C0020Servlet extends HttpServlet {
 		LocalDate lastMonthLast = ld.withDayOfMonth(1).minusDays(1);
 
 		StringBuilder sb = new StringBuilder(today);
-		String thisMonth = sb.substring(5);
+		String thisMonth = sb.substring(5, sb.length()-1);
+		int i = Integer.parseInt(thisMonth);
+		int lastMonth = 0;
+		if(sb.length() == 7 && thisMonth.contains("1")) {
+			lastMonth = 12;
+		}else{
+			lastMonth = i - 1;
+		}
 
 		int thisMonthSum = 0;
 		int lastMonthSum = 0;
@@ -192,6 +199,7 @@ public class C0020Servlet extends HttpServlet {
 			req.setAttribute("list", list);
 			req.setAttribute("today", today);
 			req.setAttribute("thisMonth", thisMonth);
+			req.setAttribute("lastMonth", lastMonth);
 
 		}catch(Exception e){
 			throw new ServletException(e);
