@@ -103,7 +103,7 @@
 				<div class="col-sm-4">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">今月（6月）の売上合計</h3>
+							<h3 class="panel-title">今月（${thisMonth}）の売上合計</h3>
 						</div>
 						<div class="panel-body" align="center">${HtmlUtils.formatComma(thisMonthSum)}</div>
 					</div>

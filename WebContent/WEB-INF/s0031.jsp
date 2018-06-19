@@ -69,7 +69,6 @@
 		 			<div class="col-sm-5">
 						<input type="text" class="form-control" name="password1" value="${param.password1}" readonly>
 					</div>
-
 				</div>
 
 				<div class="form-group">
@@ -82,16 +81,16 @@
 				<div class="form-group">
 					<label for="authority1" class="col-sm-3 control-label">売上登録権限 <span class="badge">必須</span></label>
 						<div class="col-sm-5">
-							<label><input type="radio" name="authority1" value="0" ${AuthorityUtils.checkAuthoritya(param.authority1)} readonly onclick="return false;">権限なし</label>
-							<label><input type="radio" name="authority1" value="1" ${AuthorityUtils.checkAuthorityb(param.authority1)} readonly onclick="return false;">権限あり</label>
+							<label><input type="radio" name="authority1" value="0" ${param.authority1 eq 0 ? 'checked' : ''} readonly onclick="return false;">権限なし</label>
+							<label><input type="radio" name="authority1" value="1" ${param.authority1 eq 1 ? 'checked' : ''} readonly onclick="return false;">権限あり</label>
 						</div>
 				</div>
 
 				<div class="form-group">
 					<label for="authority2" class="col-sm-3 control-label">アカウント登録権限 <span class="badge">必須</span></label>
 						<div class="col-sm-5">
-							<label><input type="radio" name="authority2" value="0" ${AuthorityUtils.checkAuthoritya(param.authority2)} readonly onclick="return false;">権限なし</label>
-							<label><input type="radio" name="authority2" value="1" ${AuthorityUtils.checkAuthorityb(param.authority2)} readonly onclick="return false;">権限あり</label>
+							<label><input type="radio" name="authority2" value="0" ${param.authority2 eq 0 ? 'checked' : ''} readonly onclick="return false;">権限なし</label>
+							<label><input type="radio" name="authority2" value="1" ${param.authority2 eq 1 ? 'checked' : ''} readonly onclick="return false;">権限あり</label>
 						</div>
 				</div>
 

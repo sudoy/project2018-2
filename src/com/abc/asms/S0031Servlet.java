@@ -54,17 +54,22 @@ public class S0031Servlet extends HttpServlet {
 		String authority2 = req.getParameter("authority2");
 		String authority = authority1 + authority2;
 
+		//売上登録権限の値が1、アカウント登録権限の値が0の時→0に変換
 		if (authority.equals("00")) {
 			authority = "0";
 		}
 
+		//売上登録権限の値が1、アカウント登録権限の値が0の時→1に変換
 		if (authority.equals("10")) {
 			authority = "1";
 		}
 
+		//売上登録権限の値が0、アカウント登録権限の値が1の時→10に変換
 		if(authority.equals("01")) {
 			authority = "10";
 		}
+
+		//売上登録権限の値が1、アカウント登録権限の値が1の時は11なので変換の必要なし
 
 		Connection con = null;
 		PreparedStatement ps = null;

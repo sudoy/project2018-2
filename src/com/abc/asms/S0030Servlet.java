@@ -125,67 +125,67 @@ public class S0030Servlet extends HttpServlet {
 		List<String> errors = new ArrayList<>();
 
 		//氏名必須入力チェック
-		if (name.equals("")) {
+		if (name.equals("")){
 			errors.add("氏名を入力してください。");
 		}
 
 		//氏名長さチェック
-		if (name.length() >= 21) {
+		if (name.length() >= 21){
 			errors.add("氏名が長すぎます。");
 		}
 
 		//メールアドレス必須チェック
-		if (mail.equals("")) {
+		if (mail.equals("")){
 			errors.add("メールアドレスを入力してください。");
 		}
 
 		//メールアドレス長さチェック
-		if (mail.length() >= 101) {
+		if (mail.length() >= 101){
 			errors.add("メールアドレスが長すぎます。");
 		}
 
 		//メールアドレス形式チェック
-		if(!mail.equals("") && !mail.contains("@")) {
+		if(!mail.equals("") && !mail.contains("@")){
 			errors.add("メールアドレスの形式が間違っています。");
 		}
 
 		//パスワード必須入力チェック
-		if (password1.equals("")) {
+		if (password1.equals("")){
 			errors.add("パスワードを入力してください。");
 		}
 
 		//パスワード長さチェック
-		if (password1.length() >= 31) {
+		if (password1.length() >= 31){
 			errors.add("パスワードが長すぎます。");
 		}
 
 		//パスワード(確認)必須入力チェック
-		if (password1.equals("")) {
+		if (password1.equals("")){
 			errors.add("パスワード(確認)を入力してください。");
 		}
 
 		//パスワード等値チェック
-		if (!password1.equals(password2)) {
+		if (!password1.equals(password2)){
 			errors.add("パスワードとパスワード（確認）が一致していません。");
 		}
 
 		//売上登録権限必須チェック
-		if (authority1.equals("")) {
+		if (authority1 == null){
 			errors.add("売上登録権限を入力してください。");
 		}
 
 		//売上登録権限値チェック
-		if (!authority1.equals("0") && !authority1.equals("1")) {
+		if (!(authority1 == null) && !authority1.equals("0") && !authority1.equals("1")){
 			errors.add("売上登録権限に正しい値を入力してください。");
 		}
 
 		//アカウント登録権限必須チェック
-		if (authority2.equals("")) {
+		if (authority2 == null){
 			errors.add("アカウント登録権限を入力してください。");
 		}
 
 		//アカウント登録権限必須チェック
-		if (!authority2.equals("0") && !authority2.equals("1")) {
+		if (!(authority1 == null) && !authority2.equals("0") && !authority2.equals("1")){
 			errors.add("アカウント登録権限に正しい値を入力してください。");
 		}
 
