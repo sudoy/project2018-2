@@ -3,26 +3,31 @@ package com.abc.asms.beans;
 import java.time.LocalDate;
 
 public class S0022 {
-	private LocalDate sale_date;
+	private int saleId;
+	private LocalDate saleDate;
 	private String name;
-	private String category_name;
-	private String trade_name;
-	private int unit_price;
-	private int sale_number;
+	private String categoryName;
+	private String tradeName;
+	private int unitPrice;
+	private int saleNumber;
 	private int sum;
 	private String note;
-	private int sale_id;
 
-//	public Detail_beans2() {
-//
-//	}
 
-	public LocalDate getSale_date() {
-		return sale_date;
+	public int getSale_id() {
+		return saleId;
 	}
 
-	public void setSale_date(LocalDate sale_date) {
-		this.sale_date = sale_date;
+	public void setSale_id(int saleId) {
+		this.saleId = saleId;
+	}
+
+	public LocalDate getSale_date() {
+		return saleDate;
+	}
+
+	public void setSale_date(LocalDate saleDate) {
+		this.saleDate = saleDate;
 	}
 
 	public String getName() {
@@ -34,35 +39,35 @@ public class S0022 {
 	}
 
 	public String getTrade_name() {
-		return trade_name;
+		return tradeName;
 	}
 
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
+	public void setCategory_name(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	public String getCategory_name() {
-		return category_name;
+		return categoryName;
 	}
 
-	public void setTrade_name(String trade_name) {
-		this.trade_name = trade_name;
+	public void setTrade_name(String tradeName) {
+		this.tradeName = tradeName;
 	}
 
 	public int getUnit_price() {
-		return unit_price;
+		return unitPrice;
 	}
 
-	public void setUnit_price(int price) {
-		this.unit_price = price;
+	public void setUnit_price(int unitPrice) {
+		this.unitPrice = unitPrice;
 	}
 
 	public int getSale_number() {
-		return sale_number;
+		return saleNumber;
 	}
 
-	public void setSale_number(int count) {
-		this.sale_number = count;
+	public void setSale_number(int saleNumber) {
+		this.saleNumber = saleNumber;
 	}
 
 	public int getSum() {
@@ -81,26 +86,19 @@ public class S0022 {
 		this.note = note;
 	}
 
-	public int getSale_id() {
-		return sale_id;
-	}
-
-	public void setSale_id(int sale_id) {
-		this.sale_id = sale_id;
-	}
-
-	public S0022(LocalDate sale_date, String name, String category_name, String trade_name, int price, int count,
-			int sum, String note, int sale_id) {
+	public S0022(int saleId, LocalDate saleDate, String name, String categoryName, String tradeName, int price, int count,
+			int sum, String note) {
 		super();
-		this.sale_date = sale_date;
+		this.saleId = saleId;
+		this.saleDate = saleDate;
 		this.name = name;
-		this.category_name = category_name;
-		this.trade_name = trade_name;
-		this.unit_price = price;
-		this.sale_number = count;
+		this.categoryName = categoryName;
+		this.tradeName = tradeName;
+		this.unitPrice = price;
+		this.saleNumber = count;
 		this.sum = sum;
 		this.note = note;
-		this.sale_id = sale_id;
+
 	}
 
 

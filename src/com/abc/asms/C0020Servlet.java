@@ -19,12 +19,24 @@ import javax.servlet.http.HttpSession;
 import com.abc.asms.beans.Accounts;
 import com.abc.asms.beans.C0020;
 import com.abc.asms.utils.DBUtils;
+import com.abc.asms.utils.Utils;
 
 @WebServlet("/C0020.html")
 public class C0020Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+
+		//ログインチェック
+		if (!Utils.checkLogin(req, resp)) {
+			return;
+		}
+
+		//セッションに保存されたアカウント情報を持ってくる
+		HttpSession session = req.getSession();
+		Accounts accounts = (Accounts)session.getAttribute("accounts");
+		int accountId = accounts.getAccountId();
+		String strAccountId = String.valueOf(accountId);
 
 		// localDateから現在時刻を抽出するか否かの判定
 		LocalDate ld = null;
@@ -55,7 +67,6 @@ public class C0020Servlet extends HttpServlet {
 		LocalDate last = null;
 
 		// 前月と翌月のパラメータ取得
-
 		if(req.getParameter("back") != null) {
 			// 前月
 			today = DateTimeFormatter.ofPattern("yyyy年MM月").format(ld.minusMonths(1));
@@ -89,12 +100,6 @@ public class C0020Servlet extends HttpServlet {
 		int thisMonthSum = 0;
 		int lastMonthSum = 0;
 
-		//セッションに保存されたアカウント情報を持ってくる
-		HttpSession session = req.getSession();
-		Accounts accounts = (Accounts)session.getAttribute("accounts");
-		int accountId = accounts.getAccountId();
-		String strAccountId = String.valueOf(accountId);
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -103,12 +108,15 @@ public class C0020Servlet extends HttpServlet {
 		try{
 			con = DBUtils.getConnection();
 
-			sql = "SELECT SUM(unit_price * sale_number) AS sum1 FROM sales WHERE sale_date between ? and ?;";
+			sql = "SELECT SUM(unit_price * sale_number) AS sum1 "
+					+ "FROM sales "
+					+ "WHERE sale_date BETWEEN ? AND ? AND account_id = ?;";
 
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, first.toString());
 			ps.setString(2, last.toString());
+			ps.setString(3, strAccountId);
 
 			rs = ps.executeQuery();
 
@@ -123,12 +131,15 @@ public class C0020Servlet extends HttpServlet {
 				DBUtils.close(rs);
 			}catch(Exception e){}
 
-			sql = "SELECT SUM(unit_price * sale_number) AS sum2 FROM sales WHERE sale_date between ? and ?;";
+			sql = "SELECT SUM(unit_price * sale_number) AS sum2 "
+					+ "FROM sales "
+					+ "WHERE sale_date BETWEEN ? AND ? AND account_id = ?;";
 
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, lastMonthFirst.toString());
 			ps.setString(2, lastMonthLast.toString());
+			ps.setString(3, strAccountId);
 
 			rs = ps.executeQuery();
 
@@ -143,11 +154,12 @@ public class C0020Servlet extends HttpServlet {
 				DBUtils.close(rs);
 			}catch(Exception e){}
 
-			sql = "select * from accounts a "
-					+"left join sales s on s.account_id = a.account_id "
-					+"left join categories c on c.category_id = s.category_id "
-					+ "where s.sale_date between ? and ? and a.account_id = ?"
-					+ "order by s.sale_date;";
+			sql = "SELECT s.sale_id, s.sale_date, c.category_name, s.trade_name, s.unit_price, s.sale_number "
+					+ "FROM accounts a "
+					+"LEFT JOIN sales s ON s.account_id = a.account_id "
+					+"LEFT JOIN categories c ON c.category_id = s.category_id "
+					+ "WHERE s.sale_date BETWEEN ? AND ? AND a.account_id = ? "
+					+ "ORDER BY s.sale_date;";
 
 			ps = con.prepareStatement(sql);
 

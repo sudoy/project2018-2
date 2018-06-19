@@ -65,6 +65,7 @@ public class S0022Servlet extends HttpServlet {
 
 			//s22へ取得したデータをセット
 			S0022 s22 = new S0022(
+						rs.getInt("sale_id"),
 						Utils.date2LocalDate(rs.getDate("sale_date")),
 						rs.getString("name"),
 						rs.getString("category_name"),
@@ -72,9 +73,7 @@ public class S0022Servlet extends HttpServlet {
 						rs.getInt("unit_price"),
 						rs.getInt("sale_number"),
 						rs.getInt("sum"),
-						rs.getString("note"),
-						rs.getInt("sale_id")
-
+						rs.getString("note")
 					);
 
 			//設定
@@ -88,9 +87,9 @@ public class S0022Servlet extends HttpServlet {
 			throw new ServletException();
 		}finally {
 			try {
-				DBUtils.close(con);
+				DBUtils.close(rs);
 				DBUtils.close(ps);
-				DBUtils.close(rs);  //DB接続終了
+				DBUtils.close(con);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

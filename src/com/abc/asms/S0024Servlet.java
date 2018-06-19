@@ -18,8 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.abc.asms.beans.Accounts;
-import com.abc.asms.beans.Categories;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.DBUtils2;
@@ -106,16 +104,17 @@ public class S0024Servlet extends HttpServlet {
 
 					rs = ps.executeQuery();
 
-					//sqlが実行出来なかったらエラー　→　s0010に返す
+					//sqlが実行出来なかったらエラー
 					if(!rs.next()) {
 						DBUtils2.getConnection2(req, resp);
 
 						errors.add("アカウントテーブルに存在しません。");
 						session.setAttribute("errors", errors);
-						getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
+						getServletContext().getRequestDispatcher("/WEB-INF/s0023.jsp")
 							.forward(req, resp);
 						return;
 					}
+
 				}catch(Exception e){
 					throw new ServletException(e);
 				}finally{
@@ -139,16 +138,17 @@ public class S0024Servlet extends HttpServlet {
 
 					rs = ps.executeQuery();
 
-					//sqlが実行出来なかったらエラー　→　s0010に返す
+
 					if(!rs.next()) {
 						DBUtils2.getConnection2(req, resp);
 
 						errors.add("商品テーブルに存在しません。");
 						req.setAttribute("errors", errors);
-						getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
+						getServletContext().getRequestDispatcher("/WEB-INF/s0023.jsp")
 							.forward(req, resp);
 						return;
 					}
+
 				}catch(Exception e){
 					throw new ServletException(e);
 				}finally{
@@ -160,7 +160,6 @@ public class S0024Servlet extends HttpServlet {
 					}
 				}
 
-				DBUtils2.getConnection2(req, resp);
 			}catch(Exception e){
 				throw new ServletException(e);
 			}finally{
@@ -173,78 +172,8 @@ public class S0024Servlet extends HttpServlet {
 				}
 			}
 
-			try {
-				con = DBUtils.getConnection();
+			DBUtils2.getConnection2(req, resp);
 
-				//SQL
-				sql = "select category_id,category_name, active_flg from categories where active_flg = 1";
-				//SELECT命令の準備
-				ps = con.prepareStatement(sql);
-
-				//SELECT命令を実行
-				rs = ps.executeQuery();
-
-				List<Categories> categories = new ArrayList<>();
-				while (rs.next()) {
-					Categories category = new Categories(
-							rs.getInt("category_id"),
-							rs.getString("category_name"),
-							rs.getInt("active_flg"));
-					categories.add(category);
-				}
-
-				req.setAttribute("categories", categories);
-
-			} catch (Exception e) {
-				throw new ServletException(e);
-
-			} finally {
-				try {
-					DBUtils.close(con);
-					DBUtils.close(ps);
-					DBUtils.close(rs);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-
-			try {
-
-				con = DBUtils.getConnection();
-
-				sql = "select account_id,name,mail,password,authority  from accounts where account_id = ?";
-				//SELECT命令の準備
-				ps = con.prepareStatement(sql);
-
-				ps.setString(1, account_id);
-				//SELECT命令を実行
-				rs = ps.executeQuery();
-
-				List<Accounts> accounts = new ArrayList<>();
-				while (rs.next()) {
-					Accounts account = new Accounts(
-							rs.getInt("account_id"),
-							rs.getString("name"),
-							rs.getString("mail"),
-							rs.getString("password"),
-							rs.getInt("authority"));
-
-					accounts.add(account);
-				}
-				req.setAttribute("accounts", accounts);
-
-			} catch (Exception e) {
-				throw new ServletException(e);
-
-			} finally {
-				try {
-					DBUtils.close(con);
-					DBUtils.close(ps);
-					DBUtils.close(rs);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 			req.getServletContext().getRequestDispatcher("/WEB-INF/s0024.jsp").forward(req, resp);
 
 

@@ -4,6 +4,7 @@
 <%@page import="com.abc.asms.utils.HtmlUtils" %>
 
 <c:set var="data" value="${today}" />
+<c:set var="MoM" value="${(thisMonthSum / lastMonthSum) * 100}" />
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -87,38 +88,37 @@
 			</div>
 		</div>
 
-
 	<div class="row">
 		<div class="col-sm-4">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-			<h3 class="panel-title">前月（5月）の売上合計</h3>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">前月（5月）の売上合計</h3>
+				</div>
+				<div class="panel-body" align="center">${HtmlUtils.formatComma(lastMonthSum)}</div>
 			</div>
-			<div class="panel-body" align="center">${HtmlUtils.formatComma(lastMonthSum)}</div>
 		</div>
-		</div>
-
 
 		<div class="col-sm-4">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-			<h3 class="panel-title">今月（6月）の売上合計</h3>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">今月（6月）の売上合計</h3>
+				</div>
+				<div class="panel-body" align="center">${HtmlUtils.formatComma(thisMonthSum)}</div>
 			</div>
-			<div class="panel-body" align="center">${HtmlUtils.formatComma(thisMonthSum)}</div>
 		</div>
-		</div>
-
 
 		<div class="col-sm-4">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-			<h3 class="panel-title">前月比</h3>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">前月比</h3>
+				</div>
+				<div class="panel-body" align="center">
+					<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"><fmt:formatNumber value="${MoM}" pattern="0.00" />%</span>
+				</div>
 			</div>
-			<div class="panel-body" align="center"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true">120.00%</span></div>
 		</div>
-		</div>
+	</div><!-- /.row -->
 
-		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading">今月の${accounts.name}さんの売上</div>
 			<div class="panel-body">
