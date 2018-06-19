@@ -81,7 +81,7 @@ public class AuthorityUtils {
 	}
 
 	public static String checkAuthority1(String authority) {
-		if (authority.equals("1") || authority.equals("11")) {
+		if (authority.equals("1") || authority.equals("11") || authority.equals("")) {
 			return "";
 		} else {
 			return "checked";
