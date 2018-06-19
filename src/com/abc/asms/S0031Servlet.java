@@ -20,8 +20,9 @@ import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0031.html")
 public class S0031Servlet extends HttpServlet {
+
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
 		//ログインチェック
@@ -34,14 +35,6 @@ public class S0031Servlet extends HttpServlet {
 			return;
 		}
 
-		getServletContext().getRequestDispatcher("/WEB-INF/s0031.jsp")
-			.forward(req, resp);
-
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
 
@@ -52,24 +45,7 @@ public class S0031Servlet extends HttpServlet {
 		String password1 = req.getParameter("password1");
 		String authority1 = req.getParameter("authority1");
 		String authority2 = req.getParameter("authority2");
-		String authority = authority1 + authority2;
-
-		//売上登録権限の値が1、アカウント登録権限の値が0の時→0に変換
-		if (authority.equals("00")) {
-			authority = "0";
-		}
-
-		//売上登録権限の値が1、アカウント登録権限の値が0の時→1に変換
-		if (authority.equals("10")) {
-			authority = "1";
-		}
-
-		//売上登録権限の値が0、アカウント登録権限の値が1の時→10に変換
-		if(authority.equals("01")) {
-			authority = "10";
-		}
-
-		//売上登録権限の値が1、アカウント登録権限の値が1の時は11なので変換の必要なし
+		String authority = authority2 + authority1;
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -108,7 +84,6 @@ public class S0031Servlet extends HttpServlet {
 			if(rs.next()) {
 				//sqlからidを取り出してsetAttribute
 				id = rs.getInt("id");
-				req.setAttribute("id", id);
 
 				//成功メッセージ（遷移先で出る）
 				List<String> successes = new ArrayList<>();
@@ -121,6 +96,7 @@ public class S0031Servlet extends HttpServlet {
 
 		}finally{
 			try{
+				DBUtils.close(rs);
 				DBUtils.close(ps);
 				DBUtils.close(con);
 			}catch(Exception e){}

@@ -40,8 +40,8 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="C0010.html">ログアウト</a></li>
 					</ul>
-				</div><!-- /.navbar-collapse -->
-			</div><!-- /.container-fluid -->
+				</div>
+			</div>
 		</nav>
 
 		<div class="container">

@@ -54,7 +54,6 @@ public class S0030Servlet extends HttpServlet {
 		String password2 = req.getParameter("password2");
 		String authority1 = req.getParameter("authority1");
 		String authority2 = req.getParameter("authority2");
-		String authority = authority1 + authority2;
 
 		req.setAttribute("accountId", accountId);
 		req.setAttribute("name", name);
@@ -63,7 +62,6 @@ public class S0030Servlet extends HttpServlet {
 		req.setAttribute("password2", password2);
 		req.setAttribute("authority1", authority1);
 		req.setAttribute("authority2", authority2);
-		req.setAttribute("authority", authority);
 
 		//バリデーションチェック(メールアドレス重複チェック以外)
 		List<String> errors = validate(accountId, name, mail,
@@ -126,7 +124,7 @@ public class S0030Servlet extends HttpServlet {
 
 		//氏名必須入力チェック
 		if (name.equals("")){
-			errors.add("氏名を入力してください。");
+			errors.add("氏名を入力して下さい。");
 		}
 
 		//氏名長さチェック
@@ -136,7 +134,7 @@ public class S0030Servlet extends HttpServlet {
 
 		//メールアドレス必須チェック
 		if (mail.equals("")){
-			errors.add("メールアドレスを入力してください。");
+			errors.add("メールアドレスを入力して下さい。");
 		}
 
 		//メールアドレス長さチェック
@@ -146,12 +144,12 @@ public class S0030Servlet extends HttpServlet {
 
 		//メールアドレス形式チェック
 		if(!mail.equals("") && !mail.contains("@")){
-			errors.add("メールアドレスの形式が間違っています。");
+			errors.add("メールアドレスを正しく入力して下さい。");
 		}
 
 		//パスワード必須入力チェック
 		if (password1.equals("")){
-			errors.add("パスワードを入力してください。");
+			errors.add("パスワードを入力して下さい。");
 		}
 
 		//パスワード長さチェック
@@ -160,8 +158,8 @@ public class S0030Servlet extends HttpServlet {
 		}
 
 		//パスワード(確認)必須入力チェック
-		if (password1.equals("")){
-			errors.add("パスワード(確認)を入力してください。");
+		if (password2.equals("")){
+			errors.add("パスワード(確認)を入力して下さい。");
 		}
 
 		//パスワード等値チェック
@@ -171,22 +169,22 @@ public class S0030Servlet extends HttpServlet {
 
 		//売上登録権限必須チェック
 		if (authority1 == null){
-			errors.add("売上登録権限を入力してください。");
+			errors.add("売上登録権限を入力して下さい。");
 		}
 
 		//売上登録権限値チェック
 		if (!(authority1 == null) && !authority1.equals("0") && !authority1.equals("1")){
-			errors.add("売上登録権限に正しい値を入力してください。");
+			errors.add("売上登録権限に正しい値を入力して下さい。");
 		}
 
 		//アカウント登録権限必須チェック
 		if (authority2 == null){
-			errors.add("アカウント登録権限を入力してください。");
+			errors.add("アカウント登録権限を入力して下さい。");
 		}
 
 		//アカウント登録権限必須チェック
-		if (!(authority1 == null) && !authority2.equals("0") && !authority2.equals("1")){
-			errors.add("アカウント登録権限に正しい値を入力してください。");
+		if (!(authority2 == null) && !authority2.equals("0") && !authority2.equals("1")){
+			errors.add("アカウント登録権限に正しい値を入力して下さい。");
 		}
 
 		return errors;
