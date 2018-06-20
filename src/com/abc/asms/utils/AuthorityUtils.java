@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import com.abc.asms.beans.Accounts;
 
 public class AuthorityUtils {
+	
 	public static boolean checkAccountEditAuthority(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 
@@ -79,7 +80,7 @@ public class AuthorityUtils {
 	}
 
 	public static String checkAuthority1(String authority) {
-		if (authority.equals("1") || authority.equals("11") || authority.equals("")) {
+		if (authority.equals("1") || authority.equals("11")) {
 			return "";
 		} else {
 			return "checked";
@@ -111,37 +112,4 @@ public class AuthorityUtils {
 		}
 
 	}
-
-	public static String checkAuthoritya(String authority) {
-		if (authority.equals("0")) {
-			return "checked";
-		} else {
-			return "";
-		}
-	}
-
-	public static String checkAuthorityb(String authority) {
-		if (authority.equals("1")) {
-			return "checked";
-		} else {
-			return "";
-		}
-	}
-
-	public static String checkAuthority3a(String authority) {
-		if (authority.equals("0")) {
-			return "1";
-		} else {
-			return "";
-		}
-	}
-
-	public static String checkAuthority4a(String authority) {
-		if (authority.equals("1")) {
-			return "10";
-		} else {
-			return "";
-		}
-	}
-
 }

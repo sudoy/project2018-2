@@ -70,6 +70,7 @@ public class S0044Servlet extends HttpServlet {
 					.forward(req, resp);
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new ServletException(e);
 		} finally {
 			try {
@@ -77,6 +78,7 @@ public class S0044Servlet extends HttpServlet {
 				DBUtils.close(ps);
 				DBUtils.close(con);
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}
@@ -87,6 +89,11 @@ public class S0044Servlet extends HttpServlet {
 
 		//ログインチェック
 		if (!Utils.checkLogin(req, resp)) {
+			return;
+		}
+
+		//権限チェック
+		if (!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
 			return;
 		}
 
@@ -120,6 +127,7 @@ public class S0044Servlet extends HttpServlet {
 			resp.sendRedirect("S0041.html");
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new ServletException(e);
 		} finally {
 			try {
@@ -127,6 +135,7 @@ public class S0044Servlet extends HttpServlet {
 				DBUtils.close(ps);
 				DBUtils.close(con);
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}

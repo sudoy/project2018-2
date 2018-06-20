@@ -76,6 +76,7 @@ public class S0045Servlet extends HttpServlet {
 					return;
 				}
 			} catch (Exception e) {
+				e.printStackTrace();
 				throw new ServletException(e);
 			} finally {
 				try {
@@ -83,6 +84,7 @@ public class S0045Servlet extends HttpServlet {
 					DBUtils.close(ps);
 					DBUtils.close(con);
 				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 

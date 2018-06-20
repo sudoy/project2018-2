@@ -39,16 +39,14 @@
 					<li><a href="S0010.html">売上登録</a></li>
 					<li><a href="S0020.html">売上検索</a></li>
 					<li><a href="S0030.html">アカウント登録</a></li>
-					<li class="active"><a href="S0041.html">アカウント検索</a></li>
+					<li class="active"><a href="S0040.html">アカウント検索</a></li>
 
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="C0010.html">ログアウト</a></li>
 				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container-fluid -->
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
 	</nav>
 
 	<div class="container">
@@ -112,9 +110,9 @@
 					class="badge">必須</span></label>
 				<div class="radio">
 					<label><input type="radio" name="authority2" value="0"
-						${AuthorityUtils.checkAuthority3(param.authority2 != null ? AuthorityUtils.checkAuthority3a(param.authority2) : accounts.authority)}>権限なし</label>
-					<label><input type="radio" name="authority2" value="1"
-						${AuthorityUtils.checkAuthority4(param.authority2 != null ? AuthorityUtils.checkAuthority4a(param.authority2) : accounts.authority)}>権限あり</label>
+						${AuthorityUtils.checkAuthority3(param.authority2 != null ? param.authority2 : accounts.authority)}>権限なし</label>
+					<label><input type="radio" name="authority2" value="10"
+						${AuthorityUtils.checkAuthority4(param.authority2 != null ? param.authority2 : accounts.authority)}>権限あり</label>
 				</div>
 			</div>
 
@@ -128,10 +126,8 @@
 			</div>
 
 		</form>
-	</div>
-	<!-- /container -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	</div><!-- /container -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

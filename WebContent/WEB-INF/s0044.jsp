@@ -21,7 +21,6 @@
 <body>
 	<nav class="navbar navbar-default">
 		<div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#global-nav"
@@ -33,7 +32,6 @@
 				<a class="navbar-brand" href="C0020.html">物品売上管理システム</a>
 			</div>
 
-			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
@@ -41,16 +39,14 @@
 					<li><a href="S0010.html">売上登録</a></li>
 					<li><a href="S0020.html">売上検索</a></li>
 					<li><a href="S0030.html">アカウント登録</a></li>
-					<li class="active"><a href="S0041.html">アカウント検索</a></li>
+					<li class="active"><a href="S0040.html">アカウント検索</a></li>
 
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="C0010.html">ログアウト</a></li>
 				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container-fluid -->
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
 	</nav>
 
 	<div class="container">
@@ -113,7 +109,7 @@
 				<div class="radio">
 					<label><input type="radio" name="authority1" value="0"
 						${AuthorityUtils.checkAuthority3(accounts.authority)} disabled>権限なし</label>
-					<label><input type="radio" name="authority1" value="1"
+					<label><input type="radio" name="authority1" value="10"
 						${AuthorityUtils.checkAuthority4(accounts.authority)} disabled>権限あり</label>
 				</div>
 			</div>
@@ -125,19 +121,11 @@
 							O K</span>
 					</button>
 					<a href="S0041.html" class="btn btn-default">キャンセル</a>
-
-					<!--
-			<button type="button" class="btn btn-primary">O K</button>
-			<button type="button" class="btn btn-default">キャンセル</button>
-			-->
 				</div>
 			</div>
-
 		</form>
-	</div>
-	<!-- /container -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	</div><!-- /container -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

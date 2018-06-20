@@ -43,8 +43,9 @@ public class S0043Servlet extends HttpServlet {
 		String password = req.getParameter("password");
 		String authority1 = req.getParameter("authority1");
 		String authority2 = req.getParameter("authority2");
+		
 		String authority = authority2 + authority1;
-
+		
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -63,14 +64,6 @@ public class S0043Servlet extends HttpServlet {
 				ps.setString(4, accountId);
 
 				ps.executeUpdate();
-
-				//成功メッセージ
-				List<String> successes = new ArrayList<>();
-				successes.add("No" + accountId + "のアカウントを更新しました。");
-				session.setAttribute("successes", successes);
-
-				resp.sendRedirect("S0041.html");
-
 			} else {
 
 				sql = "update accounts set name = ?, mail = ?, password = MD5(?), authority = ? where account_id = ?";
@@ -83,25 +76,24 @@ public class S0043Servlet extends HttpServlet {
 				ps.setString(4, authority);
 				ps.setString(5, accountId);
 
-				System.out.println(ps);
-
 				ps.executeUpdate();
-
-				//成功メッセージ
-				List<String> successes = new ArrayList<>();
-				successes.add("No" + accountId + "のアカウントを更新しました。");
-				session.setAttribute("successes", successes);
-
-				resp.sendRedirect("S0041.html");
 			}
+			
+			//成功メッセージ
+			List<String> successes = new ArrayList<>();
+			successes.add("No" + accountId + "のアカウントを更新しました。");
+			session.setAttribute("successes", successes);
+			resp.sendRedirect("S0041.html");
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new ServletException(e);
 		} finally {
 			try {
 				DBUtils.close(ps);
 				DBUtils.close(con);
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}

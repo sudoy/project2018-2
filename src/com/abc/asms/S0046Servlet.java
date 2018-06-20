@@ -60,6 +60,7 @@ public class S0046Servlet extends HttpServlet {
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new ServletException(e);
 		} finally {
 			try {
@@ -67,6 +68,7 @@ public class S0046Servlet extends HttpServlet {
 				DBUtils.close(ps);
 				DBUtils.close(con);
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 
@@ -117,6 +119,7 @@ public class S0046Servlet extends HttpServlet {
 				return;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new ServletException(e);
 		} finally {
 			try {
@@ -124,6 +127,7 @@ public class S0046Servlet extends HttpServlet {
 				DBUtils.close(ps);
 				DBUtils.close(con);
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 
@@ -144,6 +148,7 @@ public class S0046Servlet extends HttpServlet {
 			resp.sendRedirect("C0010.html");
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new ServletException(e);
 		} finally {
 			try {

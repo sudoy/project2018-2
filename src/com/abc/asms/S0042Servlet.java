@@ -71,6 +71,7 @@ public class S0042Servlet extends HttpServlet {
 					.forward(req, resp);
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new ServletException(e);
 		} finally {
 			try {
@@ -78,6 +79,8 @@ public class S0042Servlet extends HttpServlet {
 				DBUtils.close(ps);
 				DBUtils.close(con);
 			} catch (Exception e) {
+				e.printStackTrace();
+
 			}
 		}
 	}
@@ -120,7 +123,6 @@ public class S0042Servlet extends HttpServlet {
 		List<String> errors = validate(accountId, name, mail, password, passwordc, authority1, authority2);
 		if (errors.size() > 0) {
 			session.setAttribute("errors", errors);
-			//req.setAttribute("errors", errors);
 			getServletContext().getRequestDispatcher("/WEB-INF/s0042.jsp")
 					.forward(req, resp);
 			return;
@@ -150,35 +152,31 @@ public class S0042Servlet extends HttpServlet {
 			errors.add("メールアドレスが長すぎます。");
 		}
 		//1-5メールアドレス形式チェック
-		//		if (mail.matches("[a-z0-9A-Z]+")) {
-		//			errors.add("メールアドレスの形式が間違っています。");
-		//		}
-		//1-5メールアドレス形式チェック
 		if (!mail.contains("@")) {
 			errors.add("メールアドレスの形式が誤っています。");
 		}
-		//1-6パスワードの長さtチェック
+		//1-7パスワードの長さチェック
 		if (password.length() >= 31) {
 			errors.add("パスワードが長すぎます。");
 		}
-		//1-7パスワード一致チェック
+		//1-9パスワード一致チェック
 		if (!password.equals(passwordc)) {
 			errors.add("パスワードとパスワード（確認）が一致していません。");
 		}
-		//1-8売上登録権限必須チェック
+		//1-10売上登録権限必須チェック
 		if (authority1.equals("")) {
 			errors.add("売上登録権限を入力して下さい。");
 		}
-		//1-9売上登録権限値チェック
+		//1-11売上登録権限値チェック
 		if (!authority1.equals("0") && !authority1.equals("1")) {
 			errors.add("売上登録権限に正しい値を入力して下さい。");
 		}
-		//1-10アカウント登録権限必須チェック
+		//1-12アカウント登録権限必須チェック
 		if (authority2.equals("")) {
 			errors.add("アカウント登録権限を入力して下さい。");
 		}
-		//1-11アカウント登録権限必須チェック
-		if (!authority2.equals("0") && !authority2.equals("1")) {
+		//1-13アカウント登録権限必須チェック
+		if (!authority2.equals("0") && !authority2.equals("10")) {
 			errors.add("アカウント登録権限に正しい値を入力して下さい。");
 		}
 		return errors;
