@@ -66,7 +66,9 @@ public class DBUtils {
 			try{
 				DBUtils.close(rs);
 				DBUtils.close(ps);
-			}catch(Exception e){}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 
 			sql = "select account_id,name,mail,password,authority  from accounts order by account_id";
 
@@ -102,8 +104,8 @@ public class DBUtils {
 				e.printStackTrace();
 			}
 		}
-
 	}
+
 	public static void getCategoriesAndAccountsForS0021(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException {
 
@@ -139,7 +141,9 @@ public class DBUtils {
 			try{
 				DBUtils.close(rs);
 				DBUtils.close(ps);
-			}catch(Exception e){}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 
 			sql = "select account_id,name,mail,password,authority  from accounts order by account_id";
 

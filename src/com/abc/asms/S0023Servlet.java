@@ -82,6 +82,7 @@ public class S0023Servlet extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new ServletException();
 		}finally {
 			try {
 				DBUtils.close(con);
