@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 import javax.mail.AuthenticationFailedException;
 import javax.mail.Message;
@@ -140,7 +141,6 @@ public class S0045Servlet extends HttpServlet {
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0045.jsp")
 				.forward(req, resp);
-
 	}
 
 	private List<String> validate(String mail) {
@@ -154,7 +154,18 @@ public class S0045Servlet extends HttpServlet {
 			errors.add("メールアドレスが長すぎます。");
 		}
 		//1-3メールアドレス形式チェック
-		if (!mail.contains("@")) {
+//		if (!mail.contains("@") 
+//				&& !mail.equals("") 
+//				//&& !mail.substring(0, 1).equals("[0-9a-zA-Z]") 
+//				) {
+//			errors.add("メールアドレスを正しく入力して下さい。");
+//		}
+
+		String pattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$" ;
+		
+		Pattern p = Pattern.compile(pattern);
+		if(p.matcher(mail).find()){
+		}else{
 			errors.add("メールアドレスを正しく入力して下さい。");
 		}
 
