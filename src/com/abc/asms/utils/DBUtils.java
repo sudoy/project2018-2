@@ -52,16 +52,16 @@ public class DBUtils {
 			//SELECT命令を実行
 			rs = ps.executeQuery();
 
-			List<Categories> list = new ArrayList<>();
+			List<Categories> list1 = new ArrayList<>();
 			while(rs.next()) {
 				Categories category = new Categories(rs.getInt("category_id"),
 											rs.getString("category_name"),
 											rs.getInt("active_flg"));
-				list.add(category);
+				list1.add(category);
 			}
 
 			//JavaBeansをJSPへ渡す
-			req.setAttribute("list", list);
+			req.setAttribute("list1", list1);
 
 			try{
 				DBUtils.close(rs);

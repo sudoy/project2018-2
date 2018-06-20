@@ -93,7 +93,7 @@ public class S0011Servlet extends HttpServlet {
 
 				//成功メッセージ（遷移先で出る）
 				List<String> successes = new ArrayList<>();
-				successes.add("No" + id + "のアカウントを登録しました。");
+				successes.add("No" + id + "の売上を登録しました。");
 				session.setAttribute("successes", successes);
 			}
 
