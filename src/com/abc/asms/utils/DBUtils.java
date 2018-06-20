@@ -44,7 +44,7 @@ public class DBUtils {
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "select category_id,category_name, active_flg from categories where active_flg = 1";
+			sql = "select category_id,category_name, active_flg from categories where active_flg = 1 order by category_id";
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
@@ -68,7 +68,80 @@ public class DBUtils {
 				DBUtils.close(ps);
 			}catch(Exception e){}
 
-			sql = "select account_id,name,mail,password,authority  from accounts";
+			sql = "select account_id,name,mail,password,authority  from accounts order by account_id";
+
+			//SELECT命令の準備
+			ps = con.prepareStatement(sql);
+
+			//SELECT命令を実行
+			rs = ps.executeQuery();
+
+			List<Accounts> list2 = new ArrayList<>();
+			while(rs.next()) {
+				Accounts account = new Accounts(rs.getInt("account_id"),
+										rs.getString("name"),
+										rs.getString("mail"),
+										rs.getString("password"),
+										rs.getInt("authority"));
+				list2.add(account);
+			}
+
+			//JavaBeansをJSPへ渡す
+			req.setAttribute("list2", list2);
+
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new ServletException(e);
+		}finally{
+			//終了処理
+			try{
+				DBUtils.close(rs);
+				DBUtils.close(ps);
+				DBUtils.close(con);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+
+	}
+	public static void getCategoriesAndAccountsForS0021(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException {
+
+		//担当と商品カテゴリー出すためのメソッド
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+
+		try{
+			con = DBUtils.getConnection();
+
+			//SQL
+			sql = "select category_id,category_name, active_flg from categories order by category_id";
+
+			//SELECT命令の準備
+			ps = con.prepareStatement(sql);
+
+			//SELECT命令を実行
+			rs = ps.executeQuery();
+
+			List<Categories> list1 = new ArrayList<>();
+			while(rs.next()) {
+				Categories category = new Categories(rs.getInt("category_id"),
+											rs.getString("category_name"),
+											rs.getInt("active_flg"));
+				list1.add(category);
+			}
+
+			//JavaBeansをJSPへ渡す
+			req.setAttribute("list1", list1);
+
+			try{
+				DBUtils.close(rs);
+				DBUtils.close(ps);
+			}catch(Exception e){}
+
+			sql = "select account_id,name,mail,password,authority  from accounts order by account_id";
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);

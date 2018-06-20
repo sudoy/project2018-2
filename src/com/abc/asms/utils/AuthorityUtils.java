@@ -15,16 +15,16 @@ public class AuthorityUtils {
 			throws IOException {
 
 		HttpSession session = req.getSession();
-		Accounts accounts = (Accounts)session.getAttribute("accounts");
-		int authorityaccountEditAuthority = accounts.getAuthority();
-		String authority = String.valueOf(authorityaccountEditAuthority);
+		Accounts accounts = (Accounts) session.getAttribute("accounts");
+		int accountEditAuthority = accounts.getAuthority();
+		String authority = String.valueOf(accountEditAuthority);
 		if (!authority.equals("10") && !authority.equals("11")) {
 			List<String> errors = new ArrayList<>();
 			errors.add("不正なアクセスです。");
 			session.setAttribute("errors", errors);
 			resp.sendRedirect("C0020.html");
 			return false;
-		}else {
+		} else {
 			return true;
 		}
 
@@ -35,7 +35,7 @@ public class AuthorityUtils {
 			throws IOException {
 
 		HttpSession session = req.getSession();
-		Accounts accounts = (Accounts)session.getAttribute("accounts");
+		Accounts accounts = (Accounts) session.getAttribute("accounts");
 		int authority = accounts.getAuthority();
 		String salesAuthority = String.valueOf(authority);
 		if (!salesAuthority.equals("1") && !salesAuthority.equals("11")) {
@@ -44,31 +44,29 @@ public class AuthorityUtils {
 			session.setAttribute("errors", errors);
 			resp.sendRedirect("C0020.html");
 			return false;
-		}else {
+		} else {
 			return true;
 		}
 
 	}
 
-	public static boolean tabDeleteAccountAuthority(HttpServletRequest req, HttpServletResponse resp)
+	public static boolean hideBottun(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 
 		HttpSession session = req.getSession();
-		Accounts accounts = (Accounts)session.getAttribute("accounts");
+		Accounts accounts = (Accounts) session.getAttribute("accounts");
 		int authorityaccountEditAuthority = accounts.getAuthority();
 		String authority = String.valueOf(authorityaccountEditAuthority);
 		if (!authority.equals("10") && !authority.equals("11")) {
 
 			return false;
-		}else {
+		} else {
 			return true;
 		}
 
 	}
 
-
-
-	public static String conversionAuthority(String authority) {
+	public static String convertAuthority(String authority) {
 		if (authority.equals("0")) {
 			return "権限なし";
 		} else if (authority.equals("1")) {
