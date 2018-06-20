@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 import javax.mail.AuthenticationFailedException;
 import javax.mail.Message;
@@ -68,13 +69,13 @@ public class S0045Servlet extends HttpServlet {
 				rs = ps.executeQuery();
 
 				//1-4アカウントテーブル存在チェック
-				if (!rs.next()) {
-					errors.add("メールアドレスを正しく入力して下さい。");
-					session.setAttribute("errors", errors);
-					getServletContext().getRequestDispatcher("/WEB-INF/s0045.jsp")
-							.forward(req, resp);
-					return;
-				}
+//				if (!rs.next()) {
+//					errors.add("メールアドレスを正しく入力して下さい。");
+//					session.setAttribute("errors", errors);
+//					getServletContext().getRequestDispatcher("/WEB-INF/s0045.jsp")
+//							.forward(req, resp);
+//					return;
+//				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new ServletException(e);
@@ -140,7 +141,6 @@ public class S0045Servlet extends HttpServlet {
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0045.jsp")
 				.forward(req, resp);
-
 	}
 
 	private List<String> validate(String mail) {
@@ -154,10 +154,33 @@ public class S0045Servlet extends HttpServlet {
 			errors.add("メールアドレスが長すぎます。");
 		}
 		//1-3メールアドレス形式チェック
-		if (!mail.contains("@")) {
+//		if (!mail.contains("@") 
+//				&& !mail.equals("") 
+//				&& !mail.substring(0, 1).equals("[0-9a-zA-Z]")
+//				&& !mail.substring(1, ).equals("[0-9a-zA-Z]")
+//				) {
+//			errors.add("メールアドレスを正しく入力して下さい。");
+//		}
+//		System.out.println(mail.substring(1));
+
+		String pattern = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]";
+		Pattern p = Pattern.compile(pattern);
+		
+		if(!p.matcher(mail).find()){
 			errors.add("メールアドレスを正しく入力して下さい。");
 		}
-
+		String key = "@";
+		 
+		int result = mail.indexOf(key);
+ 
+		if (result != -1) {
+			System.out.println(key + "が見つかった位置：" + result);
+		} 
+		System.out.println(mail.substring(6));
+		
+		if(!p.matcher(mail).find() && !mail.substring(6).contains(".")){
+			errors.add("メールアドレスを正しく入力して下さい。");
+		}
 		return errors;
 	}
 }

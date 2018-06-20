@@ -23,10 +23,10 @@
 	<body>
 
 		<div class="container">
-<jsp:include page="_errors.jsp" />
 
 			<form class="form-signin" action="S0046.html?user=${param.user}" method="post">
 				<h2 class="form-signin-heading">物品売上管理システム</h2>
+				<jsp:include page="_errors.jsp" />
 				<h3 class="form-signin-heading">新パスワード入力</h3>
 				<label for="inputPassword" class="sr-only"></label>
 				<input type="password" name="password1" id="newPasword" class="form-control" placeholder="新パスワード" >
