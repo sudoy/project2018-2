@@ -91,9 +91,9 @@ public class S0042Servlet extends HttpServlet {
 		}
 
 		//権限チェック
-				if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
-					return;
-				}
+		if (!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
+			return;
+		}
 
 		req.setCharacterEncoding("utf-8");
 		HttpSession session = req.getSession();

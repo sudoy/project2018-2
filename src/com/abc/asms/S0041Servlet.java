@@ -30,9 +30,9 @@ public class S0041Servlet extends HttpServlet {
 			return;
 		}
 		//権限チェック
-		if(!AuthorityUtils.tabDeleteAccountAuthority(req, resp)) {
+		if (!AuthorityUtils.hideBottun(req, resp)) {
 			getServletContext().getRequestDispatcher("/WEB-INF/s0041a.jsp")
-			.forward(req, resp);
+					.forward(req, resp);
 		}
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
@@ -40,50 +40,50 @@ public class S0041Servlet extends HttpServlet {
 		PreparedStatement ps = null;
 		String sql = null;
 		ResultSet rs = null;
-		List<String> errors =  new ArrayList<>();
-		if(errors.size() > 0) {
+		List<String> errors = new ArrayList<>();
+		if (errors.size() > 0) {
 			session.setAttribute("errors", errors);
 			getServletContext().getRequestDispatcher("/WEB-INF/s0020.jsp")
-			.forward(req, resp);
+					.forward(req, resp);
 			return;
 		}
-		try{
+		try {
 			con = DBUtils.getConnection();
 			//SQL
 			sql = "select account_id,name,mail,password,authority from accounts where 0 = 0 ";
-			SearchKeepA sa = (SearchKeepA)session.getAttribute("sa");
+			SearchKeepA sa = (SearchKeepA) session.getAttribute("sa");
 			//氏名検索
-			if(sa.getAccountName() != "") {
+			if (sa.getAccountName() != "") {
 				sql += " and name like '%" + sa.getAccountName() + "%'";
-			}else {
+			} else {
 				sql += "";
 			}
 
 			//メール検索
-			if(sa.getMail() != "") {
+			if (sa.getMail() != "") {
 				sql += " and mail like '%" + sa.getMail() + "%'";
-			}else {
+			} else {
 				sql += "";
 			}
 
 			//権限検索
-			if(sa.getSaleAuthority().equals("no") && sa.getAccountAuthority().equals("no")) {
+			if (sa.getSaleAuthority().equals("no") && sa.getAccountAuthority().equals("no")) {
 				sql += " and authority = 0";
-			}else if(sa.getSaleAuthority().equals("ok") && sa.getAccountAuthority().equals("no")) {
+			} else if (sa.getSaleAuthority().equals("ok") && sa.getAccountAuthority().equals("no")) {
 				sql += " and authority = 1";
-			}else if(sa.getSaleAuthority().equals("no") && sa.getAccountAuthority().equals("ok")) {
+			} else if (sa.getSaleAuthority().equals("no") && sa.getAccountAuthority().equals("ok")) {
 				sql += " and authority = 10";
-			}else if(sa.getSaleAuthority().equals("ok") && sa.getAccountAuthority().equals("ok")) {
+			} else if (sa.getSaleAuthority().equals("ok") && sa.getAccountAuthority().equals("ok")) {
 				sql += " and authority = 11";
-			}else if(sa.getSaleAuthority().equals("all") && sa.getAccountAuthority().equals("all")) {
+			} else if (sa.getSaleAuthority().equals("all") && sa.getAccountAuthority().equals("all")) {
 				sql += " and authority in(0,1,10,11)";
-			}else if(sa.getSaleAuthority().equals("all") && sa.getAccountAuthority().equals("no")) {
+			} else if (sa.getSaleAuthority().equals("all") && sa.getAccountAuthority().equals("no")) {
 				sql += " and authority in(0,1,10)";
-			}else if(sa.getSaleAuthority().equals("all") && sa.getAccountAuthority().equals("ok")) {
+			} else if (sa.getSaleAuthority().equals("all") && sa.getAccountAuthority().equals("ok")) {
 				sql += " and authority in(0,10,11)";
-			}else if(sa.getSaleAuthority().equals("no") && sa.getAccountAuthority().equals("all")) {
+			} else if (sa.getSaleAuthority().equals("no") && sa.getAccountAuthority().equals("all")) {
 				sql += " and authority in(0,1,10)";
-			}else if(sa.getSaleAuthority().equals("ok") && sa.getAccountAuthority().equals("all")) {
+			} else if (sa.getSaleAuthority().equals("ok") && sa.getAccountAuthority().equals("all")) {
 				sql += " and authority in(0,1,11)";
 			}
 
@@ -92,7 +92,7 @@ public class S0041Servlet extends HttpServlet {
 			//SELECT命令を実行
 			rs = ps.executeQuery();
 			List<Accounts> list = new ArrayList<>();
-			while(rs.next()) {
+			while (rs.next()) {
 				Accounts account = new Accounts(rs.getInt("account_id"),
 						rs.getString("name"),
 						rs.getString("mail"),
@@ -101,7 +101,7 @@ public class S0041Servlet extends HttpServlet {
 
 				list.add(account);
 			}
-			if(list.isEmpty()) {
+			if (list.isEmpty()) {
 				errors = new ArrayList<>();
 				errors.add("検索結果はありません。");
 				session.setAttribute("errors", errors);
@@ -114,20 +114,18 @@ public class S0041Servlet extends HttpServlet {
 
 			//foward
 			getServletContext().getRequestDispatcher("/WEB-INF/s0041.jsp")
-				.forward(req, resp);
-		}catch(Exception e){
+					.forward(req, resp);
+		} catch (Exception e) {
 			throw new ServletException(e);
-		}finally{
+		} finally {
 			//終了処理
-			try{
+			try {
 				DBUtils.close(rs);
 				DBUtils.close(ps);
 				DBUtils.close(con);
-			}catch(Exception e){
+			} catch (Exception e) {
 			}
 		}
-
-
 	}
 
 }
