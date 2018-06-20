@@ -45,9 +45,7 @@
 					<li><a href="C0010.html">ログアウト</a></li>
 				</ul>
 			</div>
-			<!-- /.navbar-collapse -->
 		</div>
-		<!-- /.container-fluid -->
 	</nav>
 
 	<div class="container">
@@ -112,7 +110,7 @@
 			<div class="form-group">
 				<label for="number" class="col-sm-2 control-label">個数</label>
 				<div class="col-sm-2">
-					<input type="text" class="form-control text-right" name="sale_number" value="${param.sale_number}" disabled>
+					<input type="text" class="form-control text-right" name="sale_number" value="${HtmlUtils.formatComma(param.sale_number)}" disabled>
 				</div>
 			</div>
 
@@ -145,7 +143,6 @@
 			</div>
 		</form>
 	</div>
-	<!-- /container -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
