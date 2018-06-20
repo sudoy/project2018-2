@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.abc.asms.utils.HtmlUtils" %>
 
-<c:set var="data" value="${today}" />
 <c:set var="MoM" value="${(thisMonthSum / lastMonthSum) * 100}" />
 
 <!DOCTYPE html>
@@ -48,13 +47,13 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="C0010.html">ログアウト</a></li>
 					</ul>
-				</div><!-- /.navbar-collapse -->
-			</div><!-- /.container-fluid -->
+				</div>
+			</div>
 		</nav>
 
 		<div class="container">
 
-		<jsp:include page="_errors.jsp" />
+			<jsp:include page="_errors.jsp" />
 
 			<h1 class="text-center">ダッシュボード</h1>
 
@@ -63,32 +62,32 @@
 					<nav class="float-left">
 						<ul class="pagination">
 							<li class="page-item">
-								<a class="page-link" href="C0020.html?before=${data}"><span class="oi oi-chevron-left"></span><span class="oi oi-chevron-left"></span> 前年</a>
+								<a class="page-link" href="C0020.html?before=${today}"><span class="oi oi-chevron-left"></span><span class="oi oi-chevron-left"></span> 前年</a>
 							</li>
 							<li class="page-item">
-								<a class="page-link" href="C0020.html?back=${data}"><span class="oi oi-chevron-left"></span> 前月</a>
+								<a class="page-link" href="C0020.html?back=${today}"><span class="oi oi-chevron-left"></span> 前月</a>
 							</li>
 						</ul>
 					</nav>
 				</div>
 
 				<div class="col-sm-8 text-center">
-					<h2>${data}</h2>
+					<h2>${today}</h2>
 				</div>
 
 				<div class="col-sm-2" style="padding-left: 33px;">
 					<nav class="float-right">
 						<ul class="pagination">
 							<li class="page-item">
-								<a class="page-link" href="C0020.html?next=${data}">翌月 <span class="oi oi-chevron-right"></span></a>
+								<a class="page-link" href="C0020.html?next=${today}">翌月 <span class="oi oi-chevron-right"></span></a>
 							</li>
 							<li class="page-item">
-								<a class="page-link" href="C0020.html?after=${data}">翌年 <span class="oi oi-chevron-right"></span><span class="oi oi-chevron-right"></span></a>
+								<a class="page-link" href="C0020.html?after=${today}">翌年 <span class="oi oi-chevron-right"></span><span class="oi oi-chevron-right"></span></a>
 							</li>
 						</ul>
 					</nav>
 				</div>
-			</div><!-- /.row -->
+			</div>
 
 			<div class="row">
 				<div class="col-sm-4">
@@ -116,6 +115,12 @@
 						</div>
 						<div class="panel-body" align="center">
 							<c:choose>
+								<c:when test="${lastMonthSum eq 0 and  thisMonthSum eq 0}">
+									<strong>-</strong>
+								</c:when>
+								<c:when test="${lastMonthSum eq 0 and  thisMonthSum ge 1}">
+									<strong>-</strong>
+								</c:when>
 								<c:when test="${MoM >= 100}">
 									<div style="color: green"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"><fmt:formatNumber value="${MoM}" pattern="0.00" />%</span></div>
 								</c:when>
@@ -126,7 +131,7 @@
 						</div>
 					</div>
 				</div>
-			</div><!-- /.row -->
+			</div>
 
 			<div class="panel panel-default">
 				<div class="panel-heading">今月の${accounts.name}さんの売上</div>
@@ -168,8 +173,8 @@
 					</table>
 				</div>
 			</div>
+		</div>
 
-		</div><!-- /container -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 	</body>

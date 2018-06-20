@@ -32,12 +32,6 @@ public class C0020Servlet extends HttpServlet {
 			return;
 		}
 
-		//セッションに保存されたアカウント情報を持ってくる
-		HttpSession session = req.getSession();
-		Accounts accounts = (Accounts)session.getAttribute("accounts");
-		int accountId = accounts.getAccountId();
-		String strAccountId = String.valueOf(accountId);
-
 		// localDateから現在時刻を抽出するか否かの判定
 		LocalDate ld = null;
 
@@ -115,8 +109,13 @@ public class C0020Servlet extends HttpServlet {
 		//今月（〇月）と前月（×月）の表示
 		StringBuilder sb = new StringBuilder(today);
 		String thisMonth = sb.substring(5, sb.length()-1);
+
+		//今月をintにして計算可能にする
 		int i = Integer.parseInt(thisMonth);
+
 		int lastMonth = 0;
+
+		//1月の時は前月は12月にしてそれ以外はその月からー1する
 		if(sb.length() == 7 && thisMonth.contains("1")) {
 			lastMonth = 12;
 		}else{
@@ -126,6 +125,12 @@ public class C0020Servlet extends HttpServlet {
 		int thisMonthSum = 0;
 		int lastMonthSum = 0;
 
+		//セッションに保存されたアカウント情報を持ってくる
+		HttpSession session = req.getSession();
+		Accounts accounts = (Accounts)session.getAttribute("accounts");
+		int accountId = accounts.getAccountId();
+		String strAccountId = String.valueOf(accountId);
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -134,18 +139,21 @@ public class C0020Servlet extends HttpServlet {
 		try{
 			con = DBUtils.getConnection();
 
+			//ログインユーザーの今月の売上合計
 			sql = "SELECT SUM(unit_price * sale_number) AS sum1 "
 					+ "FROM sales "
 					+ "WHERE sale_date BETWEEN ? AND ? AND account_id = ?;";
 
 			ps = con.prepareStatement(sql);
 
+			//今月の月初と月末とログインユーザーのアカウントIDをセット
 			ps.setString(1, first.toString());
 			ps.setString(2, last.toString());
 			ps.setString(3, strAccountId);
 
 			rs = ps.executeQuery();
 
+			//今月の売上合計をデータベースから取り出してセット
 			if(rs.next()) {
 				thisMonthSum = rs.getInt("sum1");
 
@@ -159,18 +167,21 @@ public class C0020Servlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
+			//ログインユーザーの前月の売上合計
 			sql = "SELECT SUM(unit_price * sale_number) AS sum2 "
 					+ "FROM sales "
 					+ "WHERE sale_date BETWEEN ? AND ? AND account_id = ?;";
 
 			ps = con.prepareStatement(sql);
 
+			//前月の月初と月末とログインユーザーのアカウントIDをセット
 			ps.setString(1, lastMonthFirst.toString());
 			ps.setString(2, lastMonthLast.toString());
 			ps.setString(3, strAccountId);
 
 			rs = ps.executeQuery();
 
+			//前月の売上合計をデータベースから取り出してセット
 			if(rs.next()) {
 				lastMonthSum = rs.getInt("sum2");
 
@@ -184,6 +195,7 @@ public class C0020Servlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
+			//ログインユーザーの売り上げ一覧を出す
 			sql = "SELECT s.sale_id, s.sale_date, c.category_name, s.trade_name, s.unit_price, s.sale_number "
 					+ "FROM accounts a "
 					+"LEFT JOIN sales s ON s.account_id = a.account_id "
@@ -214,7 +226,6 @@ public class C0020Servlet extends HttpServlet {
 				list.add(c0020);
 			}
 
-			//JavaBeansをJSPへ渡す
 			req.setAttribute("list", list);
 			req.setAttribute("today", today);
 			req.setAttribute("thisMonth", thisMonth);
