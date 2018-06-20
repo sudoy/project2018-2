@@ -5,10 +5,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import com.abc.asms.beans.S0021;
 
 public class HtmlUtils {
-// / 区切りのメソッド
+	//区切りのメソッド
 	public static String formatDate(LocalDate saleDate) {
 
 		LocalDate line = saleDate;
@@ -17,7 +16,7 @@ public class HtmlUtils {
 		return line.format(dtf);
 	}
 
-//カンマ区切りのメソッド
+	//カンマ区切りのメソッド
 	public static String formatComma(int value) {
 		return String.format("%,d", value);
 	}
@@ -59,20 +58,5 @@ public class HtmlUtils {
 
 	}
 
-	public static String formatUnitPrice(int price) {
-		S0021 s = new S0021(price, null, null, null, null, price,price, null);
-		String str = String.format("%,3d", s.getUnitPrice());
-		return str;
-	}
-	public static String formatSaleNumber(int price) {
-		S0021 s = new S0021(price, null, null, null, null, price,price, null);
-		String str = String.format("%,3d", s.getSaleNumber());
-		return str;
-	}
-	public static String formatTotal(int price) {
-		S0021 s = new S0021(price, null, null, null, null, price,price, null);
-		String str = String.format("%,3d", s.getSaleNumber());
-		return str;
-	}
 
 }

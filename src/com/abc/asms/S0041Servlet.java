@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.Accounts;
 import com.abc.asms.beans.SearchKeepA;
-import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.Utils;
 
@@ -29,11 +28,7 @@ public class S0041Servlet extends HttpServlet {
 		if (!Utils.checkLogin(req, resp)) {
 			return;
 		}
-		//権限チェック
-		if (!AuthorityUtils.hideBottun(req, resp)) {
-			getServletContext().getRequestDispatcher("/WEB-INF/s0041a.jsp")
-					.forward(req, resp);
-		}
+
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		Connection con = null;
