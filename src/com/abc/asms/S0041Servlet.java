@@ -104,7 +104,9 @@ public class S0041Servlet extends HttpServlet {
 			getServletContext().getRequestDispatcher("/WEB-INF/s0041.jsp")
 					.forward(req, resp);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new ServletException(e);
+
 		} finally {
 			//終了処理
 			try {
@@ -112,6 +114,7 @@ public class S0041Servlet extends HttpServlet {
 				DBUtils.close(ps);
 				DBUtils.close(con);
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}

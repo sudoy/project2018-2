@@ -11,7 +11,7 @@
 		<link rel="icon" href="../../favicon.ico">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/signin.css" rel="stylesheet">
-		
+
 		<title>新パスワード入力｜物品売上管理システム</title>
 
 		<!--[if lt IE 9]>
@@ -32,15 +32,17 @@
 				<input type="password" name="password1" id="newPasword" class="form-control" placeholder="新パスワード" >
 				<label for="inputPassword" class="sr-only"></label>
 				<input type="password" name="password2" id="rnewPassword" class="form-control" placeholder="新パスワード確認">
-				
+
 				<button type="submit" class="btn btn-primary" style="width:300px;">
 					<span class="glyphicon glyphicon" aria-hidden="true">変更</span>
 				</button>
-				
+
 			</form>
 
 		</div> <!-- /container -->
 
 		<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </html>
