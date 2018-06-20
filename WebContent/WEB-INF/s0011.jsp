@@ -50,7 +50,6 @@
 			<h1>売上を登録してよろしいですか？</h1>
 
 			<form class="form-horizontal" action="S0011.html" method="post">
-				<input type="hidden" name="saleId" value="${saleId}">
 
 				<input type="hidden" name="saleDate" value="${param.saleDate}">
 		 		<div class="form-group">
@@ -60,24 +59,24 @@
 					</div>
 				</div>
 
-				<input type="hidden" name="accountId" value="${accountId}">
+				<input type="hidden" name="accountId" value="${param.accountId}">
 				<div class="form-group">
 			 		<label for="accountId" class="col-sm-2 control-label">担当</label>
 			 		<div class="col-sm-5">
 						<select class="form-control" name="accountId" id="accountId" disabled>
 							<c:forEach var="account" items="${list2}">
-								<option value="${accountId}" ${account.accountId eq accountId ? 'selected' : ''}>${account.name}</option>
+								<option value="${accountId}" ${account.accountId eq param.accountId ? 'selected' : ''}>${account.name}</option>
 							</c:forEach>
 						</select>
 					</div>
 				</div>
 
-				<input type="hidden" name="categoryId" value="${categoryId}">
+				<input type="hidden" name="categoryId" value="${param.categoryId}">
 				<div class="form-group">
 		 			<label for="categoryId" class="col-sm-2 control-label">商品カテゴリー</label>
 		 			<div class="col-sm-5">
 		 				<c:forEach var="category" items="${list1}">
-							<label class="radio-inline"><input type="radio"  name="categoryId" value="${categoryId}" ${category.categoryId eq categoryId ? 'checked' : ''} disabled>${category.categoryName}</label>
+							<label class="radio-inline"><input type="radio"  name="categoryId" value="${categoryId}" ${category.categoryId eq param.categoryId ? 'checked' : ''} disabled>${category.categoryName}</label>
 						</c:forEach>
 					</div>
 				</div>

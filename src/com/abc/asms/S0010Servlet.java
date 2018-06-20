@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
@@ -49,6 +50,8 @@ public class S0010Servlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 
+		HttpSession session = req.getSession();
+
 		String saleDate = req.getParameter("saleDate");
 		String accountId = req.getParameter("accountId");
 		String categoryId = req.getParameter("categoryId");
@@ -63,13 +66,13 @@ public class S0010Servlet extends HttpServlet {
 		if(errors.size() > 0) {
 			DBUtils.getCategoriesAndAccounts(req, resp);
 
-			req.setAttribute("errors", errors);
+			session.setAttribute("errors", errors);
 			getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
 				.forward(req, resp);
 			return;
 		}
 
-		//アカウントカウントテーブル存在確認チェック
+		//アカウントテーブル存在確認チェック
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -81,8 +84,8 @@ public class S0010Servlet extends HttpServlet {
 			//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
 			DBUtils.getCategoriesAndAccounts(req, resp);
 
-
-			sql = "SELECT * FROM accounts WHERE account_id = ?;";
+			sql = "SELECT account_id, name, mail, password, authority "
+					+ "FROM accounts WHERE account_id = ?;";
 
 			ps = con.prepareStatement(sql);
 
@@ -92,11 +95,8 @@ public class S0010Servlet extends HttpServlet {
 
 			//sqlが実行出来なかったらエラー　→　s0010に返す
 			if(!rs.next()) {
-				//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
-				DBUtils.getCategoriesAndAccounts(req, resp);
-
 				errors.add("アカウントテーブルに存在しません。");
-				req.setAttribute("errors", errors);
+				session.setAttribute("errors", errors);
 				getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
 					.forward(req, resp);
 				return;
@@ -109,8 +109,9 @@ public class S0010Servlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			//商品テーブル存在確認チェック
-			sql = "SELECT * FROM categories WHERE category_id = ? AND active_flg = 1;";
+			//商品カテゴリーテーブル存在確認チェック
+			sql = "SELECT category_id, category_name, active_flg "
+					+ "FROM categories WHERE category_id = ?;";
 
 			ps = con.prepareStatement(sql);
 
@@ -120,11 +121,8 @@ public class S0010Servlet extends HttpServlet {
 
 			//sqlが実行出来なかったらエラー　→　s0010に返す
 			if(!rs.next()) {
-				//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
-				DBUtils.getCategoriesAndAccounts(req, resp);
-
-				errors.add("商品テーブルに存在しません。");
-				req.setAttribute("errors", errors);
+				errors.add("商品カテゴリーテーブルに存在しません。");
+				session.setAttribute("errors", errors);
 				getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
 					.forward(req, resp);
 				return;
@@ -137,8 +135,6 @@ public class S0010Servlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
-			DBUtils.getCategoriesAndAccounts(req, resp);
 		}catch(Exception e){
 			e.printStackTrace();
 			throw new ServletException(e);
@@ -151,14 +147,6 @@ public class S0010Servlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
-		req.setAttribute("saleDate", saleDate);
-		req.setAttribute("accountId", accountId);
-		req.setAttribute("categoryId", categoryId);
-		req.setAttribute("tradeName", tradeName);
-		req.setAttribute("unitPrice", unitPrice);
-		req.setAttribute("saleNumber", saleNumber);
-		req.setAttribute("note", note);
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0011.jsp")
 			.forward(req, resp);
@@ -222,7 +210,7 @@ public class S0010Servlet extends HttpServlet {
 					throw new NumberFormatException();
 				}
 		    } catch (NumberFormatException e) {
-		        errors.add("単価を正しく入力してください。");
+		        errors.add("単価を正しく入力して下さい。");
 		    }
 		}
 
@@ -240,11 +228,11 @@ public class S0010Servlet extends HttpServlet {
 		if(!saleNumber.equals("")) {
 		    try {
 		        int i = Integer.parseInt(unitPrice);
-				if(i < 1) {
+				if(i <= 0) {
 					throw new NumberFormatException();
 				}
 		    } catch (NumberFormatException e) {
-		        errors.add("個数を正しく入力してください。");
+		        errors.add("個数を正しく入力して下さい。");
 		    }
 		}
 
