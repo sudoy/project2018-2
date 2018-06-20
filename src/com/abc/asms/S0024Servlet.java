@@ -234,8 +234,15 @@ public class S0024Servlet extends HttpServlet {
 		//1-2 販売日形式チェック
 		if (!saleDate.equals("")) {
 			try {
-				LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/MM/dd")
-						.withResolverStyle(ResolverStyle.STRICT));
+				if(LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/M/d")
+						.withResolverStyle(ResolverStyle.STRICT)) != null) {
+					LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/M/d")
+							.withResolverStyle(ResolverStyle.STRICT));
+				}else {
+					LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/MM/dd")
+							.withResolverStyle(ResolverStyle.STRICT));
+				}
+
 			} catch (Exception e) {
 				errors.add("販売日を正しく入力して下さい。");
 			}
@@ -269,8 +276,6 @@ public class S0024Servlet extends HttpServlet {
 			try {
 				int i = Integer.parseInt(unitPrice);
 				if (i <= 0) {
-					throw new NumberFormatException();
-				} else if (i == 0) {
 					throw new NumberFormatException();
 				}
 			} catch (NumberFormatException e) {
