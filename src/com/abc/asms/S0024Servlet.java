@@ -20,7 +20,6 @@ import javax.servlet.http.HttpSession;
 
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
-import com.abc.asms.utils.DBUtils2;
 import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0024.html")
@@ -47,7 +46,7 @@ public class S0024Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 
-//確認画面用のdoPost check
+		//確認画面用のdoPost check
 		if (req.getParameter("check") != null) {
 
 			//ログインチェック
@@ -92,12 +91,12 @@ public class S0024Servlet extends HttpServlet {
 			try{
 				con = DBUtils.getConnection();
 
-				DBUtils2.getConnection2(req, resp);
+				DBUtils.getCategoriesAndAccounts(req, resp);
 
 
 				//アカウントテーブル存在確認チェック
 				try {
-					sql = "SELECT * FROM accounts WHERE account_id = ?;";
+					sql = "select account_id,name,mail,password,authority from accounts where account_id = ?";
 					ps = con.prepareStatement(sql);
 
 					ps.setString(1, accountId);
@@ -106,7 +105,7 @@ public class S0024Servlet extends HttpServlet {
 
 					//sqlが実行出来なかったらエラー
 					if(!rs.next()) {
-						DBUtils2.getConnection2(req, resp);
+//						DBUtils2.getConnection2(req, resp);
 
 						errors.add("アカウントテーブルに存在しません。");
 						session.setAttribute("errors", errors);
@@ -116,6 +115,7 @@ public class S0024Servlet extends HttpServlet {
 					}
 
 				}catch(Exception e){
+					e.printStackTrace();
 					throw new ServletException(e);
 				}finally{
 					try{
@@ -123,6 +123,7 @@ public class S0024Servlet extends HttpServlet {
 						DBUtils.close(ps);
 						DBUtils.close(con);
 					}catch(Exception e){
+						e.printStackTrace();
 					}
 				}
 
@@ -140,7 +141,7 @@ public class S0024Servlet extends HttpServlet {
 
 
 					if(!rs.next()) {
-						DBUtils2.getConnection2(req, resp);
+//						DBUtils2.getConnection2(req, resp);
 
 						errors.add("商品テーブルに存在しません。");
 						req.setAttribute("errors", errors);
@@ -150,6 +151,7 @@ public class S0024Servlet extends HttpServlet {
 					}
 
 				}catch(Exception e){
+					e.printStackTrace();
 					throw new ServletException(e);
 				}finally{
 					try{
@@ -157,10 +159,12 @@ public class S0024Servlet extends HttpServlet {
 						DBUtils.close(ps);
 						DBUtils.close(con);
 					}catch(Exception e){
+						e.printStackTrace();
 					}
 				}
 
 			}catch(Exception e){
+				e.printStackTrace();
 				throw new ServletException(e);
 			}finally{
 				//終了処理
@@ -169,10 +173,11 @@ public class S0024Servlet extends HttpServlet {
 					DBUtils.close(ps);
 					DBUtils.close(con);
 				}catch(Exception e){
+					e.printStackTrace();
 				}
 			}
 
-			DBUtils2.getConnection2(req, resp);
+
 
 			req.getServletContext().getRequestDispatcher("/WEB-INF/s0024.jsp").forward(req, resp);
 

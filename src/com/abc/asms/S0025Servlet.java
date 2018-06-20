@@ -18,7 +18,6 @@ import javax.servlet.http.HttpSession;
 import com.abc.asms.beans.Detail_beans;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
-import com.abc.asms.utils.DBUtils2;
 import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0025.html")
@@ -44,7 +43,7 @@ public class S0025Servlet extends HttpServlet {
 		String sql = null;
 
 		//カテゴリーテーブルとアカウントテーブルの呼び出し
-		DBUtils2.getConnection2(req, resp);
+		DBUtils.getCategoriesAndAccounts(req, resp);
 
 		//DB接続とSQL
 		try {
@@ -87,9 +86,9 @@ public class S0025Servlet extends HttpServlet {
 			e.printStackTrace();
 		} finally {
 			try {
-				DBUtils.close(con);
-				DBUtils.close(ps);
 				DBUtils.close(rs);
+				DBUtils.close(ps);
+				DBUtils.close(con);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -142,8 +141,8 @@ public class S0025Servlet extends HttpServlet {
 			throw new ServletException();
 		} finally {
 			try {
-				DBUtils.close(con);
 				DBUtils.close(ps);
+				DBUtils.close(con);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

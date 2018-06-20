@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.abc.asms.beans.Detail_beans;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
-import com.abc.asms.utils.DBUtils2;
 import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0023.html")
@@ -43,7 +42,7 @@ public class S0023Servlet extends HttpServlet {
 		ResultSet rs = null;
 		String sql;
 
-		DBUtils2.getConnection2(req, resp);
+		DBUtils.getCategoriesAndAccounts(req, resp);
 
 		try {
 			con = DBUtils.getConnection();
