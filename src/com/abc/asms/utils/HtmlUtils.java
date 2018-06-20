@@ -9,9 +9,9 @@ import com.abc.asms.beans.S0021;
 
 public class HtmlUtils {
 // / 区切りのメソッド
-	public static String formatDate(LocalDate sale_date) {
+	public static String formatDate(LocalDate saleDate) {
 
-		LocalDate line = sale_date;
+		LocalDate line = saleDate;
 
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 		return line.format(dtf);
@@ -30,12 +30,17 @@ public class HtmlUtils {
 		}
 	}
 
-	public static String checkCategory(String param, String value) {
-		if(param.equals(value)) {
-			return "checked";
-		}else {
-			return "";
+	public static boolean checkCategory(String[] param, String value) {
+		if(param == null) {
+			return true;
 		}
+		for(String s : param) {
+			if(s.equals(value)) {
+				return true;
+			}
+		}
+		return false;
+
 	}
 
 	public static String selectName(String param, String value) {
@@ -69,16 +74,5 @@ public class HtmlUtils {
 		String str = String.format("%,3d", s.getSaleNumber());
 		return str;
 	}
-	public static boolean checkCategory1(String[] param, String value) {
-		if(param == null) {
-			return true;
-		}
-		for(String s : param) {
-			if(s.equals(value)) {
-				return true;
-			}
-		}
-		return false;
 
-	}
 }
