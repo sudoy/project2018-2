@@ -1,6 +1,6 @@
 package com.abc.asms.beans;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class S0021 {
 	private int saleId;

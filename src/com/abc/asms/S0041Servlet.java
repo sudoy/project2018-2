@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.Accounts;
-import com.abc.asms.beans.SearchKeepA;
+import com.abc.asms.beans.SearchKeepAccount;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.Utils;
 
@@ -35,30 +35,20 @@ public class S0041Servlet extends HttpServlet {
 		PreparedStatement ps = null;
 		String sql = null;
 		ResultSet rs = null;
-		List<String> errors = new ArrayList<>();
-		if (errors.size() > 0) {
-			session.setAttribute("errors", errors);
-			getServletContext().getRequestDispatcher("/WEB-INF/s0020.jsp")
-					.forward(req, resp);
-			return;
-		}
+
 		try {
 			con = DBUtils.getConnection();
 			//SQL
 			sql = "select account_id,name,mail,password,authority from accounts where 0 = 0 ";
-			SearchKeepA sa = (SearchKeepA) session.getAttribute("sa");
+			SearchKeepAccount sa = (SearchKeepAccount) session.getAttribute("sa");
 			//氏名検索
 			if (sa.getAccountName() != "") {
 				sql += " and name like '%" + sa.getAccountName() + "%'";
-			} else {
-				sql += "";
 			}
 
 			//メール検索
 			if (sa.getMail() != "") {
 				sql += " and mail like '%" + sa.getMail() + "%'";
-			} else {
-				sql += "";
 			}
 
 			//権限検索
@@ -73,14 +63,15 @@ public class S0041Servlet extends HttpServlet {
 			} else if (sa.getSaleAuthority().equals("all") && sa.getAccountAuthority().equals("all")) {
 				sql += " and authority in(0,1,10,11)";
 			} else if (sa.getSaleAuthority().equals("all") && sa.getAccountAuthority().equals("no")) {
-				sql += " and authority in(0,1,10)";
+				sql += " and authority in(0,1)";
 			} else if (sa.getSaleAuthority().equals("all") && sa.getAccountAuthority().equals("ok")) {
-				sql += " and authority in(0,10,11)";
+				sql += " and authority in(10,11)";
 			} else if (sa.getSaleAuthority().equals("no") && sa.getAccountAuthority().equals("all")) {
-				sql += " and authority in(0,1,10)";
+				sql += " and authority in(0,10)";
 			} else if (sa.getSaleAuthority().equals("ok") && sa.getAccountAuthority().equals("all")) {
-				sql += " and authority in(0,1,11)";
+				sql += " and authority in(1,11)";
 			}
+
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
@@ -96,7 +87,9 @@ public class S0041Servlet extends HttpServlet {
 
 				list.add(account);
 			}
+			session.setAttribute("list", list);
 			if (list.isEmpty()) {
+				List<String> errors = new ArrayList<>();
 				errors = new ArrayList<>();
 				errors.add("検索結果はありません。");
 				session.setAttribute("errors", errors);

@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.abc.asms.beans.SearchKeepS;
+import com.abc.asms.beans.SearchKeepSale;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.Utils;
 @WebServlet("/S0020.html")
@@ -34,7 +35,7 @@ public class S0020Servlet extends HttpServlet {
 		req.setAttribute("today", today);
 
 
-		DBUtils.getCategoriesAndAccounts(req, resp);
+		DBUtils.getCategoriesAndAccountsForS0021(req, resp);
 		getServletContext().getRequestDispatcher("/WEB-INF/s0020.jsp")
 		.forward(req, resp);
 
@@ -42,17 +43,21 @@ public class S0020Servlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		// ログインチェック
+		if(!Utils.checkLogin(req, resp)) {
+			return;
+		}
 
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		String saleDate1 = req.getParameter("sale_date1");
 		String saleDate2 = req.getParameter("sale_date2");
 		String accountName = req.getParameter("name");
-		String[] categoryName = req.getParameterValues("categoryName");
+		String[] categoryName = req.getParameterValues("category_name");
 		String tradeName = req.getParameter("trade_name");
 		String note = req.getParameter("note");
 
-		DBUtils.getCategoriesAndAccounts(req, resp);
+		DBUtils.getCategoriesAndAccountsForS0021(req, resp);
 
 		List<String> errors =  validate(saleDate1,saleDate2,req,accountName);
 		if(errors.size() > 0) {
@@ -62,7 +67,7 @@ public class S0020Servlet extends HttpServlet {
 			return;
 		}
 
-		SearchKeepS ss = new SearchKeepS(saleDate1,saleDate2,accountName,categoryName,tradeName,note);
+		SearchKeepSale ss = new SearchKeepSale(saleDate1,saleDate2,accountName,categoryName,tradeName,note);
 		session.setAttribute("ss", ss);
 
 		resp.sendRedirect("S0021.html");
@@ -77,8 +82,6 @@ public class S0020Servlet extends HttpServlet {
 			try {
 				if(LocalDate.parse(saleDate1, DateTimeFormatter.ofPattern("uuuu/M/d")
 						.withResolverStyle(ResolverStyle.STRICT)) != null ) {
-					LocalDate.parse(saleDate1, DateTimeFormatter.ofPattern("uuuu/M/d")
-							.withResolverStyle(ResolverStyle.STRICT)) ;
 				}else {
 					LocalDate.parse(saleDate1, DateTimeFormatter.ofPattern("uuuu/MM/dd")
 							.withResolverStyle(ResolverStyle.STRICT));
@@ -107,12 +110,12 @@ public class S0020Servlet extends HttpServlet {
 			}
 		}
 
-		if(!req.getParameter("sale_date2").equals("") && !req.getParameter("sale_date1").equals("")) {
+		if(!saleDate2.equals("") && !saleDate1.equals("")) {
 			SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd");
 			fmt.setLenient(false);
 			try {
-				java.util.Date f1 = fmt.parse(req.getParameter("sale_date1"));
-				java.util.Date f2 = fmt.parse(req.getParameter("sale_date2"));
+				Date f1 = fmt.parse(req.getParameter("sale_date1"));
+				Date f2 = fmt.parse(req.getParameter("sale_date2"));
 				if(f1.after(f2)) {
 					errors.add("販売日（検索開始日)が販売日（検索終了日)より後の日付になっています。");
 				}

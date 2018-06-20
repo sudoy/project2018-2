@@ -1,6 +1,6 @@
 package com.abc.asms.beans;
 
-public class SearchKeepS {
+public class SearchKeepSale {
 
 	private String saleDate1;
 	private String saleDate2;
@@ -8,7 +8,7 @@ public class SearchKeepS {
 	private String[] categoryName;
 	private String tradeName;
 	private String note;
-	public SearchKeepS( String saleDate1,String saleDate2, String accountName, String[] categoryName, String tradeName, String note) {
+	public SearchKeepSale( String saleDate1,String saleDate2, String accountName, String[] categoryName, String tradeName, String note) {
 		super();
 
 		this.saleDate1 = saleDate1;

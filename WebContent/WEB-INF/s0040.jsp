@@ -36,8 +36,8 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="C0010.html">ログアウト</a></li>
 			</ul>
-		</div><!-- /.navbar-collapse -->
-	</div><!-- /.container-fluid -->
+		</div>
+	</div>
 </nav>
 
 	<div class="container">
@@ -63,7 +63,7 @@
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">売上登録権限</label>
 				<div class="col-sm-5">
-					<label><input type="radio" name="sauthority" value="all" checked>全て</label>
+					<label><input type="radio" name="sauthority" value="all" ${param.sauthority != 'all' ? 'checked' : ''}>全て</label>
 					<label><input type="radio" name="sauthority" value="no" ${param.sauthority eq 'no' ? 'checked' : ''}>権限なし</label>
 					<label><input type="radio" name="sauthority" value="ok" ${param.sauthority eq 'ok' ? 'checked' : ''}>権限あり</label>
 				</div>
@@ -72,7 +72,7 @@
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">アカウント登録権限</label>
 				<div class="col-sm-5">
-					<label><input type="radio" name="aauthority" value="all" checked>全て</label>
+					<label><input type="radio" name="aauthority" value="all" ${param.aauthority != 'all' ? 'checked' : ''}>全て</label>
 					<label><input type="radio" name="aauthority" value="no"${param.aauthority eq 'no' ? 'checked' : ''}>権限なし</label>
 					<label><input type="radio" name="aauthority" value="ok"${param.aauthority eq 'ok' ? 'checked' : ''}>権限あり</label>
 				</div>

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.abc.asms.beans.SearchKeepA;
+import com.abc.asms.beans.SearchKeepAccount;
 import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0040.html")
@@ -30,6 +30,10 @@ public class S0040Servlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		//ログインチェック
+		if (!Utils.checkLogin(req, resp)) {
+			return;
+		}
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 
@@ -44,7 +48,7 @@ public class S0040Servlet extends HttpServlet {
 			.forward(req, resp);
 			return;
 		}
-		SearchKeepA sa = new SearchKeepA(name,mail,sauthority,aauthority);
+		SearchKeepAccount sa = new SearchKeepAccount(name,mail,sauthority,aauthority);
 		session.setAttribute("sa", sa);
 		resp.sendRedirect("S0041.html");
 	}

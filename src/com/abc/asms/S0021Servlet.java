@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.S0021;
-import com.abc.asms.beans.SearchKeepS;
+import com.abc.asms.beans.SearchKeepSale;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.Utils;
 
@@ -36,16 +36,10 @@ public class S0021Servlet extends HttpServlet {
 		String sql = null;
 		ResultSet rs = null;
 		DBUtils.getCategoriesAndAccounts(req, resp);
-		List<String> errors =  new ArrayList<>();
-		if(errors.size() > 0) {
-			session.setAttribute("errors", errors);
-			getServletContext().getRequestDispatcher("/WEB-INF/s0020.jsp")
-			.forward(req, resp);
-			return;
-		}
+
 		try{
 			con = DBUtils.getConnection();
-			SearchKeepS ss = (SearchKeepS)session.getAttribute("ss");
+			SearchKeepSale ss = (SearchKeepSale)session.getAttribute("ss");
 
 			//SQL
 			sql = "select sale_id,sale_date,a.name,c.category_name, s.trade_name, s.unit_price, s.sale_number,note from accounts a left join sales s on a.account_id = s.account_id "
@@ -53,17 +47,13 @@ public class S0021Servlet extends HttpServlet {
 					+ "where 0 = 0 ";
 
 			//備考検索
-			if(ss.getNote() != "") {
+			if(!ss.getNote().equals("")) {
 				sql += " and note like '%" + ss.getNote() + "%'";
-			}else {
-				sql += "";
 			}
 
 			//商品名検索
-			if(ss.getTradeName() != "") {
+			if(!ss.getTradeName().equals("")) {
 				sql += " and trade_name like '%" + ss.getTradeName() + "%'";
-			}else {
-				sql += "";
 			}
 
 			//日付検索
@@ -76,21 +66,14 @@ public class S0021Servlet extends HttpServlet {
 			//開始日が入力され、終了日が入力されなかったときに開始日の日付からすべて検索する。
 			}else if(!ss.getSaleDate1().equals("") && ss.getSaleDate2().equals("")) {
 				sql += " and sale_date >= '" + ss.getSaleDate1() + "'";
-
-			}else {
-				sql += "";
 			}
 
 			//担当検索
-			if(ss.getAccountName() !=  "") {
+			if(!ss.getAccountName().equals("")) {
 				sql += " and name =" + "'"+ss.getAccountName()+"'";
-			}else {
-				sql += "";
 			}
+
 			//カテゴリー検索
-			if(req.getParameterValues("categoryName") == null) {
-				sql += "";
-			}
 			if(ss.getCategoryName() != null) {
 				sql += "and category_name in(";
 				for(int i = 0; i < ss.getCategoryName().length; i++) {
@@ -104,7 +87,7 @@ public class S0021Servlet extends HttpServlet {
 
 			}
 
-			//id降順
+			//id昇順
 			sql += "order by sale_id";
 
 			//SELECT命令の準備
@@ -112,7 +95,7 @@ public class S0021Servlet extends HttpServlet {
 			//SELECT命令を実行
 			rs = ps.executeQuery();
 
-
+			System.out.println(ps);
 			List<S0021> list = new ArrayList<>();
 			while(rs.next()) {
 				S0021 sale = new S0021(rs.getInt("sale_id"),
@@ -127,11 +110,10 @@ public class S0021Servlet extends HttpServlet {
 				list.add(sale);
 			}
 			if(list.isEmpty()) {
-				errors = new ArrayList<>();
+				List<String> errors = new ArrayList<>();
 				errors.add("検索結果はありません。");
 				session.setAttribute("errors", errors);
-				getServletContext().getRequestDispatcher("/WEB-INF/s0020.jsp")
-						.forward(req, resp);
+				resp.sendRedirect("S0020.html");
 				return;
 			}
 			//JavaBeansをJSPへ渡す
@@ -142,6 +124,7 @@ public class S0021Servlet extends HttpServlet {
 			getServletContext().getRequestDispatcher("/WEB-INF/s0021.jsp")
 				.forward(req, resp);
 		}catch(Exception e){
+			e.printStackTrace();
 			throw new ServletException(e);
 		}finally{
 			//終了処理
@@ -150,6 +133,7 @@ public class S0021Servlet extends HttpServlet {
 				DBUtils.close(ps);
 				DBUtils.close(con);
 			}catch(Exception e){
+				e.printStackTrace();
 			}
 		}
 

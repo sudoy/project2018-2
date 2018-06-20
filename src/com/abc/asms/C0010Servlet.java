@@ -98,7 +98,7 @@ public class C0010Servlet extends HttpServlet {
 			errors.add("メールアドレスが長すぎます");
 		}
 		//1-3
-		if (!email.contains("@")) {
+		if (!email.contains("@") && !email.equals("")) {
 			errors.add("メールアドレスを正しく入力してください。");
 		}
 		//1-4
