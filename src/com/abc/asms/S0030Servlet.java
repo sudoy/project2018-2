@@ -55,14 +55,6 @@ public class S0030Servlet extends HttpServlet {
 		String authority1 = req.getParameter("authority1");
 		String authority2 = req.getParameter("authority2");
 
-		req.setAttribute("accountId", accountId);
-		req.setAttribute("name", name);
-		req.setAttribute("mail", mail);
-		req.setAttribute("password1", password1);
-		req.setAttribute("password2", password2);
-		req.setAttribute("authority1", authority1);
-		req.setAttribute("authority2", authority2);
-
 		//バリデーションチェック(メールアドレス重複チェック以外)
 		List<String> errors = validate(accountId, name, mail,
 				password1, password2, authority1, authority2);
