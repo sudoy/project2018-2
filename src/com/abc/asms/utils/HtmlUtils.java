@@ -9,9 +9,9 @@ import com.abc.asms.beans.S0021;
 
 public class HtmlUtils {
 // / 区切りのメソッド
-	public static String formatDate(LocalDate sale_date) {
+	public static String formatDate(LocalDate saleDate) {
 
-		LocalDate line = sale_date;
+		LocalDate line = saleDate;
 
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 		return line.format(dtf);

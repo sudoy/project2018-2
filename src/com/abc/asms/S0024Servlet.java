@@ -87,102 +87,76 @@ public class S0024Servlet extends HttpServlet {
 				return;
 			}
 
+			//アカウントとカテゴリーの情報取得
+			DBUtils.getCategoriesAndAccounts(req, resp);
 
-			try{
+			try {
 				con = DBUtils.getConnection();
 
-				DBUtils.getCategoriesAndAccounts(req, resp);
+				sql = "select account_id,name,mail,password,authority from accounts where account_id = ?";
+				ps = con.prepareStatement(sql);
 
+				ps.setString(1, accountId);
 
-				//アカウントテーブル存在確認チェック
-				try {
-					sql = "select account_id,name,mail,password,authority from accounts where account_id = ?";
-					ps = con.prepareStatement(sql);
+				rs = ps.executeQuery();
 
-					ps.setString(1, accountId);
-
-					rs = ps.executeQuery();
-
-					//sqlが実行出来なかったらエラー
-					if(!rs.next()) {
-//						DBUtils2.getConnection2(req, resp);
-
-						errors.add("アカウントテーブルに存在しません。");
-						session.setAttribute("errors", errors);
-						getServletContext().getRequestDispatcher("/WEB-INF/s0023.jsp")
+				//sqlが実行出来なかったらエラー
+				if (!rs.next()) {
+					errors.add("アカウントテーブルに存在しません。");
+					session.setAttribute("errors", errors);
+					getServletContext().getRequestDispatcher("/WEB-INF/s0023.jsp")
 							.forward(req, resp);
-						return;
-					}
-
-				}catch(Exception e){
-					e.printStackTrace();
-					throw new ServletException(e);
-				}finally{
-					try{
-						DBUtils.close(rs);
-						DBUtils.close(ps);
-						DBUtils.close(con);
-					}catch(Exception e){
-						e.printStackTrace();
-					}
+					return;
 				}
 
-				//商品テーブル存在確認チェック
-				try {
-					con = DBUtils.getConnection();
-
-					sql = "SELECT * FROM categories WHERE category_id = ? AND active_flg = 1;";
-
-					ps = con.prepareStatement(sql);
-
-					ps.setString(1, categoryId);
-
-					rs = ps.executeQuery();
-
-
-					if(!rs.next()) {
-//						DBUtils2.getConnection2(req, resp);
-
-						errors.add("商品テーブルに存在しません。");
-						req.setAttribute("errors", errors);
-						getServletContext().getRequestDispatcher("/WEB-INF/s0023.jsp")
-							.forward(req, resp);
-						return;
-					}
-
-				}catch(Exception e){
-					e.printStackTrace();
-					throw new ServletException(e);
-				}finally{
-					try{
-						DBUtils.close(rs);
-						DBUtils.close(ps);
-						DBUtils.close(con);
-					}catch(Exception e){
-						e.printStackTrace();
-					}
-				}
-
-			}catch(Exception e){
+			} catch (Exception e) {
 				e.printStackTrace();
-				throw new ServletException(e);
-			}finally{
-				//終了処理
-				try{
+			} finally {
+				try {
 					DBUtils.close(rs);
 					DBUtils.close(ps);
 					DBUtils.close(con);
-				}catch(Exception e){
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
 
+			//商品テーブル存在確認チェック
+			try {
+				con = DBUtils.getConnection();
 
+				sql = "select category_id,category_name,active_flg from categories where category_id = ?";
+
+				ps = con.prepareStatement(sql);
+
+				ps.setString(1, categoryId);
+
+				rs = ps.executeQuery();
+
+				if (!rs.next()) {
+					errors.add("商品カテゴリーテーブルに存在しません。");
+					session.setAttribute("errors", errors);
+					getServletContext().getRequestDispatcher("/WEB-INF/s0023.jsp")
+							.forward(req, resp);
+					return;
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new ServletException(e);
+			} finally {
+				try {
+					DBUtils.close(rs);
+					DBUtils.close(ps);
+					DBUtils.close(con);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 
 			req.getServletContext().getRequestDispatcher("/WEB-INF/s0024.jsp").forward(req, resp);
 
-
-//Update処理のメソッド
+			//Update処理のメソッド
 		} else if (req.getParameter("update") != null) {
 			//ログインチェック
 			if (!Utils.checkLogin(req, resp)) {
@@ -254,7 +228,7 @@ public class S0024Servlet extends HttpServlet {
 
 		//1-1 販売日必須入力チェック
 		if (saleDate.equals("")) {
-			errors.add("販売日を入力してください。");
+			errors.add("販売日を入力して下さい。");
 		}
 
 		//1-2 販売日形式チェック
@@ -263,7 +237,7 @@ public class S0024Servlet extends HttpServlet {
 				LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/MM/dd")
 						.withResolverStyle(ResolverStyle.STRICT));
 			} catch (Exception e) {
-				errors.add("販売日を正しく入力してください。");
+				errors.add("販売日を正しく入力して下さい。");
 			}
 		}
 
@@ -300,7 +274,7 @@ public class S0024Servlet extends HttpServlet {
 					throw new NumberFormatException();
 				}
 			} catch (NumberFormatException e) {
-				errors.add("単価を正しく入力してください。");
+				errors.add("単価を正しく入力して下さい。");
 			}
 		}
 
@@ -320,7 +294,7 @@ public class S0024Servlet extends HttpServlet {
 					throw new NumberFormatException();
 				}
 			} catch (NumberFormatException e) {
-				errors.add("個数を正しく入力してください。");
+				errors.add("個数を正しく入力して下さい。");
 			}
 		}
 
