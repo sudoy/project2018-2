@@ -43,29 +43,17 @@ public class S0043Servlet extends HttpServlet {
 		String password = req.getParameter("password");
 		String authority1 = req.getParameter("authority1");
 		String authority2 = req.getParameter("authority2");
-		String authority = authority1 + authority2;
-
-		if (authority.equals("00")) {
-			authority = "0";
-		}
-
-		if (authority.equals("10")) {
-			authority = "1";
-		}
-
-		if (authority.equals("01")) {
-			authority = "10";
-		}
+		String authority = authority2 + authority1;
 
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
 
 		try {
-			con = com.abc.asms.utils.DBUtils.getConnection();
+			con = DBUtils.getConnection();
 
 			if (password.equals("")) {
-				sql = "update accounts set name = ?, mail = ?, authority = ? where account_id = ?;";
+				sql = "update accounts set name = ?, mail = ?, authority = ? where account_id = ?";
 				ps = con.prepareStatement(sql);
 
 				//insert命令にポストデータの内容をセット
@@ -85,7 +73,7 @@ public class S0043Servlet extends HttpServlet {
 
 			} else {
 
-				sql = "update accounts set name = ?, mail = ?, password = MD5(?), authority = ? where account_id = ?;";
+				sql = "update accounts set name = ?, mail = ?, password = MD5(?), authority = ? where account_id = ?";
 				ps = con.prepareStatement(sql);
 
 				//insert命令にポストデータの内容をセット

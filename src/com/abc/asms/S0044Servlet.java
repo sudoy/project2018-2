@@ -44,7 +44,7 @@ public class S0044Servlet extends HttpServlet {
 		try {
 			con = DBUtils.getConnection();
 
-			sql = "select * from accounts where account_id = ?";
+			sql = "select account_id, name, mail, password, authority from accounts where account_id = ?";
 			//select命令の準備
 			ps = con.prepareStatement(sql);
 
@@ -73,12 +73,8 @@ public class S0044Servlet extends HttpServlet {
 			throw new ServletException(e);
 		} finally {
 			try {
-				if (rs != null) {
-					con.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
+				DBUtils.close(rs);
+				DBUtils.close(ps);
 				DBUtils.close(con);
 			} catch (Exception e) {
 			}
@@ -127,12 +123,8 @@ public class S0044Servlet extends HttpServlet {
 			throw new ServletException(e);
 		} finally {
 			try {
-				if (rs != null) {
-					con.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
+				DBUtils.close(rs);
+				DBUtils.close(ps);
 				DBUtils.close(con);
 			} catch (Exception e) {
 			}

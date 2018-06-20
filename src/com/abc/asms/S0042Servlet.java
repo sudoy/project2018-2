@@ -45,7 +45,7 @@ public class S0042Servlet extends HttpServlet {
 		try {
 			con = DBUtils.getConnection();
 
-			sql = "select * from accounts where account_id = ?";
+			sql = "select account_id, name, mail, password, authority from accounts where account_id = ?";
 			//select命令の準備
 			ps = con.prepareStatement(sql);
 
@@ -74,12 +74,8 @@ public class S0042Servlet extends HttpServlet {
 			throw new ServletException(e);
 		} finally {
 			try {
-				if (rs != null) {
-					con.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
+				DBUtils.close(rs);
+				DBUtils.close(ps);
 				DBUtils.close(con);
 			} catch (Exception e) {
 			}
@@ -109,7 +105,7 @@ public class S0042Servlet extends HttpServlet {
 		String passwordc = req.getParameter("passwordc");
 		String authority1 = req.getParameter("authority1");
 		String authority2 = req.getParameter("authority2");
-		String authority = authority1 + authority2;
+		String authority = authority2 + authority1;
 
 		req.setAttribute("account_id", accountId);
 		req.setAttribute("name", name);
@@ -139,18 +135,18 @@ public class S0042Servlet extends HttpServlet {
 		List<String> errors = new ArrayList<>();
 		//1-1氏名の必須入力
 		if (name.equals("")) {
-			errors.add("氏名を入力してください。");
+			errors.add("氏名を入力して下さい。");
 		}
 		//1-2氏名の長さチェック
-		if (name.length() > 21) {
+		if (name.length() >= 21) {
 			errors.add("氏名が長すぎます。");
 		}
 		//1-3メールアドレス必須チェック
 		if (mail.equals("")) {
-			errors.add("メールアドレスを入力してください。");
+			errors.add("メールアドレスを入力して下さい。");
 		}
 		//1-4メールアドレス長さチェック
-		if (mail.length() > 101) {
+		if (mail.length() >= 101) {
 			errors.add("メールアドレスが長すぎます。");
 		}
 		//1-5メールアドレス形式チェック
@@ -159,10 +155,10 @@ public class S0042Servlet extends HttpServlet {
 		//		}
 		//1-5メールアドレス形式チェック
 		if (!mail.contains("@")) {
-			errors.add("メールアドレスの形式が間違っています。");
+			errors.add("メールアドレスの形式が誤っています。");
 		}
 		//1-6パスワードの長さtチェック
-		if (password.length() > 31) {
+		if (password.length() >= 31) {
 			errors.add("パスワードが長すぎます。");
 		}
 		//1-7パスワード一致チェック
@@ -171,19 +167,19 @@ public class S0042Servlet extends HttpServlet {
 		}
 		//1-8売上登録権限必須チェック
 		if (authority1.equals("")) {
-			errors.add("売上登録権限を入力してください。");
+			errors.add("売上登録権限を入力して下さい。");
 		}
 		//1-9売上登録権限値チェック
 		if (!authority1.equals("0") && !authority1.equals("1")) {
-			errors.add("売上登録権限に正しい値を入力してください。");
+			errors.add("売上登録権限に正しい値を入力して下さい。");
 		}
 		//1-10アカウント登録権限必須チェック
 		if (authority2.equals("")) {
-			errors.add("アカウント登録権限を入力してください。");
+			errors.add("アカウント登録権限を入力して下さい。");
 		}
 		//1-11アカウント登録権限必須チェック
 		if (!authority2.equals("0") && !authority2.equals("1")) {
-			errors.add("アカウント登録権限に正しい値を入力してください。");
+			errors.add("アカウント登録権限に正しい値を入力して下さい。");
 		}
 		return errors;
 

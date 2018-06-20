@@ -152,7 +152,6 @@ public class S0046Servlet extends HttpServlet {
 				DBUtils.close(con);
 			} catch (Exception e) {
 				e.printStackTrace();
-
 			}
 		}
 	}
