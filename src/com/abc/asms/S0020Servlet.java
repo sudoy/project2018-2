@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.SearchKeepS;
-import com.abc.asms.utils.DBUtils2;
+import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.Utils;
 @WebServlet("/S0020.html")
 public class S0020Servlet extends HttpServlet {
@@ -34,7 +34,7 @@ public class S0020Servlet extends HttpServlet {
 		req.setAttribute("today", today);
 
 
-		DBUtils2.getConnection2(req, resp);
+		DBUtils.getCategoriesAndAccounts(req, resp);
 		getServletContext().getRequestDispatcher("/WEB-INF/s0020.jsp")
 		.forward(req, resp);
 
@@ -52,7 +52,7 @@ public class S0020Servlet extends HttpServlet {
 		String tradeName = req.getParameter("trade_name");
 		String note = req.getParameter("note");
 
-		DBUtils2.getConnection2(req, resp);
+		DBUtils.getCategoriesAndAccounts(req, resp);
 
 		List<String> errors =  validate(saleDate1,saleDate2,req,accountName);
 		if(errors.size() > 0) {

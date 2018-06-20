@@ -82,7 +82,7 @@ public class S0031Servlet extends HttpServlet {
 			rs = ps.executeQuery();
 
 			if(rs.next()) {
-				//sqlからidを取り出してsetAttribute
+				//sqlからidを取り出す
 				id = rs.getInt("id");
 
 				//成功メッセージ（遷移先で出る）

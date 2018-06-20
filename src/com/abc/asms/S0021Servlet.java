@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import com.abc.asms.beans.S0021;
 import com.abc.asms.beans.SearchKeepS;
 import com.abc.asms.utils.DBUtils;
-import com.abc.asms.utils.DBUtils2;
 import com.abc.asms.utils.Utils;
 
 
@@ -36,7 +35,7 @@ public class S0021Servlet extends HttpServlet {
 		PreparedStatement ps = null;
 		String sql = null;
 		ResultSet rs = null;
-		DBUtils2.getConnection2(req, resp);
+		DBUtils.getCategoriesAndAccounts(req, resp);
 		List<String> errors =  new ArrayList<>();
 		if(errors.size() > 0) {
 			session.setAttribute("errors", errors);

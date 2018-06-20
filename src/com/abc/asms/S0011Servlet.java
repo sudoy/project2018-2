@@ -22,7 +22,7 @@ import com.abc.asms.utils.Utils;
 public class S0011Servlet extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
 		//ログインチェック
@@ -35,13 +35,6 @@ public class S0011Servlet extends HttpServlet {
 			return;
 		}
 
-		getServletContext().getRequestDispatcher("/WEB-INF/s0011.jsp")
-			.forward(req, resp);
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
 		HttpSession session = req.getSession();
@@ -83,9 +76,11 @@ public class S0011Servlet extends HttpServlet {
 
 			try{
 				DBUtils.close(ps);
-			}catch(Exception e){}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 
-			//最後のinsertされたidをselect文で出す
+			//insertされた後のidをselect文で取り出す
 			sql = "SELECT LAST_INSERT_ID() as id FROM sales";
 
 			ps = con.prepareStatement(sql);
@@ -93,23 +88,29 @@ public class S0011Servlet extends HttpServlet {
 			rs = ps.executeQuery();
 
 			if(rs.next()) {
+				//sqlからidを取り出す
 				id = rs.getInt("id");
-				req.setAttribute("id", id);
 
+				//成功メッセージ（遷移先で出る）
 				List<String> successes = new ArrayList<>();
 				successes.add("No" + id + "のアカウントを登録しました。");
 				session.setAttribute("successes", successes);
 			}
 
 		}catch(Exception e){
+			e.printStackTrace();
 			throw new ServletException(e);
-
 		}finally{
 			try{
+				DBUtils.close(rs);
 				DBUtils.close(ps);
 				DBUtils.close(con);
-			}catch(Exception e){}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
+
+		//登録処理後、登録画面に遷移
 		resp.sendRedirect("S0010.html");
 	}
 }

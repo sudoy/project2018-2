@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
-import com.abc.asms.utils.DBUtils2;
 import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0010.html")
@@ -38,7 +37,7 @@ public class S0010Servlet extends HttpServlet {
 		}
 
 		//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
-		DBUtils2.getConnection2(req, resp);
+		DBUtils.getCategoriesAndAccounts(req, resp);
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
 			.forward(req, resp);
@@ -62,7 +61,7 @@ public class S0010Servlet extends HttpServlet {
 				tradeName, unitPrice, saleNumber, note);
 
 		if(errors.size() > 0) {
-			DBUtils2.getConnection2(req, resp);
+			DBUtils.getCategoriesAndAccounts(req, resp);
 
 			req.setAttribute("errors", errors);
 			getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
@@ -80,84 +79,76 @@ public class S0010Servlet extends HttpServlet {
 			con = DBUtils.getConnection();
 
 			//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
-			DBUtils2.getConnection2(req, resp);
+			DBUtils.getCategoriesAndAccounts(req, resp);
 
-			try {
-				sql = "SELECT * FROM accounts WHERE account_id = ?;";
 
-				ps = con.prepareStatement(sql);
+			sql = "SELECT * FROM accounts WHERE account_id = ?;";
 
-				ps.setString(1, accountId);
+			ps = con.prepareStatement(sql);
 
-				rs = ps.executeQuery();
+			ps.setString(1, accountId);
 
-				//sqlが実行出来なかったらエラー　→　s0010に返す
-				if(!rs.next()) {
-					//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
-					DBUtils2.getConnection2(req, resp);
+			rs = ps.executeQuery();
 
-					errors.add("アカウントテーブルに存在しません。");
-					req.setAttribute("errors", errors);
-					getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
-						.forward(req, resp);
-					return;
-				}
+			//sqlが実行出来なかったらエラー　→　s0010に返す
+			if(!rs.next()) {
+				//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
+				DBUtils.getCategoriesAndAccounts(req, resp);
+
+				errors.add("アカウントテーブルに存在しません。");
+				req.setAttribute("errors", errors);
+				getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
+					.forward(req, resp);
+				return;
+			}
+
+			try{
+				DBUtils.close(rs);
+				DBUtils.close(ps);
 			}catch(Exception e){
-				throw new ServletException(e);
-			}finally{
-				try{
-					DBUtils.close(rs);
-					DBUtils.close(ps);
-					DBUtils.close(con);
-				}catch(Exception e){
-				}
+				e.printStackTrace();
 			}
 
 			//商品テーブル存在確認チェック
-			try {
-				con = DBUtils.getConnection();
+			sql = "SELECT * FROM categories WHERE category_id = ? AND active_flg = 1;";
 
-				sql = "SELECT * FROM categories WHERE category_id = ? AND active_flg = 1;";
+			ps = con.prepareStatement(sql);
 
-				ps = con.prepareStatement(sql);
+			ps.setString(1, categoryId);
 
-				ps.setString(1, categoryId);
+			rs = ps.executeQuery();
 
-				rs = ps.executeQuery();
+			//sqlが実行出来なかったらエラー　→　s0010に返す
+			if(!rs.next()) {
+				//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
+				DBUtils.getCategoriesAndAccounts(req, resp);
 
-				//sqlが実行出来なかったらエラー　→　s0010に返す
-				if(!rs.next()) {
-					//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
-					DBUtils2.getConnection2(req, resp);
+				errors.add("商品テーブルに存在しません。");
+				req.setAttribute("errors", errors);
+				getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
+					.forward(req, resp);
+				return;
+			}
 
-					errors.add("商品テーブルに存在しません。");
-					req.setAttribute("errors", errors);
-					getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
-						.forward(req, resp);
-					return;
-				}
+			try{
+				DBUtils.close(rs);
+				DBUtils.close(ps);
 			}catch(Exception e){
-				throw new ServletException(e);
-			}finally{
-				try{
-					DBUtils.close(rs);
-					DBUtils.close(ps);
-					DBUtils.close(con);
-				}catch(Exception e){
-				}
+				e.printStackTrace();
 			}
 
 			//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
-			DBUtils2.getConnection2(req, resp);
+			DBUtils.getCategoriesAndAccounts(req, resp);
 		}catch(Exception e){
+			e.printStackTrace();
 			throw new ServletException(e);
 		}finally{
-			//終了処理
 			try{
 				DBUtils.close(rs);
 				DBUtils.close(ps);
 				DBUtils.close(con);
 			}catch(Exception e){
+				e.printStackTrace();
 			}
 		}
 
@@ -173,7 +164,9 @@ public class S0010Servlet extends HttpServlet {
 			.forward(req, resp);
 	}
 
-	private List<String> validate(String saleDate, String accountId, String categoryId, String tradeName, String unitPrice, String saleNumber, String note) {
+	private List<String> validate(String saleDate, String accountId, String categoryId,
+			String tradeName, String unitPrice, String saleNumber, String note) {
+
 		List<String> errors = new ArrayList<>();
 
 		//販売日の必須入力
@@ -181,7 +174,7 @@ public class S0010Servlet extends HttpServlet {
 			errors.add("販売日を入力して下さい。");
 		}
 
-		//販売日の形式（yyyy/MM//dd）
+		//販売日の形式チェック
 		if(!saleDate.equals("")) {
 			try {
 				LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/MM/dd")
@@ -247,7 +240,7 @@ public class S0010Servlet extends HttpServlet {
 		if(!saleNumber.equals("")) {
 		    try {
 		        int i = Integer.parseInt(unitPrice);
-				if(i <= 0) {
+				if(i < 1) {
 					throw new NumberFormatException();
 				}
 		    } catch (NumberFormatException e) {
