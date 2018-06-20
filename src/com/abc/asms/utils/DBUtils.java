@@ -31,7 +31,7 @@ public class DBUtils {
 
 	}
 
-	public static void getConnection2(HttpServletRequest req, HttpServletResponse resp)
+	public static void getCategoriesAndAccounts(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException {
 
 		//担当と商品カテゴリー出すためのメソッド
@@ -64,8 +64,8 @@ public class DBUtils {
 			req.setAttribute("list", list);
 
 			try{
-				DBUtils.close(ps);
 				DBUtils.close(rs);
+				DBUtils.close(ps);
 			}catch(Exception e){}
 
 			sql = "select account_id,name,mail,password,authority  from accounts";
@@ -90,6 +90,7 @@ public class DBUtils {
 			req.setAttribute("list2", list2);
 
 		}catch(Exception e){
+			e.printStackTrace();
 			throw new ServletException(e);
 		}finally{
 			//終了処理
@@ -98,6 +99,7 @@ public class DBUtils {
 				DBUtils.close(ps);
 				DBUtils.close(con);
 			}catch(Exception e){
+				e.printStackTrace();
 			}
 		}
 

@@ -68,7 +68,6 @@ public class S0024Servlet extends HttpServlet {
 			String id = req.getParameter("id");
 
 			String saleDate = req.getParameter("sale_date");
-			String name = req.getParameter("name");
 			String accountId = req.getParameter("account_id");
 			String categoryId = req.getParameter("category_id");
 			String tradeName = req.getParameter("trade_name");
@@ -326,7 +325,7 @@ public class S0024Servlet extends HttpServlet {
 		}
 
 		//1-13 備考長さチェック
-		if (note.length() >= 400) {
+		if (note.length() >= 401) {
 			errors.add("備考が長すぎます。");
 		}
 

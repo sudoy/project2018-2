@@ -119,8 +119,7 @@
 
 			<div class="col-sm-offset-3">
 
-				<c:if
-					test="${accounts.authority == '1' || accounts.authority == '11'}">
+				<c:if test="${accounts.authority == '1' || accounts.authority == '11'}">
 					<a href="S0023.html?id=${s22.saleId}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 編 集</span></a>
 					<a href="S0025.html?id=${s22.saleId}" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true">削 除</span></a>
 				</c:if>
