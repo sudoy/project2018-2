@@ -69,13 +69,13 @@ public class S0045Servlet extends HttpServlet {
 				rs = ps.executeQuery();
 
 				//1-4アカウントテーブル存在チェック
-				if (!rs.next()) {
-					errors.add("メールアドレスを正しく入力して下さい。");
-					session.setAttribute("errors", errors);
-					getServletContext().getRequestDispatcher("/WEB-INF/s0045.jsp")
-							.forward(req, resp);
-					return;
-				}
+//				if (!rs.next()) {
+//					errors.add("メールアドレスを正しく入力して下さい。");
+//					session.setAttribute("errors", errors);
+//					getServletContext().getRequestDispatcher("/WEB-INF/s0045.jsp")
+//							.forward(req, resp);
+//					return;
+//				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new ServletException(e);
@@ -156,19 +156,31 @@ public class S0045Servlet extends HttpServlet {
 		//1-3メールアドレス形式チェック
 //		if (!mail.contains("@") 
 //				&& !mail.equals("") 
-//				//&& !mail.substring(0, 1).equals("[0-9a-zA-Z]") 
+//				&& !mail.substring(0, 1).equals("[0-9a-zA-Z]")
+//				&& !mail.substring(1, ).equals("[0-9a-zA-Z]")
 //				) {
 //			errors.add("メールアドレスを正しく入力して下さい。");
 //		}
+//		System.out.println(mail.substring(1));
 
-		String pattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$" ;
-		
+		String pattern = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]";
 		Pattern p = Pattern.compile(pattern);
-		if(p.matcher(mail).find()){
-		}else{
+		
+		if(!p.matcher(mail).find()){
 			errors.add("メールアドレスを正しく入力して下さい。");
 		}
-
+		String key = "@";
+		 
+		int result = mail.indexOf(key);
+ 
+		if (result != -1) {
+			System.out.println(key + "が見つかった位置：" + result);
+		} 
+		System.out.println(mail.substring(6));
+		
+		if(!p.matcher(mail).find() && !mail.substring(6).contains(".")){
+			errors.add("メールアドレスを正しく入力して下さい。");
+		}
 		return errors;
 	}
 }
