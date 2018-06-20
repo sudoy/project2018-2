@@ -3,8 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.abc.asms.utils.HtmlUtils" %>
 
-<!-- <c:set var="MoM" value="${(thisMonthSum / lastMonthSum) * 100}" /> -->
-
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
