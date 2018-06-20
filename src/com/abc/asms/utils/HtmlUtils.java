@@ -30,12 +30,17 @@ public class HtmlUtils {
 		}
 	}
 
-	public static String checkCategory(String param, String value) {
-		if(param.equals(value)) {
-			return "checked";
-		}else {
-			return "";
+	public static boolean checkCategory(String[] param, String value) {
+		if(param == null) {
+			return true;
 		}
+		for(String s : param) {
+			if(s.equals(value)) {
+				return true;
+			}
+		}
+		return false;
+
 	}
 
 	public static String selectName(String param, String value) {
@@ -69,16 +74,5 @@ public class HtmlUtils {
 		String str = String.format("%,3d", s.getSaleNumber());
 		return str;
 	}
-	public static boolean checkCategory1(String[] param, String value) {
-		if(param == null) {
-			return true;
-		}
-		for(String s : param) {
-			if(s.equals(value)) {
-				return true;
-			}
-		}
-		return false;
 
-	}
 }
