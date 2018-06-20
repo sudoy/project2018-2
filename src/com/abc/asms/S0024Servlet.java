@@ -111,6 +111,7 @@ public class S0024Servlet extends HttpServlet {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				throw new ServletException();
 			} finally {
 				try {
 					DBUtils.close(rs);
@@ -209,7 +210,8 @@ public class S0024Servlet extends HttpServlet {
 				resp.sendRedirect("S0022.html?id=" + id);
 
 			} catch (Exception e) {
-				throw new ServletException(e);
+				e.printStackTrace();
+				throw new ServletException();
 
 			} finally {
 				try {
