@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.abc.asms.utils.HtmlUtils" %>
 
-<c:set var="MoM" value="${(thisMonthSum / lastMonthSum) * 100}" />
+<!-- <c:set var="MoM" value="${(thisMonthSum / lastMonthSum) * 100}" /> -->
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -95,7 +95,7 @@
 						<div class="panel-heading">
 							<h3 class="panel-title">前月（${lastMonth}月）の売上合計</h3>
 						</div>
-						<div class="panel-body" align="center">${HtmlUtils.formatComma(lastMonthSum)}</div>
+						<div class="panel-body" align="center" style="text-align: right">${HtmlUtils.formatComma(lastMonthSum)}円</div>
 					</div>
 				</div>
 
@@ -104,7 +104,7 @@
 						<div class="panel-heading">
 							<h3 class="panel-title">今月（${thisMonth}月）の売上合計</h3>
 						</div>
-						<div class="panel-body" align="center">${HtmlUtils.formatComma(thisMonthSum)}</div>
+						<div class="panel-body" align="center" style="text-align: right">${HtmlUtils.formatComma(thisMonthSum)}円</div>
 					</div>
 				</div>
 
@@ -151,7 +151,7 @@
 						<c:forEach var="c0020" items="${list}">
 							<tr>
 								<td style="text-align: right">${c0020.saleId}</td>
-								<td>${c0020.saleDate}</td>
+								<td>${HtmlUtils.formDate(c0020.saleDate)}</td>
 								<td>${c0020.categoryName}</td>
 								<td>${c0020.tradeName}</td>
 								<td style="text-align: right">${HtmlUtils.formatComma(c0020.unitPrice)}</td>

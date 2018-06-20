@@ -78,8 +78,8 @@ public class C0020Servlet extends HttpServlet {
 			first = ld.withDayOfMonth(1).plusMonths(1);
 			last = ld.withDayOfMonth(1).plusMonths(2).minusDays(1);
 
-			lastMonthFirst = ld.withDayOfMonth(1).plusMonths(1).minusMonths(1);
-			lastMonthLast = ld.withDayOfMonth(1).plusMonths(1).minusMonths(1);
+			lastMonthFirst = ld.withDayOfMonth(1);
+			lastMonthLast = ld.withDayOfMonth(1);
 		} else if(req.getParameter("before") != null) {
 			// 前年
 			today = DateTimeFormatter.ofPattern("yyyy年M月").format(ld.minusYears(1));
@@ -87,7 +87,7 @@ public class C0020Servlet extends HttpServlet {
 			last = ld.withDayOfMonth(1).plusMonths(1).minusDays(1).minusYears(1);
 
 			lastMonthFirst = ld.withDayOfMonth(1).minusYears(1).minusMonths(1);
-			lastMonthLast = ld.withDayOfMonth(1).plusMonths(1).minusDays(1).minusYears(1).minusMonths(1);
+			lastMonthLast = ld.withDayOfMonth(1).minusDays(1).minusYears(1);
 		} else if(req.getParameter("after") != null) {
 			// 翌年
 			today = DateTimeFormatter.ofPattern("yyyy年M月").format(ld.plusYears(1));
@@ -95,7 +95,7 @@ public class C0020Servlet extends HttpServlet {
 			last = ld.withDayOfMonth(1).plusMonths(1).minusDays(1).plusYears(1);
 
 			lastMonthFirst = ld.withDayOfMonth(1).plusYears(1).minusMonths(1);
-			lastMonthLast = ld.withDayOfMonth(1).plusMonths(1).minusDays(1).plusYears(1).minusMonths(1);
+			lastMonthLast = ld.withDayOfMonth(1).minusDays(1).plusYears(1);
 		} else {
 			// 今月
 			today = DateTimeFormatter.ofPattern("yyyy年M月").format(ld);
@@ -139,17 +139,16 @@ public class C0020Servlet extends HttpServlet {
 		try{
 			con = DBUtils.getConnection();
 
-			//ログインユーザーの今月の売上合計
+			//今月の売上合計
 			sql = "SELECT SUM(unit_price * sale_number) AS sum1 "
 					+ "FROM sales "
-					+ "WHERE sale_date BETWEEN ? AND ? AND account_id = ?;";
+					+ "WHERE sale_date BETWEEN ? AND ?;";
 
 			ps = con.prepareStatement(sql);
 
 			//今月の月初と月末とログインユーザーのアカウントIDをセット
 			ps.setString(1, first.toString());
 			ps.setString(2, last.toString());
-			ps.setString(3, strAccountId);
 
 			rs = ps.executeQuery();
 
@@ -167,17 +166,16 @@ public class C0020Servlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			//ログインユーザーの前月の売上合計
+			//前月の売上合計
 			sql = "SELECT SUM(unit_price * sale_number) AS sum2 "
 					+ "FROM sales "
-					+ "WHERE sale_date BETWEEN ? AND ? AND account_id = ?;";
+					+ "WHERE sale_date BETWEEN ? AND ?;";
 
 			ps = con.prepareStatement(sql);
 
 			//前月の月初と月末とログインユーザーのアカウントIDをセット
 			ps.setString(1, lastMonthFirst.toString());
 			ps.setString(2, lastMonthLast.toString());
-			ps.setString(3, strAccountId);
 
 			rs = ps.executeQuery();
 
@@ -224,6 +222,17 @@ public class C0020Servlet extends HttpServlet {
 						);
 
 				list.add(c0020);
+			}
+
+			try {
+				int MoM = (thisMonthSum / lastMonthSum) * 100;
+
+				if(thisMonthSum == 0 && lastMonthSum == 0) {
+					throw new ArithmeticException();
+				}
+				req.setAttribute("MoM", MoM);
+			}catch(ArithmeticException e){
+				e.printStackTrace();
 			}
 
 			req.setAttribute("list", list);
