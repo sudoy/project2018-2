@@ -20,8 +20,10 @@ import com.abc.asms.utils.Utils;
 
 @WebServlet("/S0031.html")
 public class S0031Servlet extends HttpServlet {
+
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 
 		//ログインチェック
 		if (!Utils.checkLogin(req, resp)) {
@@ -29,29 +31,13 @@ public class S0031Servlet extends HttpServlet {
 		}
 
 		//権限チェック
-		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
+		if (!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
 			return;
 		}
 
-		req.getServletContext().getRequestDispatcher("/WEB-INF/s0031.jsp").forward(req, resp);
+		getServletContext().getRequestDispatcher("/WEB-INF/s0030.jsp")
+				.forward(req, resp);
 	}
-
-@Override
-protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-	//ログインチェック
-	if (!Utils.checkLogin(req, resp)) {
-		return;
-	}
-
-	//権限チェック
-	if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
-		return;
-	}
-
-	getServletContext().getRequestDispatcher("/WEB-INF/s0030.jsp")
-		.forward(req, resp);
-}	
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -63,10 +49,9 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 		}
 
 		//権限チェック
-		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
+		if (!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
 			return;
 		}
-
 
 		req.setCharacterEncoding("UTF-8");
 
@@ -102,9 +87,10 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 
 			ps.executeUpdate();
 
-			try{
+			try {
 				DBUtils.close(ps);
-			}catch(Exception e){}
+			} catch (Exception e) {
+			}
 
 			//insertされた後のidをselect文で取り出す
 			sql = "SELECT LAST_INSERT_ID() as id FROM accounts";
@@ -113,7 +99,7 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 
 			rs = ps.executeQuery();
 
-			if(rs.next()) {
+			if (rs.next()) {
 				//sqlからidを取り出す
 				id = rs.getInt("id");
 
@@ -123,15 +109,16 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 				session.setAttribute("successes", successes);
 			}
 
-		}catch(Exception e){
+		} catch (Exception e) {
 			throw new ServletException(e);
 
-		}finally{
-			try{
+		} finally {
+			try {
 				DBUtils.close(rs);
 				DBUtils.close(ps);
 				DBUtils.close(con);
-			}catch(Exception e){}
+			} catch (Exception e) {
+			}
 		}
 
 		//登録処理後、登録画面に遷移

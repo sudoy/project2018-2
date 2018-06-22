@@ -53,7 +53,7 @@
 				<div class="form-group">
 		 			<label for="name" class="col-sm-3 control-label">氏名 <span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
-						<input type="text" class="form-control" name="name"  value="${param.name}" disabled>
+						<input type="text" class="form-control" name="name"  value="${param.name}" readonly>
 					</div>
 				</div>
 
