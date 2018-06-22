@@ -193,6 +193,33 @@ public class C0020Servlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
+			sql = "select SUM(unit_price * sale_number)as summary from sales"
+					+" where sale_date between ? and ? and account_id = ?";
+
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, first.toString());
+			ps.setString(2, last.toString());
+			ps.setString(3, strAccountId);
+
+			rs = ps.executeQuery();
+
+			if(rs.next()) {
+				int thisSum = rs.getInt("summary");
+
+				req.setAttribute("thisSum", thisSum);
+			}
+
+			try{
+				DBUtils.close(rs);
+				DBUtils.close(ps);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+
+
+
+
 			//ログインユーザーの売り上げ一覧を出す
 			sql = "SELECT s.sale_id, s.sale_date, c.category_name, s.trade_name, s.unit_price, s.sale_number "
 					+ "FROM accounts a "

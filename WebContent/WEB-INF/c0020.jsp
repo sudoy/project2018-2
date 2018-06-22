@@ -165,7 +165,7 @@
 								<td>　</td>
 								<td>　</td>
 								<th style="text-align: right">合計</th>
-								<td style="text-align: right">${HtmlUtils.formatComma(thisMonthSum)}</td>
+								<td style="text-align: right">${HtmlUtils.formatComma(thisSum)}</td>
 							</tr>
 
 					</table>
