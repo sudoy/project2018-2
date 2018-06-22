@@ -53,7 +53,7 @@ public class HtmlUtils {
 		if(d == null) {
 			return "";
 		}
-		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/d");
 		 return sdf.format(d);
 
 	}

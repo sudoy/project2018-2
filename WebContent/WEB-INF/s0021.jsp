@@ -52,9 +52,9 @@
 				<th>担当</th>
 				<th>商品カテゴリー</th>
 				<th>商品名</th>
-				<th>単価</th>
-				<th>個数</th>
-				<th>小計</th>
+				<th style="text-align: right">単価</th>
+				<th style="text-align: right">個数</th>
+				<th style="text-align: right">小計</th>
 			</tr>
 			<c:forEach var="project2" items="${list}">
 			<tr>
@@ -64,9 +64,9 @@
 			<td>${project2.accountName}</td>
 			<td>${project2.categoryName}</td>
 			<td>${project2.tradeName}</td>
-			<td>${HtmlUtils.formatComma(project2.unitPrice)}</td>
-			<td>${HtmlUtils.formatComma(project2.saleNumber)}</td>
-			<td>${HtmlUtils.formatComma(project2.unitPrice * project2.saleNumber)}</td>
+			<td style="text-align: right">${HtmlUtils.formatComma(project2.unitPrice)}</td>
+			<td style="text-align: right">${HtmlUtils.formatComma(project2.saleNumber)}</td>
+			<td style="text-align: right">${HtmlUtils.formatComma(project2.unitPrice * project2.saleNumber)}</td>
 			</tr>
 			</c:forEach>
 
