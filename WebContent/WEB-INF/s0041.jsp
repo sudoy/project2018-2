@@ -55,7 +55,7 @@
 		<table class="table">
 			<tr>
 				<th>操作</th>
-				<th>No</th>
+				<th style="text-align: right">No</th>
 				<th>氏名</th>
 				<th>メールアドレス</th>
 				<th>権限</th>
@@ -68,12 +68,12 @@
 							test="${accounts.authority == '10' || accounts.authority == '11'}">
 							<a href="S0042.html?account_id=${account.accountId}"
 								class="btn btn-primary"><span class="glyphicon glyphicon-ok"
-								aria-hidden="true"></span> 詳細</a>
+								aria-hidden="true"></span> 編集</a>
 							<a href="S0044.html?account_id=${account.accountId}"
 								class="btn btn-danger"><span
 								class="glyphicon glyphicon-remove" aria-hidden="true"></span> 削除</a>
 						</c:if></td>
-					<td>${account.accountId}</td>
+					<td style="text-align: right">${account.accountId}</td>
 					<td>${account.name}</td>
 					<td>${account.mail}</td>
 					<td>${AuthorityUtils.convertAuthority(account.authority)}</td>
