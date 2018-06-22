@@ -53,7 +53,7 @@
 				<div class="form-group">
 		 			<label for="name" class="col-sm-3 control-label">氏名 <span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
-						<input type="text" class="form-control" name="name"  value="${param.name}" readonly>
+						<input type="text" class="form-control" name="name"  value="${param.name}" disabled>
 					</div>
 				</div>
 
@@ -67,14 +67,14 @@
 				<div class="form-group">
 		 			<label for="password1" class="col-sm-3 control-label">パスワード<span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
-						<input type="text" class="form-control" name="password1" value="${param.password1}" readonly>
+						<input type="password" class="form-control" name="password1" value="${param.password1}" readonly>
 					</div>
 				</div>
 
 				<div class="form-group">
 		 			<label for="password2" class="col-sm-3 control-label">パスワード（確認）<span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
-						<input type="text" class="form-control" name="password2" value="${param.password2}" readonly>
+						<input type="password" class="form-control" name="password2" value="${param.password2}" readonly>
 					</div>
 				</div>
 
@@ -102,7 +102,7 @@
 				</div>
 
 			</form>
-		</div><!-- /container -->
+		</div>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
