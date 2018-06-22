@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,11 +69,15 @@ public class S0044Servlet extends HttpServlet {
 			//JSPへフォワード
 			getServletContext().getRequestDispatcher("/WEB-INF/s0044.jsp")
 					.forward(req, resp);
-
+			
+		}catch(SQLException e) {
+			getServletContext().getRequestDispatcher("/WEB-INF/s0040.jsp")
+				.forward(req, resp);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServletException(e);
-		} finally {
+		} 
+		finally {
 			try {
 				DBUtils.close(rs);
 				DBUtils.close(ps);
