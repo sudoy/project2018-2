@@ -35,7 +35,7 @@ public class S0011Servlet extends HttpServlet {
 			return;
 		}
 
-		req.getServletContext().getRequestDispatcher("/WEB-INF/s0011.jsp").forward(req, resp);
+		req.getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp").forward(req, resp);
 	}
 
 	@Override
