@@ -71,7 +71,8 @@ public class C0020Servlet extends HttpServlet {
 			last = ld.withDayOfMonth(1).minusDays(1);
 
 			lastMonthFirst = ld.withDayOfMonth(1).minusMonths(1).minusMonths(1);
-			lastMonthLast = ld.withDayOfMonth(1).minusDays(1).minusMonths(1);
+			lastMonthLast = ld.withDayOfMonth(1).minusMonths(1).minusDays(1);
+
 		} else if(req.getParameter("next") != null) {
 			// 翌月
 			today = DateTimeFormatter.ofPattern("yyyy年M月").format(ld.plusMonths(1));
@@ -80,6 +81,7 @@ public class C0020Servlet extends HttpServlet {
 
 			lastMonthFirst = ld.withDayOfMonth(1);
 			lastMonthLast = ld.withDayOfMonth(1).plusMonths(1).minusDays(1);
+
 		} else if(req.getParameter("before") != null) {
 			// 前年
 			today = DateTimeFormatter.ofPattern("yyyy年M月").format(ld.minusYears(1));
