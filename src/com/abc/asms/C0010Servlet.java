@@ -60,7 +60,7 @@ public class C0010Servlet extends HttpServlet {
 			rs=ps.executeQuery();
 
 			if(!rs.next()) {
-				errors.add("メールアドレス、パスワードを正しく入力してください。");
+				errors.add("メールアドレス、パスワードを正しく入力して下さい。");
 				session.setAttribute("errors", errors);
 				getServletContext().getRequestDispatcher("/WEB-INF/c0010.jsp")
 				.forward(req, resp);
@@ -91,7 +91,7 @@ public class C0010Servlet extends HttpServlet {
 		List<String> errors = new ArrayList<>();
 		//1-1
 		if(email.equals("")) {
-			errors.add("メールアドレスを入力してください。");
+			errors.add("メールアドレスを入力して下さい。");
 		}
 		//1-2
 		if(email.length() > 100) {
@@ -99,7 +99,7 @@ public class C0010Servlet extends HttpServlet {
 		}
 		//1-3
 		if (!email.contains("@") && !email.equals("")) {
-			errors.add("メールアドレスを正しく入力してください。");
+			errors.add("メールアドレスを正しく入力して下さい。");
 		}
 		//1-4
 		if(password.equals("")) {
