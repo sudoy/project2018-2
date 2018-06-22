@@ -227,7 +227,7 @@ public class S0010Servlet extends HttpServlet {
 		//個数整数かつ1以上にする
 		if(!saleNumber.equals("")) {
 		    try {
-		        int i = Integer.parseInt(unitPrice);
+		        int i = Integer.parseInt(saleNumber);
 				if(i <= 0) {
 					throw new NumberFormatException();
 				}
