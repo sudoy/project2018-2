@@ -75,7 +75,7 @@
 			<div class="form-group">
 				<label for="name" class="col-sm-3 control-label">パスワード</label>
 				<div class="col-sm-5">
-					<input type="password" class="form-control" name="password"
+					<input type="password" class="form-control" placeholder="パスワード" name="password"
 						id="pass1" value="${param.password}" readonly>
 				</div>
 
@@ -84,7 +84,7 @@
 			<div class="form-group">
 				<label for="name" class="col-sm-3 control-label">パスワード（確認）</label>
 				<div class="col-sm-5">
-					<input type="password" class="form-control" name="password"
+					<input type="password" class="form-control"  placeholder="パスワード（確認）" name="password"
 						id="pass2" value="${param.password}" readonly>
 				</div>
 			</div>
