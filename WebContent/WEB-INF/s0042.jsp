@@ -64,7 +64,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="name" name="name"
-						value="${param.name != null ? param.name : accounts.name}" placeholder="氏名">
+						placeholder="氏名" value="${param.name != null ? param.name : accounts.name}">
 				</div>
 			</div>
 
@@ -73,7 +73,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="mailadress" name="mail"
-						value="${param.mail != null ? param.mail : accounts.mail}" placeholder="メールアドレス">
+						placeholder="メールアドレス" value="${param.mail != null ? param.mail : accounts.mail}">
 				</div>
 			</div>
 
@@ -81,7 +81,7 @@
 				<label for="name" class="col-sm-3 control-label">パスワード</label>
 				<div class="col-sm-5">
 					<input type="password" class="form-control" name="password"
-						id="pass1" placeholder="パスワード">
+						placeholder="パスワード" id="pass1" value="">
 				</div>
 
 			</div>
@@ -90,7 +90,7 @@
 				<label for="name" class="col-sm-3 control-label">パスワード（確認）</label>
 				<div class="col-sm-5">
 					<input type="password" class="form-control" name="passwordc"
-						id="pass2" placeholder="パスワード（確認）">
+						placeholder="パスワード（確認）" id="pass2" value="">
 				</div>
 			</div>
 
