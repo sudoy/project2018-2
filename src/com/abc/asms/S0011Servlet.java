@@ -22,6 +22,23 @@ import com.abc.asms.utils.Utils;
 public class S0011Servlet extends HttpServlet {
 
 	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+
+		//ログインチェック
+		if (!Utils.checkLogin(req, resp)) {
+			return;
+		}
+
+		//権限チェック
+		if(!AuthorityUtils.checkSalesAuthority(req, resp)) {
+			return;
+		}
+
+		req.getServletContext().getRequestDispatcher("/WEB-INF/s0011.jsp").forward(req, resp);
+	}
+
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
