@@ -70,14 +70,14 @@
 				<div class="form-group">
 		 			<label for="password1" class="col-sm-3 control-label">パスワード<span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
-						<input type="text" class="form-control" name="password1" placeholder="パスワード" value="">
+						<input type="password" class="form-control" name="password1" placeholder="パスワード" value="">
 					</div>
 				</div>
 
 				<div class="form-group">
 		 			<label for="password2" class="col-sm-3 control-label">パスワード（確認）<span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
-						<input type="text" class="form-control" name="password2" placeholder="パスワード（確認）" value="">
+						<input type="password" class="form-control" name="password2" placeholder="パスワード（確認）" value="">
 					</div>
 				</div>
 
