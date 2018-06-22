@@ -43,7 +43,7 @@
 						<li><a href="S0040.html">アカウント検索</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="C0010.html">ログアウト</a></li>
+						<li><a href="C0030.html">ログアウト</a></li>
 					</ul>
 				</div>
 			</div>
