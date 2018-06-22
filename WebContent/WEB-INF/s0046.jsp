@@ -28,9 +28,8 @@
 				<h2 class="form-signin-heading">物品売上管理システム</h2>
 				<jsp:include page="_errors.jsp" />
 				<h3 class="form-signin-heading">新パスワード入力</h3>
-				<label for="inputPassword" class="sr-only"></label>
+
 				<input type="password" name="password1" id="newPasword" class="form-control" placeholder="新パスワード" >
-				<label for="inputPassword" class="sr-only"></label>
 				<input type="password" name="password2" id="rnewPassword" class="form-control" placeholder="新パスワード確認">
 
 				<button type="submit" class="btn btn-primary" style="width:300px;">
@@ -39,10 +38,11 @@
 
 			</form>
 
-		</div> <!-- /container -->
+		</div>
 
 		<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+
 	</body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
 </html>

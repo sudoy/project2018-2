@@ -11,7 +11,7 @@
 	<link rel="icon" href="../../favicon.ico">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/signin.css" rel="stylesheet">
-	
+
 	<title>ログイン｜物品売上管理システム</title>
 
 	<!--[if lt IE 9]>
@@ -37,8 +37,10 @@
 				<span class="glyphicon glyphicon" aria-hidden="true">メール送信</span>
 			</button>
 		</form>
-	</div> <!-- /container -->
-	</body>
+	</div>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+
+</body>
 </html>
