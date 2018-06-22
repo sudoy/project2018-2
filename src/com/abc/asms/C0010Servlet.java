@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -17,17 +18,28 @@ import javax.servlet.http.HttpSession;
 import com.abc.asms.beans.Accounts;
 import com.abc.asms.utils.DBUtils;
 
-
 @WebServlet("/C0010.html")
 public class C0010Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		getServletContext().getRequestDispatcher("/WEB-INF/c0010.jsp")
-		.forward(req, resp);
+		HttpSession session = req.getSession();
+		Enumeration<String> e = session.getAttributeNames();
+		String key = null;
+		while (e.hasMoreElements()) {
+			key = (String) e.nextElement();
+			System.out.println(key);
+			if (key.contains("accounts")) {
+				resp.sendRedirect("C0020.html");
+				return;
+			}
+		}
 
+		getServletContext().getRequestDispatcher("/WEB-INF/c0010.jsp")
+				.forward(req, resp);
 	}
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -36,11 +48,11 @@ public class C0010Servlet extends HttpServlet {
 		String email = req.getParameter("mail");
 		String password = req.getParameter("password");
 
-		List<String> errors = validate(email,password);
-		if(errors.size() > 0) {
+		List<String> errors = validate(email, password);
+		if (errors.size() > 0) {
 			session.setAttribute("errors", errors);
 			getServletContext().getRequestDispatcher("/WEB-INF/c0010.jsp")
-			.forward(req, resp);
+					.forward(req, resp);
 			return;
 		}
 		//関連チェック
@@ -48,22 +60,22 @@ public class C0010Servlet extends HttpServlet {
 		PreparedStatement ps = null;
 		String sql = null;
 		ResultSet rs = null;
-		try{
+		try {
 			//データベースの接続を確立
 			con = DBUtils.getConnection();
 			//GETパラメーターを取得
 			sql = "SELECT account_id, name, mail, password,authority from accounts where mail = ? and password = MD5(?)";
-			ps= con.prepareStatement(sql);
+			ps = con.prepareStatement(sql);
 			ps.setString(1, email);
 			ps.setString(2, password);
 			//SELCT命令を実行
-			rs=ps.executeQuery();
+			rs = ps.executeQuery();
 
-			if(!rs.next()) {
+			if (!rs.next()) {
 				errors.add("メールアドレス、パスワードを正しく入力して下さい。");
 				session.setAttribute("errors", errors);
 				getServletContext().getRequestDispatcher("/WEB-INF/c0010.jsp")
-				.forward(req, resp);
+						.forward(req, resp);
 				return;
 
 			}
@@ -76,25 +88,27 @@ public class C0010Servlet extends HttpServlet {
 			session.setAttribute("accounts", accounts);
 			resp.sendRedirect("C0020.html");
 
-		}catch(Exception e){
+		} catch (Exception e) {
 			throw new ServletException(e);
 
-		}finally{
-			try{
+		} finally {
+			try {
 				DBUtils.close(rs);
 				DBUtils.close(ps);
 				DBUtils.close(con);
-			}catch(Exception e){}
+			} catch (Exception e) {
+			}
 		}
 	}
-	private List<String> validate(String email,String password) {
+
+	private List<String> validate(String email, String password) {
 		List<String> errors = new ArrayList<>();
 		//1-1
-		if(email.equals("")) {
+		if (email.equals("")) {
 			errors.add("メールアドレスを入力して下さい。");
 		}
 		//1-2
-		if(email.length() > 100) {
+		if (email.length() > 100) {
 			errors.add("メールアドレスが長すぎます");
 		}
 		//1-3
@@ -102,14 +116,13 @@ public class C0010Servlet extends HttpServlet {
 			errors.add("メールアドレスを正しく入力して下さい。");
 		}
 		//1-4
-		if(password.equals("")) {
+		if (password.equals("")) {
 			errors.add("パスワードが未入力です。");
 		}
 		//1-5
-		if(password.length() > 30) {
+		if (password.length() > 30) {
 			errors.add("パスワードが長すぎます");
 		}
-
 
 		return errors;
 
