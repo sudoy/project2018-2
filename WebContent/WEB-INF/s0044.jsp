@@ -16,7 +16,7 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-		
+
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -78,7 +78,7 @@
 			<div class="form-group">
 				<label for="name" class="col-sm-3 control-label">パスワード</label>
 				<div class="col-sm-5">
-					<input type="password" class="form-control" name="password"
+					<input type="password" class="form-control" placeholder="パスワード" name="password"
 						id="pass1" value="" disabled>
 				</div>
 
@@ -87,7 +87,7 @@
 			<div class="form-group">
 				<label for="name" class="col-sm-3 control-label">パスワード（確認）</label>
 				<div class="col-sm-5">
-					<input type="password" class="form-control" name="pass2" id="pass2"
+					<input type="password" class="form-control" placeholder="パスワード(確認)" name="pass2" id="pass2"
 						value="" disabled>
 				</div>
 			</div>
