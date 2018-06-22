@@ -60,7 +60,7 @@ public class S0045Servlet extends HttpServlet {
 		try {
 			try {
 				con = DBUtils.getConnection();
-				sql = "SELECT * FROM accounts WHERE mail = ?";
+				sql = "SELECT account_id, name, mail, password, authority FROM accounts WHERE mail = ?";
 				ps = con.prepareStatement(sql);
 
 				ps.setString(1, mail);
@@ -68,13 +68,14 @@ public class S0045Servlet extends HttpServlet {
 				rs = ps.executeQuery();
 
 				//1-4アカウントテーブル存在チェック
-//				if (!rs.next()) {
-//					errors.add("メールアドレスを正しく入力して下さい。");
-//					session.setAttribute("errors", errors);
-//					getServletContext().getRequestDispatcher("/WEB-INF/s0045.jsp")
-//							.forward(req, resp);
-//					return;
-//				}
+				if (!rs.next()) {
+					errors.add("メールアドレスを正しく入力して下さい。");
+					session.setAttribute("errors", errors);
+					getServletContext().getRequestDispatcher("/WEB-INF/s0045.jsp")
+							.forward(req, resp);
+					return;
+				}
+
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new ServletException(e);
