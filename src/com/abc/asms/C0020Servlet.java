@@ -136,6 +136,8 @@ public class C0020Servlet extends HttpServlet {
 		String sql = null;
 		ResultSet rs = null;
 
+		DBUtils.getCategoriesAndAccounts(req, resp);
+
 		try{
 			con = DBUtils.getConnection();
 
@@ -193,6 +195,7 @@ public class C0020Servlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
+			//6/22 ログインユーザーの合計が正しく出るように作成したSQL
 			sql = "select SUM(unit_price * sale_number)as summary from sales"
 					+" where sale_date between ? and ? and account_id = ?";
 
