@@ -43,7 +43,7 @@ public class S0025Servlet extends HttpServlet {
 		String sql = null;
 
 		//カテゴリーテーブルとアカウントテーブルの呼び出し
-		DBUtils.getCategoriesAndAccounts(req, resp);
+		DBUtils.getCategoriesAndAccountsForAll(req, resp);
 
 		//DB接続とSQL
 		try {

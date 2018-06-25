@@ -35,7 +35,7 @@ public class S0020Servlet extends HttpServlet {
 		req.setAttribute("today", today);
 
 
-		DBUtils.getCategoriesAndAccountsForS0021(req, resp);
+		DBUtils.getCategoriesAndAccountsForAll(req, resp);
 		getServletContext().getRequestDispatcher("/WEB-INF/s0020.jsp")
 		.forward(req, resp);
 
@@ -57,7 +57,7 @@ public class S0020Servlet extends HttpServlet {
 		String tradeName = req.getParameter("trade_name");
 		String note = req.getParameter("note");
 
-		DBUtils.getCategoriesAndAccountsForS0021(req, resp);
+		DBUtils.getCategoriesAndAccountsForAll(req, resp);
 
 		List<String> errors =  validate(saleDate1,saleDate2,req,accountName);
 		if(errors.size() > 0) {

@@ -88,7 +88,7 @@ public class S0021Servlet extends HttpServlet {
 			}
 
 			//id昇順
-			sql += "order by sale_id";
+			sql += "order by sale_date ";
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
