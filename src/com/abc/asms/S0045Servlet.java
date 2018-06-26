@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 import javax.mail.AuthenticationFailedException;
 import javax.mail.Message;
@@ -154,33 +155,23 @@ public class S0045Servlet extends HttpServlet {
 			errors.add("メールアドレスが長すぎます。");
 		}
 		//1-3メールアドレス形式チェック
-//		if (!mail.contains("@")
-//				&& !mail.equals("")
-//				&& !mail.substring(0, 1).equals("[0-9a-zA-Z]")
-//				&& !mail.substring(1, ).equals("[0-9a-zA-Z]")
-//				) {
-//			errors.add("メールアドレスを正しく入力して下さい。");
-//		}
-//		System.out.println(mail.substring(1));
-
-//		String pattern = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]";
-//		Pattern p = Pattern.compile(pattern);
-//
-//		if(!p.matcher(mail).find()){
-//			errors.add("メールアドレスを正しく入力して下さい。");
-//		}
-//		String key = "@";
-//
-//		int result = mail.indexOf(key);
-//
-//		if (result != -1) {
-//			System.out.println(key + "が見つかった位置：" + result);
-//		}
-//		System.out.println(mail.substring(6));
-//
-//		if(!p.matcher(mail).find() && !mail.substring(6).contains(".")){
-//			errors.add("メールアドレスを正しく入力して下さい。");
-//		}
+		if(!mail.equals("") && mail.contains("@")) {
+			String pattern = "^[a-zA-Z0-9]*$";
+			Pattern p = Pattern.compile(pattern);
+			String[] split = mail.split("@", 0);
+			String firstCharacter = mail.substring(0, 1);
+			if(!p.matcher(firstCharacter).find()){
+				errors.add("メールアドレスを正しく入力して下さい。");
+			}else if(!split[0].matches("^[a-zA-Z0-9._-]*$") || split[0].length() == 1) {
+				errors.add("メールアドレスを正しく入力して下さい。");
+			}else if(!split[1].matches("^[a-zA-Z0-9._-]*$") ||split[0].length() == 0) {
+				errors.add("メールアドレスを正しく入力して下さい。");
+			}else if(!split[1].contains(".") ||split[0].length() == 0) {
+				errors.add("メールアドレスを正しく入力して下さい。");
+			}else if(!split[0].matches("^[a-zA-Z0-9._-]*$") && split[0].length() == 0) {
+				errors.add("メールアドレスを正しく入力して下さい。");
+			}
+		}
 		return errors;
 	}
 }

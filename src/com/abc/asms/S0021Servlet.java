@@ -42,7 +42,7 @@ public class S0021Servlet extends HttpServlet {
 			SearchKeepSale ss = (SearchKeepSale)session.getAttribute("ss");
 
 			//SQL
-			sql = "select sale_id,sale_date,a.name,c.category_name, s.trade_name, s.unit_price, s.sale_number,note from accounts a left join sales s on a.account_id = s.account_id "
+			sql = "select sale_id,sale_date,a.name,c.category_name, s.trade_name, s.unit_price, s.sale_number,note,s.sale_number * s.unit_price as total  from accounts a left join sales s on a.account_id = s.account_id "
 					+"left join categories c on c.category_id = s.category_id "
 					+ "where 0 = 0 ";
 
@@ -88,7 +88,7 @@ public class S0021Servlet extends HttpServlet {
 			}
 
 			//id昇順
-			sql += "order by sale_date ";
+			sql += "order by sale_date desc,category_name_phonetic ,total,sale_id";
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
