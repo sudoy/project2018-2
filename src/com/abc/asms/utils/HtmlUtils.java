@@ -12,7 +12,7 @@ public class HtmlUtils {
 
 		LocalDate line = saleDate;
 
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/M/d");
 		return line.format(dtf);
 	}
 
