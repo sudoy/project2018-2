@@ -55,7 +55,7 @@
 		 		<div class="form-group">
 			 		<label for="saleDate" class="col-sm-2 control-label">販売日 <span class="badge">必須</span></label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" id="saleDate" name="saleDate" placeholder="販売日" value="${param.saleDate}">
+						<input type="text" class="form-control" id="saleDate" name="saleDate" placeholder="販売日" value="${param.saleDate != null ? param.saleDate : today}">
 					</div>
 				</div>
 

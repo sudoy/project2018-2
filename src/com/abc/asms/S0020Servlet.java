@@ -31,7 +31,7 @@ public class S0020Servlet extends HttpServlet {
 		}
 		req.setCharacterEncoding("UTF-8");
 		LocalDateTime d = LocalDateTime.now();
-		String today = DateTimeFormatter.ofPattern("yyyy/MM/dd").format(d);
+		String today = DateTimeFormatter.ofPattern("yyyy/M/d").format(d);
 		req.setAttribute("today", today);
 
 

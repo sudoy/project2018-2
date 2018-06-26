@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 import java.util.ArrayList;
@@ -39,6 +40,11 @@ public class S0010Servlet extends HttpServlet {
 
 		//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
 		DBUtils.getCategoriesAndAccounts(req, resp);
+		
+		req.setCharacterEncoding("UTF-8");
+		LocalDateTime d = LocalDateTime.now();
+		String today = DateTimeFormatter.ofPattern("yyyy/M/dd").format(d);
+		req.setAttribute("today", today);
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
 			.forward(req, resp);
