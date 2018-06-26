@@ -40,8 +40,8 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="C0030.html">ログアウト</a></li>
 					</ul>
-				</div><!-- /.navbar-collapse -->
-			</div><!-- /.container-fluid -->
+				</div>
+			</div>
 		</nav>
 
 		<div class="container">
@@ -54,28 +54,28 @@
 			<form class="form-horizontal" action="S0030.html" method="post">
 
 				<div class="form-group">
-		 			<label for="name" class="col-sm-3 control-label">氏名 <span class="badge">必須</span></label>
+		 			<label class="col-sm-3 control-label">氏名 <span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
 						<input type="text" class="form-control" name="name" placeholder="氏名" value="${param.name}">
 					</div>
 				</div>
 
 				<div class="form-group">
-		 			<label for="mail" class="col-sm-3 control-label">メールアドレス <span class="badge">必須</span></label>
+		 			<label class="col-sm-3 control-label">メールアドレス <span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
 						<input type="text" class="form-control" name="mail" placeholder="メールアドレス" value="${param.mail}">
 					</div>
 				</div>
 
 				<div class="form-group">
-		 			<label for="password1" class="col-sm-3 control-label">パスワード<span class="badge">必須</span></label>
+		 			<label class="col-sm-3 control-label">パスワード<span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
 						<input type="password" class="form-control" name="password1" placeholder="パスワード" value="">
 					</div>
 				</div>
 
 				<div class="form-group">
-		 			<label for="password2" class="col-sm-3 control-label">パスワード（確認）<span class="badge">必須</span></label>
+		 			<label class="col-sm-3 control-label">パスワード（確認）<span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
 						<input type="password" class="form-control" name="password2" placeholder="パスワード（確認）" value="">
 					</div>
@@ -83,7 +83,7 @@
 
 
 				<div class="form-group">
-					<label for="authority1" class="col-sm-3 control-label">売上登録権限 <span class="badge">必須</span></label>
+					<label class="col-sm-3 control-label">売上登録権限 <span class="badge">必須</span></label>
 						<div class="col-sm-5">
 							<label><input type="radio" name="authority1" value="0" ${param.authority1 eq 0 ? 'checked' : ''}>権限なし</label>
 							<label><input type="radio" name="authority1" value="1" ${param.authority1 eq 1 ? 'checked' : ''}>権限あり</label>
@@ -91,7 +91,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="authority2" class="col-sm-3 control-label">アカウント登録権限 <span class="badge">必須</span></label>
+					<label class="col-sm-3 control-label">アカウント登録権限 <span class="badge">必須</span></label>
 						<div class="col-sm-5">
 							<label><input type="radio" name="authority2" value="0" ${param.authority2 eq 0 ? 'checked' : ''}>権限なし</label>
 							<label><input type="radio" name="authority2" value="1" ${param.authority2 eq 1 ? 'checked' : ''}>権限あり</label>
