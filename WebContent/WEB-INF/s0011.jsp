@@ -65,7 +65,7 @@
 			 		<div class="col-sm-5">
 						<select class="form-control" name="accountId" id="accountId" disabled>
 							<c:forEach var="account" items="${list2}">
-								<option value="${accountId}" ${account.accountId eq param.accountId ? 'selected' : ''}>${account.name}</option>
+								<option value="${accountId}" ${account.accountId eq param.accountId ? 'selected' : ''}>${HtmlUtils.formName(account.name)}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -76,7 +76,7 @@
 		 			<label for="categoryId" class="col-sm-2 control-label">商品カテゴリー</label>
 		 			<div class="col-sm-5">
 		 				<c:forEach var="category" items="${list1}">
-							<label class="radio-inline"><input type="radio"  name="categoryId" value="${categoryId}" ${category.categoryId eq param.categoryId ? 'checked' : ''} disabled>${category.categoryName}</label>
+							<label class="radio-inline"><input type="radio"  name="categoryId" value="${categoryId}" ${category.categoryId eq param.categoryId ? 'checked' : ''} disabled>${HtmlUtils.formName(category.categoryName)}</label>
 						</c:forEach>
 					</div>
 				</div>

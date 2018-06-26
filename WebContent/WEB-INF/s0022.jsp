@@ -67,14 +67,14 @@
 
 					<tr>
 						<th>担当</th>
-						<td>${s22.name}</td>
+						<td>${HtmlUtils.formName(s22.name)}</td>
 					</tr>
 
 					<th>　</th>
 
 					<tr>
 						<th>商品カテゴリー</th>
-						<td>${s22.categoryName}</td>
+						<td>${HtmlUtils.formName(s22.categoryName)}</td>
 					</tr>
 
 					<th>　</th>

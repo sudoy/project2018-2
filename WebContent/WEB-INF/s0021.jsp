@@ -61,8 +61,8 @@
 			<td><a href="S0022.html?id=${project2.saleId}" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 詳細</a></td>
 			<td>${project2.saleId}</td>
 			<td>${HtmlUtils.formDate(project2.saleDate)}</td>
-			<td>${project2.accountName}</td>
-			<td>${project2.categoryName}</td>
+			<td>${HtmlUtils.formName(project2.accountName)}</td>
+			<td>${HtmlUtils.formName(project2.categoryName)}</td>
 			<td>${project2.tradeName}</td>
 			<td style="text-align: right">${HtmlUtils.formatComma(project2.unitPrice)}</td>
 			<td style="text-align: right">${HtmlUtils.formatComma(project2.saleNumber)}</td>

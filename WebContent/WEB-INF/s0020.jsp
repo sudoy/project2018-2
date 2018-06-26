@@ -68,7 +68,7 @@
 					<select class="form-control" name="name" >
 						<option value="" >選択してください</option>
 						<c:forEach var="staff" items="${list2}">
-						<option value="${staff.name}" ${param.name eq staff.name  ? 'selected' : ''}>${staff.name}</option>
+						<option value="${staff.name}" ${param.name eq staff.name  ? 'selected' : ''}>${HtmlUtils.formName(staff.name)}</option>
 						</c:forEach>
 					</select>
 				</div>
@@ -81,7 +81,7 @@
  			<div class="col-sm-5">
  			<c:forEach  var="product" items="${list1}">
 	 			<label class="checkbox-inline" ><input type="checkbox" name="category_name"  class="custom-control-input category"
-	 			 value="${product.categoryName}" ${HtmlUtils.checkCategory(paramValues.categoryName, product.categoryName) ? 'checked' : ''}>${product.categoryName}</label>
+	 			 value="${product.categoryName}" ${HtmlUtils.checkCategory(paramValues.categoryName, product.categoryName) ? 'checked' : ''}>${HtmlUtils.formName(product.categoryName)}</label>
 			</c:forEach>
 			</div>
 		</div>

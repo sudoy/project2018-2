@@ -64,6 +64,18 @@ public class S0011Servlet extends HttpServlet {
 		String saleNumber = req.getParameter("saleNumber");
 		String note = req.getParameter("note");
 
+		if(tradeName.contains("<") || tradeName.contains(">") || tradeName.contains("&")) {
+			tradeName = tradeName.replaceAll("<", "&lt;");
+			tradeName = tradeName.replaceAll(">", "&gt;");
+			tradeName = tradeName.replaceAll("&", "&amp;");
+		}
+
+		if(note.contains("<") || note.contains(">") || note.contains("&")) {
+			note = note.replaceAll("<", "&lt;");
+			note = note.replaceAll(">", "&gt;");
+			note = note.replaceAll("&", "&amp;");
+		}
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;

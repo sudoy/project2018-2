@@ -75,7 +75,7 @@
 						<option value="0">選択してください</option>
 						<c:forEach var="aName" items="${list2}">
 							<option value="${aName.accountId}"
-								${param.account_id != null? param.account_id eq aName.accountId ? 'selected' : '' : aName.accountId.equals(s23.accountId) ? 'selected' : '' }>${aName.name}</option>
+								${param.account_id != null? param.account_id eq aName.accountId ? 'selected' : '' : aName.accountId.equals(s23.accountId) ? 'selected' : '' }>${HtmlUtils.formName(aName.name)}</option>
 						</c:forEach>
 					</select>
 				</div>
@@ -89,7 +89,7 @@
 					<c:forEach var="type" items="${list1}">
 						<label class="radio-inline"> <input type="radio"
 							name="category_id" value="${type.categoryId}"
-							${param.category_id != null? param.category_id eq type.categoryId ? 'checked' : '' : type.categoryId.equals(s23.categoryId) ? 'checked' : '' }>${type.categoryName}
+							${param.category_id != null? param.category_id eq type.categoryId ? 'checked' : '' : type.categoryId.equals(s23.categoryId) ? 'checked' : '' }>${HtmlUtils.formName(type.categoryName)}
 						</label>
 					</c:forEach>
 				</div>

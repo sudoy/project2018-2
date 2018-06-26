@@ -64,6 +64,12 @@ public class S0031Servlet extends HttpServlet {
 		String authority2 = req.getParameter("authority2");
 		String authority = authority2 + authority1;
 
+		if(name.contains("<") || name.contains(">") || name.contains("&")) {
+			name = name.replaceAll("<", "&lt;");
+			name = name.replaceAll(">", "&gt;");
+			name = name.replaceAll("&", "&amp;");
+		}
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;

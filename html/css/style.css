@@ -1,4 +1,4 @@
-@chaset "utf-8";
+@charset "utf-8";
 
 table{
 	padding-bottom: 0;
@@ -28,4 +28,7 @@ table{
   content: "\f374";
   color: #17bcdf;
   !important
+}
+.col-xs-1{
+	align: center;
 }

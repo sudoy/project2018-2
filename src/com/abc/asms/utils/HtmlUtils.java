@@ -58,5 +58,15 @@ public class HtmlUtils {
 
 	}
 
+	public static String formName(String name) {
+		if(name.contains("<") || name.contains(">") || name.contains("&")) {
+			name = name.replaceAll("<", "&lt;");
+			name = name.replaceAll(">", "&gt;");
+			name = name.replaceAll("&", "&amp;");
+		}
+		return name;
+	}
+
+
 
 }
