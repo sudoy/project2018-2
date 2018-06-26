@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -112,8 +113,22 @@ public class C0010Servlet extends HttpServlet {
 			errors.add("メールアドレスが長すぎます");
 		}
 		//1-3
-		if (!email.contains("@") && !email.equals("")) {
-			errors.add("メールアドレスを正しく入力して下さい。");
+		if(!email.equals("") && email.contains("@")) {
+			String pattern = "^[a-zA-Z0-9]*$";
+			Pattern p = Pattern.compile(pattern);
+			String[] split = email.split("@", 0);
+			String firstCharacter = email.substring(0, 1);
+			if(!p.matcher(firstCharacter).find()){
+				errors.add("メールアドレスを正しく入力して下さい。");
+			}else if(!split[0].matches("^[a-zA-Z0-9._-]*$") || split[0].length() == 1) {
+				errors.add("メールアドレスを正しく入力して下さい。");
+			}else if(!split[1].matches("^[a-zA-Z0-9._-]*$") ||split[0].length() == 0) {
+				errors.add("メールアドレスを正しく入力して下さい。");
+			}else if(!split[1].contains(".") ||split[0].length() == 0) {
+				errors.add("メールアドレスを正しく入力して下さい。");
+			}else if(!split[0].matches("^[a-zA-Z0-9._-]*$") && split[0].length() == 0) {
+				errors.add("メールアドレスを正しく入力して下さい。");
+			}
 		}
 		//1-4
 		if (password.equals("")) {
@@ -123,6 +138,7 @@ public class C0010Servlet extends HttpServlet {
 		if (password.length() > 30) {
 			errors.add("パスワードが長すぎます");
 		}
+
 
 		return errors;
 
