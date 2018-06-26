@@ -57,64 +57,77 @@
 			<h1>売上詳細表示</h1>
 
 			<div class="col-sm-offset-2">
+
 				<table>
 					<tr>
-						<th>販売日</th>
+						<th style = "padding-right: 65px;">販売日</th>
 						<td>${HtmlUtils.formatDate(s22.saleDate)}</td>
 					</tr>
+				</table>
 
-					<th>　</th>
+				<br>
 
+				<table>
 					<tr>
-						<th>担当</th>
+						<th style = "padding-right: 80px;">担当</th>
 						<td>${HtmlUtils.formName(s22.name)}</td>
 					</tr>
+				</table>
 
-					<th>　</th>
+				<br>
 
+				<table>
 					<tr>
-						<th>商品カテゴリー</th>
+						<th style = "padding-right: 10px;">商品カテゴリー</th>
 						<td>${HtmlUtils.formName(s22.categoryName)}</td>
 					</tr>
+				</table>
 
-					<th>　</th>
+				<br>
 
+				<table>
 					<tr>
-						<th>商品名</th>
+						<th style = "padding-right: 65px;">商品名</th>
 						<td>${s22.tradeName}</td>
 					</tr>
+				</table>
 
-					<th>　</th>
+				<br>
 
+				<table>
 					<tr>
-						<th>単価</th>
-						<td class=text-right>${HtmlUtils.formatComma(s22.unitPrice)}</td>
+						<th style = "padding-right: 80px;">単価</th>
+						<td class= "text-right" style = "width: 127px;padding-left: 50px;padding-right: 5px;">${HtmlUtils.formatComma(s22.unitPrice)}</td>
 					</tr>
+				</table>
 
-					<th>　</th>
+				<br>
 
+				<table>
 					<tr>
-						<th>個数</th>
-						<td class=text-right>${HtmlUtils.formatComma(s22.saleNumber)}</td>
+						<th style = "padding-right: 80px;">個数</th>
+						<td class= "text-right" style = "width: 127px;padding-left: 50px;padding-right: 5px;">${HtmlUtils.formatComma(s22.saleNumber)}</td>
 					</tr>
+				</table>
 
-					<th>　</th>
+				<br>
 
+				<table>
 					<tr>
-						<th>小計</th>
-						<td class=text-right>${HtmlUtils.formatComma(s22.sum)}</td>
+						<th style = "padding-right: 80px;">小計</th>
+						<td class= "text-right" style = "width: 127px;padding-left: 50px;padding-right: 5px;">${HtmlUtils.formatComma(s22.sum)}</td>
 					</tr>
+				</table>
 
-					<th>　</th>
+				<br>
 
+				<table>
 					<tr>
-						<th>備考</th>
+						<th style ="padding-right: 80px;">備考</th>
 						<td>${s22.note}</td>
 					</tr>
-
-					<th>　</th>
-
 				</table>
+
 			</div>
 
 			<div class="col-sm-offset-3">

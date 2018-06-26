@@ -65,9 +65,6 @@ public class S0040Servlet extends HttpServlet {
 			errors.add("メールアドレスの指定が長すぎます。");
 		}
 
-		if (!mail.contains("@") && !mail.equals("")) {
-			errors.add("メールアドレスの形式が誤っています。");
-		}
 		return errors;
 
 

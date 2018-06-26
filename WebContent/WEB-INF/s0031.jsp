@@ -51,46 +51,46 @@
 			<form class="form-horizontal" action="S0031.html" method="post">
 
 				<div class="form-group">
-		 			<label for="name" class="col-sm-3 control-label">氏名 <span class="badge">必須</span></label>
+		 			<label class="col-sm-3 control-label">氏名 <span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
 						<input type="text" class="form-control" name="name"  value="${param.name}" readonly>
 					</div>
 				</div>
 
 				<div class="form-group">
-		 			<label for="mail" class="col-sm-3 control-label">メールアドレス <span class="badge">必須</span></label>
+		 			<label class="col-sm-3 control-label">メールアドレス <span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
 						<input type="text" class="form-control" name="mail" value="${param.mail}" readonly>
 					</div>
 				</div>
 
 				<div class="form-group">
-		 			<label for="password1" class="col-sm-3 control-label">パスワード<span class="badge">必須</span></label>
+		 			<label class="col-sm-3 control-label">パスワード<span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
 						<input type="password" class="form-control" name="password1" value="${param.password1}" readonly>
 					</div>
 				</div>
 
 				<div class="form-group">
-		 			<label for="password2" class="col-sm-3 control-label">パスワード（確認）<span class="badge">必須</span></label>
+		 			<label class="col-sm-3 control-label">パスワード（確認）<span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
 						<input type="password" class="form-control" name="password2" value="${param.password2}" readonly>
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label for="authority1" class="col-sm-3 control-label">売上登録権限 <span class="badge">必須</span></label>
+					<label class="col-sm-3 control-label">売上登録権限 <span class="badge">必須</span></label>
 						<div class="col-sm-5">
-							<label><input type="radio" name="authority1" value="0" ${param.authority1 eq 0 ? 'checked' : ''} readonly onclick="return false;">権限なし</label>
-							<label><input type="radio" name="authority1" value="1" ${param.authority1 eq 1 ? 'checked' : ''} readonly onclick="return false;">権限あり</label>
+							<label><input type="radio" name="authority1" value="0" ${param.authority1 eq 0 ? 'checked' : ''} onclick="return false;">権限なし</label>
+							<label><input type="radio" name="authority1" value="1" ${param.authority1 eq 1 ? 'checked' : ''} onclick="return false;">権限あり</label>
 						</div>
 				</div>
 
 				<div class="form-group">
-					<label for="authority2" class="col-sm-3 control-label">アカウント登録権限 <span class="badge">必須</span></label>
+					<label class="col-sm-3 control-label">アカウント登録権限 <span class="badge">必須</span></label>
 						<div class="col-sm-5">
-							<label><input type="radio" name="authority2" value="0" ${param.authority2 eq 0 ? 'checked' : ''} readonly onclick="return false;">権限なし</label>
-							<label><input type="radio" name="authority2" value="1" ${param.authority2 eq 1 ? 'checked' : ''} readonly onclick="return false;">権限あり</label>
+							<label><input type="radio" name="authority2" value="0" ${param.authority2 eq 0 ? 'checked' : ''} onclick="return false;">権限なし</label>
+							<label><input type="radio" name="authority2" value="1" ${param.authority2 eq 1 ? 'checked' : ''} onclick="return false;">権限あり</label>
 						</div>
 				</div>
 
