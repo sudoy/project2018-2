@@ -54,7 +54,7 @@
 		</div>
 
 		<div class="form-group">
- 			<label for="name" class="col-sm-2 control-label">メールアドレス</label>
+ 			<label for="name" class="col-sm-2 control-label">メールアドレス <span class="badge">部分一致</span></label>
  			<div class="col-sm-5">
 				<input type="text" class="form-control" id="mailadress" placeholder="メールアドレス" value="${param.mail != null ? param.mail :mail}" name="mail">
 			</div>

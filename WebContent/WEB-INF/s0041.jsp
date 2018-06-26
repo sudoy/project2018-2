@@ -41,9 +41,7 @@
 					<li><a href="C0030.html">ログアウト</a></li>
 				</ul>
 			</div>
-			<!-- /.navbar-collapse -->
 		</div>
-		<!-- /.container-fluid -->
 	</nav>
 
 	<div class="container">
@@ -57,7 +55,9 @@
 				<th>操作</th>
 				<th style="text-align: right">No</th>
 				<th>氏名</th>
+				<c:if test="${accounts.authority == '10' || accounts.authority == '11'}">
 				<th>メールアドレス</th>
+				</c:if>
 				<th>権限</th>
 
 			</tr>
@@ -75,14 +75,15 @@
 						</c:if></td>
 					<td style="text-align: right">${account.accountId}</td>
 					<td>${account.name}</td>
+					<c:if test="${accounts.authority == '10' || accounts.authority == '11'}">
 					<td>${account.mail}</td>
+					</c:if>
 					<td>${AuthorityUtils.convertAuthority(account.authority)}</td>
 				</tr>
 			</c:forEach>
 
 		</table>
 	</div>
-	<!-- /container -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

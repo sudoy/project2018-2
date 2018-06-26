@@ -45,8 +45,8 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="C0030.html">ログアウト</a></li>
 				</ul>
-			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
+			</div>
+		</div>
 	</nav>
 
 	<div class="container">
@@ -118,13 +118,13 @@
 				<div class="col-sm-offset-4">
 					<button type="submit" class="btn btn-danger">
 						<span class="glyphicon glyphicon-remove" aria-hidden="true">
-							O K</span>
+							削除</span>
 					</button>
 					<a href="S0041.html" class="btn btn-default">キャンセル</a>
 				</div>
 			</div>
 		</form>
-	</div><!-- /container -->
+	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 </body>
