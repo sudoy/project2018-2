@@ -128,7 +128,7 @@
 			<div class="form-group">
 				<label for="note" class="col-sm-2 control-label">備考</label>
 				<div class="col-sm-5">
-					<textarea class="form-control" name="note" rows="5" disabled>${param.note != null? param.note : null}</textarea>
+					<textarea placeholder="備考" class="form-control" name="note" rows="5" disabled>${param.note != null? param.note : null}</textarea>
 				</div>
 			</div>
 

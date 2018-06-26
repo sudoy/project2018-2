@@ -106,7 +106,7 @@ public class DBUtils {
 		}
 	}
 
-	public static void getCategoriesAndAccountsForS0021(HttpServletRequest req, HttpServletResponse resp)
+	public static void getCategoriesAndAccountsForAll(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException {
 
 		//担当と商品カテゴリー出すためのメソッド

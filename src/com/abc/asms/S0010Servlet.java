@@ -165,8 +165,14 @@ public class S0010Servlet extends HttpServlet {
 		//販売日の形式チェック
 		if(!saleDate.equals("")) {
 			try {
-				LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/MM/dd")
-					.withResolverStyle(ResolverStyle.STRICT));
+				if(LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/M/d")
+						.withResolverStyle(ResolverStyle.STRICT)) != null ) {
+					LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/M/d")
+							.withResolverStyle(ResolverStyle.STRICT)) ;
+				}else {
+					LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/MM/dd")
+							.withResolverStyle(ResolverStyle.STRICT));
+				}
 			}catch(Exception e) {
 				errors.add("販売日を正しく入力して下さい。");
 			}

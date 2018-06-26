@@ -63,7 +63,7 @@
 
 				<div class="col-sm-2">
 					<input type="text" class="form-control" name="sale_date"
-						id="salesDate" value="${param.sale_date != null? param.sale_date : HtmlUtils.formatDate(s23.saleDate)}">
+						id="salesDate" placeholder="販売日" value="${param.sale_date != null? param.sale_date : HtmlUtils.formatDate(s23.saleDate)}">
 				</div>
 			</div>
 
@@ -100,7 +100,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" name="trade_name" id="name"
-						value="${param.trade_name != null? param.trade_name : s23.tradeName}">
+						placeholder="商品名" value="${param.trade_name != null? param.trade_name : s23.tradeName}">
 				</div>
 			</div>
 
@@ -111,7 +111,7 @@
 
 				<div class="col-sm-2">
 					<input type="text" class="form-control text-right"
-						name="unit_price" id="price" value="${param.unit_price != null? param.unit_price : s23.unitPrice}">
+						 placeholder="単価" name="unit_price" id="price" value="${param.unit_price != null? param.unit_price : s23.unitPrice}">
 				</div>
 			</div>
 
@@ -120,14 +120,14 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-2">
 					<input type="text" class="form-control text-right"
-						name="sale_number" id="number" value="${param.sale_number != null? param.sale_number : s23.saleNumber}">
+						placeholder="個数" name="sale_number" id="number" value="${param.sale_number != null? param.sale_number : s23.saleNumber}">
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label for="note" class="col-sm-2 control-label">備考 </label>
 				<div class="col-sm-5">
-					<textarea class="form-control" name="note" id="note" rows="5">${param.note != null? param.note : s23.note}</textarea>
+					<textarea placeholder="備考" class="form-control" name="note" id="note" rows="5">${param.note != null? param.note : s23.note}</textarea>
 				</div>
 			</div>
 
