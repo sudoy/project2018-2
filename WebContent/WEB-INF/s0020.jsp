@@ -47,24 +47,23 @@
 <jsp:include page="_errors.jsp" />
 	<form class="form-horizontal" action="S0020.html" method="post">
  		<div class="form-group">
-	 		<label for="salesDate" class="col-sm-2 control-label">販売日 </label>
-
+	 		<label class="col-sm-2 control-label">販売日 </label>
 			<div class="col-sm-2">
-					<input type="text" class="form-control" name="sale_date1" id="salesspanStart" placeholder="販売日(検索開始日)"  value="${param.sale_date1 != null ? param.sale_date1 : today}" >
+				<input type="text" class="form-control" name="sale_date1" id="salesspanStart" placeholder="販売日(検索開始日)"  value="${param.sale_date1 != null ? param.sale_date1 : today}" >
 			</div>
 
-			<div class="col-xs-1" align="center">
-			<h5>～</h5>
+			<div class="col-sm-1">
+				<h5>～</h5>
 			</div>
 
 			<div class="col-sm-2">
-					<input type="text" class="form-control" name="sale_date2" id="salesspanEnd" placeholder="販売日(検索終了日)"  value="${param.sale_date2 != null ? param.sale_date2 : today}">
+				<input type="text" class="form-control" name="sale_date2" id="salesspanEnd" placeholder="販売日(検索終了日)"  value="${param.sale_date2 != null ? param.sale_date2 : today}">
 			</div>
 
 		</div>
 
 		 <div class="form-group">
-	 			<label for="person" class="col-sm-2 control-label">担当 </label>
+	 			<label class="col-sm-2 control-label">担当 </label>
 	 			<div class="col-sm-5">
 					<select class="form-control" name="name" >
 						<option value="" >選択してください</option>
@@ -78,24 +77,24 @@
 
 
 		<div class="form-group">
- 			<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
+ 			<label class="col-sm-2 control-label">商品カテゴリー</label>
  			<div class="col-sm-5">
  			<c:forEach  var="product" items="${list1}">
 	 			<label class="checkbox-inline" ><input type="checkbox" name="category_name"  class="custom-control-input category"
-	 			 value="${product.categoryName}"${HtmlUtils.checkCategory(paramValues.categoryName, product.categoryName) ? 'checked' : ''}>${product.categoryName}</label>
+	 			 value="${product.categoryName}" ${HtmlUtils.checkCategory(paramValues.categoryName, product.categoryName) ? 'checked' : ''}>${product.categoryName}</label>
 			</c:forEach>
 			</div>
 		</div>
 
 		<div class="form-group">
- 			<label for="name" class="col-sm-2 control-label">商品名 <span class="badge">部分一致</span></label>
+ 			<label class="col-sm-2 control-label">商品名 <span class="badge">部分一致</span></label>
  			<div class="col-sm-5">
 				<input type="text" class="form-control" name="trade_name" id="name" placeholder="商品名" value="${param.trade_name}">
 			</div>
 		</div>
 
 		<div class="form-group">
- 			<label for="note" class="col-sm-2 control-label">備考 <span class="badge">部分一致</span></label>
+ 			<label class="col-sm-2 control-label">備考 <span class="badge">部分一致</span></label>
  			<div class="col-sm-5">
 				<input type="text" class="form-control" name="note" id="note" placeholder="備考" value="${param.note}">
 			</div>
