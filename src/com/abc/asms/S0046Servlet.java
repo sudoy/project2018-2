@@ -172,14 +172,17 @@ public class S0046Servlet extends HttpServlet {
 		//1-2新パスワードの必須入力
 		if (password1.equals("")) {
 			errors.add("パスワードを入力して下さい");
+			return errors ;
 		}
 		//1-3メールアドレス長さチェック
 		if (password1.length() >= 31) {
 			errors.add("パスワードが長すぎます。");
+			return errors;
 		}
 		//1-4新パスワード確認の必須入力
 		if (password2.equals("")) {
 			errors.add("確認用パスワードを入力して下さい");
+			return errors ;
 		}
 		//1-5新パスワード一致チェック
 		if (!password1.equals(password2)) {
