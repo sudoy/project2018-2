@@ -40,7 +40,8 @@ public class S0021Servlet extends HttpServlet {
 		try{
 			con = DBUtils.getConnection();
 			SearchKeepSale ss = (SearchKeepSale)session.getAttribute("ss");
-
+			req.setAttribute("ss", ss);
+			session.setAttribute("ss", null);
 			//SQL
 			sql = "select sale_id,sale_date,a.name,c.category_name, s.trade_name, s.unit_price, s.sale_number,note,s.sale_number * s.unit_price as total  from accounts a left join sales s on a.account_id = s.account_id "
 					+"left join categories c on c.category_id = s.category_id "
@@ -113,7 +114,8 @@ public class S0021Servlet extends HttpServlet {
 				List<String> errors = new ArrayList<>();
 				errors.add("検索結果はありません。");
 				session.setAttribute("errors", errors);
-				resp.sendRedirect("S0020.html");
+				getServletContext().getRequestDispatcher("/WEB-INF/s0020.jsp")
+				.forward(req, resp);
 				return;
 			}
 			//JavaBeansをJSPへ渡す

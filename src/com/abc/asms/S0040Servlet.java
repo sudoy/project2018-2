@@ -41,14 +41,16 @@ public class S0040Servlet extends HttpServlet {
 		String mail = req.getParameter("mail");
 		String sauthority = req.getParameter("sauthority");
 		String aauthority = req.getParameter("aauthority");
+		SearchKeepAccount sa = new SearchKeepAccount(name,mail,sauthority,aauthority);
 		List<String> errors =  validate(name,mail);
 		if(errors.size() > 0) {
 			session.setAttribute("errors", errors);
+			session.setAttribute("sa", sa);
 			getServletContext().getRequestDispatcher("/WEB-INF/s0040.jsp")
 			.forward(req, resp);
 			return;
 		}
-		SearchKeepAccount sa = new SearchKeepAccount(name,mail,sauthority,aauthority);
+
 		session.setAttribute("sa", sa);
 		resp.sendRedirect("S0041.html");
 	}
