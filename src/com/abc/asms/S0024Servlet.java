@@ -78,12 +78,12 @@ public class S0024Servlet extends HttpServlet {
 			List<String> errors = validate(saleDate, accountId, categoryId, tradeName, unitPrice, saleNumber,
 					note);
 
-			if (errors.size() > 0) {
+			if(errors.size() > 0) {
+				DBUtils.getCategoriesAndAccounts(req, resp);
 
 				session.setAttribute("errors", errors);
-
-				resp.sendRedirect("S0023.html?id=" + id);
-
+				getServletContext().getRequestDispatcher("/WEB-INF/s0023.jsp")
+					.forward(req, resp);
 				return;
 			}
 
