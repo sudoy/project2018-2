@@ -100,9 +100,9 @@
 					class="badge">必須</span></label>
 				<div class="radio">
 					<label><input type="radio" name="authority1" value="0"
-						${AuthorityUtils.checkAuthority1(param.authority1 != null ? param.authority1 : accounts.authority)}>権限なし</label>
+						${AuthorityUtils.checkAuthority1(param.authority1 != null ? param.authority1 : accountsList.authority)}>権限なし</label>
 					<label><input type="radio" name="authority1" value="1"
-						${AuthorityUtils.checkAuthority2(param.authority1 != null ? param.authority1 : accounts.authority)}>権限あり</label>
+						${AuthorityUtils.checkAuthority2(param.authority1 != null ? param.authority1 : accountsList.authority)}>権限あり</label>
 				</div>
 			</div>
 
@@ -111,9 +111,9 @@
 					class="badge">必須</span></label>
 				<div class="radio">
 					<label><input type="radio" name="authority2" value="0"
-						${AuthorityUtils.checkAuthority3(param.authority2 != null ? param.authority2 : accounts.authority)}>権限なし</label>
+						${AuthorityUtils.checkAuthority3(param.authority2 != null ? param.authority2 : accountsList.authority)}>権限なし</label>
 					<label><input type="radio" name="authority2" value="10"
-						${AuthorityUtils.checkAuthority4(param.authority2 != null ? param.authority2 : accounts.authority)}>権限あり</label>
+						${AuthorityUtils.checkAuthority4(param.authority2 != null ? param.authority2 : accountsList.authority)}>権限あり</label>
 				</div>
 			</div>
 
