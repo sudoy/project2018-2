@@ -72,8 +72,8 @@ public class HtmlUtils {
 	
 	public static double taxPrice(int price, int number, Date d) throws ParseException {
 		DateFormat dateTimeFormat = new SimpleDateFormat("yyyy/M/d");
-		java.util.Date date1 = dateTimeFormat.parse("2019/9/30"); 
-		java.util.Date date2 = dateTimeFormat.parse("2019/10/1"); 
+		java.util.Date date1 = dateTimeFormat.parse("2019/10/1"); 
+		java.util.Date date2 = dateTimeFormat.parse("2019/9/30"); 
 		double sum;
 		double tax;
 		
@@ -96,8 +96,8 @@ public class HtmlUtils {
 		int price1 = Integer.parseInt(price);
 		int number1 = Integer.parseInt(number);
 		DateFormat dateTimeFormat = new SimpleDateFormat("yyyy/M/d");
-		java.util.Date date1 = dateTimeFormat.parse("2019/9/30"); 
-		java.util.Date date2 = dateTimeFormat.parse("2019/10/1"); 
+		java.util.Date date1 = dateTimeFormat.parse("2019/10/1"); 
+		java.util.Date date2 = dateTimeFormat.parse("2019/9/30"); 
 		java.util.Date d1 = dateTimeFormat.parse(d); 
 		double sum;
 		double tax;
