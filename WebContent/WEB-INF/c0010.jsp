@@ -16,14 +16,14 @@
 	</head>
 
 	<body>
-
+		<div class="container" style="width:600px">
+		<jsp:include page="_successes.jsp" />
+				<jsp:include page="_errors.jsp" />
+		</div>
 		<div class="container">
 
 			<form class="form-signin"  action="C0010.html" method="post">
 				<h2 class="form-signin-heading">物品売上管理システム</h2>
-				<jsp:include page="_successes.jsp" />
-				<jsp:include page="_errors.jsp" />
-
 				<label for="inputEmail" class="sr-only"></label>
 				<input type="text" id="inputEmail" name="mail" class="form-control" placeholder="メールアドレス" value="${param.mail != null ? param.mail : ''}"/>
 				<label for="inputPassword" class="sr-only"></label>

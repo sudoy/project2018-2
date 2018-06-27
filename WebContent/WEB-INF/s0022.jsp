@@ -97,7 +97,7 @@
 
 				<table>
 					<tr>
-						<th style = "padding-right: 80px;">単価</th>
+						<th style = "padding-right: 1px;">単価</th>
 						<td class= "text-right" style = "width: 127px;padding-left: 50px;padding-right: 5px;">${HtmlUtils.formatComma(s22.unitPrice)}</td>
 					</tr>
 				</table>
@@ -106,7 +106,7 @@
 
 				<table>
 					<tr>
-						<th style = "padding-right: 80px;">個数</th>
+						<th style = "padding-right: 1px;">個数</th>
 						<td class= "text-right" style = "width: 127px;padding-left: 50px;padding-right: 5px;">${HtmlUtils.formatComma(s22.saleNumber)}</td>
 					</tr>
 				</table>
@@ -115,7 +115,7 @@
 
 				<table>
 					<tr>
-						<th style = "padding-right: 80px;">小計</th>
+						<th style = "padding-right: 1px;">小計</th>
 						<td class= "text-right" style = "width: 127px;padding-left: 50px;padding-right: 5px;">${HtmlUtils.formatComma(s22.sum)}</td>
 					</tr>
 				</table>

@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -24,19 +23,6 @@ public class C0010Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-
-		HttpSession session = req.getSession();
-		Enumeration<String> e = session.getAttributeNames();
-		String key = null;
-		while (e.hasMoreElements()) {
-			key = (String) e.nextElement();
-			System.out.println(key);
-			if (key.contains("accounts")) {
-				resp.sendRedirect("C0020.html");
-				return;
-			}
-		}
-
 		getServletContext().getRequestDispatcher("/WEB-INF/c0010.jsp")
 				.forward(req, resp);
 	}

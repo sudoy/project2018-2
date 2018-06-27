@@ -83,7 +83,7 @@
 
 				<div class="form-group">
 		 			<label for="tradeName" class="col-sm-2 control-label">商品名 <span class="badge">必須</span></label>
-		 			<div class="col-sm-2">
+		 			<div class="col-sm-5">
 						<input type="text" class="form-control" id="tradeName" name="tradeName" placeholder="商品名" value="${param.tradeName}">
 					</div>
 				</div>
