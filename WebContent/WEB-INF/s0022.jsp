@@ -62,7 +62,7 @@
 				<table>
 					<tr>
 						<th style = "padding-right: 65px;">販売日</th>
-						<td>${HtmlUtils.formDate(s22.saleDate)}</td>
+						<td>${HtmlUtils.formatDate(s22.saleDate)}</td>
 					</tr>
 				</table>
 
@@ -89,7 +89,7 @@
 				<table>
 					<tr>
 						<th style = "padding-right: 65px;">商品名</th>
-						<td>${s22.tradeName}</td>
+						<td>${HtmlUtils.formName(s22.tradeName)}</td>
 					</tr>
 				</table>
 
@@ -97,7 +97,7 @@
 
 				<table>
 					<tr>
-						<th style = "padding-right: 80px;">単価</th>
+						<th style = "padding-right: 1px;">単価</th>
 						<td class= "text-right" style = "width: 127px;padding-left: 50px;padding-right: 5px;">${HtmlUtils.formatComma(s22.unitPrice)}</td>
 					</tr>
 				</table>
@@ -106,7 +106,7 @@
 
 				<table>
 					<tr>
-						<th style = "padding-right: 80px;">個数</th>
+						<th style = "padding-right: 1px;">個数</th>
 						<td class= "text-right" style = "width: 127px;padding-left: 50px;padding-right: 5px;">${HtmlUtils.formatComma(s22.saleNumber)}</td>
 					</tr>
 				</table>
@@ -115,8 +115,8 @@
 
 				<table>
 					<tr>
-						<th style = "padding-right: 80px;">小計</th>
-						<td class= "text-right" style = "width: 127px;padding-left: 50px;padding-right: 5px;">${HtmlUtils.formatComma(HtmlUtils.taxPrice(s22.unitPrice, s22.saleNumber, s22.saleDate))}</td>
+						<th style = "padding-right: 1px;">小計</th>
+						<td class= "text-right" style = "width: 127px;padding-left: 50px;padding-right: 5px;">${HtmlUtils.formatComma(s22.sum)}</td>
 					</tr>
 				</table>
 
@@ -125,7 +125,7 @@
 				<table>
 					<tr>
 						<th style ="padding-right: 80px;">備考</th>
-						<td>${s22.note}</td>
+						<td>${HtmlUtils.formName(s22.note)}</td>
 					</tr>
 				</table>
 

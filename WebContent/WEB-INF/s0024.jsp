@@ -93,7 +93,7 @@
 			<div class="form-group">
 				<label for="name" class="col-sm-2 control-label">商品名</label>
 				<div class="col-sm-5">
-					<input type="text" class="form-control" name="trade_name" value="${param.trade_name}" disabled>
+					<input type="text" class="form-control" name="trade_name" value="${HtmlUtils.formName(param.trade_name)}" disabled>
 				</div>
 			</div>
 
@@ -129,7 +129,7 @@
 			<div class="form-group">
 				<label for="note" class="col-sm-2 control-label">備考</label>
 				<div class="col-sm-5">
-					<textarea placeholder="備考" class="form-control" name="note" rows="5" disabled>${param.note != null? param.note : null}</textarea>
+					<textarea placeholder="備考" class="form-control" name="note" rows="5" disabled>${param.note != null? HtmlUtils.formName(param.note) : null}</textarea>
 				</div>
 			</div>
 

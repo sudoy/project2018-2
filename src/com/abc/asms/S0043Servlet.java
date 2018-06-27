@@ -36,7 +36,7 @@ public class S0043Servlet extends HttpServlet {
 		req.getServletContext().getRequestDispatcher("/WEB-INF/s0040.jsp")
 		.forward(req, resp);
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -61,9 +61,28 @@ public class S0043Servlet extends HttpServlet {
 		String password = req.getParameter("password");
 		String authority1 = req.getParameter("authority1");
 		String authority2 = req.getParameter("authority2");
-		
+
 		String authority = authority2 + authority1;
-		
+
+		//クロスサイトスクリプティング対策
+		if(name.contains("<") || name.contains(">") || name.contains("&")) {
+			name = name.replaceAll("<", "&lt;");
+			name = name.replaceAll(">", "&gt;");
+			name = name.replaceAll("&", "&amp;");
+		}
+
+		if(mail.contains("<") || mail.contains(">") || mail.contains("&")) {
+			mail = mail.replaceAll("<", "&lt;");
+			mail = mail.replaceAll(">", "&gt;");
+			mail = mail.replaceAll("&", "&amp;");
+		}
+
+		if(password.contains("<") || password.contains(">") || password.contains("&")) {
+			password = password.replaceAll("<", "&lt;");
+			password = password.replaceAll(">", "&gt;");
+			password = password.replaceAll("&", "&amp;");
+		}
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -96,7 +115,7 @@ public class S0043Servlet extends HttpServlet {
 
 				ps.executeUpdate();
 			}
-			
+
 			//成功メッセージ
 			List<String> successes = new ArrayList<>();
 			successes.add("No" + accountId + "のアカウントを更新しました。");

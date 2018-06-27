@@ -50,32 +50,32 @@
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">氏名 <span class="badge">部分一致</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" id="name" placeholder="氏名" value="${param.name != null ? param.name :name}"  name="name">
+				<input type="text" class="form-control" id="name" placeholder="氏名" value="${sa.accountName != null ? sa.accountName :accountName}"  name="name">
 			</div>
 		</div>
 
 		<div class="form-group">
  			<label for="name" class="col-sm-2 control-label">メールアドレス <span class="badge">部分一致</span></label>
  			<div class="col-sm-5">
-				<input type="text" class="form-control" id="mailadress" placeholder="メールアドレス" value="${param.mail != null ? param.mail :mail}" name="mail">
+				<input type="text" class="form-control" id="mailadress" placeholder="メールアドレス" value="${sa.mail != null ? sa.mail :mail}" name="mail">
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">売上登録権限</label>
 				<div class="col-sm-5">
-					<label><input type="radio" name="sauthority" value="all" ${param.sauthority != 'all' ? 'checked' : ''}>全て</label>
-					<label><input type="radio" name="sauthority" value="no" ${param.sauthority eq 'no' ? 'checked' : ''}>権限なし</label>
-					<label><input type="radio" name="sauthority" value="ok" ${param.sauthority eq 'ok' ? 'checked' : ''}>権限あり</label>
+					<label><input type="radio" name="sauthority" value="all" ${sa.saleAuthority != 'all' ? 'checked' : 'checked'}>全て</label>
+					<label><input type="radio" name="sauthority" value="no" ${sa.saleAuthority eq 'no' ? 'checked' : ''}>権限なし</label>
+					<label><input type="radio" name="sauthority" value="ok" ${sa.saleAuthority eq 'ok' ? 'checked' : ''}>権限あり</label>
 				</div>
 		</div>
 
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">アカウント登録権限</label>
 				<div class="col-sm-5">
-					<label><input type="radio" name="aauthority" value="all" ${param.aauthority != 'all' ? 'checked' : ''}>全て</label>
-					<label><input type="radio" name="aauthority" value="no"${param.aauthority eq 'no' ? 'checked' : ''}>権限なし</label>
-					<label><input type="radio" name="aauthority" value="ok"${param.aauthority eq 'ok' ? 'checked' : ''}>権限あり</label>
+					<label><input type="radio" name="aauthority" value="all" ${sa.accountAuthority != 'all' ? 'checked' : 'checked'}>全て</label>
+					<label><input type="radio" name="aauthority" value="no"${sa.accountAuthority eq 'no' ? 'checked' : ''}>権限なし</label>
+					<label><input type="radio" name="aauthority" value="ok"${sa.accountAuthority eq 'ok' ? 'checked' : ''}>権限あり</label>
 				</div>
 		</div>
 

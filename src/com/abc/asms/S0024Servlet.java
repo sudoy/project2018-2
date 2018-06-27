@@ -179,6 +179,19 @@ public class S0024Servlet extends HttpServlet {
 			String saleNumber = req.getParameter("sale_number");
 			String note = req.getParameter("note");
 
+			//クロスサイトスクリプティング対策
+			if(tradeName.contains("<") || tradeName.contains(">") || tradeName.contains("&")) {
+				tradeName = tradeName.replaceAll("<", "&lt;");
+				tradeName = tradeName.replaceAll(">", "&gt;");
+				tradeName = tradeName.replaceAll("&", "&amp;");
+			}
+
+			if(note.contains("<") || note.contains(">") || note.contains("&")) {
+				note = note.replaceAll("<", "&lt;");
+				note = note.replaceAll(">", "&gt;");
+				note = note.replaceAll("&", "&amp;");
+			}
+
 			Connection con = null;
 			PreparedStatement ps = null;
 
@@ -207,7 +220,7 @@ public class S0024Servlet extends HttpServlet {
 				successes.add("No." + id + "の売上を更新しました。");
 				session.setAttribute("successes", successes);
 
-				resp.sendRedirect("S0022.html?id=" + id);
+				resp.sendRedirect("S0021.html");
 
 			} catch (Exception e) {
 				e.printStackTrace();

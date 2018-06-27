@@ -156,11 +156,11 @@
 							<tr>
 								<td style="text-align: right">${c0020.saleId}</td>
 								<td>${HtmlUtils.formDate(c0020.saleDate)}</td>
-								
-								
-								
-								<td>${c0020.categoryName}</td>
-								<td>${c0020.tradeName}</td>
+
+
+
+								<td>${HtmlUtils.formName(c0020.categoryName)}</td>
+								<td>${HtmlUtils.formName(c0020.tradeName)}</td>
 								<td style="text-align: right">${HtmlUtils.formatComma(c0020.unitPrice)}</td>
 								<td style="text-align: right">${HtmlUtils.formatComma(c0020.saleNumber)}</td>
 								<td style="text-align: right">${HtmlUtils.formatComma(HtmlUtils.taxPrice(c0020.unitPrice, c0020.saleNumber, c0020.saleDate))}</td>

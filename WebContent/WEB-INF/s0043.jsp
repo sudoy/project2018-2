@@ -1,6 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page pageEncoding="UTF-8"%>
 <%@ page import="com.abc.asms.utils.AuthorityUtils"%>
+<%@ page import="com.abc.asms.utils.HtmlUtils" %>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -60,7 +61,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="name" name="name"
-						value="${param.name}" readonly>
+						value="${HtmlUtils.formName(param.name)}" readonly>
 				</div>
 			</div>
 
@@ -69,7 +70,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="mailadress" name="mail"
-						value="${param.mail}" readonly>
+						value="${HtmlUtils.formName(param.mail)}" readonly>
 				</div>
 			</div>
 
@@ -77,7 +78,7 @@
 				<label for="name" class="col-sm-3 control-label">パスワード</label>
 				<div class="col-sm-5">
 					<input type="password" class="form-control" placeholder="パスワード" name="password"
-						id="pass1" value="${param.password}" readonly>
+						id="pass1" value="${HtmlUtils.formName(param.password)}" readonly>
 				</div>
 
 			</div>
@@ -86,7 +87,7 @@
 				<label for="name" class="col-sm-3 control-label">パスワード（確認）</label>
 				<div class="col-sm-5">
 					<input type="password" class="form-control"  placeholder="パスワード（確認）" name="password"
-						id="pass2" value="${param.password}" readonly>
+						id="pass2" value="${HtmlUtils.formName(param.password)}" readonly>
 				</div>
 			</div>
 

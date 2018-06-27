@@ -63,20 +63,39 @@ public class S0044Servlet extends HttpServlet {
 			String password = rs.getString("password");
 			int authority = rs.getInt("authority");
 
+			//クロスサイトスクリプティング対策
+			if(name.contains("<") || name.contains(">") || name.contains("&")) {
+				name = name.replaceAll("<", "&lt;");
+				name = name.replaceAll(">", "&gt;");
+				name = name.replaceAll("&", "&amp;");
+			}
+
+			if(mail.contains("<") || mail.contains(">") || mail.contains("&")) {
+				mail = mail.replaceAll("<", "&lt;");
+				mail = mail.replaceAll(">", "&gt;");
+				mail = mail.replaceAll("&", "&amp;");
+			}
+
+			if(password.contains("<") || password.contains(">") || password.contains("&")) {
+				password = password.replaceAll("<", "&lt;");
+				password = password.replaceAll(">", "&gt;");
+				password = password.replaceAll("&", "&amp;");
+			}
+
 			Accounts accounts = new Accounts(accountId, name, mail, password, authority);
 			req.setAttribute("accounts", accounts);
 
 			//JSPへフォワード
 			getServletContext().getRequestDispatcher("/WEB-INF/s0044.jsp")
 					.forward(req, resp);
-			
+
 		}catch(SQLException e) {
 			getServletContext().getRequestDispatcher("/WEB-INF/s0040.jsp")
 				.forward(req, resp);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServletException(e);
-		} 
+		}
 		finally {
 			try {
 				DBUtils.close(rs);

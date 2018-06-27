@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -37,7 +38,9 @@ public class S0042Servlet extends HttpServlet {
 		}
 
 		req.setCharacterEncoding("utf-8");
-		//HttpSession session = req.getSession();
+
+		HttpSession session = req.getSession();
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -58,14 +61,43 @@ public class S0042Servlet extends HttpServlet {
 
 			rs.next();
 
+			if(req.getParameter("account_id") == null) {
+				List<String> errors = new ArrayList<>();
+				errors.add("不正なアクセスです。");
+				session.setAttribute("errors", errors);
+				resp.sendRedirect("C0020.html");
+				return ;
+			}
+
+
+
 			int accountId = rs.getInt("account_id");
 			String name = rs.getString("name");
 			String mail = rs.getString("mail");
 			String password = rs.getString("password");
 			int authority = rs.getInt("authority");
 
-			Accounts accounts = new Accounts(accountId, name, mail, password, authority);
-			req.setAttribute("accounts", accounts);
+			//クロスサイトスクリプティング対策
+			if(name.contains("<") || name.contains(">") || name.contains("&")) {
+				name = name.replaceAll("<", "&lt;");
+				name = name.replaceAll(">", "&gt;");
+				name = name.replaceAll("&", "&amp;");
+			}
+
+			if(mail.contains("<") || mail.contains(">") || mail.contains("&")) {
+				mail = mail.replaceAll("<", "&lt;");
+				mail = mail.replaceAll(">", "&gt;");
+				mail = mail.replaceAll("&", "&amp;");
+			}
+
+			if(password.contains("<") || password.contains(">") || password.contains("&")) {
+				password = password.replaceAll("<", "&lt;");
+				password = password.replaceAll(">", "&gt;");
+				password = password.replaceAll("&", "&amp;");
+			}
+
+			Accounts accountsList = new Accounts(accountId, name, mail, password, authority);
+			req.setAttribute("accountsList", accountsList);
 
 			//JSPへフォワード
 			getServletContext().getRequestDispatcher("/WEB-INF/s0042.jsp")
@@ -129,6 +161,48 @@ public class S0042Servlet extends HttpServlet {
 			return;
 		}
 
+		//メールアドレス重複チェック
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql;
+
+		DBUtils.getCategoriesAndAccounts(req, resp);
+
+		try {
+			con = DBUtils.getConnection();
+
+			sql = "select account_id from accounts where mail = ? ";
+
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, mail);
+
+			rs = ps.executeQuery();
+
+			rs.next();
+
+			if(rs.next()) {
+				errors.add("メールアドレスが既に登録されています。");
+				session.setAttribute("errors", errors);
+				getServletContext().getRequestDispatcher("/WEB-INF/s0042.jsp")
+						.forward(req, resp);
+				return;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				DBUtils.close(rs);
+				DBUtils.close(ps);
+				DBUtils.close(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+
 		getServletContext().getRequestDispatcher("/WEB-INF/s0043.jsp")
 				.forward(req, resp);
 	}
@@ -170,6 +244,7 @@ public class S0042Servlet extends HttpServlet {
 				errors.add("メールアドレスを正しく入力して下さい。");
 			}
 		}
+
 		//1-7パスワードの長さチェック
 		if (password.length() >= 31) {
 			errors.add("パスワードが長すぎます。");
@@ -178,22 +253,21 @@ public class S0042Servlet extends HttpServlet {
 		if (!password.equals(passwordc)) {
 			errors.add("パスワードとパスワード（確認）が一致していません。");
 		}
-		//1-10売上登録権限必須チェック
-		if (authority1.equals("")) {
-			errors.add("売上登録権限を入力して下さい。");
+
+		//1-10,11 売上登録権限必須入力チェック
+		if(authority1 == null) {
+			errors.add("売上登録権限を入力してください。");
+		}else if(!authority1.equals("0") && !authority1.equals("1")) {
+			errors.add("売上登録権限に正しい値を入力してください。");
 		}
-		//1-11売上登録権限値チェック
-		if (!authority1.equals("0") && !authority1.equals("1")) {
-			errors.add("売上登録権限に正しい値を入力して下さい。");
-		}
-		//1-12アカウント登録権限必須チェック
-		if (authority2.equals("")) {
+
+		//1-12,13アカウント登録権限必須チェック
+		if (authority2 == null) {
 			errors.add("アカウント登録権限を入力して下さい。");
-		}
-		//1-13アカウント登録権限必須チェック
-		if (!authority2.equals("0") && !authority2.equals("10")) {
+		}else if(!authority2.equals("0") && !authority2.equals("10")) {
 			errors.add("アカウント登録権限に正しい値を入力して下さい。");
 		}
+
 		return errors;
 
 	}

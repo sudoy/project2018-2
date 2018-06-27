@@ -40,7 +40,10 @@ public class S0041Servlet extends HttpServlet {
 			con = DBUtils.getConnection();
 			//SQL
 			sql = "select account_id,name,mail,password,authority from accounts where 0 = 0 ";
+
 			SearchKeepAccount sa = (SearchKeepAccount) session.getAttribute("sa");
+			req.setAttribute("sa", sa);
+
 			//氏名検索
 			if (sa.getAccountName() != "") {
 				sql += " and name like '%" + sa.getAccountName() + "%'";
@@ -87,7 +90,6 @@ public class S0041Servlet extends HttpServlet {
 
 				list.add(account);
 			}
-			session.setAttribute("list", list);
 			if (list.isEmpty()) {
 				List<String> errors = new ArrayList<>();
 				errors = new ArrayList<>();
@@ -97,6 +99,7 @@ public class S0041Servlet extends HttpServlet {
 						.forward(req, resp);
 				return;
 			}
+
 			//JavaBeansをJSPへ渡す
 			req.setAttribute("list", list);
 

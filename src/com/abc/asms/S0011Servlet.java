@@ -64,6 +64,7 @@ public class S0011Servlet extends HttpServlet {
 		String saleNumber = req.getParameter("saleNumber");
 		String note = req.getParameter("note");
 
+		//クロスサイトスクリプティング対策
 		if(tradeName.contains("<") || tradeName.contains(">") || tradeName.contains("&")) {
 			tradeName = tradeName.replaceAll("<", "&lt;");
 			tradeName = tradeName.replaceAll(">", "&gt;");

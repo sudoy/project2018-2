@@ -2,6 +2,7 @@
 <%@page pageEncoding="UTF-8"%>
 <%@ page import="com.abc.asms.utils.AuthorityUtils"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.abc.asms.utils.HtmlUtils"%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -46,8 +47,8 @@
 					<li><a href="#">${accounts.name} 様</a></li>
 					<li><a href="C0030.html">ログアウト</a></li>
 				</ul>
-			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
+			</div>
+		</div>
 	</nav>
 
 	<div class="container">
@@ -57,7 +58,7 @@
 		<h1>アカウント編集</h1>
 
 		<form class="form-horizontal"
-			action="S0042.html?account_id=${param.account_id != null ? param.account_id : accounts.account_id}"
+			action="S0042.html?account_id=${param.account_id != null ? param.account_id : accountsList.account_id}"
 			method="post">
 
 			<div class="form-group">
@@ -65,7 +66,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="name" name="name"
-						placeholder="氏名" value="${param.name != null ? param.name : accounts.name}">
+						placeholder="氏名" value="${param.name != null ? HtmlUtils.formName(param.name) : HtmlUtils.formName(accountsList.name)}">
 				</div>
 			</div>
 
@@ -74,7 +75,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="mailadress" name="mail"
-						placeholder="メールアドレス" value="${param.mail != null ? param.mail : accounts.mail}">
+						placeholder="メールアドレス" value="${param.mail != null ? HtmlUtils.formName(param.mail) : HtmlUtils.formName(accountsList.mail)}">
 				</div>
 			</div>
 
@@ -100,9 +101,9 @@
 					class="badge">必須</span></label>
 				<div class="radio">
 					<label><input type="radio" name="authority1" value="0"
-						${AuthorityUtils.checkAuthority1(param.authority1 != null ? param.authority1 : accounts.authority)}>権限なし</label>
+						${AuthorityUtils.checkAuthority1(param.authority1 != null ? param.authority1 : accountsList.authority)}>権限なし</label>
 					<label><input type="radio" name="authority1" value="1"
-						${AuthorityUtils.checkAuthority2(param.authority1 != null ? param.authority1 : accounts.authority)}>権限あり</label>
+						${AuthorityUtils.checkAuthority2(param.authority1 != null ? param.authority1 : accountsList.authority)}>権限あり</label>
 				</div>
 			</div>
 
@@ -111,9 +112,9 @@
 					class="badge">必須</span></label>
 				<div class="radio">
 					<label><input type="radio" name="authority2" value="0"
-						${AuthorityUtils.checkAuthority3(param.authority2 != null ? param.authority2 : accounts.authority)}>権限なし</label>
+						${AuthorityUtils.checkAuthority3(param.authority2 != null ? param.authority2 : accountsList.authority)}>権限なし</label>
 					<label><input type="radio" name="authority2" value="10"
-						${AuthorityUtils.checkAuthority4(param.authority2 != null ? param.authority2 : accounts.authority)}>権限あり</label>
+						${AuthorityUtils.checkAuthority4(param.authority2 != null ? param.authority2 : accountsList.authority)}>権限あり</label>
 				</div>
 			</div>
 
@@ -127,7 +128,7 @@
 			</div>
 
 		</form>
-	</div><!-- /container -->
+	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 </body>
