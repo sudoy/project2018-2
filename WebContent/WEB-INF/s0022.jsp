@@ -62,7 +62,7 @@
 				<table>
 					<tr>
 						<th style = "padding-right: 65px;">販売日</th>
-						<td>${HtmlUtils.formatDate(s22.saleDate)}</td>
+						<td>${HtmlUtils.formDate(s22.saleDate)}</td>
 					</tr>
 				</table>
 
@@ -116,7 +116,7 @@
 				<table>
 					<tr>
 						<th style = "padding-right: 80px;">小計</th>
-						<td class= "text-right" style = "width: 127px;padding-left: 50px;padding-right: 5px;">${HtmlUtils.formatComma(s22.sum)}</td>
+						<td class= "text-right" style = "width: 127px;padding-left: 50px;padding-right: 5px;">${HtmlUtils.formatComma(HtmlUtils.taxPrice(s22.unitPrice, s22.saleNumber, s22.saleDate))}</td>
 					</tr>
 				</table>
 

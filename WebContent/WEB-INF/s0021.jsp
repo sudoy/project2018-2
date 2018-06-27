@@ -67,7 +67,7 @@
 			<td>${project2.tradeName}</td>
 			<td style="text-align: right">${HtmlUtils.formatComma(project2.unitPrice)}</td>
 			<td style="text-align: right">${HtmlUtils.formatComma(project2.saleNumber)}</td>
-			<td style="text-align: right">${HtmlUtils.formatComma(project2.unitPrice * project2.saleNumber)}</td>
+			<td style="text-align: right">${HtmlUtils.formatComma(HtmlUtils.taxPrice(project2.unitPrice, project2.saleNumber, project2.saleDate))}</td>
 			</tr>
 			</c:forEach>
 

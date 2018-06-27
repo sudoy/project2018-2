@@ -41,11 +41,10 @@ public class S0022Servlet extends HttpServlet {
 		//売上IDからすべてのデータをセレクト出力
 		try {
 			con = DBUtils.getConnection();
-
 			String sql = "select sale_id, sale_date,name,"
 						+" (select category_name from categories c where s.category_id = c.category_id)"
 						+" as category_name, trade_name,unit_price, sale_number,"
-						+" unit_price * sale_number as sum, note from sales s"
+						+" note from sales s"
 						+" JOIN accounts a ON s.account_id = a.account_id"
 						+" where sale_id = ?";
 
@@ -66,13 +65,12 @@ public class S0022Servlet extends HttpServlet {
 			//s22へ取得したデータをセット
 			S0022 s22 = new S0022(
 						rs.getInt("sale_id"),
-						Utils.date2LocalDate(rs.getDate("sale_date")),
+						rs.getDate("sale_date"),
 						rs.getString("name"),
 						rs.getString("category_name"),
 						rs.getString("trade_name"),
 						rs.getInt("unit_price"),
 						rs.getInt("sale_number"),
-						rs.getInt("sum"),
 						rs.getString("note")
 					);
 

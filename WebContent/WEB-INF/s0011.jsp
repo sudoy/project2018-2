@@ -110,7 +110,7 @@
 				<div class="form-group">
 		 			<label for="subtotal" class="col-sm-2 control-label">小計</label>
 		 			<div class="col-sm-2">
-						<input type="text" style="text-align: right" class="form-control" name="subtotal" id="subtotal" value="${HtmlUtils.formatComma(param.unitPrice * param.saleNumber)}" disabled>
+						<input type="text" style="text-align: right" class="form-control" name="subtotal" id="subtotal" value="${HtmlUtils.formatComma(HtmlUtils.taxPrice1(param.unitPrice, param.saleNumber, param.saleDate))}" disabled>
 					</div>
 				</div>
 

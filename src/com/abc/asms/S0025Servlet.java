@@ -51,7 +51,7 @@ public class S0025Servlet extends HttpServlet {
 
 			sql = "select sale_id, sale_date, name,"
 					+ " category_id, a.account_id,"
-					+ " trade_name, unit_price,sale_number, unit_price * sale_number as sum,"
+					+ " trade_name, unit_price,sale_number,"
 					+ " note from sales s JOIN accounts a ON s.account_id = a.account_id"
 					+ " where sale_id = ?";
 
@@ -67,14 +67,13 @@ public class S0025Servlet extends HttpServlet {
 
 			Detail_beans s25 = new Detail_beans(
 					rs.getInt("sale_id"),
-					Utils.date2LocalDate(rs.getDate("sale_date")),
+					rs.getDate("sale_date"),
 					rs.getString("name"),
 					rs.getInt("category_id"),
 					rs.getInt("account_id"),
 					rs.getString("trade_name"),
 					rs.getInt("unit_price"),
 					rs.getInt("sale_number"),
-					rs.getInt("sum"),
 					rs.getString("note")
 					);
 

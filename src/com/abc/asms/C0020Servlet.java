@@ -31,6 +31,7 @@ public class C0020Servlet extends HttpServlet {
 		if (!Utils.checkLogin(req, resp)) {
 			return;
 		}
+		
 
 		// localDateから現在時刻を抽出するか否かの判定
 		LocalDate ld = null;
@@ -223,8 +224,6 @@ public class C0020Servlet extends HttpServlet {
 			}
 
 
-
-
 			//ログインユーザーの売り上げ一覧を出す
 			sql = "SELECT s.sale_id, s.sale_date, c.category_name, s.trade_name, s.unit_price, s.sale_number "
 					+ "FROM accounts a "
@@ -251,11 +250,11 @@ public class C0020Servlet extends HttpServlet {
 							rs.getString("trade_name"),
 							rs.getInt("unit_price"),
 							rs.getInt("sale_number")
-						);
 
+						);							
 				list.add(c0020);
 			}
-
+			
 			try {
 				int MoM = (thisMonthSum / lastMonthSum) * 100;
 
@@ -266,12 +265,12 @@ public class C0020Servlet extends HttpServlet {
 			}catch(ArithmeticException e){
 				e.printStackTrace();
 			}
-
+			
 			req.setAttribute("list", list);
 			req.setAttribute("today", today);
 			req.setAttribute("thisMonth", thisMonth);
 			req.setAttribute("lastMonth", lastMonth);
-
+			
 		}catch(Exception e){
 			e.printStackTrace();
 			throw new ServletException(e);
