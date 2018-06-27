@@ -57,7 +57,7 @@
 		<h1>アカウント編集</h1>
 
 		<form class="form-horizontal"
-			action="S0042.html?account_id=${param.account_id != null ? param.account_id : accounts.account_id}"
+			action="S0042.html?account_id=${param.account_id != null ? param.account_id : accountsList.account_id}"
 			method="post">
 
 			<div class="form-group">
@@ -65,7 +65,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="name" name="name"
-						placeholder="氏名" value="${param.name != null ? param.name : accounts.name}">
+						placeholder="氏名" value="${param.name != null ? param.name : accountsList.name}">
 				</div>
 			</div>
 
@@ -74,7 +74,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="mailadress" name="mail"
-						placeholder="メールアドレス" value="${param.mail != null ? param.mail : accounts.mail}">
+						placeholder="メールアドレス" value="${param.mail != null ? param.mail : accountsList.mail}">
 				</div>
 			</div>
 

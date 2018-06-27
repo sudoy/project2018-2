@@ -56,8 +56,6 @@ public class S0042Servlet extends HttpServlet {
 			//select文にパラメータの内容をセット
 			ps.setString(1, req.getParameter("account_id"));
 
-			System.out.println(ps);
-
 			//select命令を実行
 			rs = ps.executeQuery();
 
@@ -79,8 +77,8 @@ public class S0042Servlet extends HttpServlet {
 			String password = rs.getString("password");
 			int authority = rs.getInt("authority");
 
-			Accounts accounts = new Accounts(accountId, name, mail, password, authority);
-			req.setAttribute("accounts", accounts);
+			Accounts accountsList = new Accounts(accountId, name, mail, password, authority);
+			req.setAttribute("accountsList", accountsList);
 
 			//JSPへフォワード
 			getServletContext().getRequestDispatcher("/WEB-INF/s0042.jsp")
