@@ -115,7 +115,7 @@
 
 				<table>
 					<tr>
-						<th style = "padding-right: 1px;">小計</th>
+						<th style = "padding-right: 1px;">小計（税込）</th>
 						<td class= "text-right" style = "width: 127px;padding-left: 50px;padding-right: 5px;">${HtmlUtils.formatComma(HtmlUtils.taxPrice(s22.unitPrice, s22.saleNumber, s22.saleDate))}</td>
 					</tr>
 				</table>

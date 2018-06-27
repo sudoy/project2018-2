@@ -55,7 +55,7 @@
 				<th>商品名</th>
 				<th style="text-align: right">単価</th>
 				<th style="text-align: right">個数</th>
-				<th style="text-align: right">小計</th>
+				<th style="text-align: right">小計（税込）</th>
 			</tr>
 			<c:forEach var="project2" items="${list}">
 			<tr>

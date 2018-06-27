@@ -108,7 +108,7 @@
 			</div>
 
 			<div class="form-group">
-				<label for="number" class="col-sm-2 control-label">小計</label>
+				<label for="number" class="col-sm-2 control-label">小計（税込）</label>
 				<div class="col-sm-2">
 					<input type="text" class="form-control text-right" name="number" value="${HtmlUtils.formatComma(HtmlUtils.taxPrice(s25.unitPrice, s25.saleNumber, s25.saleDate))}" disabled>
 				</div>
