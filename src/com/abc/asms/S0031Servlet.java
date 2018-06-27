@@ -60,14 +60,34 @@ public class S0031Servlet extends HttpServlet {
 		String name = req.getParameter("name");
 		String mail = req.getParameter("mail");
 		String password1 = req.getParameter("password1");
+		String password2 = req.getParameter("password2");
 		String authority1 = req.getParameter("authority1");
 		String authority2 = req.getParameter("authority2");
 		String authority = authority2 + authority1;
 
+		//クロスサイトスクリプティング対策
 		if(name.contains("<") || name.contains(">") || name.contains("&")) {
 			name = name.replaceAll("<", "&lt;");
 			name = name.replaceAll(">", "&gt;");
 			name = name.replaceAll("&", "&amp;");
+		}
+
+		if(mail.contains("<") || mail.contains(">") || mail.contains("&")) {
+			mail = mail.replaceAll("<", "&lt;");
+			mail = mail.replaceAll(">", "&gt;");
+			mail = mail.replaceAll("&", "&amp;");
+		}
+
+		if(password1.contains("<") || password1.contains(">") || password1.contains("&")) {
+			password1 = password1.replaceAll("<", "&lt;");
+			password1 = password1.replaceAll(">", "&gt;");
+			password1 = password1.replaceAll("&", "&amp;");
+		}
+
+		if(password2.contains("<") || password2.contains(">") || password2.contains("&")) {
+			password2 = password2.replaceAll("<", "&lt;");
+			password2 = password2.replaceAll(">", "&gt;");
+			password2 = password2.replaceAll("&", "&amp;");
 		}
 
 		Connection con = null;

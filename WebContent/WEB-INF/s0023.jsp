@@ -101,7 +101,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" name="trade_name" id="name"
-						placeholder="商品名" value="${param.trade_name != null? param.trade_name : s23.tradeName}">
+						placeholder="商品名" value="${param.trade_name != null? HtmlUtils.formName(param.trade_name) : HtmlUtils.formName(s23.tradeName)}">
 				</div>
 			</div>
 
@@ -128,7 +128,7 @@
 			<div class="form-group">
 				<label for="note" class="col-sm-2 control-label">備考 </label>
 				<div class="col-sm-5">
-					<textarea placeholder="備考" class="form-control" name="note" id="note" rows="5">${param.note != null? param.note : s23.note}</textarea>
+					<textarea placeholder="備考" class="form-control" name="note" id="note" rows="5">${param.note != null? HtmlUtils.formName(param.note) : HtmlUtils.formName(s23.note)}</textarea>
 				</div>
 			</div>
 

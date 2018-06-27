@@ -65,7 +65,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="name" name="name"
-						placeholder="氏名" value="${param.name != null ? param.name : accountsList.name}">
+						placeholder="氏名" value="${param.name != null ? HtmlUtils.formName(param.name) : HtmlUtils.formName(accountsList.name)}">
 				</div>
 			</div>
 
@@ -74,7 +74,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="mailadress" name="mail"
-						placeholder="メールアドレス" value="${param.mail != null ? param.mail : accountsList.mail}">
+						placeholder="メールアドレス" value="${param.mail != null ? HtmlUtils.formName(param.mail) : HtmlUtils.formName(accountsList.mail)}">
 				</div>
 			</div>
 

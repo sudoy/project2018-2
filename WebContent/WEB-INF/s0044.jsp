@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.abc.asms.utils.AuthorityUtils"%>
-
+<%@ page import="com.abc.asms.utils.HtmlUtils" %>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -63,7 +63,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="name" name="name"
-						value="${accounts.name}" disabled>
+						value="${HtmlUtils.formName(accounts.name)}" disabled>
 				</div>
 			</div>
 
@@ -72,7 +72,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="mailadress" name="mail"
-						value="${accounts.mail}" disabled>
+						value="${HtmlUtils.formName(accounts.mail)}" disabled>
 				</div>
 			</div>
 

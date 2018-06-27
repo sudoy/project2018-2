@@ -87,7 +87,7 @@
 			<div class="form-group">
 				<label for="name" class="col-sm-2 control-label">商品名</label>
 				<div class="col-sm-2">
-					<input type="text" class="form-control" name="name" value="${s25.tradeName}" disabled>
+					<input type="text" class="form-control" name="name" value="${HtmlUtils.formName(s25.tradeName)}" disabled>
 				</div>
 			</div>
 
@@ -118,7 +118,7 @@
 			<div class="form-group">
 				<label for="note" class="col-sm-2 control-label">備考</label>
 				<div class="col-sm-5">
-					<textarea placeholder="備考" class="form-control" name="note" rows="5" disabled>${s25.note}</textarea>
+					<textarea placeholder="備考" class="form-control" name="note" rows="5" disabled>${HtmlUtils.formName(s25.note)}</textarea>
 				</div>
 			</div>
 

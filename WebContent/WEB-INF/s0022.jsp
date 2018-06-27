@@ -89,7 +89,7 @@
 				<table>
 					<tr>
 						<th style = "padding-right: 65px;">商品名</th>
-						<td>${s22.tradeName}</td>
+						<td>${HtmlUtils.formName(s22.tradeName)}</td>
 					</tr>
 				</table>
 
@@ -125,7 +125,7 @@
 				<table>
 					<tr>
 						<th style ="padding-right: 80px;">備考</th>
-						<td>${s22.note}</td>
+						<td>${HtmlUtils.formName(s22.note)}</td>
 					</tr>
 				</table>
 

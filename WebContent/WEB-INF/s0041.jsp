@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.abc.asms.utils.AuthorityUtils"%>
+<%@ page import="com.abc.asms.utils.HtmlUtils" %>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -75,9 +76,9 @@
 								class="glyphicon glyphicon-remove" aria-hidden="true"></span> 削除</a>
 						</c:if></td>
 					<td style="text-align: right">${account.accountId}</td>
-					<td>${account.name}</td>
+					<td>${HtmlUtils.formName(account.name)}</td>
 					<c:if test="${accounts.authority == '10' || accounts.authority == '11'}">
-					<td>${account.mail}</td>
+					<td>${HtmlUtils.formName(account.mail)}</td>
 					</c:if>
 					<td>${AuthorityUtils.convertAuthority(account.authority)}</td>
 				</tr>

@@ -64,7 +64,7 @@
 			<td>${HtmlUtils.formDate(project2.saleDate)}</td>
 			<td>${HtmlUtils.formName(project2.accountName)}</td>
 			<td>${HtmlUtils.formName(project2.categoryName)}</td>
-			<td>${project2.tradeName}</td>
+			<td>${HtmlUtils.formName(project2.tradeName)}</td>
 			<td style="text-align: right">${HtmlUtils.formatComma(project2.unitPrice)}</td>
 			<td style="text-align: right">${HtmlUtils.formatComma(project2.saleNumber)}</td>
 			<td style="text-align: right">${HtmlUtils.formatComma(project2.unitPrice * project2.saleNumber)}</td>
