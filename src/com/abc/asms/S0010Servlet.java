@@ -40,10 +40,10 @@ public class S0010Servlet extends HttpServlet {
 
 		//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
 		DBUtils.getCategoriesAndAccounts(req, resp);
-		
+
 		req.setCharacterEncoding("UTF-8");
 		LocalDateTime d = LocalDateTime.now();
-		String today = DateTimeFormatter.ofPattern("yyyy/M/dd").format(d);
+		String today = DateTimeFormatter.ofPattern("yyyy/M/d").format(d);
 		req.setAttribute("today", today);
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")

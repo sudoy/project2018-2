@@ -56,7 +56,7 @@
 		 		<div class="form-group">
 			 		<label for="saleDate" class="col-sm-2 control-label">販売日</label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" name="saleDate" id="saleDate" value="${param.saleDate}" disabled>
+						<input type="text" class="form-control" name="saleDate" id="saleDate" value="${param.saleDate}" readonly>
 					</div>
 				</div>
 
@@ -124,8 +124,8 @@
 
 				<div class="form-group">
 					<div class="col-sm-offset-4">
-						<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
-						<a href="S0010.html" class="btn btn-default">キャンセル</a>
+						<button type="submit" name="insert" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
+						<button type="submit" class="btn btn-default">キャンセル</button>
 					</div>
 				</div>
 			</form>

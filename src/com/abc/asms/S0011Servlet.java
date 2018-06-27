@@ -42,6 +42,25 @@ public class S0011Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
+		req.setCharacterEncoding("UTF-8");
+
+		String saleDate = req.getParameter("saleDate");
+		String accountId = req.getParameter("accountId");
+		String categoryId = req.getParameter("categoryId");
+		String tradeName = req.getParameter("tradeName");
+		String unitPrice = req.getParameter("unitPrice");
+		String saleNumber = req.getParameter("saleNumber");
+		String note = req.getParameter("note");
+
+		String insert = req.getParameter("insert");
+		if(insert == null) {
+			//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
+			DBUtils.getCategoriesAndAccounts(req, resp);
+
+			req.getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
+				.forward(req, resp);
+		}
+
 		//ログインチェック
 		if (!Utils.checkLogin(req, resp)) {
 			return;
@@ -52,17 +71,7 @@ public class S0011Servlet extends HttpServlet {
 			return;
 		}
 
-		req.setCharacterEncoding("UTF-8");
-
 		HttpSession session = req.getSession();
-
-		String saleDate = req.getParameter("saleDate");
-		String accountId = req.getParameter("accountId");
-		String categoryId = req.getParameter("categoryId");
-		String tradeName = req.getParameter("tradeName");
-		String unitPrice = req.getParameter("unitPrice");
-		String saleNumber = req.getParameter("saleNumber");
-		String note = req.getParameter("note");
 
 		//クロスサイトスクリプティング対策
 		if(tradeName.contains("<") || tradeName.contains(">") || tradeName.contains("&")) {
