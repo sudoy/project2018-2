@@ -76,7 +76,7 @@
 		 			<label for="categoryName" class="col-sm-2 control-label">商品カテゴリー <span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
 						<c:forEach var="category" items="${list1}">
-							<label class="radio-inline"><input type="radio"  name="categoryId" value="${category.categoryId}" ${param.categoryId eq category.categoryId ? 'checked' : ''}>${HtmlUtils.formName(category.categoryName)}</label>
+							<label><input type="radio"  name="categoryId" value="${category.categoryId}" ${param.categoryId eq category.categoryId ? 'checked' : ''}>${HtmlUtils.formName(category.categoryName)}</label>
 						</c:forEach>
 					</div>
 				</div>
