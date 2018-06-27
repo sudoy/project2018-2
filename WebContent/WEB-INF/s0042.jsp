@@ -2,6 +2,7 @@
 <%@page pageEncoding="UTF-8"%>
 <%@ page import="com.abc.asms.utils.AuthorityUtils"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.abc.asms.utils.HtmlUtils"%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -46,8 +47,8 @@
 					<li><a href="#">${accounts.name} 様</a></li>
 					<li><a href="C0030.html">ログアウト</a></li>
 				</ul>
-			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
+			</div>
+		</div>
 	</nav>
 
 	<div class="container">
@@ -127,7 +128,7 @@
 			</div>
 
 		</form>
-	</div><!-- /container -->
+	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 </body>
