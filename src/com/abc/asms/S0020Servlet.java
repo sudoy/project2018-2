@@ -33,7 +33,8 @@ public class S0020Servlet extends HttpServlet {
 		LocalDateTime d = LocalDateTime.now();
 		String today = DateTimeFormatter.ofPattern("yyyy/M/d").format(d);
 		req.setAttribute("today", today);
-
+		HttpSession session = req.getSession();
+		session.setAttribute("ss", null);
 
 		DBUtils.getCategoriesAndAccountsForAll(req, resp);
 		getServletContext().getRequestDispatcher("/WEB-INF/s0020.jsp")
@@ -58,18 +59,17 @@ public class S0020Servlet extends HttpServlet {
 		String note = req.getParameter("note");
 
 		DBUtils.getCategoriesAndAccountsForAll(req, resp);
-
+		SearchKeepSale ss = new SearchKeepSale(saleDate1,saleDate2,accountName,categoryName,tradeName,note);
 		List<String> errors =  validate(saleDate1,saleDate2,req,accountName);
 		if(errors.size() > 0) {
 			session.setAttribute("errors", errors);
+			session.setAttribute("ss", ss);
 			getServletContext().getRequestDispatcher("/WEB-INF/s0020.jsp")
 			.forward(req, resp);
 			return;
 		}
 
-		SearchKeepSale ss = new SearchKeepSale(saleDate1,saleDate2,accountName,categoryName,tradeName,note);
 		session.setAttribute("ss", ss);
-
 		resp.sendRedirect("S0021.html");
 
 

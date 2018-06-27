@@ -207,7 +207,7 @@ public class S0024Servlet extends HttpServlet {
 				successes.add("No." + id + "の売上を更新しました。");
 				session.setAttribute("successes", successes);
 
-				resp.sendRedirect("S0022.html?id=" + id);
+				resp.sendRedirect("S0021.html");
 
 			} catch (Exception e) {
 				e.printStackTrace();
