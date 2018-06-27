@@ -40,9 +40,10 @@ public class S0041Servlet extends HttpServlet {
 			con = DBUtils.getConnection();
 			//SQL
 			sql = "select account_id,name,mail,password,authority from accounts where 0 = 0 ";
+
 			SearchKeepAccount sa = (SearchKeepAccount) session.getAttribute("sa");
 			req.setAttribute("sa", sa);
-			session.setAttribute("sa", null);
+
 			//氏名検索
 			if (sa.getAccountName() != "") {
 				sql += " and name like '%" + sa.getAccountName() + "%'";

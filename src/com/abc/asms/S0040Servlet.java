@@ -23,6 +23,8 @@ public class S0040Servlet extends HttpServlet {
 		if (!Utils.checkLogin(req, resp)) {
 			return;
 		}
+		HttpSession session = req.getSession();
+		session.setAttribute("sa", null);
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0040.jsp")
 			.forward(req, resp);

@@ -33,7 +33,8 @@ public class S0020Servlet extends HttpServlet {
 		LocalDateTime d = LocalDateTime.now();
 		String today = DateTimeFormatter.ofPattern("yyyy/M/d").format(d);
 		req.setAttribute("today", today);
-
+		HttpSession session = req.getSession();
+		session.setAttribute("ss", null);
 
 		DBUtils.getCategoriesAndAccountsForAll(req, resp);
 		getServletContext().getRequestDispatcher("/WEB-INF/s0020.jsp")
