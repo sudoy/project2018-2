@@ -119,7 +119,7 @@
 			<div class="form-group">
 				<label for="number" class="col-sm-2 control-label">小計</label>
 				<div class="col-sm-2">
-					<input type="text" class="form-control text-right" name="sum" value="${HtmlUtils.formatComma(param.unit_price * param.sale_number)}" disabled>
+					<input type="text" class="form-control text-right" name="sum" value="${HtmlUtils.formatComma(HtmlUtils.taxPrice1(param.unit_price, param.sale_number, param.sale_date))}" disabled>
 				</div>
 			</div>
 

@@ -64,7 +64,7 @@
 
 				<div class="col-sm-2">
 					<input type="text" class="form-control" name="sale_date"
-						id="salesDate" placeholder="販売日" value="${param.sale_date != null? param.sale_date : HtmlUtils.formatDate(s23.saleDate)}">
+						id="salesDate" placeholder="販売日" value="${param.sale_date != null? param.sale_date : HtmlUtils.formDate(s23.saleDate)}">
 				</div>
 			</div>
 

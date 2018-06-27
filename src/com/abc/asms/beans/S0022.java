@@ -1,18 +1,30 @@
 package com.abc.asms.beans;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class S0022 {
 	private int saleId;
-	private LocalDate saleDate;
+	private Date saleDate;
 	private String name;
 	private String categoryName;
 	private String tradeName;
 	private int unitPrice;
 	private int saleNumber;
-	private int sum;
 	private String note;
 
+	public S0022(int saleId, Date saleDate, String name, String categoryName, String tradeName, int price, int count,
+			String note) {
+		super();
+		this.saleId = saleId;
+		this.saleDate = saleDate;
+		this.name = name;
+		this.categoryName = categoryName;
+		this.tradeName = tradeName;
+		this.unitPrice = price;
+		this.saleNumber = count;
+		this.note = note;
+
+	}
 
 	public int getSaleId() {
 		return saleId;
@@ -22,11 +34,11 @@ public class S0022 {
 		this.saleId = saleId;
 	}
 
-	public LocalDate getSaleDate() {
+	public Date getSaleDate() {
 		return saleDate;
 	}
 
-	public void setSaleDate(LocalDate saleDate) {
+	public void setSaleDate(Date saleDate) {
 		this.saleDate = saleDate;
 	}
 
@@ -70,14 +82,6 @@ public class S0022 {
 		this.saleNumber = saleNumber;
 	}
 
-	public int getSum() {
-		return sum;
-	}
-
-	public void setSum(int sum) {
-		this.sum = sum;
-	}
-
 	public String getNote() {
 		return note;
 	}
@@ -85,24 +89,4 @@ public class S0022 {
 	public void setNote(String note) {
 		this.note = note;
 	}
-
-	public S0022(int saleId, LocalDate saleDate, String name, String categoryName, String tradeName, int price, int count,
-			int sum, String note) {
-		super();
-		this.saleId = saleId;
-		this.saleDate = saleDate;
-		this.name = name;
-		this.categoryName = categoryName;
-		this.tradeName = tradeName;
-		this.unitPrice = price;
-		this.saleNumber = count;
-		this.sum = sum;
-		this.note = note;
-
-	}
-
-
-
-
-
 }

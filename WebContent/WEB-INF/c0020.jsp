@@ -151,6 +151,7 @@
 								<th style="text-align: right">小計（税込）</th>
 							</tr>
 						</thead>
+						<c:set var="total" value="${0}"/>
 						<c:forEach var="c0020" items="${list}">
 							<tr>
 								<td style="text-align: right">${c0020.saleId}</td>
@@ -162,7 +163,9 @@
 								<td>${HtmlUtils.formName(c0020.tradeName)}</td>
 								<td style="text-align: right">${HtmlUtils.formatComma(c0020.unitPrice)}</td>
 								<td style="text-align: right">${HtmlUtils.formatComma(c0020.saleNumber)}</td>
-								<td style="text-align: right">${HtmlUtils.formatComma(c0020.unitPrice * c0020.saleNumber)}</td>
+								<td style="text-align: right">${HtmlUtils.formatComma(HtmlUtils.taxPrice(c0020.unitPrice, c0020.saleNumber, c0020.saleDate))}</td>
+								
+								<c:set var="total" value="${total + HtmlUtils.taxPrice(c0020.unitPrice, c0020.saleNumber, c0020.saleDate)}"/>
 							</tr>
 						</c:forEach>
 
@@ -173,7 +176,7 @@
 								<td>　</td>
 								<td>　</td>
 								<th style="text-align: right">合計</th>
-								<td style="text-align: right">${HtmlUtils.formatComma(thisSum)}</td>
+								<td style="text-align: right">${HtmlUtils.formatComma(total)}</td>
 							</tr>
 
 					</table>

@@ -60,7 +60,7 @@
 
 				<div class="col-sm-2">
 					<input type="text" class="form-control" name="sale_date"
-						value="${HtmlUtils.formatDate(s25.saleDate)}" disabled>
+						value="${HtmlUtils.formDate(s25.saleDate)}" disabled>
 				</div>
 			</div>
 
@@ -108,9 +108,9 @@
 			</div>
 
 			<div class="form-group">
-				<label for="number" class="col-sm-2 control-label">小計</label>
+				<label for="number" class="col-sm-2 control-label">小計（税込）</label>
 				<div class="col-sm-2">
-					<input type="text" class="form-control text-right" name="number" value="${HtmlUtils.formatComma(s25.sum)}" disabled>
+					<input type="text" class="form-control text-right" name="number" value="${HtmlUtils.formatComma(HtmlUtils.taxPrice(s25.unitPrice, s25.saleNumber, s25.saleDate))}" disabled>
 				</div>
 			</div>
 
