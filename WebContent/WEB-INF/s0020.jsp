@@ -80,8 +80,8 @@
  			<label class="col-sm-2 control-label">商品カテゴリー</label>
  			<div class="col-sm-5">
  			<c:forEach  var="product" items="${list1}">
-	 			<label class="checkbox-inline" ><input type="checkbox" name="category_name"  class="custom-control-input category"
-	 			 value="${product.categoryName}" ${HtmlUtils.checkCategory(paramValues.categoryName, product.categoryName) ? 'checked' : ''}>${HtmlUtils.formName(product.categoryName)}</label>
+
+	 			<label ><input type="checkbox" name="category_name" value="${product.categoryName}" ${HtmlUtils.checkCategory(paramValues.categoryName, product.categoryName) ? 'checked' : ''}>${HtmlUtils.formName(product.categoryName)}</label>
 			</c:forEach>
 			</div>
 		</div>
