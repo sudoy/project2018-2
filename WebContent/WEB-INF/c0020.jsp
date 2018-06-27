@@ -47,6 +47,7 @@
 						<li><a href="S0040.html">アカウント検索</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#">${accounts.name} 様</a></li>
 						<li><a href="C0030.html">ログアウト</a></li>
 					</ul>
 				</div>
@@ -147,13 +148,16 @@
 								<th>商品名</th>
 								<th style="text-align: right">単価</th>
 								<th style="text-align: right">個数</th>
-								<th style="text-align: right">小計</th>
+								<th style="text-align: right">小計（税込）</th>
 							</tr>
 						</thead>
 						<c:forEach var="c0020" items="${list}">
 							<tr>
 								<td style="text-align: right">${c0020.saleId}</td>
 								<td>${HtmlUtils.formDate(c0020.saleDate)}</td>
+								
+								
+								
 								<td>${c0020.categoryName}</td>
 								<td>${c0020.tradeName}</td>
 								<td style="text-align: right">${HtmlUtils.formatComma(c0020.unitPrice)}</td>
