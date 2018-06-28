@@ -93,12 +93,16 @@ public class C0010Servlet extends HttpServlet {
 		//1-1
 		if (email.equals("")) {
 			errors.add("メールアドレスを入力して下さい。");
+			return errors;
 		}
 		//1-2
 		if (email.length() > 100) {
 			errors.add("メールアドレスが長すぎます");
 		}
 		//1-3
+		if(!email.contains("@")) {
+			errors.add("メールアドレスを正しく入力して下さい。");
+		}
 		if(!email.equals("") && email.contains("@")) {
 			String pattern = "^[a-zA-Z0-9]*$";
 			Pattern p = Pattern.compile(pattern);
@@ -106,7 +110,7 @@ public class C0010Servlet extends HttpServlet {
 			String firstCharacter = email.substring(0, 1);
 			if(!p.matcher(firstCharacter).find()){
 				errors.add("メールアドレスを正しく入力して下さい。");
-			}else if(!split[0].matches("^[a-zA-Z0-9._-]*$") || split[0].length() == 1) {
+			}else if(!split[0].matches("^[a-zA-Z0-9._-]*$") ) {
 				errors.add("メールアドレスを正しく入力して下さい。");
 			}else if(!split[0].matches("^[a-zA-Z0-9._-]*$") || split[0].length() == 0) {
 				errors.add("メールアドレスを正しく入力して下さい。");

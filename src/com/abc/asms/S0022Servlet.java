@@ -45,7 +45,7 @@ public class S0022Servlet extends HttpServlet {
 						+" (select category_name from categories c where s.category_id = c.category_id)"
 						+" as category_name, trade_name,unit_price, sale_number,"
 						+" note from sales s"
-						+" JOIN accounts a ON s.account_id = a.account_id"
+						+" left JOIN accounts a ON s.account_id = a.account_id"
 						+" where sale_id = ?";
 
 			//上記SQL実施
