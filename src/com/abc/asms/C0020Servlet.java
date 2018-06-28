@@ -125,8 +125,8 @@ public class C0020Servlet extends HttpServlet {
 			lastMonth = i - 1;
 		}
 
-		int thisMonthSum = 0;
-		int lastMonthSum = 0;
+		double thisMonthSum = 0;
+		double lastMonthSum = 0;
 
 		//セッションに保存されたアカウント情報を持ってくる
 		HttpSession session = req.getSession();
@@ -159,7 +159,7 @@ public class C0020Servlet extends HttpServlet {
 
 			//今月の売上合計をデータベースから取り出してセット
 			if(rs.next()) {
-				thisMonthSum = rs.getInt("sum1");
+				thisMonthSum = rs.getDouble("sum1");
 
 				req.setAttribute("thisMonthSum", thisMonthSum);
 			}
@@ -186,7 +186,7 @@ public class C0020Servlet extends HttpServlet {
 
 			//前月の売上合計をデータベースから取り出してセット
 			if(rs.next()) {
-				lastMonthSum = rs.getInt("sum2");
+				lastMonthSum = rs.getDouble("sum2");
 
 				req.setAttribute("lastMonthSum", lastMonthSum);
 			}
@@ -256,7 +256,7 @@ public class C0020Servlet extends HttpServlet {
 			}
 
 			try {
-				int MoM = (int) (((double)thisMonthSum / (double)lastMonthSum) * 100);
+				Double MoM = ((thisMonthSum / lastMonthSum) * 100);
 
 				if(thisMonthSum == 0 && lastMonthSum == 0) {
 					throw new ArithmeticException();
