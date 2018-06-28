@@ -73,7 +73,7 @@
 				</div>
 
 				<div class="form-group">
-		 			<label for="categoryName" class="col-sm-2 control-label">商品カテゴリー <span class="badge">必須</span></label>
+		 			<label class="col-sm-2 control-label">商品カテゴリー <span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
 						<c:forEach var="category" items="${list1}">
 							<label><input type="radio"  name="categoryId" value="${category.categoryId}" ${param.categoryId eq category.categoryId ? 'checked' : ''}>${HtmlUtils.formName(category.categoryName)}</label>
