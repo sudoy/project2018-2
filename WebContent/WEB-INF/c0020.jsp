@@ -13,7 +13,6 @@
 		<title>ダッシュボード｜物品売上管理システム</title>
 
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="css/style.css" type="text/css">
 		<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css" type="text/css">
 
 		<!--[if lt IE 9]>
@@ -58,10 +57,10 @@
 
 			<jsp:include page="_errors.jsp" />
 
-			<h1 class="text-center">ダッシュボード</h1>
-
 			<div class="row">
-				<div class="col-sm-2">
+				<h1 class="text-center">ダッシュボード</h1>
+
+				<div class="col-xs-2" style="padding-right: 0px;">
 					<nav class="float-left">
 						<ul class="pagination">
 							<li class="page-item">
@@ -74,11 +73,11 @@
 					</nav>
 				</div>
 
-				<div class="col-sm-8 text-center">
+				<div class="col-xs-8 text-center">
 					<h2>${today}</h2>
 				</div>
 
-				<div class="col-sm-2" style="padding-left: 33px;">
+				<div class="col-xs-2" style="padding-left: 0px;">
 					<nav class="float-right">
 						<ul class="pagination">
 							<li class="page-item">
@@ -90,15 +89,13 @@
 						</ul>
 					</nav>
 				</div>
-			</div>
 
-			<div class="row">
 				<div class="col-sm-4">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title">前月（${lastMonth}月）の売上合計</h3>
 						</div>
-						<div class="panel-body" align="center" style="text-align: right">${HtmlUtils.formatComma(lastMonthSum)}円</div>
+						<div class="panel-body"  style="text-align: right">${HtmlUtils.formatComma(lastMonthSum)}円</div>
 					</div>
 				</div>
 
@@ -107,7 +104,7 @@
 						<div class="panel-heading">
 							<h3 class="panel-title">今月（${thisMonth}月）の売上合計</h3>
 						</div>
-						<div class="panel-body" align="center" style="text-align: right">${HtmlUtils.formatComma(thisMonthSum)}円</div>
+						<div class="panel-body"  style="text-align: right">${HtmlUtils.formatComma(thisMonthSum)}円</div>
 					</div>
 				</div>
 
@@ -116,7 +113,7 @@
 						<div class="panel-heading">
 							<h3 class="panel-title">前月比</h3>
 						</div>
-						<div class="panel-body" align="center">
+						<div class="panel-body" style="text-align: center;">
 							<c:choose>
 								<c:when test="${lastMonthSum eq 0 and  thisMonthSum eq 0}">
 									<strong>-</strong>
@@ -164,7 +161,7 @@
 								<td style="text-align: right">${HtmlUtils.formatComma(c0020.unitPrice)}</td>
 								<td style="text-align: right">${HtmlUtils.formatComma(c0020.saleNumber)}</td>
 								<td style="text-align: right">${HtmlUtils.formatComma(HtmlUtils.taxPrice(c0020.unitPrice, c0020.saleNumber, c0020.saleDate))}</td>
-								
+
 								<c:set var="total" value="${total + HtmlUtils.taxPrice(c0020.unitPrice, c0020.saleNumber, c0020.saleDate)}"/>
 							</tr>
 						</c:forEach>
