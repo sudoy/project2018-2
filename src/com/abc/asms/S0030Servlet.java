@@ -126,24 +126,29 @@ public class S0030Servlet extends HttpServlet {
 //		}
 
 		//メールアドレス必須チェック
-		if (mail.equals("")){
+		//1-1
+		if (mail.equals("")) {
 			errors.add("メールアドレスを入力して下さい。");
+			return errors;
 		}
-
-		//メールアドレス長さチェック
-		if (mail.length() >= 101){
-			errors.add("メールアドレスが長すぎます。");
+		//1-2
+		if (mail.length() > 100) {
+			errors.add("メールアドレスが長すぎます");
 		}
-
-		//メールアドレス形式チェック
+		//1-3
+		if(!mail.contains("@")) {
+			errors.add("メールアドレスを正しく入力して下さい。");
+		}
 		if(!mail.equals("") && mail.contains("@")) {
 			String pattern = "^[a-zA-Z0-9]*$";
 			Pattern p = Pattern.compile(pattern);
-			String[] split = mail.split("@", 0);
+			String[] split = mail.split("@", -1);
 			String firstCharacter = mail.substring(0, 1);
 			if(!p.matcher(firstCharacter).find()){
 				errors.add("メールアドレスを正しく入力して下さい。");
-			}else if(!split[0].matches("^[a-zA-Z0-9._-]*$") || split[0].length() == 1) {
+			}else if(!split[0].matches("^[a-zA-Z0-9._-]*$") ) {
+				errors.add("メールアドレスを正しく入力して下さい。");
+			}else if(!split[0].matches("^[a-zA-Z0-9._-]*$") || split[0].length() == 0) {
 				errors.add("メールアドレスを正しく入力して下さい。");
 			}else if(!split[1].matches("^[a-zA-Z0-9._-]*$") ||split[0].length() == 0) {
 				errors.add("メールアドレスを正しく入力して下さい。");
