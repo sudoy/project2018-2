@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.abc.asms.beans.InsertSales;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.Utils;
@@ -35,7 +36,20 @@ public class S0011Servlet extends HttpServlet {
 			return;
 		}
 
-		req.getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp").forward(req, resp);
+		HttpSession session = req.getSession();
+
+		InsertSales is = (InsertSales)session.getAttribute("is");
+		req.setAttribute("is", is);
+
+		if(is == null) {
+			resp.sendRedirect("S0010.html");
+			return;
+		}
+
+		DBUtils.getCategoriesAndAccounts(req, resp);
+
+		getServletContext().getRequestDispatcher("/WEB-INF/s0011.jsp")
+			.forward(req, resp);
 	}
 
 	@Override
@@ -148,6 +162,8 @@ public class S0011Servlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+
+			session.setAttribute("is", null);
 
 			//登録処理後、登録画面に遷移
 			resp.sendRedirect("S0010.html");

@@ -56,7 +56,7 @@
 		 		<div class="form-group">
 			 		<label for="saleDate" class="col-sm-2 control-label">販売日 <span class="badge">必須</span></label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" id="saleDate" name="saleDate" placeholder="販売日" value="${param.saleDate != null ? param.saleDate : today}">
+						<input type="text" class="form-control" id="saleDate" name="saleDate" placeholder="販売日" value="${is.saleDate != null ? is.saleDate : today}">
 					</div>
 				</div>
 
@@ -66,7 +66,7 @@
 						<select class="form-control" name="accountId" id="accountId">
 							<option value="">選択してください</option>
 							<c:forEach var="account" items="${list2}">
-								<option value="${account.accountId}" ${param.accountId eq account.accountId ? 'selected' : '' }>${HtmlUtils.formName(account.name)}</option>
+								<option value="${account.accountId}" ${is.accountId eq account.accountId ? 'selected' : '' }>${HtmlUtils.formName(account.name)}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -76,7 +76,7 @@
 		 			<label class="col-sm-2 control-label">商品カテゴリー <span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
 						<c:forEach var="category" items="${list1}">
-							<label><input type="radio"  name="categoryId" value="${category.categoryId}" ${param.categoryId eq category.categoryId ? 'checked' : ''}>${HtmlUtils.formName(category.categoryName)}</label>
+							<label><input type="radio"  name="categoryId" value="${category.categoryId}" ${is.categoryId eq category.categoryId ? 'checked' : ''}>${HtmlUtils.formName(category.categoryName)}</label>
 						</c:forEach>
 					</div>
 				</div>
@@ -84,7 +84,7 @@
 				<div class="form-group">
 		 			<label for="tradeName" class="col-sm-2 control-label">商品名 <span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
-						<input type="text" class="form-control" id="tradeName" name="tradeName" placeholder="商品名" value="${param.tradeName}">
+						<input type="text" class="form-control" id="tradeName" name="tradeName" placeholder="商品名" value="${is.tradeName}">
 					</div>
 				</div>
 
@@ -93,21 +93,21 @@
 		 			<label for="unitPrice" class="col-sm-2 control-label">単価 <span class="badge">必須</span></label>
 
 		 			<div class="col-sm-2">
-						<input type="text" style="text-align: right" class="form-control" id="unitPrice" name="unitPrice" placeholder="単価" value="${param.unitPrice}">
+						<input type="text" style="text-align: right" class="form-control" id="unitPrice" name="unitPrice" placeholder="単価" value="${is.unitPrice}">
 					</div>
 				</div>
 
 				<div class="form-group">
 		 			<label for="saleNumber" class="col-sm-2 control-label">個数 <span class="badge">必須</span></label>
 		 			<div class="col-sm-2">
-						<input type="text"  style="text-align: right" class="form-control" id="saleNumber" name="saleNumber" placeholder="個数" value="${param.saleNumber}">
+						<input type="text"  style="text-align: right" class="form-control" id="saleNumber" name="saleNumber" placeholder="個数" value="${is.saleNumber}">
 					</div>
 				</div>
 
 				<div class="form-group">
 		 			<label for="note" class="col-sm-2 control-label">備考 </label>
 		 			<div class="col-sm-5">
-						<textarea class="form-control" id="note" name="note" placeholder="備考" rows="5">${param.note}</textarea>
+						<textarea class="form-control" id="note" name="note" placeholder="備考" rows="5">${is.note}</textarea>
 					</div>
 				</div>
 

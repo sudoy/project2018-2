@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.abc.asms.beans.InsertSales;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.Utils;
@@ -42,9 +43,23 @@ public class S0010Servlet extends HttpServlet {
 		DBUtils.getCategoriesAndAccounts(req, resp);
 
 		req.setCharacterEncoding("UTF-8");
+
 		LocalDateTime d = LocalDateTime.now();
 		String today = DateTimeFormatter.ofPattern("yyyy/M/d").format(d);
 		req.setAttribute("today", today);
+
+		HttpSession session = req.getSession();
+
+		InsertSales is = (InsertSales)session.getAttribute("is");
+
+		if(is != null) {
+			session.setAttribute("is", is);
+			getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
+				.forward(req, resp);
+			return;
+		}
+
+		session.setAttribute("is", null);
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
 			.forward(req, resp);
@@ -65,6 +80,11 @@ public class S0010Servlet extends HttpServlet {
 		String unitPrice = req.getParameter("unitPrice");
 		String saleNumber = req.getParameter("saleNumber");
 		String note = req.getParameter("note");
+
+		DBUtils.getCategoriesAndAccounts(req, resp);
+
+		InsertSales is = new InsertSales(saleDate,accountId,categoryId,tradeName,unitPrice,saleNumber,note);
+		session.setAttribute("is", is);
 
 		List<String> errors =  validate(saleDate, accountId, categoryId,
 				tradeName, unitPrice, saleNumber, note);
@@ -154,8 +174,7 @@ public class S0010Servlet extends HttpServlet {
 			}
 		}
 
-		getServletContext().getRequestDispatcher("/WEB-INF/s0011.jsp")
-			.forward(req, resp);
+		resp.sendRedirect("S0011.html");
 	}
 
 	private List<String> validate(String saleDate, String accountId, String categoryId,
