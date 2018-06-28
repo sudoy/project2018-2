@@ -2,7 +2,7 @@ package com.abc.asms.beans;
 
 import java.sql.Date;
 
-public class Detail_beans {
+public class DetailBeans {
 	private int saleId;
 	private Date saleDate;
 	private String name;
@@ -13,7 +13,7 @@ public class Detail_beans {
 	private int saleNumber;
 	private String note;
 
-	public Detail_beans(int saleId, Date saleDate, String name, int categoryId, int accountId, String tradeName,
+	public DetailBeans(int saleId, Date saleDate, String name, int categoryId, int accountId, String tradeName,
 			int price, int count, String note) {
 		super();
 		this.saleId = saleId;

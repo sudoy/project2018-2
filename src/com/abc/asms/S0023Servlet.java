@@ -11,8 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.abc.asms.beans.Detail_beans;
+import com.abc.asms.beans.CancelBeans;
+import com.abc.asms.beans.DetailBeans;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.Utils;
@@ -20,7 +22,37 @@ import com.abc.asms.utils.Utils;
 @WebServlet("/S0023.html")
 public class S0023Servlet extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		req.setCharacterEncoding("utf-8");
+
+		HttpSession session = req.getSession();
+
+		//ログインチェック
+		if (!Utils.checkLogin(req, resp)) {
+			return;
+		}
+
+		//権限チェック
+		if(!AuthorityUtils.checkSalesAuthority(req, resp)) {
+			return;
+		}
+
+		CancelBeans data = (CancelBeans) session.getAttribute("data");
+
+		session.setAttribute("data", data);
+
+
+		//アカウントとカテゴリーの情報取得
+		DBUtils.getCategoriesAndAccounts(req, resp);
+
+		getServletContext().getRequestDispatcher("/WEB-INF/s0023.jsp").forward(req, resp);
+
+	}
+
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
 		//ログインチェック
@@ -32,6 +64,8 @@ public class S0023Servlet extends HttpServlet {
 		if(!AuthorityUtils.checkSalesAuthority(req, resp)) {
 			return;
 		}
+
+//		HttpSession session = req.getSession();
 
 		req.setCharacterEncoding("utf-8");
 
@@ -49,7 +83,7 @@ public class S0023Servlet extends HttpServlet {
 
 			sql = "select sale_id, sale_date, name,"
 					+" category_id, a.account_id,"
-					+" trade_name, unit_price, sale_number,"
+					+" trade_name, unit_price,sale_number, unit_price * sale_number as sum,"
 					+" note from sales s JOIN accounts a ON s.account_id = a.account_id"
 					+" where sale_id = ?";
 
@@ -63,7 +97,7 @@ public class S0023Servlet extends HttpServlet {
 				throw new Exception();
 			}
 
-			Detail_beans s23 = new Detail_beans(
+			DetailBeans s23 = new DetailBeans(
 					rs.getInt("sale_id"),
 					rs.getDate("sale_date"),
 					rs.getString("name"),

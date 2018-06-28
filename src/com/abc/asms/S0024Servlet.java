@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.abc.asms.beans.CancelBeans;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.Utils;
@@ -36,9 +37,9 @@ public class S0024Servlet extends HttpServlet {
 		if (!AuthorityUtils.checkSalesAuthority(req, resp)) {
 			return;
 		}
-		
+
 		resp.sendRedirect("S0020.html");
-		
+
 	}
 
 	@Override
@@ -81,12 +82,12 @@ public class S0024Servlet extends HttpServlet {
 			List<String> errors = validate(saleDate, accountId, categoryId, tradeName, unitPrice, saleNumber,
 					note);
 
-			if(errors.size() > 0) {
+			if (errors.size() > 0) {
 				DBUtils.getCategoriesAndAccounts(req, resp);
 
 				session.setAttribute("errors", errors);
 				getServletContext().getRequestDispatcher("/WEB-INF/s0023.jsp")
-					.forward(req, resp);
+						.forward(req, resp);
 				return;
 			}
 
@@ -102,6 +103,7 @@ public class S0024Servlet extends HttpServlet {
 				ps.setString(1, accountId);
 
 				rs = ps.executeQuery();
+
 
 				//sqlが実行出来なかったらエラー
 				if (!rs.next()) {
@@ -183,13 +185,13 @@ public class S0024Servlet extends HttpServlet {
 			String note = req.getParameter("note");
 
 			//クロスサイトスクリプティング対策
-			if(tradeName.contains("<") || tradeName.contains(">") || tradeName.contains("&")) {
+			if (tradeName.contains("<") || tradeName.contains(">") || tradeName.contains("&")) {
 				tradeName = tradeName.replaceAll("<", "&lt;");
 				tradeName = tradeName.replaceAll(">", "&gt;");
 				tradeName = tradeName.replaceAll("&", "&amp;");
 			}
 
-			if(note.contains("<") || note.contains(">") || note.contains("&")) {
+			if (note.contains("<") || note.contains(">") || note.contains("&")) {
 				note = note.replaceAll("<", "&lt;");
 				note = note.replaceAll(">", "&gt;");
 				note = note.replaceAll("&", "&amp;");
@@ -223,6 +225,8 @@ public class S0024Servlet extends HttpServlet {
 				successes.add("No." + id + "の売上を更新しました。");
 				session.setAttribute("successes", successes);
 
+				session.setAttribute("data", null);
+
 				resp.sendRedirect("S0021.html");
 
 			} catch (Exception e) {
@@ -237,7 +241,31 @@ public class S0024Servlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+
+		}else if(req.getParameter("cancel")!= null) {
+
+			DBUtils.getCategoriesAndAccounts(req, resp);
+
+			String id = req.getParameter("id");
+
+			CancelBeans data = new CancelBeans(
+							req.getParameter("id"),
+							req.getParameter("sale_date"),
+							req.getParameter("name"),
+							req.getParameter("account_id"),
+							req.getParameter("category_id"),
+							req.getParameter("trade_name"),
+							req.getParameter("unit_price"),
+							req.getParameter("sale_number"),
+							req.getParameter("note")
+						);
+
+			session.setAttribute("data", data);
+
+			resp.sendRedirect("S0023.html?id=" + id);
+
 		}
+
 	}
 
 	private List<String> validate(String saleDate, String accountId, String categoryId, String tradeName,
@@ -252,11 +280,11 @@ public class S0024Servlet extends HttpServlet {
 		//1-2 販売日形式チェック
 		if (!saleDate.equals("")) {
 			try {
-				if(LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/M/d")
+				if (LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/M/d")
 						.withResolverStyle(ResolverStyle.STRICT)) != null) {
 					LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/M/d")
 							.withResolverStyle(ResolverStyle.STRICT));
-				}else {
+				} else {
 					LocalDate.parse(saleDate, DateTimeFormatter.ofPattern("uuuu/MM/dd")
 							.withResolverStyle(ResolverStyle.STRICT));
 				}

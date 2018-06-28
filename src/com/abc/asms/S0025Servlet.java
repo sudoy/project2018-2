@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.abc.asms.beans.Detail_beans;
+import com.abc.asms.beans.DetailBeans;
 import com.abc.asms.beans.SearchKeepSale;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
@@ -78,7 +78,7 @@ public class S0025Servlet extends HttpServlet {
 				throw new Exception();
 			}
 
-			Detail_beans s25 = new Detail_beans(
+			DetailBeans s25 = new DetailBeans(
 					rs.getInt("sale_id"),
 					rs.getDate("sale_date"),
 					rs.getString("name"),
