@@ -50,48 +50,48 @@
 			<h1>アカウントを登録してよろしいですか？</h1>
 
 			<form class="form-horizontal" action="S0031.html" method="post">
-				<input type="hidden" name="name" value="${param.name}">
+				<input type="hidden" name="name" value="${ia.name}">
 				<div class="form-group">
 		 			<label class="col-sm-3 control-label">氏名 <span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
-						<input type="text" class="form-control" name="name"  value="${param.name}" disabled>
+						<input type="text" class="form-control" name="name"  value="${ia.name}" disabled>
 					</div>
 				</div>
-				<input type="hidden" name="mail" value="${param.mail}">
+				<input type="hidden" name="mail" value="${ia.mail}">
 				<div class="form-group">
 		 			<label class="col-sm-3 control-label">メールアドレス <span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
-						<input type="text" class="form-control" name="mail" value="${param.mail}" disabled>
+						<input type="text" class="form-control" name="mail" value="${ia.mail}" disabled>
 					</div>
 				</div>
-				<input type="hidden" name="password1" value="${param.password1}">
+				<input type="hidden" name="password1" value="${ia.password1}">
 				<div class="form-group">
 		 			<label class="col-sm-3 control-label">パスワード<span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
-						<input type="password" class="form-control" name="password1" value="${param.password1}" disabled>
+						<input type="password" class="form-control" name="password1" value="${ia.password1}" disabled>
 					</div>
 				</div>
-				<input type="hidden" name="password2" value="${param.password2}">
+				<input type="hidden" name="password2" value="${ia.password2}">
 				<div class="form-group">
 		 			<label class="col-sm-3 control-label">パスワード（確認）<span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
-						<input type="password" class="form-control" name="password2" value="${param.password2}" disabled>
+						<input type="password" class="form-control" name="password2" value="${ia.password2}" disabled>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label class="col-sm-3 control-label">売上登録権限 <span class="badge">必須</span></label>
 						<div class="col-sm-5">
-							<label><input type="radio" name="authority1" value="0" ${param.authority1 eq 0 ? 'checked' : ''} onclick="return false;">権限なし</label>
-							<label><input type="radio" name="authority1" value="1" ${param.authority1 eq 1 ? 'checked' : ''} onclick="return false;">権限あり</label>
+							<label><input type="radio" name="authority1" value="0" ${ia.authority1 eq 0 ? 'checked' : ''} onclick="return false;">権限なし</label>
+							<label><input type="radio" name="authority1" value="1" ${ia.authority1 eq 1 ? 'checked' : ''} onclick="return false;">権限あり</label>
 						</div>
 				</div>
 
 				<div class="form-group">
 					<label class="col-sm-3 control-label">アカウント登録権限 <span class="badge">必須</span></label>
 						<div class="col-sm-5">
-							<label><input type="radio" name="authority2" value="0" ${param.authority2 eq 0 ? 'checked' : ''} onclick="return false;">権限なし</label>
-							<label><input type="radio" name="authority2" value="1" ${param.authority2 eq 1 ? 'checked' : ''} onclick="return false;">権限あり</label>
+							<label><input type="radio" name="authority2" value="0" ${ia.authority2 eq 0 ? 'checked' : ''} onclick="return false;">権限なし</label>
+							<label><input type="radio" name="authority2" value="1" ${ia.authority2 eq 1 ? 'checked' : ''} onclick="return false;">権限あり</label>
 						</div>
 				</div>
 

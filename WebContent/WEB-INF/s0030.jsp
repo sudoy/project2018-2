@@ -57,14 +57,14 @@
 				<div class="form-group">
 		 			<label class="col-sm-3 control-label">氏名 <span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
-						<input type="text" class="form-control" name="name" placeholder="氏名" value="${param.name}">
+						<input type="text" class="form-control" name="name" placeholder="氏名" value="${ia.name}">
 					</div>
 				</div>
 
 				<div class="form-group">
 		 			<label class="col-sm-3 control-label">メールアドレス <span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
-						<input type="text" class="form-control" name="mail" placeholder="メールアドレス" value="${param.mail}">
+						<input type="text" class="form-control" name="mail" placeholder="メールアドレス" value="${ia.mail}">
 					</div>
 				</div>
 
@@ -86,16 +86,16 @@
 				<div class="form-group">
 					<label class="col-sm-3 control-label">売上登録権限 <span class="badge">必須</span></label>
 						<div class="col-sm-5">
-							<label><input type="radio" name="authority1" value="0" ${param.authority1 eq 0 ? 'checked' : ''}>権限なし</label>
-							<label><input type="radio" name="authority1" value="1" ${param.authority1 eq 1 ? 'checked' : ''}>権限あり</label>
+							<label><input type="radio" name="authority1" value="0" ${ia.authority1 eq 0 ? 'checked' : ''}>権限なし</label>
+							<label><input type="radio" name="authority1" value="1" ${ia.authority1 eq 1 ? 'checked' : ''}>権限あり</label>
 						</div>
 				</div>
 
 				<div class="form-group">
 					<label class="col-sm-3 control-label">アカウント登録権限 <span class="badge">必須</span></label>
 						<div class="col-sm-5">
-							<label><input type="radio" name="authority2" value="0" ${param.authority2 eq 0 ? 'checked' : ''}>権限なし</label>
-							<label><input type="radio" name="authority2" value="1" ${param.authority2 eq 1 ? 'checked' : ''}>権限あり</label>
+							<label><input type="radio" name="authority2" value="0" ${ia.authority2 eq 0 ? 'checked' : ''}>権限なし</label>
+							<label><input type="radio" name="authority2" value="1" ${ia.authority2 eq 1 ? 'checked' : ''}>権限あり</label>
 						</div>
 				</div>
 

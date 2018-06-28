@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.abc.asms.beans.InsertAccounts;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.Utils;
@@ -34,6 +35,19 @@ public class S0030Servlet extends HttpServlet {
 		if(!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
 			return;
 		}
+
+		HttpSession session = req.getSession();
+
+		InsertAccounts ia = (InsertAccounts)session.getAttribute("ia");
+
+		if(ia != null) {
+			session.setAttribute("ia", ia);
+			getServletContext().getRequestDispatcher("/WEB-INF/s0030.jsp")
+				.forward(req, resp);
+			return;
+		}
+
+		session.setAttribute("ia", null);
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0030.jsp")
 			.forward(req, resp);
@@ -55,6 +69,9 @@ public class S0030Servlet extends HttpServlet {
 		String password2 = req.getParameter("password2");
 		String authority1 = req.getParameter("authority1");
 		String authority2 = req.getParameter("authority2");
+
+		InsertAccounts ia = new InsertAccounts(name,mail,password1,password2,authority1,authority2);
+		session.setAttribute("ia", ia);
 
 		//バリデーションチェック(メールアドレス重複チェック以外)
 		List<String> errors = validate(accountId, name, mail,
@@ -104,8 +121,7 @@ public class S0030Servlet extends HttpServlet {
 			}
 		}
 
-		getServletContext().getRequestDispatcher("/WEB-INF/s0031.jsp")
-			.forward(req, resp);
+		resp.sendRedirect("S0031.html");
 
 	}
 
