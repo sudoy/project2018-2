@@ -36,6 +36,9 @@ public class S0024Servlet extends HttpServlet {
 		if (!AuthorityUtils.checkSalesAuthority(req, resp)) {
 			return;
 		}
+		
+		resp.sendRedirect("S0020.html");
+		
 	}
 
 	@Override
