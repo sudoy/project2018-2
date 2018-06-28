@@ -50,32 +50,32 @@
 			<h1>アカウントを登録してよろしいですか？</h1>
 
 			<form class="form-horizontal" action="S0031.html" method="post">
-
+				<input type="hidden" name="name" value="${param.name}">
 				<div class="form-group">
 		 			<label class="col-sm-3 control-label">氏名 <span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
-						<input type="text" class="form-control" name="name"  value="${param.name}" readonly>
+						<input type="text" class="form-control" name="name"  value="${param.name}" disabled>
 					</div>
 				</div>
-
+				<input type="hidden" name="mail" value="${param.mail}">
 				<div class="form-group">
 		 			<label class="col-sm-3 control-label">メールアドレス <span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
-						<input type="text" class="form-control" name="mail" value="${param.mail}" readonly>
+						<input type="text" class="form-control" name="mail" value="${param.mail}" disabled>
 					</div>
 				</div>
-
+				<input type="hidden" name="password1" value="${param.password1}">
 				<div class="form-group">
 		 			<label class="col-sm-3 control-label">パスワード<span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
-						<input type="password" class="form-control" name="password1" value="${param.password1}" readonly>
+						<input type="password" class="form-control" name="password1" value="${param.password1}" disabled>
 					</div>
 				</div>
-
+				<input type="hidden" name="password2" value="${param.password2}">
 				<div class="form-group">
 		 			<label class="col-sm-3 control-label">パスワード（確認）<span class="badge">必須</span></label>
 		 			<div class="col-sm-5">
-						<input type="password" class="form-control" name="password2" value="${param.password2}" readonly>
+						<input type="password" class="form-control" name="password2" value="${param.password2}" disabled>
 					</div>
 				</div>
 

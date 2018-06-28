@@ -56,12 +56,13 @@
 		<form class="form-horizontal"
 			action="S0043.html?account_id=${param.account_id != null ? param.account_id : accounts.account_id}"
 			method="post">
+			<input type="hidden" name="name" value="${param.name}">
 			<div class="form-group">
 				<label for="name" class="col-sm-3 control-label">氏名 <span
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="name" name="name"
-						value="${HtmlUtils.formName(param.name)}" readonly>
+						value="${HtmlUtils.formName(param.name)}" disabled>
 				</div>
 			</div>
 
@@ -96,10 +97,10 @@
 					class="badge">必須</span></label>
 				<div class="radio">
 					<label><input type="radio" name="authority1" value="0"
-						${param.authority1 eq '0' ? 'checked' : ''} readonly
+						${param.authority1 eq '0' ? 'checked' : ''}
 						onclick="return false;">権限なし</label> <label><input
 						type="radio" name="authority1" value="1"
-						${param.authority1 eq '1' ? 'checked' : ''} readonly
+						${param.authority1 eq '1' ? 'checked' : ''}
 						onclick="return false;">権限あり</label>
 				</div>
 			</div>
@@ -109,10 +110,10 @@
 					class="badge">必須</span></label>
 				<div class="radio">
 					<label><input type="radio" name="authority2" value="0"
-						${param.authority2 eq '0' ? 'checked' : ''} readonly
+						${param.authority2 eq '0' ? 'checked' : ''}
 						onclick="return false;">権限なし</label> <label><input
 						type="radio" name="authority2" value="1"
-						${param.authority2 eq '10' ? 'checked' : ''} readonly
+						${param.authority2 eq '10' ? 'checked' : ''}
 						onclick="return false;">権限あり</label>
 				</div>
 			</div>
