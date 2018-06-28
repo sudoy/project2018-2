@@ -102,11 +102,13 @@ public class C0010Servlet extends HttpServlet {
 		if(!email.equals("") && email.contains("@")) {
 			String pattern = "^[a-zA-Z0-9]*$";
 			Pattern p = Pattern.compile(pattern);
-			String[] split = email.split("@", 0);
+			String[] split = email.split("@", -1);
 			String firstCharacter = email.substring(0, 1);
 			if(!p.matcher(firstCharacter).find()){
 				errors.add("メールアドレスを正しく入力して下さい。");
 			}else if(!split[0].matches("^[a-zA-Z0-9._-]*$") || split[0].length() == 1) {
+				errors.add("メールアドレスを正しく入力して下さい。");
+			}else if(!split[0].matches("^[a-zA-Z0-9._-]*$") || split[0].length() == 0) {
 				errors.add("メールアドレスを正しく入力して下さい。");
 			}else if(!split[1].matches("^[a-zA-Z0-9._-]*$") ||split[0].length() == 0) {
 				errors.add("メールアドレスを正しく入力して下さい。");
