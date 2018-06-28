@@ -68,6 +68,7 @@
 				<label for="person" class="col-sm-2 control-label">担当</label>
 				<div class="col-sm-5">
 					<select class="form-control" name="account_id" disabled>
+							<option value="" ></option>
 						<c:forEach var="aName" items="${list2}">
 							<option value="${aName.accountId}" ${aName.accountId eq s25.accountId ? 'selected' : '' }>${HtmlUtils.formName(aName.name)}</option>
 						</c:forEach>
