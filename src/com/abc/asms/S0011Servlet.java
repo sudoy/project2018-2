@@ -52,8 +52,7 @@ public class S0011Servlet extends HttpServlet {
 		String saleNumber = req.getParameter("saleNumber");
 		String note = req.getParameter("note");
 
-		String insert = req.getParameter("insert");
-		if(insert == null) {
+		if(req.getParameter("cancel") != null) {
 			//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
 			DBUtils.getCategoriesAndAccounts(req, resp);
 
@@ -61,95 +60,99 @@ public class S0011Servlet extends HttpServlet {
 				.forward(req, resp);
 		}
 
-		//ログインチェック
-		if (!Utils.checkLogin(req, resp)) {
-			return;
-		}
+		else if(req.getParameter("insert") != null) {
+			//ログインチェック
+			if (!Utils.checkLogin(req, resp)) {
+				return;
+			}
 
-		//権限チェック
-		if(!AuthorityUtils.checkSalesAuthority(req, resp)) {
-			return;
-		}
+			//権限チェック
+			if(!AuthorityUtils.checkSalesAuthority(req, resp)) {
+				return;
+			}
 
-		HttpSession session = req.getSession();
+			HttpSession session = req.getSession();
 
-		//クロスサイトスクリプティング対策
-		if(tradeName.contains("<") || tradeName.contains(">") || tradeName.contains("&")) {
-			tradeName = tradeName.replaceAll("<", "&lt;");
-			tradeName = tradeName.replaceAll(">", "&gt;");
-			tradeName = tradeName.replaceAll("&", "&amp;");
-		}
+			//クロスサイトスクリプティング対策
+			if(tradeName.contains("<") || tradeName.contains(">") || tradeName.contains("&")) {
+				tradeName = tradeName.replaceAll("<", "&lt;");
+				tradeName = tradeName.replaceAll(">", "&gt;");
+				tradeName = tradeName.replaceAll("&", "&amp;");
+			}
 
-		if(note.contains("<") || note.contains(">") || note.contains("&")) {
-			note = note.replaceAll("<", "&lt;");
-			note = note.replaceAll(">", "&gt;");
-			note = note.replaceAll("&", "&amp;");
-		}
+			if(note.contains("<") || note.contains(">") || note.contains("&")) {
+				note = note.replaceAll("<", "&lt;");
+				note = note.replaceAll(">", "&gt;");
+				note = note.replaceAll("&", "&amp;");
+			}
 
-		Connection con = null;
-		PreparedStatement ps = null;
-		String sql = null;
-		ResultSet rs = null;
+			Connection con = null;
+			PreparedStatement ps = null;
+			String sql = null;
+			ResultSet rs = null;
 
-		int id = 0;
+			int id = 0;
 
-		try {
-			con = DBUtils.getConnection();
+			try {
+				con = DBUtils.getConnection();
 
-			sql = "INSERT INTO sales(sale_date, account_id, category_id, trade_name, unit_price, sale_number, note)"
-					+ "values(?,?,?,?,?,?,?);";
+				sql = "INSERT INTO sales(sale_date, account_id, category_id, trade_name, unit_price, sale_number, note)"
+						+ "values(?,?,?,?,?,?,?);";
 
-			//INSERT命令の準備
-			ps = con.prepareStatement(sql);
+				//INSERT命令の準備
+				ps = con.prepareStatement(sql);
 
-			//INSERT命令にポストデータの内容をセット
-			ps.setString(1, saleDate);
-			ps.setString(2, accountId);
-			ps.setString(3, categoryId);
-			ps.setString(4, tradeName);
-			ps.setString(5, unitPrice);
-			ps.setString(6, saleNumber);
-			ps.setString(7, note);
+				//INSERT命令にポストデータの内容をセット
+				ps.setString(1, saleDate);
+				ps.setString(2, accountId);
+				ps.setString(3, categoryId);
+				ps.setString(4, tradeName);
+				ps.setString(5, unitPrice);
+				ps.setString(6, saleNumber);
+				ps.setString(7, note);
 
-			ps.executeUpdate();
+				ps.executeUpdate();
 
-			try{
-				DBUtils.close(ps);
+				try{
+					DBUtils.close(ps);
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+
+				//insertされた後のidをselect文で取り出す
+				sql = "SELECT LAST_INSERT_ID() as id FROM sales";
+
+				ps = con.prepareStatement(sql);
+
+				rs = ps.executeQuery();
+
+				if(rs.next()) {
+					//sqlからidを取り出す
+					id = rs.getInt("id");
+
+					//成功メッセージ（遷移先で出る）
+					List<String> successes = new ArrayList<>();
+					successes.add("No" + id + "の売上を登録しました。");
+					session.setAttribute("successes", successes);
+				}
+
 			}catch(Exception e){
 				e.printStackTrace();
+				throw new ServletException(e);
+			}finally{
+				try{
+					DBUtils.close(rs);
+					DBUtils.close(ps);
+					DBUtils.close(con);
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 			}
 
-			//insertされた後のidをselect文で取り出す
-			sql = "SELECT LAST_INSERT_ID() as id FROM sales";
-
-			ps = con.prepareStatement(sql);
-
-			rs = ps.executeQuery();
-
-			if(rs.next()) {
-				//sqlからidを取り出す
-				id = rs.getInt("id");
-
-				//成功メッセージ（遷移先で出る）
-				List<String> successes = new ArrayList<>();
-				successes.add("No" + id + "の売上を登録しました。");
-				session.setAttribute("successes", successes);
-			}
-
-		}catch(Exception e){
-			e.printStackTrace();
-			throw new ServletException(e);
-		}finally{
-			try{
-				DBUtils.close(rs);
-				DBUtils.close(ps);
-				DBUtils.close(con);
-			}catch(Exception e){
-				e.printStackTrace();
-			}
+			//登録処理後、登録画面に遷移
+			resp.sendRedirect("S0010.html");
 		}
-
-		//登録処理後、登録画面に遷移
-		resp.sendRedirect("S0010.html");
 	}
+
+
 }

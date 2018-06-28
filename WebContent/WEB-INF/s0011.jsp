@@ -125,7 +125,7 @@
 				<div class="form-group">
 					<div class="col-sm-offset-4">
 						<button type="submit" name="insert" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
-						<button type="submit" class="btn btn-default">キャンセル</button>
+						<button type="submit" name="cancel" class="btn btn-default">キャンセル</button>
 					</div>
 				</div>
 			</form>
