@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.Detail_beans;
+import com.abc.asms.beans.SearchKeepSale;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.Utils;
@@ -25,6 +26,9 @@ public class S0025Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+
+		req.setCharacterEncoding("UTF-8");
+
 		//ログインチェック
 		if (!Utils.checkLogin(req, resp)) {
 			return;
@@ -36,6 +40,15 @@ public class S0025Servlet extends HttpServlet {
 		}
 
 		String id = req.getParameter("id");
+
+		HttpSession session = req.getSession();
+		SearchKeepSale ss = (SearchKeepSale)session.getAttribute("ss");
+		req.setAttribute("ss", ss);
+
+		if(ss == null) {
+			resp.sendRedirect("S0020.html");
+			return;
+		}
 
 		Connection con = null;
 		PreparedStatement ps = null;

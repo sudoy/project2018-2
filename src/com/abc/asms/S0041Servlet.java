@@ -31,6 +31,15 @@ public class S0041Servlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
+
+		SearchKeepAccount sa = (SearchKeepAccount) session.getAttribute("sa");
+		req.setAttribute("sa", sa);
+
+		if(sa == null) {
+			resp.sendRedirect("S0040.html");
+			return;
+		}
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -41,7 +50,6 @@ public class S0041Servlet extends HttpServlet {
 			//SQL
 			sql = "select account_id,name,mail,password,authority from accounts where 0 = 0 ";
 
-			SearchKeepAccount sa = (SearchKeepAccount) session.getAttribute("sa");
 			req.setAttribute("sa", sa);
 
 			//氏名検索

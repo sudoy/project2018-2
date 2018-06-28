@@ -31,6 +31,15 @@ public class S0021Servlet extends HttpServlet {
 		}
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
+
+		SearchKeepSale ss = (SearchKeepSale)session.getAttribute("ss");
+		req.setAttribute("ss", ss);
+
+		if(ss == null) {
+			resp.sendRedirect("S0020.html");
+			return;
+		}
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -39,7 +48,7 @@ public class S0021Servlet extends HttpServlet {
 
 		try{
 			con = DBUtils.getConnection();
-			SearchKeepSale ss = (SearchKeepSale)session.getAttribute("ss");
+
 			req.setAttribute("ss", ss);
 
 			//SQL
