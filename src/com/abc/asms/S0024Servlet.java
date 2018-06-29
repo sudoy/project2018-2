@@ -68,8 +68,6 @@ public class S0024Servlet extends HttpServlet {
 			ResultSet rs = null;
 			String sql;
 
-			String id = req.getParameter("id");
-
 			String saleDate = req.getParameter("sale_date");
 			String accountId = req.getParameter("account_id");
 			String categoryId = req.getParameter("category_id");
@@ -86,8 +84,6 @@ public class S0024Servlet extends HttpServlet {
 				DBUtils.getCategoriesAndAccounts(req, resp);
 
 				session.setAttribute("errors", errors);
-
-				CancelBeans data = (CancelBeans) session.getAttribute("data");
 
 				session.setAttribute("data",null);
 
@@ -114,8 +110,6 @@ public class S0024Servlet extends HttpServlet {
 				if (!rs.next()) {
 					errors.add("アカウントテーブルに存在しません。");
 					session.setAttribute("errors", errors);
-
-					CancelBeans data = (CancelBeans) session.getAttribute("data");
 
 					session.setAttribute("data",null);
 					getServletContext().getRequestDispatcher("/WEB-INF/s0023.jsp")
@@ -152,9 +146,7 @@ public class S0024Servlet extends HttpServlet {
 					errors.add("商品カテゴリーテーブルに存在しません。");
 					session.setAttribute("errors", errors);
 
-					CancelBeans data = (CancelBeans) session.getAttribute("data");
 
-					session.setAttribute("data",null);
 					getServletContext().getRequestDispatcher("/WEB-INF/s0023.jsp")
 							.forward(req, resp);
 					return;
