@@ -199,22 +199,22 @@ public class C0020Servlet extends HttpServlet {
 			}
 
 			//6/22 ログインユーザーの合計が正しく出るように作成したSQL
-			sql = "select SUM(unit_price * sale_number)as summary from sales"
-					+" where sale_date between ? and ? and account_id = ?";
-
-			ps = con.prepareStatement(sql);
-
-			ps.setString(1, first.toString());
-			ps.setString(2, last.toString());
-			ps.setString(3, strAccountId);
-
-			rs = ps.executeQuery();
-
-			if(rs.next()) {
-				int thisSum = rs.getInt("summary");
-
-				req.setAttribute("thisSum", thisSum);
-			}
+//			sql = "select SUM(unit_price * sale_number)as summary from sales"
+//					+" where sale_date between ? and ? and account_id = ?";
+//
+//			ps = con.prepareStatement(sql);
+//
+//			ps.setString(1, first.toString());
+//			ps.setString(2, last.toString());
+//			ps.setString(3, strAccountId);
+//
+//			rs = ps.executeQuery();
+//
+//			if(rs.next()) {
+//				int thisSum = rs.getInt("summary");
+//
+//				req.setAttribute("thisSum", thisSum);
+//			}
 
 			try{
 				DBUtils.close(rs);
