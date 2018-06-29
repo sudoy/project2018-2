@@ -38,15 +38,7 @@ public class S0030Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 
-		InsertAccounts ia = (InsertAccounts)session.getAttribute("ia");
-
-		if(ia != null) {
-			session.setAttribute("ia", ia);
-			getServletContext().getRequestDispatcher("/WEB-INF/s0030.jsp")
-				.forward(req, resp);
-			return;
-		}
-
+		//セッションをnullにする
 		session.setAttribute("ia", null);
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0030.jsp")
@@ -61,6 +53,16 @@ public class S0030Servlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		HttpSession session = req.getSession();
+
+		//キャンセル時の入力保持
+		if(req.getParameter("cancel") != null) {
+			InsertAccounts ia = (InsertAccounts)session.getAttribute("ia");
+			session.setAttribute("ia", ia);
+
+			getServletContext().getRequestDispatcher("/WEB-INF/s0030.jsp")
+				.forward(req, resp);
+			return;
+		}
 
 		String accountId = req.getParameter("accountId");
 		String name = req.getParameter("name");
@@ -81,6 +83,9 @@ public class S0030Servlet extends HttpServlet {
 			session.setAttribute("errors", errors);
 			getServletContext().getRequestDispatcher("/WEB-INF/s0030.jsp")
 				.forward(req, resp);
+
+			session.setAttribute("ia", null);
+
 			return;
 		}
 

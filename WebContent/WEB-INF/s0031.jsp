@@ -95,14 +95,18 @@
 						</div>
 				</div>
 
-				<div class="form-group">
-					<div class="col-sm-offset-4">
-						<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
-						<a href="S0030.html" class="btn btn-default">キャンセル</a>
-					</div>
+				<div class="col-sm-4 text-right">
+					<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
 				</div>
 
 			</form>
+
+			<form action="S0030.html" method="POST">
+				<div class="col-sm-4 text-left">
+					<button type="submit" name="cancel" class="btn btn-default">キャンセル</button>
+				</div>
+			</form>
+
 		</div>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
