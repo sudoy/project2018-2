@@ -69,7 +69,7 @@
 			</div>
 
 			<div class="form-group">
-				<label for="person" class="col-sm-2 control-label">担当 <span
+				<label class="col-sm-2 control-label">担当 <span
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<select class="form-control" name="account_id">
@@ -83,13 +83,12 @@
 			</div>
 
 			<div class="form-group">
-				<label for="category" class="col-sm-2 control-label">商品カテゴリー
+				<label class="col-sm-2 control-label">商品カテゴリー
 					<span class="badge">必須</span>
 				</label>
 				<div class="col-sm-5">
 					<c:forEach var="type" items="${list1}">
-						<label class="radio-inline"> <input type="radio"
-							name="category_id" value="${type.categoryId}"
+						<label > <input type="radio" name="category_id" value="${type.categoryId}"
 							${data.categoryId != null? data.categoryId eq type.categoryId ? 'checked' : '' : param.category_id != null? param.category_id eq type.categoryId ? 'checked': '' :type.categoryId.equals(s23.categoryId) ? 'checked' : '' }>${HtmlUtils.formName(type.categoryName)}
 						</label>
 					</c:forEach>

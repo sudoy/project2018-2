@@ -57,7 +57,7 @@
 			method="post">
 			<input type="hidden" name="sale_date" value="${param.sale_date}">
 			<div class="form-group">
-				<label for="salesDate" class="col-sm-2 control-label">販売日</label>
+				<label class="col-sm-2 control-label">販売日</label>
 
 				<div class="col-sm-2">
 					<input type="text" class="form-control" name="sale_date" value="${param.sale_date}" disabled>
@@ -66,7 +66,7 @@
 
 			<input type="hidden" name="account_id" value="${param.account_id}">
 			<div class="form-group">
-				<label for="person" class="col-sm-2 control-label">担当</label>
+				<label class="col-sm-2 control-label">担当</label>
 				<div class="col-sm-5">
 					<select class="form-control" name="account_id" disabled>
 						<option value="0">選択してください</option>
@@ -79,10 +79,10 @@
 
 			<input type="hidden" name="category_id" value="${param.category_id}">
 			<div class="form-group">
-				<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
+				<label class="col-sm-2 control-label">商品カテゴリー</label>
 				<div class="col-sm-5">
 					<c:forEach var="type" items="${list1}">
-						<label class="radio-inline">
+						<label>
 							<input type="radio" name="category_id" value="${type.categoryId}" ${param.category_id eq type.categoryId ? 'checked' : ' '  } disabled>${HtmlUtils.formName(type.categoryName)}
 						</label>
 					</c:forEach>
@@ -91,7 +91,7 @@
 
 			<input type="hidden" name="trade_name" value="${param.trade_name}">
 			<div class="form-group">
-				<label for="name" class="col-sm-2 control-label">商品名</label>
+				<label class="col-sm-2 control-label">商品名</label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" name="trade_name" value="${HtmlUtils.formName(param.trade_name)}" disabled>
 				</div>
@@ -100,7 +100,7 @@
 			<input type="hidden" name="unit_price" value="${param.unit_price}">
 			<div class="form-group">
 
-				<label for="price" name="unit_price" class="col-sm-2 control-label">単価</label>
+				<label class="col-sm-2 control-label">単価</label>
 
 				<div class="col-sm-2">
 					<input type="text" class="form-control text-right" name="unit_price" value="${HtmlUtils.formatComma(param.unit_price)}" disabled>
@@ -109,7 +109,7 @@
 
 			<input type="hidden" name="sale_number" value="${param.sale_number}">
 			<div class="form-group">
-				<label for="number" class="col-sm-2 control-label">個数</label>
+				<label class="col-sm-2 control-label">個数</label>
 				<div class="col-sm-2">
 					<input type="text" class="form-control text-right" name="sale_number" value="${HtmlUtils.formatComma(param.sale_number)}" disabled>
 				</div>
@@ -117,7 +117,7 @@
 
 			<input type="hidden" name="sum" value="${param.sum}">
 			<div class="form-group">
-				<label for="number" class="col-sm-2 control-label">小計（税込）</label>
+				<label class="col-sm-2 control-label">小計（税込）</label>
 				<div class="col-sm-2">
 					<input type="text" class="form-control text-right" name="sum" value="${HtmlUtils.formatComma(HtmlUtils.taxPrice1(param.unit_price, param.sale_number, param.sale_date))}" disabled>
 				</div>
@@ -127,7 +127,7 @@
 			<input type="hidden" name="note"
 				value="${param.note != null? param.note : null}">
 			<div class="form-group">
-				<label for="note" class="col-sm-2 control-label">備考</label>
+				<label class="col-sm-2 control-label">備考</label>
 				<div class="col-sm-5">
 					<textarea placeholder="備考" class="form-control" name="note" rows="5" disabled>${param.note != null? HtmlUtils.formName(param.note) : null}</textarea>
 				</div>
