@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,6 +38,14 @@ public class S0023Servlet extends HttpServlet {
 		//権限チェック
 		if(!AuthorityUtils.checkSalesAuthority(req, resp)) {
 			return;
+		}
+
+		if(req.getParameter("account_id") == null) {
+			List<String> errors = new ArrayList<>();
+			errors.add("不正なアクセスです。");
+			session.setAttribute("errors", errors);
+			resp.sendRedirect("S0020.html");
+			return ;
 		}
 
 		CancelBeans data = (CancelBeans) session.getAttribute("data");
