@@ -99,7 +99,7 @@
 						</div>
 				</div>
 
-				<div class="col-sm-4 text-right">
+				<div class="col-sm-5 text-right">
 					<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
 				</div>
 
