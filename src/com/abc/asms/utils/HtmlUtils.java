@@ -102,10 +102,6 @@ public class HtmlUtils {
 		java.util.Date d1 = dateTimeFormat.parse(d);
 		double sum;
 		double tax;
-		
-		System.out.println(price1);
-		System.out.println(number1);
-
 
 		// ~2019/9/30だったら税率8%
 		if(d1.before(date1)) {
@@ -117,16 +113,16 @@ public class HtmlUtils {
 			tax = 0;
 		}
 
-		
+
 		sum = price1 * number1 * tax;
 		Math.floor(sum);
 		return (long) sum;
 
 	}
-	
+
 	public static double Truncation(double value) {
 		return Math.floor(value);
-		
+
 	}
 
 }
