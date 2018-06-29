@@ -40,18 +40,17 @@ public class S0023Servlet extends HttpServlet {
 			return;
 		}
 
-		if(req.getParameter("account_id") == null) {
+		CancelBeans data = (CancelBeans) session.getAttribute("data");
+
+		session.setAttribute("data", data);
+
+		if(req.getParameter("id") == null) {
 			List<String> errors = new ArrayList<>();
 			errors.add("不正なアクセスです。");
 			session.setAttribute("errors", errors);
 			resp.sendRedirect("S0020.html");
 			return ;
 		}
-
-		CancelBeans data = (CancelBeans) session.getAttribute("data");
-
-		session.setAttribute("data", data);
-
 
 		//アカウントとカテゴリーの情報取得
 		DBUtils.getCategoriesAndAccounts(req, resp);
@@ -74,8 +73,6 @@ public class S0023Servlet extends HttpServlet {
 		if(!AuthorityUtils.checkSalesAuthority(req, resp)) {
 			return;
 		}
-
-//		HttpSession session = req.getSession();
 
 		req.setCharacterEncoding("utf-8");
 
