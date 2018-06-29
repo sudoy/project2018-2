@@ -99,14 +99,14 @@
 						</div>
 				</div>
 
-				<div class="col-sm-5 text-right">
+				<div class="col-sm-5 text-right" style="padding-right: 3px;">
 					<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
 				</div>
 
 			</form>
 
 			<form action="S0030.html" method="POST">
-				<div class="col-sm-4 text-left">
+				<div class="col-sm-4 text-left" style="padding-left: 3px;">
 					<button type="submit" name="cancel" class="btn btn-default">キャンセル</button>
 				</div>
 			</form>
