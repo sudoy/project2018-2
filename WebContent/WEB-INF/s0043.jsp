@@ -57,6 +57,7 @@
 			action="S0043.html?account_id=${ea.accountId != null ? ea.accountId : accounts.accountId}"
 			method="post">
 
+			<input type="hidden" name="name" value="${HtmlUtils.formName(ea.name)}">
 			<div class="form-group">
 				<label class="col-sm-3 control-label">氏名 <span
 					class="badge">必須</span></label>
@@ -66,6 +67,7 @@
 				</div>
 			</div>
 
+			<input type="hidden" name="mail" value="${HtmlUtils.formName(ea.mail)}">
 			<div class="form-group">
 				<label class="col-sm-3 control-label">メールアドレス <span
 					class="badge">必須</span></label>
@@ -75,6 +77,7 @@
 				</div>
 			</div>
 
+			<input type="hidden" name="password" value="${HtmlUtils.formName(ea.password)}">
 			<div class="form-group">
 				<label class="col-sm-3 control-label">パスワード</label>
 				<div class="col-sm-5">
@@ -83,7 +86,8 @@
 				</div>
 
 			</div>
-
+			
+			<input type="hidden" name="password" value="${HtmlUtils.formName(ea.password)}">
 			<div class="form-group">
 				<label class="col-sm-3 control-label">パスワード（確認）</label>
 				<div class="col-sm-5">
