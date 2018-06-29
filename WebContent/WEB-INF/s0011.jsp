@@ -127,7 +127,7 @@
 						<button type="submit" name="insert" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
 					</div>
 					</form>
-					<form action="S0010.html" method="GET">
+					<form action="S0010.html" method="POST">
 						<button type="submit" name="cancel" class="btn btn-default">キャンセル</button>
 					</form>
 				</div>

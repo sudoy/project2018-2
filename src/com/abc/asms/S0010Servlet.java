@@ -50,16 +50,6 @@ public class S0010Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 
-		InsertSales is = (InsertSales)session.getAttribute("is");
-
-		//キャンセル時の入力保持
-		if(is != null && req.getParameter("cancel") != null) {
-			session.setAttribute("is", is);
-			getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
-				.forward(req, resp);
-			return;
-		}
-
 		//セッションをnullにする
 		session.setAttribute("is", null);
 
@@ -74,6 +64,19 @@ public class S0010Servlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		HttpSession session = req.getSession();
+
+		//キャンセル時の入力保持
+		if(req.getParameter("cancel") != null) {
+			//CategoriesテーブルとAccountsテーブルのデータをbeansに変換してjspに渡す
+			DBUtils.getCategoriesAndAccounts(req, resp);
+
+			InsertSales is = (InsertSales)session.getAttribute("is");
+			session.setAttribute("is", is);
+
+			getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
+				.forward(req, resp);
+			return;
+		}
 
 		String saleDate = req.getParameter("saleDate");
 		String accountId = req.getParameter("accountId");
