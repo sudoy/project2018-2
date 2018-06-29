@@ -68,7 +68,7 @@
 				<label for="person" class="col-sm-2 control-label">担当</label>
 				<div class="col-sm-5">
 					<select class="form-control" name="account_id" disabled>
-							<option value="" ></option>
+							<option value="" >選択してください</option>
 						<c:forEach var="aName" items="${list2}">
 							<option value="${aName.accountId}" ${aName.accountId eq s25.accountId ? 'selected' : '' }>${HtmlUtils.formName(aName.name)}</option>
 						</c:forEach>
@@ -77,16 +77,16 @@
 			</div>
 
 			<div class="form-group">
-				<label for="category" class="col-sm-2 control-label">商品カテゴリー</label>
+				<label  class="col-sm-2 control-label">商品カテゴリー</label>
 				<div class="col-sm-5">
 					<c:forEach var="type" items="${list1}">
-						<label class="radio-inline"><input type="radio"	name="categoryType" value="${typeCategoryId}" ${s25.categoryId eq type.categoryId ? 'checked' : ' '} disabled>${HtmlUtils.formName(type.categoryName)}</label>
+						<label><input type="radio"	name="categoryType" value="${typeCategoryId}" ${s25.categoryId eq type.categoryId ? 'checked' : ' '} disabled>${HtmlUtils.formName(type.categoryName)}</label>
 					</c:forEach>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="name" class="col-sm-2 control-label">商品名</label>
+				<label class="col-sm-2 control-label">商品名</label>
 				<div class="col-sm-2">
 					<input type="text" class="form-control" name="name" value="${HtmlUtils.formName(s25.tradeName)}" disabled>
 				</div>
@@ -94,7 +94,7 @@
 
 			<div class="form-group">
 
-				<label for="price" class="col-sm-2 control-label">単価</label>
+				<label class="col-sm-2 control-label">単価</label>
 
 				<div class="col-sm-2">
 					<input type="text" class="form-control text-right" name="price"	value="${HtmlUtils.formatComma(s25.unitPrice)}" disabled>
@@ -102,14 +102,14 @@
 			</div>
 
 			<div class="form-group">
-				<label for="number" class="col-sm-2 control-label">個数</label>
+				<label  class="col-sm-2 control-label">個数</label>
 				<div class="col-sm-2">
 					<input type="text" class="form-control text-right" name="number" value="${HtmlUtils.formatComma(s25.saleNumber)}" disabled>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="number" class="col-sm-2 control-label">小計（税込）</label>
+				<label class="col-sm-2 control-label">小計（税込）</label>
 				<div class="col-sm-2">
 					<input type="text" class="form-control text-right" name="number" value="${HtmlUtils.formatComma(HtmlUtils.taxPrice(s25.unitPrice, s25.saleNumber, s25.saleDate))}" disabled>
 				</div>
@@ -117,7 +117,7 @@
 
 
 			<div class="form-group">
-				<label for="note" class="col-sm-2 control-label">備考</label>
+				<label  class="col-sm-2 control-label">備考</label>
 				<div class="col-sm-5">
 					<textarea placeholder="備考" class="form-control" name="note" rows="5" disabled>${HtmlUtils.formName(s25.note)}</textarea>
 				</div>
