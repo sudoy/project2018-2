@@ -64,7 +64,7 @@
 
 				<div class="col-sm-2">
 					<input type="text" class="form-control" name="sale_date"
-						id="salesDate" placeholder="販売日" value="${data.saleDate != null? data.saleDate : HtmlUtils.formDate(s23.saleDate)}">
+						id="salesDate" placeholder="販売日" value="${data.saleDate != null? data.saleDate : param.sale_date != null? param.sale_date : HtmlUtils.formDate(s23.saleDate)}">
 				</div>
 			</div>
 
@@ -76,7 +76,7 @@
 						<option value="0">選択してください</option>
 						<c:forEach var="aName" items="${list2}">
 							<option value="${aName.accountId}"
-								${data.accountId != null? data.accountId eq aName.accountId ? 'selected' : '' : aName.accountId.equals(s23.accountId) ? 'selected' : '' }>${HtmlUtils.formName(aName.name)}</option>
+								${data.accountId != null? data.accountId eq aName.accountId ? 'selected' : '' : param.account_id != null? param.account_id eq aName.accountId? 'selected': '' : aName.accountId.equals(s23.accountId) ? 'selected' : '' }>${HtmlUtils.formName(aName.name)}</option>
 						</c:forEach>
 					</select>
 				</div>
@@ -90,7 +90,7 @@
 					<c:forEach var="type" items="${list1}">
 						<label class="radio-inline"> <input type="radio"
 							name="category_id" value="${type.categoryId}"
-							${data.categoryId != null? data.categoryId eq type.categoryId ? 'checked' : '' : type.categoryId.equals(s23.categoryId) ? 'checked' : '' }>${HtmlUtils.formName(type.categoryName)}
+							${data.categoryId != null? data.categoryId eq type.categoryId ? 'checked' : '' : param.category_id != null? param.category_id eq type.categoryId ? 'checked': '' :type.categoryId.equals(s23.categoryId) ? 'checked' : '' }>${HtmlUtils.formName(type.categoryName)}
 						</label>
 					</c:forEach>
 				</div>
@@ -101,7 +101,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" name="trade_name" id="name"
-						placeholder="商品名" value="${data.tradeName != null? HtmlUtils.formName(data.tradeName) : HtmlUtils.formName(s23.tradeName)}">
+						placeholder="商品名" value="${data.tradeName != null? HtmlUtils.formName(data.tradeName) : param.trade_name != null? param.trade_name : HtmlUtils.formName(s23.tradeName)}">
 				</div>
 			</div>
 
@@ -112,7 +112,7 @@
 
 				<div class="col-sm-2">
 					<input type="text" class="form-control text-right"
-						 placeholder="単価" name="unit_price" id="price" value="${data.unitPrice != null? data.unitPrice : s23.unitPrice}">
+						 placeholder="単価" name="unit_price" id="price" value="${data.unitPrice != null? data.unitPrice : param.unit_price != null? param.unit_price : s23.unitPrice}">
 				</div>
 			</div>
 
@@ -121,14 +121,14 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-2">
 					<input type="text" class="form-control text-right"
-						placeholder="個数" name="sale_number" id="number" value="${data.saleNumber != null? data.saleNumber : s23.saleNumber}">
+						placeholder="個数" name="sale_number" id="number" value="${data.saleNumber != null? data.saleNumber : param.sale_number != null? param.sale_number : s23.saleNumber}">
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label for="note" class="col-sm-2 control-label">備考 </label>
 				<div class="col-sm-5">
-					<textarea placeholder="備考" class="form-control" name="note" id="note" rows="5">${data.note != null? HtmlUtils.formName(data.note) : HtmlUtils.formName(s23.note)}</textarea>
+					<textarea placeholder="備考" class="form-control" name="note" id="note" rows="5">${data.note != null? HtmlUtils.formName(data.note) : param.note != null? param.note : HtmlUtils.formName(s23.note)}</textarea>
 				</div>
 			</div>
 
@@ -138,7 +138,7 @@
 						<span class="glyphicon glyphicon-ok" aria-hidden="true"> 更
 							新</span>
 					</button>
-					<a href="S0022.html?id=${data.saleId != null? data.saleId : s23.saleId}" class="btn btn-default">キャンセル</a>
+					<a href="S0022.html?id=${data.saleId != null? data.saleId : param.id != null? param.id : s23.saleId}" class="btn btn-default">キャンセル</a>
 				</div>
 			</div>
 
