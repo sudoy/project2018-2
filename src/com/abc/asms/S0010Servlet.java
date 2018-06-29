@@ -52,13 +52,15 @@ public class S0010Servlet extends HttpServlet {
 
 		InsertSales is = (InsertSales)session.getAttribute("is");
 
-		if(is != null) {
+		//キャンセル時の入力保持
+		if(is != null && req.getParameter("cancel") != null) {
 			session.setAttribute("is", is);
 			getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
 				.forward(req, resp);
 			return;
 		}
 
+		//セッションをnullにする
 		session.setAttribute("is", null);
 
 		getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
@@ -95,6 +97,9 @@ public class S0010Servlet extends HttpServlet {
 			session.setAttribute("errors", errors);
 			getServletContext().getRequestDispatcher("/WEB-INF/s0010.jsp")
 				.forward(req, resp);
+
+			session.setAttribute("is", null);
+
 			return;
 		}
 
