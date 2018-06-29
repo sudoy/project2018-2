@@ -25,6 +25,7 @@ public class C0030Servlet extends HttpServlet {
 		session.setAttribute("ss", null);
 		session.setAttribute("sa", null);
 		session.setAttribute("ia", null);
+		session.setAttribute("ea", null);
 
 		//ログアウトメッセージ
 		List<String> successes = new ArrayList<>();
