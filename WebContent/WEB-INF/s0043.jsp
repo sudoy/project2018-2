@@ -2,7 +2,7 @@
 <%@page pageEncoding="UTF-8"%>
 <%@ page import="com.abc.asms.utils.AuthorityUtils"%>
 <%@ page import="com.abc.asms.utils.HtmlUtils" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -36,9 +36,13 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
-					<li><a href="S0010.html">売上登録</a></li>
-					<li><a href="S0020.html">売上検索</a></li>
-					<li><a href="S0030.html">アカウント登録</a></li>
+					<c:if test="${accounts.authority == '1' || accounts.authority == '11'}">
+						<li><a href="S0010.html">売上登録</a></li>
+						</c:if>
+						<li><a href="S0020.html">売上検索</a></li>
+						<c:if test="${accounts.authority == '10' || accounts.authority == '11'}">
+						<li><a href="S0030.html">アカウント登録</a></li>
+						</c:if>
 					<li class="active"><a href="S0040.html">アカウント検索</a></li>
 
 				</ul>
@@ -86,7 +90,7 @@
 				</div>
 
 			</div>
-			
+
 			<input type="hidden" name="password" value="${HtmlUtils.formName(ea.password)}">
 			<div class="form-group">
 				<label class="col-sm-3 control-label">パスワード（確認）</label>

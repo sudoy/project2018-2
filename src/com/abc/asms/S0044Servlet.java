@@ -63,8 +63,8 @@ public class S0044Servlet extends HttpServlet {
 			String password = rs.getString("password");
 			int authority = rs.getInt("authority");
 
-			Accounts accounts = new Accounts(accountId, name, mail, password, authority);
-			req.setAttribute("accounts", accounts);
+			Accounts account = new Accounts(accountId, name, mail, password, authority);
+			req.setAttribute("account", account);
 
 			//JSPへフォワード
 			getServletContext().getRequestDispatcher("/WEB-INF/s0044.jsp")

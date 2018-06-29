@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.abc.asms.utils.AuthorityUtils"%>
 <%@ page import="com.abc.asms.utils.HtmlUtils" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -36,9 +36,13 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
-					<li><a href="S0010.html">売上登録</a></li>
-					<li><a href="S0020.html">売上検索</a></li>
-					<li><a href="S0030.html">アカウント登録</a></li>
+					<c:if test="${accounts.authority == '1' || accounts.authority == '11'}">
+						<li><a href="S0010.html">売上登録</a></li>
+						</c:if>
+						<li><a href="S0020.html">売上検索</a></li>
+						<c:if test="${accounts.authority == '10' || accounts.authority == '11'}">
+						<li><a href="S0030.html">アカウント登録</a></li>
+						</c:if>
 					<li class="active"><a href="S0040.html">アカウント検索</a></li>
 
 				</ul>
@@ -55,7 +59,7 @@
 		<h1>アカウントを削除してよろしいですか？</h1>
 
 		<form class="form-horizontal"
-			action="S0044.html?account_id=${param.account_id != null ? param.account_id : accounts.account_id}"
+			action="S0044.html?account_id=${param.account_id != null ? param.account_id : account.account_id}"
 			method="post">
 
 			<div class="form-group">
@@ -63,7 +67,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="name" name="name"
-						value="${HtmlUtils.formName(accounts.name)}" disabled>
+						value="${HtmlUtils.formName(account.name)}" disabled>
 				</div>
 			</div>
 
@@ -72,7 +76,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="mailadress" name="mail"
-						value="${HtmlUtils.formName(accounts.mail)}" disabled>
+						value="${HtmlUtils.formName(account.mail)}" disabled>
 				</div>
 			</div>
 
@@ -98,9 +102,9 @@
 					class="badge">必須</span></label>
 				<div class="radio">
 					<label><input type="radio" name="authority" value="0"
-						${AuthorityUtils.checkAuthority1(accounts.authority)} disabled>権限なし</label>
+						${AuthorityUtils.checkAuthority1(account.authority)} disabled>権限なし</label>
 					<label><input type="radio" name="authority" value="1"
-						${AuthorityUtils.checkAuthority2(accounts.authority)} disabled>権限あり</label>
+						${AuthorityUtils.checkAuthority2(account.authority)} disabled>権限あり</label>
 				</div>
 			</div>
 
@@ -109,9 +113,9 @@
 					class="badge">必須</span></label>
 				<div class="radio">
 					<label><input type="radio" name="authority1" value="0"
-						${AuthorityUtils.checkAuthority3(accounts.authority)} disabled>権限なし</label>
+						${AuthorityUtils.checkAuthority3(account.authority)} disabled>権限なし</label>
 					<label><input type="radio" name="authority1" value="10"
-						${AuthorityUtils.checkAuthority4(accounts.authority)} disabled>権限あり</label>
+						${AuthorityUtils.checkAuthority4(account.authority)} disabled>権限あり</label>
 				</div>
 			</div>
 
