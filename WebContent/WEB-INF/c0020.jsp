@@ -162,7 +162,7 @@
 								<td style="text-align: right">${HtmlUtils.formatComma(c0020.saleNumber)}</td>
 								<td style="text-align: right">${HtmlUtils.formatComma(HtmlUtils.taxPrice(c0020.unitPrice, c0020.saleNumber, c0020.saleDate))}</td>
 
-								<c:set var="total" value="${total + HtmlUtils.taxPrice(c0020.unitPrice, c0020.saleNumber, c0020.saleDate)}"/>
+								<c:set var="total" value="${total + HtmlUtils.Truncation(HtmlUtils.taxPrice(c0020.unitPrice, c0020.saleNumber, c0020.saleDate))}"/>
 							</tr>
 						</c:forEach>
 

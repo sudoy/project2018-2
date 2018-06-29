@@ -19,7 +19,7 @@ public class HtmlUtils {
 	}
 
 	//カンマ区切りのメソッド
-	public static String formatComma(int value) {
+	public static String formatComma(long value) {
 		return String.format("%,d", value);
 	}
 
@@ -70,7 +70,7 @@ public class HtmlUtils {
 	}
 
 
-	public static double taxPrice(int price, int number, Date d) throws ParseException {
+	public static long taxPrice(long price, long number, Date d) throws ParseException {
 		DateFormat dateTimeFormat = new SimpleDateFormat("yyyy/M/d");
 		java.util.Date date1 = dateTimeFormat.parse("2019/10/1");
 		java.util.Date date2 = dateTimeFormat.parse("2019/9/30");
@@ -88,19 +88,24 @@ public class HtmlUtils {
 		}
 
 		sum = price * number * tax;
-		return sum;
+		Math.floor(sum);
+		return (long) sum;
 
 	}
 
-	public static double taxPrice1(String price, String number, String d) throws ParseException {
-		int price1 = Integer.parseInt(price);
-		int number1 = Integer.parseInt(number);
+	public static long taxPrice1(String price, String number, String d) throws ParseException {
+		long price1 = Long.parseLong(price);
+		long number1 = Long.parseLong(number);
 		DateFormat dateTimeFormat = new SimpleDateFormat("yyyy/M/d");
 		java.util.Date date1 = dateTimeFormat.parse("2019/10/1");
 		java.util.Date date2 = dateTimeFormat.parse("2019/9/30");
 		java.util.Date d1 = dateTimeFormat.parse(d);
 		double sum;
 		double tax;
+		
+		System.out.println(price1);
+		System.out.println(number1);
+
 
 		// ~2019/9/30だったら税率8%
 		if(d1.before(date1)) {
@@ -112,9 +117,16 @@ public class HtmlUtils {
 			tax = 0;
 		}
 
+		
 		sum = price1 * number1 * tax;
-		return sum;
+		Math.floor(sum);
+		return (long) sum;
 
+	}
+	
+	public static double Truncation(double value) {
+		return Math.floor(value);
+		
 	}
 
 }
