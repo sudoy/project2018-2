@@ -56,7 +56,7 @@
 		 		<div class="form-group">
 			 		<label for="saleDate" class="col-sm-2 control-label">販売日</label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" name="saleDate" id="saleDate" value="${is.saleDate}" readonly>
+						<input type="text" class="form-control" name="saleDate" id="saleDate" value="${is.saleDate}" >
 					</div>
 				</div>
 

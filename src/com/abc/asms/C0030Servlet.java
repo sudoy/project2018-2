@@ -2,7 +2,6 @@ package com.abc.asms;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,27 +19,22 @@ public class C0030Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 
-		Enumeration<String> e = session.getAttributeNames();
-		String key = null;
-		while (e.hasMoreElements()) {
-			key = (String) e.nextElement();
-			System.out.println(key);
-			if (key.contains("accounts")) {
-				session.setAttribute("accounts", null);
-				
-				//ログアウトメッセージ
-				List<String> successes = new ArrayList<>();
-				successes.add("ログアウトしました。");
-				session.setAttribute("successes", successes);
-				
-				// リダイレクト
-				resp.sendRedirect("C0010.html");
-				return;
-			}
-		}
 
-		getServletContext().getRequestDispatcher("/WEB-INF/c0010.jsp")
-				.forward(req, resp);
+		session.setAttribute("accounts", null);
+		session.setAttribute("is", null);
+		session.setAttribute("ss", null);
+		session.setAttribute("sa", null);
+		session.setAttribute("ia", null);
+
+		//ログアウトメッセージ
+		List<String> successes = new ArrayList<>();
+		successes.add("ログアウトしました。");
+		session.setAttribute("successes", successes);
+
+		// リダイレクト
+		resp.sendRedirect("C0010.html");
+		return;
+
 
 	}
 }
