@@ -56,7 +56,7 @@
 		 		<div class="form-group">
 			 		<label for="saleDate" class="col-sm-2 control-label">販売日</label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" name="saleDate" id="saleDate" value="${is.saleDate}" >
+						<input type="text" class="form-control" name="saleDate" id="saleDate" value="${is.saleDate}" disabled>
 					</div>
 				</div>
 
@@ -77,7 +77,7 @@
 		 			<label for="categoryId" class="col-sm-2 control-label">商品カテゴリー</label>
 		 			<div class="col-sm-5">
 		 				<c:forEach var="category" items="${list1}">
-							<label class="radio-inline"><input type="radio"  name="categoryId" value="${categoryId}" ${category.categoryId eq is.categoryId ? 'checked' : ''} disabled>${HtmlUtils.formName(category.categoryName)}</label>
+							<label><input type="radio"  name="categoryId" value="${categoryId}" ${category.categoryId eq is.categoryId ? 'checked' : ''} disabled>${HtmlUtils.formName(category.categoryName)}</label>
 						</c:forEach>
 					</div>
 				</div>
