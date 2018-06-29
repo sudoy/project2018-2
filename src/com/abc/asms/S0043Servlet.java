@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.abc.asms.beans.EditAccounts;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.Utils;
@@ -29,12 +30,25 @@ public class S0043Servlet extends HttpServlet {
 		}
 
 		//権限チェック
-		if(!AuthorityUtils.checkSalesAuthority(req, resp)) {
+		if (!AuthorityUtils.checkAccountEditAuthority(req, resp)) {
 			return;
 		}
 
-		req.getServletContext().getRequestDispatcher("/WEB-INF/s0040.jsp")
-		.forward(req, resp);
+		HttpSession session = req.getSession();
+
+		if(req.getParameter("account_id") == null) {
+			List<String> errors = new ArrayList<>();
+			errors.add("不正なアクセスです。");
+			session.setAttribute("errors", errors);
+			resp.sendRedirect("S0040.html");
+			return ;
+		}
+
+		EditAccounts ea = (EditAccounts) session.getAttribute("ea");
+		session.setAttribute("ea", ea);
+
+		req.getServletContext().getRequestDispatcher("/WEB-INF/s0043.jsp")
+			.forward(req, resp);
 	}
 
 	@Override
@@ -120,7 +134,6 @@ public class S0043Servlet extends HttpServlet {
 			List<String> successes = new ArrayList<>();
 			successes.add("No" + accountId + "のアカウントを更新しました。");
 			session.setAttribute("successes", successes);
-			resp.sendRedirect("S0041.html");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -133,5 +146,7 @@ public class S0043Servlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+
+		resp.sendRedirect("S0041.html");
 	}
 }

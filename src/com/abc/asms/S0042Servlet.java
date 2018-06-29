@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.Accounts;
+import com.abc.asms.beans.EditAccounts;
 import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.Utils;
@@ -40,6 +41,8 @@ public class S0042Servlet extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 
 		HttpSession session = req.getSession();
+
+		session.setAttribute("ea", null);
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -65,11 +68,9 @@ public class S0042Servlet extends HttpServlet {
 				List<String> errors = new ArrayList<>();
 				errors.add("不正なアクセスです。");
 				session.setAttribute("errors", errors);
-				resp.sendRedirect("C0020.html");
+				resp.sendRedirect("S0040.html");
 				return ;
 			}
-
-
 
 			int accountId = rs.getInt("account_id");
 			String name = rs.getString("name");
@@ -99,10 +100,6 @@ public class S0042Servlet extends HttpServlet {
 			Accounts accountsList = new Accounts(accountId, name, mail, password, authority);
 			req.setAttribute("accountsList", accountsList);
 
-			//JSPへフォワード
-			getServletContext().getRequestDispatcher("/WEB-INF/s0042.jsp")
-					.forward(req, resp);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServletException(e);
@@ -116,6 +113,11 @@ public class S0042Servlet extends HttpServlet {
 
 			}
 		}
+
+		//JSPへフォワード
+		getServletContext().getRequestDispatcher("/WEB-INF/s0042.jsp")
+				.forward(req, resp);
+
 	}
 
 	@Override
@@ -132,6 +134,7 @@ public class S0042Servlet extends HttpServlet {
 		}
 
 		req.setCharacterEncoding("utf-8");
+
 		HttpSession session = req.getSession();
 
 		String accountId = req.getParameter("account_id");
@@ -141,16 +144,9 @@ public class S0042Servlet extends HttpServlet {
 		String passwordc = req.getParameter("passwordc");
 		String authority1 = req.getParameter("authority1");
 		String authority2 = req.getParameter("authority2");
-		String authority = authority2 + authority1;
 
-		req.setAttribute("account_id", accountId);
-		req.setAttribute("name", name);
-		req.setAttribute("mail", mail);
-		req.setAttribute("password", password);
-		req.setAttribute("passwordc", passwordc);
-		req.setAttribute("authority1", authority1);
-		req.setAttribute("authority2", authority2);
-		req.setAttribute("authority", authority);
+		EditAccounts ea = new EditAccounts(accountId,name,mail,password,passwordc,authority1,authority2);
+		session.setAttribute("ea", ea);
 
 		//バリデーションチェック
 		List<String> errors = validate(accountId, name, mail, password, passwordc, authority1, authority2);
@@ -203,8 +199,7 @@ public class S0042Servlet extends HttpServlet {
 
 		}
 
-		getServletContext().getRequestDispatcher("/WEB-INF/s0043.jsp")
-				.forward(req, resp);
+		resp.sendRedirect("S0043.html?account_id=" + accountId);
 	}
 
 	private List<String> validate(String accountId, String name, String mail, String password, String passwordc,

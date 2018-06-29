@@ -54,66 +54,66 @@
 
 		<h1>アカウントを編集してよろしいですか？</h1>
 		<form class="form-horizontal"
-			action="S0043.html?account_id=${param.account_id != null ? param.account_id : accounts.account_id}"
+			action="S0043.html?account_id=${ea.accountId != null ? ea.accountId : accounts.accountId}"
 			method="post">
-			<input type="hidden" name="name" value="${param.name}">
+
 			<div class="form-group">
-				<label for="name" class="col-sm-3 control-label">氏名 <span
+				<label class="col-sm-3 control-label">氏名 <span
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="name" name="name"
-						value="${HtmlUtils.formName(param.name)}" disabled>
+						value="${HtmlUtils.formName(ea.name)}" readonly>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="name" class="col-sm-3 control-label">メールアドレス <span
+				<label class="col-sm-3 control-label">メールアドレス <span
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="mailadress" name="mail"
-						value="${HtmlUtils.formName(param.mail)}" readonly>
+						value="${HtmlUtils.formName(ea.mail)}" readonly>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="name" class="col-sm-3 control-label">パスワード</label>
+				<label class="col-sm-3 control-label">パスワード</label>
 				<div class="col-sm-5">
 					<input type="password" class="form-control" placeholder="パスワード" name="password"
-						id="pass1" value="${HtmlUtils.formName(param.password)}" readonly>
+						id="pass1" value="${HtmlUtils.formName(ea.password)}" readonly>
 				</div>
 
 			</div>
 
 			<div class="form-group">
-				<label for="name" class="col-sm-3 control-label">パスワード（確認）</label>
+				<label class="col-sm-3 control-label">パスワード（確認）</label>
 				<div class="col-sm-5">
 					<input type="password" class="form-control"  placeholder="パスワード（確認）" name="password"
-						id="pass2" value="${HtmlUtils.formName(param.password)}" readonly>
+						id="pass2" value="${HtmlUtils.formName(ea.password)}" readonly>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="name" class="col-sm-3 control-label">売上登録権限 <span
+				<label class="col-sm-3 control-label">売上登録権限 <span
 					class="badge">必須</span></label>
 				<div class="radio">
 					<label><input type="radio" name="authority1" value="0"
-						${param.authority1 eq '0' ? 'checked' : ''}
+						${ea.authority1 eq '0' ? 'checked' : ''}
 						onclick="return false;">権限なし</label> <label><input
 						type="radio" name="authority1" value="1"
-						${param.authority1 eq '1' ? 'checked' : ''}
+						${ea.authority1 eq '1' ? 'checked' : ''}
 						onclick="return false;">権限あり</label>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="name" class="col-sm-3 control-label">アカウント登録権限 <span
+				<label class="col-sm-3 control-label">アカウント登録権限 <span
 					class="badge">必須</span></label>
 				<div class="radio">
 					<label><input type="radio" name="authority2" value="0"
-						${param.authority2 eq '0' ? 'checked' : ''}
+						${ea.authority2 eq '0' ? 'checked' : ''}
 						onclick="return false;">権限なし</label> <label><input
 						type="radio" name="authority2" value="1"
-						${param.authority2 eq '10' ? 'checked' : ''}
+						${ea.authority2 eq '10' ? 'checked' : ''}
 						onclick="return false;">権限あり</label>
 				</div>
 			</div>
@@ -123,7 +123,7 @@
 					<button type="submit" class="btn btn-primary">
 						<span class="glyphicon glyphicon-ok" aria-hidden="true"> O K</span>
 					</button>
-					<a href="S0041.html" class="btn btn-default">キャンセル</a>
+					<a href="S0042.html?account_id=${ea.accountId != null ? ea.accountId : accounts.accountId}" class="btn btn-default">キャンセル</a>
 
 				</div>
 			</div>

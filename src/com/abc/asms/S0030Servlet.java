@@ -137,9 +137,9 @@ public class S0030Servlet extends HttpServlet {
 		}
 
 		//氏名長さチェック
-//		if (name.length() >= 21){
-//			errors.add("氏名が長すぎます。");
-//		}
+		if (name.length() >= 21){
+			errors.add("氏名が長すぎます。");
+		}
 
 		//メールアドレス必須チェック
 		//1-1
