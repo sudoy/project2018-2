@@ -128,7 +128,7 @@
 				<table>
 					<tr>
 						<th style="padding-right: 80px;">備考</th>
-						<td style="word-break: break-all; width: 100px;">${HtmlUtils.formName(s22.note)}</td>
+						<td>${HtmlUtils.formNewLine(HtmlUtils.formName(s22.note))}</td>
 					</tr>
 				</table>
 

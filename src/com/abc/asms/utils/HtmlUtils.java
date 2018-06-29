@@ -125,4 +125,11 @@ public class HtmlUtils {
 
 	}
 
+	public static String formNewLine(String note) {
+		if(note.contains("\n")) {
+			note = note.replaceAll("\n", "<br>");
+		}
+		return note;
+	}
+
 }
