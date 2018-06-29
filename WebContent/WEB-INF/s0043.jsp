@@ -62,7 +62,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="name" name="name"
-						value="${HtmlUtils.formName(ea.name)}" readonly>
+						value="${HtmlUtils.formName(ea.name)}" disabled>
 				</div>
 			</div>
 
@@ -71,7 +71,7 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="mailadress" name="mail"
-						value="${HtmlUtils.formName(ea.mail)}" readonly>
+						value="${HtmlUtils.formName(ea.mail)}" disabled>
 				</div>
 			</div>
 
@@ -79,7 +79,7 @@
 				<label class="col-sm-3 control-label">パスワード</label>
 				<div class="col-sm-5">
 					<input type="password" class="form-control" placeholder="パスワード" name="password"
-						id="pass1" value="${HtmlUtils.formName(ea.password)}" readonly>
+						id="pass1" value="${HtmlUtils.formName(ea.password)}" disabled>
 				</div>
 
 			</div>
@@ -88,7 +88,7 @@
 				<label class="col-sm-3 control-label">パスワード（確認）</label>
 				<div class="col-sm-5">
 					<input type="password" class="form-control"  placeholder="パスワード（確認）" name="password"
-						id="pass2" value="${HtmlUtils.formName(ea.password)}" readonly>
+						id="pass2" value="${HtmlUtils.formName(ea.password)}" disabled>
 				</div>
 			</div>
 
