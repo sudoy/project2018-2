@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.S0022;
 import com.abc.asms.utils.DBUtils;
@@ -27,6 +28,8 @@ public class S0022Servlet extends HttpServlet {
 		if (!Utils.checkLogin(req, resp)) {
 			return;
 		}
+
+		HttpSession session = req.getSession();
 
 		req.setCharacterEncoding("utf-8");
 
@@ -76,6 +79,8 @@ public class S0022Servlet extends HttpServlet {
 
 			//設定
 			req.setAttribute("s22", s22);
+
+			session.setAttribute("data",null);
 
 			req.getServletContext().getRequestDispatcher("/WEB-INF/s0022.jsp").forward(req, resp);
 

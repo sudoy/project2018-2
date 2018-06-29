@@ -61,8 +61,8 @@
 
 				<table>
 					<tr>
-						<th style = "padding-right: 65px;">販売日</th>
-						<td>${HtmlUtils.formDate(s22.saleDate)}</td>
+						<th style="padding-right: 65px;">販売日</th>
+						<td style="padding-left: 40px;">${HtmlUtils.formDate(s22.saleDate)}</td>
 					</tr>
 				</table>
 
@@ -70,8 +70,8 @@
 
 				<table>
 					<tr>
-						<th style = "padding-right: 80px;">担当</th>
-						<td>${HtmlUtils.formName(s22.name)}</td>
+						<th style="padding-right: 80px;">担当</th>
+						<td style="padding-left: 40px;">${HtmlUtils.formName(s22.name)}</td>
 					</tr>
 				</table>
 
@@ -79,8 +79,8 @@
 
 				<table>
 					<tr>
-						<th style = "padding-right: 10px;">商品カテゴリー</th>
-						<td>${HtmlUtils.formName(s22.categoryName)}</td>
+						<th style="padding-right: 10px;">商品カテゴリー</th>
+						<td style="padding-left: 40px;">${HtmlUtils.formName(s22.categoryName)}</td>
 					</tr>
 				</table>
 
@@ -88,8 +88,8 @@
 
 				<table>
 					<tr>
-						<th style = "padding-right: 65px;">商品名</th>
-						<td>${HtmlUtils.formName(s22.tradeName)}</td>
+						<th style="padding-right: 65px;">商品名</th>
+						<td style="padding-left: 40px;">${HtmlUtils.formName(s22.tradeName)}</td>
 					</tr>
 				</table>
 
@@ -97,8 +97,9 @@
 
 				<table>
 					<tr>
-						<th style = "padding-right: 1px;">単価</th>
-						<td class= "text-right" style = "width: 127px;padding-left: 50px;padding-right: 5px;">${HtmlUtils.formatComma(s22.unitPrice)}</td>
+						<th style="padding-right: 60px;">単価</th>
+						<td class="text-right"
+							style="width: 127px; padding-left: 50px; padding-right: 5px;">${HtmlUtils.formatComma(s22.unitPrice)}</td>
 					</tr>
 				</table>
 
@@ -106,8 +107,9 @@
 
 				<table>
 					<tr>
-						<th style = "padding-right: 1px;">個数</th>
-						<td class= "text-right" style = "width: 127px;padding-left: 50px;padding-right: 5px;">${HtmlUtils.formatComma(s22.saleNumber)}</td>
+						<th style="padding-right: 60px;">個数</th>
+						<td class="text-right"
+							style="width: 127px; padding-left: 50px; padding-right: 5px;">${HtmlUtils.formatComma(s22.saleNumber)}</td>
 					</tr>
 				</table>
 
@@ -115,8 +117,9 @@
 
 				<table>
 					<tr>
-						<th style = "padding-right: 1px;">小計（税込）</th>
-						<td class= "text-right" style = "width: 127px;padding-left: 50px;padding-right: 5px;">${HtmlUtils.formatComma(HtmlUtils.taxPrice(s22.unitPrice, s22.saleNumber, s22.saleDate))}</td>
+						<th style="padding-right: 1px;">小計（税込）</th>
+						<td class="text-right"
+							style="width: 127px; padding-left: 50px; padding-right: 5px;">${HtmlUtils.formatComma(HtmlUtils.taxPrice(s22.unitPrice, s22.saleNumber, s22.saleDate))}</td>
 					</tr>
 				</table>
 
@@ -124,8 +127,8 @@
 
 				<table>
 					<tr>
-						<th style ="padding-right: 80px;">備考</th>
-						<td>${HtmlUtils.formName(s22.note)}</td>
+						<th style="padding-right: 80px;">備考</th>
+						<td style="word-break: break-all; width: 100px;">${HtmlUtils.formName(s22.note)}</td>
 					</tr>
 				</table>
 
@@ -133,9 +136,14 @@
 
 			<div class="col-sm-offset-3">
 
-				<c:if test="${accounts.authority == '1' || accounts.authority == '11'}">
-					<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"> 編 集</span></button>
-					<a href="S0025.html?id=${s22.saleId}" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true">削 除</span></a>
+				<c:if
+					test="${accounts.authority == '1' || accounts.authority == '11'}">
+					<button type="submit" class="btn btn-primary">
+						<span class="glyphicon glyphicon-ok" aria-hidden="true"> 編
+							集</span>
+					</button>
+					<a href="S0025.html?id=${s22.saleId}" class="btn btn-danger"><span
+						class="glyphicon glyphicon-remove" aria-hidden="true">削 除</span></a>
 				</c:if>
 
 				<a href="S0021.html" class="btn btn-default">キャンセル</a>

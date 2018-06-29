@@ -146,7 +146,7 @@ public class S0024Servlet extends HttpServlet {
 					errors.add("商品カテゴリーテーブルに存在しません。");
 					session.setAttribute("errors", errors);
 
-
+					session.setAttribute("data",null);
 					getServletContext().getRequestDispatcher("/WEB-INF/s0023.jsp")
 							.forward(req, resp);
 					return;
