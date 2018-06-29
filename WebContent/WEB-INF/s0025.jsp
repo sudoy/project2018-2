@@ -56,7 +56,7 @@
 		<form class="form-horizontal" action="S0025.html?id=${s25.saleId}"
 			method="post">
 			<div class="form-group">
-				<label for="salesDate" class="col-sm-2 control-label">販売日</label>
+				<label class="col-sm-2 control-label">販売日</label>
 
 				<div class="col-sm-2">
 					<input type="text" class="form-control" name="sale_date"
@@ -65,7 +65,7 @@
 			</div>
 
 			<div class="form-group">
-				<label for="person" class="col-sm-2 control-label">担当</label>
+				<label class="col-sm-2 control-label">担当</label>
 				<div class="col-sm-5">
 					<select class="form-control" name="account_id" disabled>
 							<option value="" >選択してください</option>

@@ -91,7 +91,7 @@ public class S0023Servlet extends HttpServlet {
 			sql = "select sale_id, sale_date, name,"
 					+" category_id, a.account_id,"
 					+" trade_name, unit_price,sale_number, unit_price * sale_number as sum,"
-					+" note from sales s JOIN accounts a ON s.account_id = a.account_id"
+					+" note from sales s LEFT JOIN accounts a ON s.account_id = a.account_id"
 					+" where sale_id = ?";
 
 			ps = con.prepareStatement(sql);
