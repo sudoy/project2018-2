@@ -131,7 +131,7 @@
 			<div class="form-group">
 				<div class="col-sm-offset-4">
 					<button type="submit" class="btn btn-danger"><span
-						class="glyphicon glyphicon-remove" aria-hidden="true"> O K</span></button>
+						class="glyphicon glyphicon-remove" aria-hidden="true"> 削 除</span></button>
 					<a href="S0022.html?id=${s25.saleId}" class="btn btn-default">キャンセル</a>
 				</div>
 			</div>

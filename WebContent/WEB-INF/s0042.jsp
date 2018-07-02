@@ -104,7 +104,7 @@
 				<label for="name" class="col-sm-3 control-label">売上登録権限 <span
 					class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority1" value="0"
+					<label style="padding-left: 35px;"><input type="radio" name="authority1" value="0"
 						${AuthorityUtils.checkAuthority1(ea.authority1 != null ? ea.authority1 : accountsList.authority)}>権限なし</label>
 					<label><input type="radio" name="authority1" value="1"
 						${AuthorityUtils.checkAuthority2(ea.authority1 != null ? ea.authority1 : accountsList.authority)}>権限あり</label>
@@ -115,7 +115,7 @@
 				<label for="name" class="col-sm-3 control-label">アカウント登録権限 <span
 					class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority2" value="0"
+					<label style="padding-left: 35px;"><input type="radio" name="authority2" value="0"
 						${AuthorityUtils.checkAuthority3(ea.authority2 != null ? ea.authority2 : accountsList.authority)}>権限なし</label>
 					<label><input type="radio" name="authority2" value="10"
 						${AuthorityUtils.checkAuthority4(ea.authority2 != null ? ea.authority2 : accountsList.authority)}>権限あり</label>

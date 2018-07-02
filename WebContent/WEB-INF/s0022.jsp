@@ -132,7 +132,7 @@
 				<table>
 					<tr>
 						<th style="padding-right: 80px;">備考</th>
-						<td>${HtmlUtils.formNewLine(HtmlUtils.formName(s22.note))}</td>
+						<td style="padding-left: 35px;">${HtmlUtils.formNewLine(HtmlUtils.formName(s22.note))}</td>
 					</tr>
 				</table>
 
