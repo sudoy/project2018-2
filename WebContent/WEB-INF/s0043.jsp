@@ -104,7 +104,7 @@
 				<label class="col-sm-3 control-label">売上登録権限 <span
 					class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority1" value="0"
+					<label style="padding-left: 35px;"><input type="radio" name="authority1" value="0"
 						${ea.authority1 eq '0' ? 'checked' : ''}
 						onclick="return false;">権限なし</label> <label><input
 						type="radio" name="authority1" value="1"
@@ -117,7 +117,7 @@
 				<label class="col-sm-3 control-label">アカウント登録権限 <span
 					class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority2" value="0"
+					<label style="padding-left: 35px;"><input type="radio" name="authority2" value="0"
 						${ea.authority2 eq '0' ? 'checked' : ''}
 						onclick="return false;">権限なし</label> <label><input
 						type="radio" name="authority2" value="1"
