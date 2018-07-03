@@ -55,7 +55,7 @@
 				<input type="text" class="form-control" name="sale_date1" id="salesspanStart" placeholder="販売日(検索開始日)"  value="${ss.saleDate1 != null ? ss.saleDate1 : today}" >
 			</div>
 
-			<div class="col-sm-1">
+			<div class="col-xs-1" align="center">
 				<h5>～</h5>
 			</div>
 
