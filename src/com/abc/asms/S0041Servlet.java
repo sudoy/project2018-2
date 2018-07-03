@@ -32,6 +32,8 @@ public class S0041Servlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 
+		session.setAttribute("ea", null);
+
 		SearchKeepAccount sa = (SearchKeepAccount) session.getAttribute("sa");
 		req.setAttribute("sa", sa);
 

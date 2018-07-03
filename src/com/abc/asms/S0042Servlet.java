@@ -42,8 +42,6 @@ public class S0042Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 
-		session.setAttribute("ea", null);
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;

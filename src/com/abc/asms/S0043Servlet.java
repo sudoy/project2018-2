@@ -128,6 +128,8 @@ public class S0043Servlet extends HttpServlet {
 			}
 		}
 
+		session.setAttribute("ea", null);
+
 		resp.sendRedirect("S0041.html");
 	}
 }
