@@ -101,10 +101,10 @@
 				<label for="name" class="col-sm-3 control-label">売上登録権限 <span
 					class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority" value="0"
-						${AuthorityUtils.checkAuthority1(account.authority)} disabled>権限なし</label>
+					<label style="padding-left: 35px;"><input type="radio" name="authority" value="0"
+						${AuthorityUtils.checkAuthority1(account.authority)} onclick="return false;">権限なし</label>
 					<label><input type="radio" name="authority" value="1"
-						${AuthorityUtils.checkAuthority2(account.authority)} disabled>権限あり</label>
+						${AuthorityUtils.checkAuthority2(account.authority)} onclick="return false;">権限あり</label>
 				</div>
 			</div>
 
@@ -112,10 +112,10 @@
 				<label for="name" class="col-sm-3 control-label">アカウント登録権限 <span
 					class="badge">必須</span></label>
 				<div class="radio">
-					<label><input type="radio" name="authority1" value="0"
-						${AuthorityUtils.checkAuthority3(account.authority)} disabled>権限なし</label>
+					<label style="padding-left: 35px;"><input type="radio" name="authority1" value="0"
+						${AuthorityUtils.checkAuthority3(account.authority)} onclick="return false;">権限なし</label>
 					<label><input type="radio" name="authority1" value="10"
-						${AuthorityUtils.checkAuthority4(account.authority)} disabled>権限あり</label>
+						${AuthorityUtils.checkAuthority4(account.authority)} onclick="return false;">権限あり</label>
 				</div>
 			</div>
 
