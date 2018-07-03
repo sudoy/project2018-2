@@ -60,34 +60,30 @@
 			<div class="row">
 				<h1 class="text-center">ダッシュボード</h1>
 
-				<div class="col-xs-2" style="padding-right: 0px;">
-					<nav class="float-left">
-						<ul class="pagination">
-							<li class="page-item">
-								<a class="page-link" href="C0020.html?before=${today}"><span class="oi oi-chevron-left"></span><span class="oi oi-chevron-left"></span> 前年</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="C0020.html?back=${today}"><span class="oi oi-chevron-left"></span> 前月</a>
-							</li>
-						</ul>
-					</nav>
+				<div class="col-xs-4">
+					<ul class="pagination">
+						<li class="page-item">
+							<a class="page-link" href="C0020.html?before=${today}"><span class="oi oi-chevron-left"></span><span class="oi oi-chevron-left"></span> 前年</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="C0020.html?back=${today}"><span class="oi oi-chevron-left"></span> 前月</a>
+						</li>
+					</ul>
 				</div>
 
-				<div class="col-xs-8 text-center">
+				<div class="col-xs-4 text-center">
 					<h2>${today}</h2>
 				</div>
 
-				<div class="col-xs-2" style="padding-left: 0px;">
-					<nav class="float-right">
-						<ul class="pagination">
-							<li class="page-item">
-								<a class="page-link" href="C0020.html?next=${today}">翌月 <span class="oi oi-chevron-right"></span></a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="C0020.html?after=${today}">翌年 <span class="oi oi-chevron-right"></span><span class="oi oi-chevron-right"></span></a>
-							</li>
-						</ul>
-					</nav>
+				<div class="col-xs-4 text-right">
+					<ul class="pagination">
+						<li class="page-item">
+							<a class="page-link" href="C0020.html?next=${today}">翌月 <span class="oi oi-chevron-right"></span></a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="C0020.html?after=${today}">翌年 <span class="oi oi-chevron-right"></span><span class="oi oi-chevron-right"></span></a>
+						</li>
+					</ul>
 				</div>
 
 				<div class="col-sm-4">
