@@ -117,8 +117,8 @@ public class S0045Servlet extends HttpServlet {
 				mimeMessage.setRecipient(Message.RecipientType.TO, toAddress);
 				mimeMessage.setFrom(fromAddress);
 				mimeMessage.setSubject("【物品売上管理システム】パスワード再設定", "ISO-2022-JP");
-				mimeMessage.setText("パスワードの再設定を行います。"
-						+ "以下のURLより新パスワードの入力・変更を行って下さい。"
+				mimeMessage.setText("パスワードの再設定を行います。\r\n"
+						+ "以下のURLより新パスワードの入力・変更を行って下さい。\r\n"
 						+ "http://localhost:8080/project2/S0046.html?user=" + mail, "ISO-2022-JP");
 
 				Transport.send(mimeMessage);
