@@ -91,7 +91,7 @@
 
 			<div class="form-group">
 				<label class="col-sm-2 control-label">商品名</label>
-				<div class="col-sm-2">
+				<div class="col-sm-5">
 					<input type="text" class="form-control" name="name" value="${HtmlUtils.formName(s25.tradeName)}" disabled>
 				</div>
 			</div>

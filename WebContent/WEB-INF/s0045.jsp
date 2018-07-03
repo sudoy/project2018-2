@@ -23,11 +23,12 @@
 <body>
 
 	<div class="container">
-
-		<form class="form-signin" action="S0045.html" method="post">
-			<h2 class="form-signin-heading">物品売上管理システム</h2>
+		<div class="container" style="width:600px">
 			<jsp:include page="_successes.jsp" />
 			<jsp:include page="_errors.jsp" />
+		</div>
+		<form class="form-signin" action="S0045.html" method="post">
+			<h2 class="form-signin-heading">物品売上管理システム</h2>
 			<h3 class="form-signin-heading">パスワード再設定</h3>
 			<label for="inputEmail" class="sr-only"></label>
 
