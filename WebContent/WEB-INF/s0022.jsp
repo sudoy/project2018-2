@@ -147,7 +147,7 @@
 							集</span>
 					</button>
 					<a href="S0025.html?id=${s22.saleId}" class="btn btn-danger"><span
-						class="glyphicon glyphicon-remove" aria-hidden="true">削 除</span></a>
+						class="glyphicon glyphicon-remove" aria-hidden="true"> 削 除</span></a>
 				</c:if>
 
 				<a href="S0021.html" class="btn btn-default">キャンセル</a>
