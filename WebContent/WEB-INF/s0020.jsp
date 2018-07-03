@@ -37,7 +37,7 @@
 				<li><a href="S0040.html">アカウント検索</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">${accounts.name} 様</a></li>
+				<li><a href="#">${accounts.name}</a></li>
 				<li><a href="C0030.html">ログアウト</a></li>
 			</ul>
 		</div>
