@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
 public class HtmlUtils {
 	//区切りのメソッド
 	public static String formatDate(LocalDate saleDate) {
@@ -24,19 +23,19 @@ public class HtmlUtils {
 	}
 
 	public static String selectCategory(String param, String value) {
-		if(param.equals(value)) {
+		if (param.equals(value)) {
 			return "selected";
-		}else {
+		} else {
 			return "";
 		}
 	}
 
 	public static boolean checkCategory(String[] param, String value) {
-		if(param == null) {
+		if (param == null) {
 			return true;
 		}
-		for(String s : param) {
-			if(s.equals(value)) {
+		for (String s : param) {
+			if (s.equals(value)) {
 				return true;
 			}
 		}
@@ -45,30 +44,38 @@ public class HtmlUtils {
 	}
 
 	public static String selectName(String param, String value) {
-		if(param.equals(value)) {
+		if (param.equals(value)) {
 			return "selected";
-		}else {
+		} else {
 			return "";
 		}
 	}
+
 	public static String formDate(Date d) {
-		if(d == null) {
+		if (d == null) {
 			return "";
 		}
-		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/d");
-		 return sdf.format(d);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/d");
+		return sdf.format(d);
+	}
 
+	//-を/に変える
+	public static String formSlash(String saleDate) {
+		if (saleDate.contains("-0")|| saleDate.contains("-")) {
+			saleDate = saleDate.replaceAll("-0", "/");
+			saleDate = saleDate.replaceAll("-", "/");
+		}
+		return saleDate;
 	}
 
 	public static String formName(String name) {
-		if(name.contains("<") || name.contains(">") || name.contains("&")) {
+		if (name.contains("<") || name.contains(">") || name.contains("&")) {
 			name = name.replaceAll("&", "&amp;");
 			name = name.replaceAll("<", "&lt;");
 			name = name.replaceAll(">", "&gt;");
 		}
 		return name;
 	}
-
 
 	public static long taxPrice(long price, long number, Date d) throws ParseException {
 		DateFormat dateTimeFormat = new SimpleDateFormat("yyyy/M/d");
@@ -78,12 +85,12 @@ public class HtmlUtils {
 		double tax;
 
 		// ~2019/9/30だったら税率8%
-		if(d.before(date1)) {
+		if (d.before(date1)) {
 			tax = 1.08;
-		// 2019/10/1~だったら税率10%
-		}else if(d.after(date2)){
+			// 2019/10/1~だったら税率10%
+		} else if (d.after(date2)) {
 			tax = 1.10;
-		}else {
+		} else {
 			tax = 0;
 		}
 
@@ -104,15 +111,14 @@ public class HtmlUtils {
 		double tax;
 
 		// ~2019/9/30だったら税率8%
-		if(d1.before(date1)) {
+		if (d1.before(date1)) {
 			tax = 1.08;
-		// 2019/10/1~だったら税率10%
-		}else if(d1.after(date2)){
+			// 2019/10/1~だったら税率10%
+		} else if (d1.after(date2)) {
 			tax = 1.10;
-		}else {
+		} else {
 			tax = 0;
 		}
-
 
 		sum = price1 * number1 * tax;
 		Math.floor(sum);
@@ -126,7 +132,7 @@ public class HtmlUtils {
 	}
 
 	public static String formNewLine(String note) {
-		if(note.contains("\n")) {
+		if (note.contains("\n")) {
 			note = note.replaceAll("\n", "<br>");
 		}
 		return note;

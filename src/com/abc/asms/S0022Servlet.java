@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.abc.asms.beans.S0022;
+import com.abc.asms.utils.AuthorityUtils;
 import com.abc.asms.utils.DBUtils;
 import com.abc.asms.utils.Utils;
 
@@ -24,12 +27,25 @@ public class S0022Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
+		HttpSession session = req.getSession();
+
 		//ログインチェック
 		if (!Utils.checkLogin(req, resp)) {
 			return;
 		}
 
-		HttpSession session = req.getSession();
+		//権限チェック
+		if (!AuthorityUtils.checkSalesAuthority(req, resp)) {
+			return;
+		}
+
+		if (req.getParameter("id") == null) {
+			List<String> errors = new ArrayList<>();
+			errors.add("不正なアクセスです。");
+			session.setAttribute("errors", errors);
+			resp.sendRedirect("S0020.html");
+			return;
+		}
 
 		req.setCharacterEncoding("utf-8");
 
