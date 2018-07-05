@@ -37,14 +37,16 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
-					<c:if test="${accounts.authority == '1' || accounts.authority == '11'}">
+					<c:if
+						test="${accounts.authority == '1' || accounts.authority == '11'}">
 						<li><a href="S0010.html">売上登録</a></li>
-						</c:if>
-						<li class="active"><a href="S0020.html">売上検索</a></li>
-						<c:if test="${accounts.authority == '10' || accounts.authority == '11'}">
+					</c:if>
+					<li class="active"><a href="S0020.html">売上検索</a></li>
+					<c:if
+						test="${accounts.authority == '10' || accounts.authority == '11'}">
 						<li><a href="S0030.html">アカウント登録</a></li>
-						</c:if>
-						<li><a href="S0040.html">アカウント検索</a></li>
+					</c:if>
+					<li><a href="S0040.html">アカウント検索</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#">${accounts.name}</a></li>
@@ -54,7 +56,8 @@
 		</div>
 	</nav>
 
-	<form class="form-horizontal" action="S0023.html?id=${param.id != null? param.id : preserve.saleId}"
+	<form class="form-horizontal"
+		action="S0023.html?id=${param.id != null? param.id : preserve.saleId}"
 		method="POST">
 		<div class="container">
 			<jsp:include page="_errors.jsp" />
@@ -67,13 +70,13 @@
 
 				<div class="col-sm-2">
 					<input type="text" class="form-control" name="sale_date"
-						id="salesDate" placeholder="販売日" value="${param.sale_date != null ? param.sale_date : data.saleDate != null ? HtmlUtils.formSlash(data.saleDate) : HtmlUtils.formSlash(preserve.saleDate)}">
+						id="salesDate" placeholder="販売日"
+						value="${param.sale_date != null ? param.sale_date : data.saleDate != null ? HtmlUtils.formSlash(data.saleDate) : HtmlUtils.formSlash(preserve.saleDate)}">
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-2 control-label">担当 <span
-					class="badge">必須</span></label>
+				<label class="col-sm-2 control-label">担当 <span class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<select class="form-control" name="account_id">
 						<option value="0">選択してください</option>
@@ -86,12 +89,13 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-2 control-label">商品カテゴリー
-					<span class="badge">必須</span>
+				<label class="col-sm-2 control-label">商品カテゴリー <span
+					class="badge">必須</span>
 				</label>
 				<div class="col-sm-5">
 					<c:forEach var="type" items="${list1}">
-						<label > <input type="radio" name="category_id" value="${type.categoryId}"
+						<label> <input type="radio" name="category_id"
+							value="${type.categoryId}"
 							${data.categoryId != null? data.categoryId eq type.categoryId ? 'checked' : '' : param.category_id != null? param.category_id eq type.categoryId ? 'checked': '' :type.categoryId.equals(preserve.categoryId) ? 'checked' : '' }>${HtmlUtils.formName(type.categoryName)}
 						</label>
 					</c:forEach>
@@ -103,7 +107,8 @@
 					class="badge">必須</span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" name="trade_name" id="name"
-						placeholder="商品名" value="${data.tradeName != null? HtmlUtils.formName(data.tradeName) : param.trade_name != null? param.trade_name : HtmlUtils.formName(preserve.tradeName)}">
+						placeholder="商品名"
+						value="${data.tradeName != null? HtmlUtils.formName(data.tradeName) : param.trade_name != null? param.trade_name : HtmlUtils.formName(preserve.tradeName)}">
 				</div>
 			</div>
 
@@ -113,8 +118,9 @@
 					class="badge">必須</span></label>
 
 				<div class="col-sm-2">
-					<input type="text" class="form-control text-right"
-						 placeholder="単価" name="unit_price" id="price" value="${data.unitPrice != null? data.unitPrice : param.unit_price != null? param.unit_price : preserve.unitPrice}">
+					<input type="text" class="form-control text-right" placeholder="単価"
+						name="unit_price" id="price"
+						value="${data.unitPrice != null? data.unitPrice : param.unit_price != null? param.unit_price : preserve.unitPrice}">
 				</div>
 			</div>
 
@@ -122,15 +128,17 @@
 				<label for="number" class="col-sm-2 control-label">個数 <span
 					class="badge">必須</span></label>
 				<div class="col-sm-2">
-					<input type="text" class="form-control text-right"
-						placeholder="個数" name="sale_number" id="number" value="${data.saleNumber != null? data.saleNumber : param.sale_number != null? param.sale_number : preserve.saleNumber}">
+					<input type="text" class="form-control text-right" placeholder="個数"
+						name="sale_number" id="number"
+						value="${data.saleNumber != null? data.saleNumber : param.sale_number != null? param.sale_number : preserve.saleNumber}">
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label for="note" class="col-sm-2 control-label">備考 </label>
 				<div class="col-sm-5">
-					<textarea placeholder="備考" class="form-control" name="note" id="note" rows="5">${data.note != null? HtmlUtils.formName(data.note) : param.note != null? param.note : HtmlUtils.formName(preserve.note)}</textarea>
+					<textarea placeholder="備考" class="form-control" name="note"
+						id="note" rows="5">${data.note != null? HtmlUtils.formName(data.note) : param.note != null? param.note : HtmlUtils.formName(preserve.note)}</textarea>
 				</div>
 			</div>
 
@@ -140,7 +148,9 @@
 						<span class="glyphicon glyphicon-ok" aria-hidden="true"> 更
 							新</span>
 					</button>
-					<a href="S0022.html?id=${data.saleId != null? data.saleId : param.id != null? param.id : s23.saleId}" class="btn btn-default">キャンセル</a>
+					<a
+						href="S0022.html?id=${data.saleId != null? data.saleId : param.id != null? param.id : s23.saleId}"
+						class="btn btn-default">キャンセル</a>
 				</div>
 			</div>
 
